@@ -6,11 +6,13 @@ public class InputController : MonoBehaviour {
 
 	Rigidbody playerPhysics;
 	BoxCollider playerCollider;
+	float distToGround;
 
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
 		playerCollider = GetComponentInParent<BoxCollider> ();
+		distToGround = playerCollider.bounds.extents.y;
 	}
 	
 	// Update is called once per frame
@@ -24,26 +26,17 @@ public class InputController : MonoBehaviour {
 	void SetMovement(){
 		playerPhysics.AddForce(new Vector3(Input.GetAxis ("Horizontal")*10,0,0));
 		playerPhysics.AddForce(new Vector3(0,0,Input.GetAxis ("Vertical")*20));
-		if (!IsAirborne()) {
-			playerPhysics.AddForce (new Vector3 (0, Input.GetAxis ("Jump") * 20, 0));
+		if (IsGrounded()) {
+			playerPhysics.AddForce (new Vector3 (0, Input.GetAxis ("Jump") * 150, 0));
 		}
 	}
 
-	bool IsAirborne(){
-		RaycastHit[] hits = Physics.BoxCastAll(this.transform.position-(Vector3.down*playerCollider.bounds.extents.y), playerCollider.bounds.extents, Vector3.down);
-		bool hitValid = false;
-		foreach (RaycastHit hit in hits) {
-			Collider col = hit.collider;
-			print ("Collider is: " + col);
-			if(!col.CompareTag("Player")) {
-				print ("Collider was not player");
-				hitValid = true;
-				break;
-			}
-		}
-		if (hitValid) {
-			return false;
-		}
-		return true;
+	/**
+	 * Checks to see if player is touching the ground. Raycasts below the player with a margin of 0.2 (units?)
+	 * below the bottom of the player's bounding box in order to account for irregularities in the ground, where
+	 * ground may not be seen otherwise.
+	 */
+	bool IsGrounded(){
+		return Physics.Raycast (this.transform.position, Vector3.down, distToGround + 0.2f);
 	}
 }
