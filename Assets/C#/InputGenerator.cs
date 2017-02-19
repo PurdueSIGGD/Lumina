@@ -2,25 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour {
+public class InputGenerator : MonoBehaviour {
 
 	public MovementController playerMovement;
+	Rigidbody playerPhysics;
+
+	float jumpInput;
 
 	// Use this for initialization
 	void Start () {
+		playerPhysics = GetComponentInParent<Rigidbody> ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		playerMovement.SetMovement();
+		playerMovement.SetMovement(Input.GetAxis ("Horizontal"),Input.GetAxis ("Vertical"));
+		if((jumpInput = Input.GetAxis ("Jump")) > 0){
+			playerMovement.isJumping = true;
+		}
 	}
 
 
 
-	/*
-	
-	Gets the potential state changes for a player when they press certain buttons. how this is used
-	in the furture remain to be determined. 
+	/**
+	* Gets the potential state changes for a player when they press certain buttons. how this is used
+	* in the furture remain to be determined. 
 	*/
 
 	void ButtonStates(){
@@ -28,4 +35,6 @@ public class InputController : MonoBehaviour {
 			Debug.Log ("Trying to interact");
 		}
 	}
+
+
 }
