@@ -12,12 +12,11 @@ public class InputGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		playerMovement.SetMovement(Input.GetAxis ("Horizontal"),Input.GetAxis ("Vertical"));
+		playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
@@ -27,9 +26,8 @@ public class InputGenerator : MonoBehaviour {
 
 	/**
 	* Gets the potential state changes for a player when they press certain buttons. how this is used
-	* in the furture remain to be determined. 
+	* in the furture remains to be determined. 
 	*/
-
 	void ButtonStates(){
 		if (Input.GetAxis ("Interact") > 0) {
 			Debug.Log ("Trying to interact");

@@ -1,27 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour {
+	public static int SPRINT_MAX = 3;
+	public static int SPRINT_COOLDOWN = 3;
+	public static float MAX_X_SPEED = 2;
+	public static float MAX_Z_SPEED = 5;
 
-	BoxCollider playerCollider;
-	float distToGround;
+	CapsuleCollider playerCollider;
 	Rigidbody playerPhysics;
-	float lastJump;//the time since the last jump
-	public bool isJumping;
 
+	float distToGround;
+	float lastJump; //the time since the last jump
+	float sprintTime; //the elapsed time player has been sprinting
+	float sprintRecharge; //the amount of time left before player can sprint again
+
+	public bool isJumping;
+	public bool isSprinting;
 
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-		playerCollider = GetComponentInParent<BoxCollider> ();
+		playerCollider = GetComponentInParent<CapsuleCollider> ();
+
 		distToGround = playerCollider.bounds.extents.y;
 		lastJump = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		sprintTime = 0;
+		sprintRecharge = 0;
+
+		isJumping = false;
+		isSprinting = false;
 	}
 
 	/*
@@ -29,41 +39,30 @@ public class MovementController : MonoBehaviour {
 	* fb - the foward and backward movement from the axis
 	* lr - the left and right movement from the keyboards
 	*/
-	public void SetMovement(float lr, float fb){
-		playerPhysics.AddForce(new Vector3(lr*10,0,0));
-		playerPhysics.AddForce(new Vector3(0,0,fb*20));
+	public void SetMovement(float lr, float fb, bool sprintPressed){
+		UpdateCooldowns ();
+		ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {
 			if (IsGrounded()) {
 				playerPhysics.AddForce (new Vector3 (0, 300, 0));
-				Debug.Log ("You have Jumped!!");
 			} else {
 				isJumping = false;
 			}
 		}
 	}
 
-	/**
-	 * checking to see if the person is airborne
-	 * 
-	 * */
-
-	bool IsAirborne(){
-		RaycastHit[] hits = Physics.BoxCastAll (this.transform.position - (Vector3.down * playerCollider.bounds.extents.y), playerCollider.bounds.extents, Vector3.down);
-		bool hitValid = false;
-		foreach (RaycastHit hit in hits) {
-			Collider col = hit.collider;
-			print ("Collider is: " + col);
-			if (!col.CompareTag ("Player")) {
-				print ("Collider was not player");
-				hitValid = true;
-				break;
-			}
+	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
+		ApplySprint (sprintPressed);
+		if (isSprinting) {
+			print ("SPRINTING");
 		}
-		if (hitValid) {
-			return false;
+		float sprintModifier = isSprinting ? 1.5f : 1f;
+		if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
+			playerPhysics.AddForce (new Vector3 (x * 10 * sprintModifier, 0, 0));
 		}
-		return true;
-
+		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) { 
+			playerPhysics.AddForce (new Vector3 (0, 0, z * 20 * sprintModifier));
+		}
 	}
 
 	/**
@@ -73,7 +72,7 @@ public class MovementController : MonoBehaviour {
 	 * 
 	 * added in a time period that a person has to wait before using the raycast again
 	 */
-	public bool IsGrounded(){ 
+	private bool IsGrounded(){ 
 		float elaps = Time.realtimeSinceStartup - lastJump;
 
 		if (elaps < 0.3f ) {
@@ -81,6 +80,40 @@ public class MovementController : MonoBehaviour {
 		}
 		lastJump = Time.realtimeSinceStartup;
 		return Physics.Raycast (this.transform.position, Vector3.down, distToGround + 0.2f);
+	}
+
+	private bool CanSprint(){
+		return sprintTime < SPRINT_MAX && !(sprintRecharge > 0);
+	}
+
+	private void ApplySprint(bool sprintPressed){
+		if (sprintPressed) {
+			if (!isSprinting && CanSprint()) {
+				isSprinting = true;
+			}
+			if (isSprinting && !CanSprint()) {
+				isSprinting = false;
+				sprintRecharge = (sprintTime / SPRINT_MAX) * SPRINT_COOLDOWN;
+				sprintTime = 0;
+			}
+		} else {
+			if (isSprinting) {
+				isSprinting = false;
+				sprintRecharge = (sprintTime / SPRINT_MAX) * SPRINT_COOLDOWN;
+				sprintTime = 0;
+			}
 		}
-		
+	}
+
+	private void UpdateCooldowns() {
+		if (isSprinting) {
+			sprintTime += Time.deltaTime;
+		}
+		if (sprintRecharge > 0) {
+			sprintRecharge -= Time.deltaTime;
+			if (sprintRecharge < 0) {
+				sprintRecharge = 0;
+			}
+		}
+	}
 }
