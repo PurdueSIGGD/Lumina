@@ -10,8 +10,6 @@ abstract public class BaseEnemy : MonoBehaviour {
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
 
-	public bool isAttacking;		//If the enemy is currently attacking, return true
-
 	/*
 	 * Method called when enemy dies
 	 * Identifies the number of drops the enemy drops based on the minimum and maximum values
@@ -41,9 +39,7 @@ abstract public class BaseEnemy : MonoBehaviour {
 	 */
 	public void Update () {
 		
-		if (!isAttacking) {
-			Movement ();
-		}
+		Movement ();
 
 		if (health <= 0) {
 			OnDeath ();
@@ -51,5 +47,5 @@ abstract public class BaseEnemy : MonoBehaviour {
 	}
 
 	abstract public IEnumerator Attack();		//Abstract method that checks if the player is within range and then damages player
-	abstract public void Movement();	//Abstract method defining how the specific enemy moves 
+	abstract public void Movement();			//Abstract method defining how the specific enemy moves 
 }

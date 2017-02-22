@@ -3,17 +3,23 @@ using System.Collections;
 
 public class SlimeEnemy : BaseEnemy {
 
-	public Transform target; 	//The player, for the slime to face and move toward
-	public int thrust;			//The amount of force used to propel the slime forward
+	public Transform target; 				//The player, for the slime to face and move toward
+	public int thrust;						//The amount of force used to propel the slime forward
+	public bool isAttacking;				//If the enemy is currently attacking, return true
 
-	private Rigidbody rb;		//The slimes rigidbody which allows us to propel it
+	private Vector3 startPos;				//The slimes starting position
+	private Rigidbody rb;					//The slimes rigidbody which allows us to propel it
+	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
 
 	//Variable initialization 
 	void Start(){
 		health = 5;
 		movementSpeed = 1;
 		thrust = 500;
+
+		startPos = transform.position;
 		rb = GetComponent<Rigidbody> ();
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 		
 	/* The attack method is an IEnumarator to allow the slime to wait before executing the attack
@@ -34,9 +40,22 @@ public class SlimeEnemy : BaseEnemy {
 	 */
 	public override void Movement(){
 		if (target != null) {
-			transform.LookAt (target);
+			if (!isAttacking) {
+				transform.LookAt (target);
+				transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
+			} 
 		}
-		transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
+
+		if (target == null) {
+			changeDirectionCount += Time.deltaTime;
+			transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
+			if (changeDirectionCount > 4f) {
+				transform.rotation = Quaternion.Euler(0, Random.Range (15, 360), 0);
+				changeDirectionCount = 0;
+				Debug.Log ("CHANGE");
+			}
+		}
+
 	}
 
 	/* This access the slime's Sphere Collider where there is a trigger 
@@ -44,9 +63,11 @@ public class SlimeEnemy : BaseEnemy {
 	 * when triggered
 	 */
 	public void OnTriggerEnter(Collider col){
-		if (col.tag == target.tag) {
-			isAttacking = true;
-			StartCoroutine (Attack ());
+		if (target != null) {
+			if (col.tag == target.tag && !isAttacking) {
+				isAttacking = true;
+				StartCoroutine (Attack ());
+			}
 		}
 	}
 }
