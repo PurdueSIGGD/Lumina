@@ -7,8 +7,9 @@ public class ExampleEnemy : BaseEnemy {
 		health = 5;
 	}
 
-	public override void Attack(){
+	public override IEnumerator Attack(){
 		//If within range
+		yield return new WaitForSeconds(1);
 		//Player.TakeDamage(9001);
 	}
 
