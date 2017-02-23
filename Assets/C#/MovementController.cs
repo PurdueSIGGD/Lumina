@@ -6,13 +6,13 @@ using UnityEngine;
 public class MovementController : MonoBehaviour {
 	public static int SPRINT_MAX = 3;
 	public static int SPRINT_COOLDOWN = 3;
-	public static float MAX_X_SPEED = 2;
-	public static float MAX_Z_SPEED = 5;
+	public static float MAX_X_SPEED = 4;
+	public static float MAX_Z_SPEED = 6;
 
 	CapsuleCollider playerCollider;
 	Rigidbody playerPhysics;
 
-	float distToGround;
+	float distToGround; //distance from the center of the player to the bottom of their hitbox
 	float lastJump; //the time since the last jump
 	float sprintTime; //the elapsed time player has been sprinting
 	float sprintRecharge; //the amount of time left before player can sprint again
@@ -66,6 +66,9 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * Separate function for movement in the horizontal direction.
+	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
 		if (isSprinting) {
@@ -97,10 +100,17 @@ public class MovementController : MonoBehaviour {
 		return Physics.Raycast (this.transform.position, Vector3.down, distToGround + 0.2f);
 	}
 
+	/**
+	 * Whether or not the player is allowed to sprint
+	 */
 	private bool CanSprint(){
 		return sprintTime < SPRINT_MAX && !(sprintRecharge > 0);
 	}
 
+	/**
+	 * Updates whether the player is sprinting or not based on if the key is pressed
+	 * and if the player is allowed to sprint
+	 */
 	private void ApplySprint(bool sprintPressed){
 		if (sprintPressed) {
 			if (!isSprinting && CanSprint()) {
@@ -120,6 +130,9 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
+	/**
+	 * Updates the sprint time and the recharge time to sprint
+	 */
 	private void UpdateCooldowns() {
 		if (isSprinting) {
 			sprintTime += Time.deltaTime;
