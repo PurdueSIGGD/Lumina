@@ -6,16 +6,15 @@ public class SlimeEnemy : BaseEnemy {
 	public Transform target; 				//The player, for the slime to face and move toward
 	public int thrust;						//The amount of force used to propel the slime forward
 	public bool isAttacking;				//If the enemy is currently attacking, return true
+    public float timeBetweenAttacks;        //How fast the slime jumps at you
 
 	private Vector3 startPos;				//The slimes starting position
 	private Rigidbody rb;					//The slimes rigidbody which allows us to propel it
 	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
 
+
 	//Variable initialization 
 	void Start(){
-		health = 5;
-		movementSpeed = 1;
-		thrust = 500;
 
 		startPos = transform.position;
 		rb = GetComponent<Rigidbody> ();
@@ -27,30 +26,41 @@ public class SlimeEnemy : BaseEnemy {
 	 * It will wait a couple of seconds before moving again
 	 */
 	public override IEnumerator Attack(){
+        isAttacking = true;
 
-		yield return new WaitForSeconds(1); //Wait a single second before attack
-		rb.AddForce(transform.forward*thrust);
+		yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
+		rb.AddForce(transform.forward*thrust + Vector3.up * thrust/2);
 
-		yield return new WaitForSeconds(2); //Time waited to move again
-		isAttacking = false; //This will start movement again in the Update method
-	}
+        // If still attacking, attack again
+        if (isAttacking) StartCoroutine(Attack());
+    }
 
 	/* This is a simple movement method, 
 	 * it looks in the players direction and moves that way constantly
 	 */
 	public override void Movement(){
 		if (target != null) {
-			if (!isAttacking) {
-				transform.LookAt (target);
-				transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
-			} 
-		}
+			if (isAttacking) {
+                // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
+				transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed * .5f);
+                if (/* You want to stop attacking, say you are mid air or low health*/false) {
+                    isAttacking = false;
+                }
+            } else {
+                if (/* You want to start attacking, as in you are on the floor or health regenerated*/false) {
+                    isAttacking = true;
+                }
+            } 
 
-		if (target == null) {
+            
+            transform.LookAt(target);
+        }
+
+        else if (target == null) {
 			changeDirectionCount += Time.deltaTime;
 			transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
 			if (changeDirectionCount > 4f) {
-				transform.rotation = Quaternion.Euler(0, Random.Range (15, 360), 0);
+				transform.rotation = Quaternion.Euler(0, Random.Range (-360, 360), 0);
 				changeDirectionCount = 0;
 				Debug.Log ("CHANGE");
 			}
@@ -63,11 +73,20 @@ public class SlimeEnemy : BaseEnemy {
 	 * when triggered
 	 */
 	public void OnTriggerEnter(Collider col){
-		if (target != null) {
-			if (col.tag == target.tag && !isAttacking) {
-				isAttacking = true;
-				StartCoroutine (Attack ());
-			}
-		}
-	}
+        if (col.tag == "Player" && !isAttacking)
+        {
+            target = col.transform;
+            isAttacking = true;
+            StartCoroutine(Attack());
+        }
+    }
+
+    public void OnTriggerExit(Collider col)
+    {
+        if (col.transform == target)
+        {
+            target = null;
+            isAttacking = false;
+        }
+    }
 }
