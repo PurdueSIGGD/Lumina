@@ -16,9 +16,11 @@ public class MovementController : MonoBehaviour {
 	float lastJump; //the time since the last jump
 	float sprintTime; //the elapsed time player has been sprinting
 	float sprintRecharge; //the amount of time left before player can sprint again
+	Vector3 recoilVec;//vector used to set and maintain the rotation of the player and the camera
 
 	public bool isJumping;
 	public bool isSprinting;
+	public GameObject cameraObj;
 
 	// Use this for initialization
 	void Start () {
@@ -51,6 +53,19 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
+	/**
+	*Getting the mouse movements and move your camera
+	*/
+	public void MoveCamera(float x, float y){
+		cameraObj.transform.Rotate(-y*5+(recoilVec.x*-1),recoilVec.y,recoilVec.z);
+		gameObject.transform.Rotate (0, x * 5, 0);
+		if (recoilVec.x > 0) {
+			recoilVec = new Vector3 (recoilVec.x - 10 * Time.deltaTime, recoilVec.x, recoilVec.z);
+		} else {
+			recoilVec = new Vector3 (0,recoilVec.y,recoilVec.z);
+		}
+	}
+
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
 		if (isSprinting) {
@@ -58,10 +73,10 @@ public class MovementController : MonoBehaviour {
 		}
 		float sprintModifier = isSprinting ? 1.5f : 1f;
 		if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
-			playerPhysics.AddForce (new Vector3 (x * 10 * sprintModifier, 0, 0));
+			playerPhysics.AddRelativeForce (new Vector3 (x * 10 * sprintModifier, 0, 0));
 		}
 		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) { 
-			playerPhysics.AddForce (new Vector3 (0, 0, z * 20 * sprintModifier));
+			playerPhysics.AddRelativeForce (new Vector3 (0, 0, z * 20 * sprintModifier));
 		}
 	}
 

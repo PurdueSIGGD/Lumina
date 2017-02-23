@@ -17,6 +17,7 @@ public class InputGenerator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
+		playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
