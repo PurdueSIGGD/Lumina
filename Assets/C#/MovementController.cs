@@ -16,7 +16,7 @@ public class MovementController : MonoBehaviour {
 	float lastJump; //the time since the last jump
 	float sprintTime; //the elapsed time player has been sprinting
 	float sprintRecharge; //the amount of time left before player can sprint again
-	Vector3 recoilVec;//vector used to set and maintain the rotation of the player and the camera
+	Vector3 rotationVector;//vector used to set and maintain the rotation of the player and the camera
 
 	public bool isJumping;
 	public bool isSprinting;
@@ -58,34 +58,40 @@ public class MovementController : MonoBehaviour {
 	*Getting the mouse movements and move your camera
 	*/
 	public void MoveCamera(float x, float y){
-		cameraObj.transform.Rotate(-y*5+(recoilVec.x*-1),recoilVec.y,recoilVec.z);
-		gameObject.transform.Rotate (0, x * 5, 0);
-		if (recoilVec.x > 0) {
-			recoilVec = new Vector3 (recoilVec.x - 10 * Time.deltaTime, recoilVec.x, recoilVec.z);
-		} else {
-			recoilVec = new Vector3 (0,recoilVec.y,recoilVec.z);
-		}
-	}
+        float newDeltaX = -y * 5 + (rotationVector.x * -1);
+        float newX = cameraObj.transform.rotation.eulerAngles.x + newDeltaX;
+        //We do some fancy math to ensure 0 < newX < 360, nothing more
+        newX =(newX+360) % 360;
+        //Ensure it doesn't go past our top or low bounds
+        if ((newX > 0 && newX < 90) || (newX < 360 && newX > 270)) {
+            // Camera rotation
+            cameraObj.transform.Rotate(newDeltaX, rotationVector.y, rotationVector.z);
+        } else {
+            // We don't want you to look all the way behind you, that's weird
+        }
+
+        // Body rotate
+        gameObject.transform.Rotate (0, x * 5, 0);
+
+    }
 
 	/**
 	 * Separate function for movement in the horizontal direction.
 	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
-		if (isSprinting) {
-			print ("SPRINTING");
-		}
-		if (!IsGrounded ()) {
-			return;
-		}
+        print("SPRINTING= " +  sprintPressed);
+
 		float sprintModifier = isSprinting ? 1.5f : 1f;
-		if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
-			playerPhysics.AddRelativeForce (new Vector3 (x * 10 * sprintModifier, 0, 0));
-		}
-		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) { 
-			playerPhysics.AddRelativeForce (new Vector3 (0, 0, z * 20 * sprintModifier));
-		}
-	}
+        float airborneModifier = IsGrounded() ? 1 : .75f;
+
+        if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
+            transform.position += transform.right * x * Time.deltaTime * sprintModifier * airborneModifier * 10;
+        }
+		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) {
+            transform.position += transform.forward * z * Time.deltaTime * sprintModifier * airborneModifier * 10;
+        }
+    }
 
 	/**
 	 * Checks to see if player is touching the ground. Raycasts below the player with a margin of 0.2 (units?)
