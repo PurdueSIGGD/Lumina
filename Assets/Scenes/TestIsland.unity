@@ -130,6 +130,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 54940195805770608, guid: 6630bdef38959da47a7caedd8eac5d90,
+        type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136429524223387134, guid: 6630bdef38959da47a7caedd8eac5d90,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 4938615daf47b65478ac4b08613ff324,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6630bdef38959da47a7caedd8eac5d90, type: 2}
   m_IsPrefabParent: 0
@@ -497,7 +508,7 @@ TerrainCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1961133855}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 306d558bd0b4a284daeebea25ecf0191, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 774673cb2f28b5f44a7a7698ad78ae31, type: 2}
   m_EnableTreeColliders: 1

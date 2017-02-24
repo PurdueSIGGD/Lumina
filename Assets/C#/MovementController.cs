@@ -47,6 +47,7 @@ public class MovementController : MonoBehaviour {
 		if (isJumping) {
 			if (IsGrounded()) {
 				playerPhysics.AddForce (new Vector3 (0, 300, 0));
+				lastJump = 0;
 			} else {
 				isJumping = false;
 			}
@@ -74,6 +75,9 @@ public class MovementController : MonoBehaviour {
 		if (isSprinting) {
 			print ("SPRINTING");
 		}
+		if (!IsGrounded ()) {
+			return;
+		}
 		float sprintModifier = isSprinting ? 1.5f : 1f;
 		if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
 			playerPhysics.AddRelativeForce (new Vector3 (x * 10 * sprintModifier, 0, 0));
@@ -91,12 +95,9 @@ public class MovementController : MonoBehaviour {
 	 * added in a time period that a person has to wait before using the raycast again
 	 */
 	private bool IsGrounded(){ 
-		float elaps = Time.realtimeSinceStartup - lastJump;
-
-		if (elaps < 0.3f ) {
+		if (lastJump < 0.3f ) {
 			return false;
 		}
-		lastJump = Time.realtimeSinceStartup;
 		return Physics.Raycast (this.transform.position, Vector3.down, distToGround + 0.2f);
 	}
 
@@ -131,7 +132,7 @@ public class MovementController : MonoBehaviour {
 	}
 
 	/**
-	 * Updates the sprint time and the recharge time to sprint
+	 * Updates the sprint time and the recharge time to sprint and the time since the last jump
 	 */
 	private void UpdateCooldowns() {
 		if (isSprinting) {
@@ -143,5 +144,6 @@ public class MovementController : MonoBehaviour {
 				sprintRecharge = 0;
 			}
 		}
+		lastJump += Time.deltaTime;
 	}
 }
