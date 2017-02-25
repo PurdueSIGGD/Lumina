@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ItemStats : MonoBehaviour {
 
-	public int tier = 0;
+	enum Tier {Simple,Moderate,Epic};
+
+	public Tier tier = Tier.Simple;
 	public float condition = 100.0f;
 	public float minCondition = 1.0f;
 	public float maxCondition = 100.0f;
@@ -13,6 +15,7 @@ public class ItemStats : MonoBehaviour {
 	void Start() {
 		condition = Random.Range (minCondition, maxCondition);
 	}
+
 	/**
 	 * 
 	 * Increases the damage factor and applies damage to the item.
