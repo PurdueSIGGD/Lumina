@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingWeapon : Weapon {
+public class Projectile : Weapon {
 
 	// Use this for initialization
 	void Start () {
