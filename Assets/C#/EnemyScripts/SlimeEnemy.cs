@@ -28,11 +28,12 @@ public class SlimeEnemy : BaseEnemy {
 	public override IEnumerator Attack(){
         isAttacking = true;
 
-		yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-		rb.AddForce(transform.forward*thrust + Vector3.up * thrust/2);
+        yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
+        rb.AddForce(transform.forward * thrust + Vector3.up * thrust / 2);
 
         // If still attacking, attack again
         if (isAttacking) StartCoroutine(Attack());
+        else StopCoroutine(Attack());
     }
 
 	/* This is a simple movement method, 
@@ -62,7 +63,6 @@ public class SlimeEnemy : BaseEnemy {
 			if (changeDirectionCount > 4f) {
 				transform.rotation = Quaternion.Euler(0, Random.Range (-360, 360), 0);
 				changeDirectionCount = 0;
-				Debug.Log ("CHANGE");
 			}
 		}
 
