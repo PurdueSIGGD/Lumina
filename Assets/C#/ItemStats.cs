@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ItemStats : MonoBehaviour {
 
-	enum Tier {Simple,Moderate,Epic};
+	public enum Tier {Simple,Moderate,Epic};
 
 	public Tier tier = Tier.Simple;
 	public float condition = 100.0f;
 	public float minCondition = 1.0f;
 	public float maxCondition = 100.0f;
-	public int factor = 1.0f;
+	public float factor = 1.0f;
 
 	void Start() {
 		condition = Random.Range (minCondition, maxCondition);
