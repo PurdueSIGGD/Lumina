@@ -5,103 +5,69 @@ using UnityEngine;
 public class InputGenerator : MonoBehaviour {
 
 	public MovementController playerMovement;
+    public InventoryController playerInventory;
+
 	Rigidbody playerPhysics;
 
 	float jumpInput;
 
-	public bool isAttacking;
-	bool doneAttacking;
-	public bool isCasting;
-	bool doneCasting;
-	public bool isInteracting;
-	bool doneInteracting;
-	public float attackTimeSet;
-	float attackTime;
-	public float castTimeSet;
-	public float castTime;
-
-	bool countDown;//when a button is pressed for a time
 
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-		isAttacking = false;
-		isCasting = false;
-		attackTimeSet = 0.5f;
-		castTimeSet = 0.5f;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		ButtonStates ();
-		playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
-		playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
-		if((jumpInput = Input.GetAxis ("Jump")) > 0){
-			playerMovement.isJumping = true;
-		}
+        CursorStates();
+		
+        
+	}
+
+    /**
+     * We update the button lock states here
+     */
+    void CursorStates()
+    {
+        // If we are paused, mouse will appear
 		if (Time.timeScale != 0 || Input.GetAxis ("Cancel") != 0) {
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
 		}
-	}
-
-
-
+    }
 	/**
 	* Gets the potential state changes for a player when they press certain buttons. how this is used
 	* in the furture remains to be determined. 
 	*/
 	void ButtonStates(){
-		if (Input.GetAxis ("Interact") > 0) {
-			if (!isInteracting) {
-				isInteracting = true;
-				Debug.Log ("Trying to interact");
-			}
-		}else if(Input.GetAxis ("Interact") == 0){
-			isInteracting = false;
-		}
+        playerInventory.Interact(Input.GetAxis("Interact") > 0);
+		
 
 		if(Input.GetAxis ("Fire1") > 0){
-			if (!isAttacking) {
-				isAttacking = true;
-				attackTime = attackTimeSet;
-				countDown = true;
-				Debug.Log ("Trying to attack");
-				//Attacking method
-			}
-		}else if(Input.GetAxis ("Fire1") == 0){
-			isInteracting = false;
-		}
+            //Debug.Log("WeaponController1 True");
 
-		if(Input.GetAxis ("Fire2") > 0){
-			if (!isCasting) {
-				isCasting = true;
-				castTime = castTimeSet;
-				countDown = true;
-				Debug.Log ("Trying to Cast");
-				//Casting method
-			}
-		}
+        }
+        else if(Input.GetAxis ("Fire1") == 0){
+            //Debug.Log("WeaponController1 false");
 
-		attackTime -= Time.deltaTime;
-		castTime -= Time.deltaTime;
+        }
 
-		if(countDown){
-			int donePress = 0;
+        if (Input.GetAxis ("Fire2") > 0){
+			//Debug.Log ("WeaponController1 True");
 
-			if(attackTime <= 0){
-				isAttacking = false;
-				donePress++;
-			}
-			if(castTime <= 0){
-				isCasting = false;
-				donePress++;
-			}
+		} else if (Input.GetAxis("Fire2") == 0)
+        {
+            //Debug.Log("WeaponController2 false");
+        }
 
-			if(donePress >= 2){
-				countDown = false;
-			}
+
+        playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
+		playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
+		if((jumpInput = Input.GetAxis ("Jump")) > 0){
+			playerMovement.isJumping = true;
 		}
 
 	}
