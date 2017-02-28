@@ -39,6 +39,11 @@ public class InputGenerator : MonoBehaviour {
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
+		if (Time.timeScale != 0 || Input.GetAxis ("Cancel") != 0) {
+			Cursor.lockState = CursorLockMode.Locked;
+		} else {
+			Cursor.lockState = CursorLockMode.None;
+		}
 	}
 
 
