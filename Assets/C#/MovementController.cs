@@ -42,6 +42,9 @@ public class MovementController : MonoBehaviour {
 	* lr - the left and right movement from the keyboards
 	*/
 	public void SetMovement(float lr, float fb, bool sprintPressed){
+		//TODO: REMOVE THIS FROM FINAL GAME?
+
+
 		UpdateCooldowns ();
 		ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {
@@ -80,7 +83,6 @@ public class MovementController : MonoBehaviour {
 	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
-        print("SPRINTING= " +  sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
         float airborneModifier = IsGrounded() ? 1 : .75f;
