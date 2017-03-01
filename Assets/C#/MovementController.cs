@@ -80,7 +80,7 @@ public class MovementController : MonoBehaviour {
 	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
-        print("SPRINTING= " +  sprintPressed);
+        //print("SPRINTING= " +  sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
         float airborneModifier = IsGrounded() ? 1 : .75f;
