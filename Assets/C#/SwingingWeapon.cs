@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwingingWeapon : Weapon {
+public class SwingingWeapon : Weapon { 
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +14,8 @@ public class SwingingWeapon : Weapon {
 	void Update () {
 		
 	}
+    public override void Attack(bool mouseDown)
+    {
+
+    }
 }
