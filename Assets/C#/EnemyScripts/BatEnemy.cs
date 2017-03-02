@@ -14,6 +14,7 @@ public class BatEnemy : BaseEnemy
     private Vector3 startPos;               //The slimes starting position
     private Rigidbody rb;                   //The slimes rigidbody which allows us to propel it
     private float changeDirectionCount = 0; //The time counter for the slime to change direction while the player isn't around
+    Coroutine attackMethod;
 
     //Variable initialization 
     void Start()
@@ -21,6 +22,7 @@ public class BatEnemy : BaseEnemy
         startPos = transform.position;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+        StartCoroutine(MovementPattern());
     }
 
     /* The attack method is an IEnumarator to allow the slime to wait before executing the attack
@@ -36,12 +38,37 @@ public class BatEnemy : BaseEnemy
             yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
             rb.AddForce(transform.forward * thrust * 2);
             yield return new WaitForSeconds(timeBetweenAttacks/2); //Wait a single second before attack
-            rb.AddForce(transform.forward * thrust + Vector3.up * thrust/2);
+            rb.AddForce(transform.forward * thrust/5 + Vector3.up * thrust/5);
         }
 
         // If still attacking, attack again
         //if (isAttacking) StartCoroutine(Attack());
         //else StopCoroutine(Attack());
+    }
+
+    public IEnumerator MovementPattern()
+    {
+        //This coroutine randomizes the bats upward thrust for flying giving it a more eratic flight pattern for realism
+        //The Movement () method just makes the bat fly forward now
+        //Called from start() so as to not start the coroutine every frame
+        while (true)
+        {
+            yield return new WaitForSeconds(0.15f);
+            RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
+            foreach (RaycastHit hit in raycastHits)
+            {
+                if (hit.transform.tag == "Ground")
+                {
+                    if (transform.position.y - hit.point.y < flightHeight)
+                    {
+                        float thrust = Random.Range(3 * flightThrust / 4, flightThrust);
+                        rb.AddForce(Vector3.up * thrust);
+                        //Debug.Log(thrust);
+                    }
+                }
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
     /* This is a simple movement method, 
@@ -58,17 +85,18 @@ public class BatEnemy : BaseEnemy
                 // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
                 rb.AddForce(transform.forward * movementSpeed * 2);
 
-                RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
+                /*RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
                 foreach (RaycastHit hit in raycastHits)
                 {
                     if (hit.transform.tag == "Ground")
                     {
                         if (transform.position.y - hit.point.y < flightHeight)
                         {
-                            rb.AddForce(Vector3.up * flightThrust);
+                            rb.AddForce(Vector3.up * Random.Range(flightThrust / 2, flightThrust));
                         }
                     }
-                }
+                }*/
+
                 if (/* You want to stop attacking, say you are mid air or low health*/false)
                 {
                     isAttacking = false;
@@ -89,7 +117,7 @@ public class BatEnemy : BaseEnemy
         {
             rb.AddForce(transform.forward * movementSpeed * 5);
 
-            RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
+            /*RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
             foreach (RaycastHit hit in raycastHits)
             {
                 if (hit.transform.tag == "Ground")
@@ -99,7 +127,7 @@ public class BatEnemy : BaseEnemy
                         rb.AddForce(Vector3.up * flightThrust);
                     }
                 }
-            }
+            }*/
 
             //Change direction randomly every 4 seconds
             changeDirectionCount += Time.deltaTime;
@@ -122,7 +150,7 @@ public class BatEnemy : BaseEnemy
         {
             target = col.transform;
             isAttacking = true;
-            StartCoroutine(Attack());
+            attackMethod = StartCoroutine(Attack());
         }
     }
 
@@ -132,7 +160,7 @@ public class BatEnemy : BaseEnemy
         {
             target = null;
             isAttacking = false;
-            StopCoroutine(Attack());
+            StopCoroutine(attackMethod);
         }
     }
 }
