@@ -7,6 +7,7 @@ public class BatEnemy : BaseEnemy
     public Transform target;                //The player, for the slime to face and move toward
     public int thrust;                      //The amount of force used to propel the slime forward
     public bool isAttacking;				//If the enemy is currently attacking, return true
+    public float attackRange;               //Range between player and this before it starts attacking
     public float timeBetweenAttacks;        //How fast the slime jumps at you
     public float flightHeight;              //Height above the ground we want the bat to float
     public float flightThrust;              //Thrust power the bat will use to fly
@@ -15,6 +16,7 @@ public class BatEnemy : BaseEnemy
     private Rigidbody rb;                   //The slimes rigidbody which allows us to propel it
     private float changeDirectionCount = 0; //The time counter for the slime to change direction while the player isn't around
     Coroutine attackMethod;
+    float forceMultiplier = 1;
 
     //Variable initialization 
     void Start()
@@ -31,21 +33,24 @@ public class BatEnemy : BaseEnemy
 	 */
     public override IEnumerator Attack()
     {
+        
         isAttacking = true;
+        Debug.Log("starting routine");
 
         while (isAttacking)
         {
             yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-            rb.AddForce(transform.forward * thrust * 2);
-            yield return new WaitForSeconds(timeBetweenAttacks/2); //Wait a single second before attack
-            rb.AddForce(transform.forward * thrust/5 + Vector3.up * thrust/5);
+            rb.AddForce(transform.forward * thrust * 2 * forceMultiplier);
+            yield return new WaitForSeconds(timeBetweenAttacks / 2); //Wait a single second before attack
+            rb.AddForce(forceMultiplier * transform.forward * thrust / 5 + Vector3.up * thrust / 5);
         }
 
+        
         // If still attacking, attack again
         //if (isAttacking) StartCoroutine(Attack());
         //else StopCoroutine(Attack());
     }
-
+    
     public IEnumerator MovementPattern()
     {
         //This coroutine randomizes the bats upward thrust for flying giving it a more eratic flight pattern for realism
@@ -80,10 +85,19 @@ public class BatEnemy : BaseEnemy
         {
             if (isAttacking)
             {
+                if (!(Vector3.Distance(target.position, transform.position) < attackRange))
+                {
+                    forceMultiplier = 0;
+                }
+                else
+                {
+                    forceMultiplier = 1;
+                }
+
                 transform.LookAt(target);
 
                 // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
-                rb.AddForce(transform.forward * movementSpeed * 2);
+                rb.AddForce(transform.forward * movementSpeed * 5);
 
                 /*RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
                 foreach (RaycastHit hit in raycastHits)

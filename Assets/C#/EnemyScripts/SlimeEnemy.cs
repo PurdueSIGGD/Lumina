@@ -7,14 +7,16 @@ public class SlimeEnemy : BaseEnemy {
 	public int thrust;						//The amount of force used to propel the slime forward
 	public bool isAttacking;				//If the enemy is currently attacking, return true
     public float timeBetweenAttacks;        //How fast the slime jumps at you
+    public float attackRange;
 
 	private Vector3 startPos;				//The slimes starting position
 	private Rigidbody rb;					//The slimes rigidbody which allows us to propel it
 	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
+    float forceMultiplier = 1;
 
 
-	//Variable initialization 
-	void Start(){
+    //Variable initialization 
+    void Start(){
 
 		startPos = transform.position;
 		rb = GetComponent<Rigidbody> ();
@@ -29,7 +31,7 @@ public class SlimeEnemy : BaseEnemy {
         isAttacking = true;
 
         yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-        rb.AddForce(transform.forward * thrust + Vector3.up * thrust / 2);
+        rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
 
         // If still attacking, attack again
         if (isAttacking) StartCoroutine(Attack());
@@ -42,8 +44,17 @@ public class SlimeEnemy : BaseEnemy {
 	public override void Movement(){
 		if (target != null) {
 			if (isAttacking) {
+
+                if (!(Vector3.Distance(target.position, transform.position) < attackRange))
+                {
+                    forceMultiplier = 0;
+                } else
+                {
+                    forceMultiplier = 1;
+                }
+
                 // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
-				transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed * .5f);
+                transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
                 if (/* You want to stop attacking, say you are mid air or low health*/false) {
                     isAttacking = false;
                 }
@@ -78,6 +89,7 @@ public class SlimeEnemy : BaseEnemy {
             target = col.transform;
             isAttacking = true;
             StartCoroutine(Attack());
+            Debug.Log("PLAYER FOUND");
         }
     }
 

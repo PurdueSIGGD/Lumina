@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23755905788691258}
   - component: {fileID: 114785277216166020}
   - component: {fileID: 54219829721165556}
-  - component: {fileID: 65223884197290524}
+  - component: {fileID: 135459857778289816}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -98,18 +98,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65223884197290524
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1430667555586948}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 16, y: 16, z: 16}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114785277216166020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,13 +113,26 @@ MonoBehaviour:
   minDrops: 0
   maxDrops: 0
   health: 5
-  movementSpeed: 0.1
+  movementSpeed: 0.25
   target: {fileID: 0}
   thrust: 300
   isAttacking: 0
+  attackRange: 7
   timeBetweenAttacks: 1
   flightHeight: 5
   flightThrust: 50
+--- !u!135 &135459857778289816
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1430667555586948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135541355231121984
 SphereCollider:
   m_ObjectHideFlags: 1
