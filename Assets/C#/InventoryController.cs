@@ -5,6 +5,8 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour {
 
     private float interactCooldown;
+	Vector3 cameraAim;
+	RaycastHit hitObj;//the hopefully raycast of an item that it finds
 
 	void Start () {
 		interactCooldown = 1;
@@ -16,15 +18,29 @@ public class InventoryController : MonoBehaviour {
         {
             if (Time.timeSinceLevelLoad - interactCooldown > 1)
             {
-                Debug.Log("Boop");
                 interactCooldown = Time.timeSinceLevelLoad;
             }
+
+			cameraAim = GetComponentInChildren<Camera> ().transform.rotation.eulerAngles;
+			if (Physics.Raycast (this.transform.position, cameraAim,out hitObj)) {
+				if (hitObj.collider.gameObject.tag == "Weapon") {
+					Inventory I = gameObject.GetComponentInParent<Inventory> ();
+					InventoryItem Get = hitObj.collider.gameObject.GetComponentInParent<Weapon> ();
+					I.addToInventory (Get);
+					Debug.Log ("player is Grabbing Weapon "+Get);
+				}
+			}
         } 
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Handle picking up smaller items (upgrade kits/potions)
+		if(other.gameObject.GetComponentInParent<Potion>()!= null){
+			Inventory I = gameObject.GetComponentInParent<Inventory> ();
+			InventoryItem Get = other.gameObject.GetComponentInParent<Potion> ();
+			I.addToInventory (Get);
+			Debug.Log ("Player sucked up "+Get);
+		}
     }
 }
