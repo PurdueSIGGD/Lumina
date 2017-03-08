@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : InventoryItem {
+public class Pickup : MonoBehaviour {
 
+
+	public enum pickUpType{magic,health,upgradePotion,upgradeKit};
+
+	float amount;
+
+	public pickUpType itemType;
 	// Use this for initialization
 	void Start () {
-		thisType = itemType.potion;
 	}
 	
 	// Update is called once per frame

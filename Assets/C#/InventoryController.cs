@@ -23,10 +23,11 @@ public class InventoryController : MonoBehaviour {
 
 			cameraAim = GetComponentInChildren<Camera> ().transform.rotation.eulerAngles;
 			if (Physics.Raycast (this.transform.position, cameraAim,out hitObj)) {
-				if (hitObj.collider.gameObject.tag == "Weapon") {
+				string itemTag = hitObj.collider.gameObject.tag;
+				if ( itemTag == "Armor") {
 					Inventory I = gameObject.GetComponentInParent<Inventory> ();
-					InventoryItem Get = hitObj.collider.gameObject.GetComponentInParent<Weapon> ();
-					I.addToInventory (Get);
+					Armor Get = hitObj.collider.gameObject.GetComponentInParent<Armor> ();
+					I.pickUpItem (Get);
 					Debug.Log ("player is Grabbing Weapon "+Get);
 				}
 			}
@@ -36,11 +37,10 @@ public class InventoryController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-		if(other.gameObject.GetComponentInParent<Potion>()!= null){
-			Inventory I = gameObject.GetComponentInParent<Inventory> ();
-			InventoryItem Get = other.gameObject.GetComponentInParent<Potion> ();
-			I.addToInventory (Get);
-			Debug.Log ("Player sucked up "+Get);
+			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
+			Pickup Get = other.gameObject.GetComponentInParent<Pickup> ();
+			Debug.Log ("Player picked up " + Get.itemType);
+
 		}
     }
 }

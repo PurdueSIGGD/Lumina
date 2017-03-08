@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
-	List<InventoryItem> inventory = new List<InventoryItem>();
+	
+	bool canpickup;
+	int upgradekit;
+	int upgradePotions;
+
+	Armor helmet;
+	Armor chestPlate;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,13 +21,24 @@ public class Inventory : MonoBehaviour {
 		
 	}
 
-	public void addToInventory(InventoryItem iI){
-		inventory.Add (iI);
+	public void pickUpItem(Armor item){
+		switch(item.type){
+		case Armor.armorType.head:
+				helmet = item;
+				break;
+		case Armor.armorType.chestplate:
+			chestPlate = item;
+			break;
+		}
 	}
 
-	void printInventory(){
-		foreach(InventoryItem iI in inventory){
-			Debug.Log(iI);
-		}
+	void useUpgradeKit(ItemStats i){
+	}
+
+	void useUpgradePotion(){
+	}
+
+	void OnTriggerEnter(Collider c){
+		
 	}
 }
