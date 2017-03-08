@@ -28,7 +28,7 @@ public class InventoryController : MonoBehaviour {
 					Inventory I = gameObject.GetComponentInParent<Inventory> ();
 					Armor Get = hitObj.collider.gameObject.GetComponentInParent<Armor> ();
 					I.pickUpItem (Get);
-					Debug.Log ("player is Grabbing Weapon "+Get);
+					Debug.Log ("player is Grabbing Armor ");
 				}
 			}
         } 
