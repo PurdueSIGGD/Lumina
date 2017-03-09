@@ -2,25 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : ItemStats {
+public abstract class Weapon : ItemStats {
 
-	public enum damageType{wimpy,normal,glad,umbra};
+	public enum WeaponCategory {Melee, Projectile, Magic};
+    public Hittable.DamageType damageType;
+	public float weaponSpeed; //Time inbetween pressing button and actually attacking
+	public float coolDown; //Time between end of attack and next attack
+	public float range;
+	public float damage;
+    public abstract void Attack(bool mouseDown);
 
-	float minDamage;
-	float maxDamage;
-
-	public damageType type;
-
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	override public void Damage(){}
-
-	override public void Upgrade(){}
 }
