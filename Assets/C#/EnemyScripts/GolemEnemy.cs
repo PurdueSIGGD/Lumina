@@ -10,15 +10,24 @@ public class GolemEnemy : BaseEnemy {
     public Transform target;    //target to attack, ex: player, animal
     public bool isAttacking;    //if golem is attacking
     public float timeBetweenAttacks;    //time between 2 attacks
-    public float meleeRange;    //range that golem will smash target
-    public float throwRange;    //range that golem will throw stuff at target 
-    public GameObject[] rocks;
 
+    public float meleeRange;    //range that golem will smash target
+    public float throwRange;    //range that golem will throw stuff at target, does not use right now :( 
+
+    public GameObject[] rocks; //rocks that golem will use to throw, if don't have rocks, it will stare at you angrily  
     private Rigidbody rb;
+
+    public Transform[] patrolPositions; //positions that golem will move around, don't have, golem stand still.
+    private bool isWalking; //if golem is walking, don't change direction
+    private int curDestination; //destination that golem is heading
+    public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
+
  
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        curDestination = -1;
+        PatrolAround();
     }
 
 
@@ -35,8 +44,8 @@ public class GolemEnemy : BaseEnemy {
         float distanceFromTarget = 
             Vector3.Magnitude(target.transform.position - transform.position);
         
-        //attack
-        if (distanceFromTarget < 2f)       
+        //decide which attack to use
+        if (distanceFromTarget < meleeRange)       
             Smash();            
         else ThrowRock();
 
@@ -46,15 +55,22 @@ public class GolemEnemy : BaseEnemy {
 
     }
 
+    /*
+     * Main method that will be updated every frame
+     */
     public override void Movement()
     {
        //golem stay in 1 place because it is lazy and love to sleep
        if (target != null )
         {
-            transform.LookAt(target);           
+            //transform.LookAt(target); 
+            
         }
         
-        
+        else
+        {
+            //PatrolAround();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,6 +98,13 @@ public class GolemEnemy : BaseEnemy {
     {
         //incase target fast-escape
         if (target == null) return;
+
+        //check if golem has rock
+        if (rocks == null || rocks.Length == 0)
+        {
+            Debug.Log("Please put in some rocks for golem :|");
+            return;
+        }
 
         //simple smash using rock
         Vector3 pos = transform.position + transform.forward + transform.up;
@@ -120,6 +143,13 @@ public class GolemEnemy : BaseEnemy {
         //in case target escape when golem ready to throw rock
         if (target == null) return;
 
+        //check if golem has rock
+        if (rocks == null || rocks.Length == 0)
+        {
+            Debug.Log("Please put in some rocks for golem :|");
+            return;
+        }
+
         //get the rock
         GameObject rock = Instantiate( 
             rocks[Random.Range(0, rocks.Length)], 
@@ -152,6 +182,30 @@ public class GolemEnemy : BaseEnemy {
         //for keep things clean, destroy after 2 seconds
         Destroy(rock, 2f);
     }
+
+    /*
+     * PatrolAround() golem will patrol around specific points
+     * waiting for sth to attack
+     */
+    private void PatrolAround()
+    {
+        //if there is no assigned positions, golem stand still 
+        if (patrolPositions == null || patrolPositions.Length == 0)
+        {
+            return;
+        }
+        StartCoroutine( WaitForSomeTime());
+        curDestination = (curDestination + 1) % patrolPositions.Length;
+        transform.position = patrolPositions[curDestination].position;
+    }
+
+    private IEnumerator WaitForSomeTime()
+    {
+        yield return new WaitForSeconds(timeBeforeChangeDirection);
+        StopCoroutine(WaitForSomeTime());
+    }
+
+
 
     
 
