@@ -7,7 +7,7 @@ public class Pickup : MonoBehaviour {
 
 	public enum pickUpType{magic,health,upgradePotion,upgradeKit};
 
-	float amount;
+	public float amount;
 
 	public pickUpType itemType;
 	// Use this for initialization

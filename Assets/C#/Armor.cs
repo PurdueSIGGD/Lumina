@@ -4,4 +4,6 @@ using UnityEngine;
 
 public class Armor : ItemStats {
     public enum armorType {helmet, chestplate};
+
+	public armorType type;
 }

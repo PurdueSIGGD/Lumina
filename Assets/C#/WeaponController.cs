@@ -37,7 +37,7 @@ public class WeaponController : MonoBehaviour {
     }
 
     public Weapon getCurrentWeapon() {
-        
+		return weapon [weaponIndex];//I'm not sure if this is proper implementation I put this here so it could compile
     }
 
 

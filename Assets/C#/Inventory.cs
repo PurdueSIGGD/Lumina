@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 	
-	bool canpickup;
-	int upgradekit;
-	int upgradePotions;
 
-	Armor helmet;
-	Armor chestPlate;
+
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +19,9 @@ public class Inventory : MonoBehaviour {
 		
 	}
 
-	public void pickUpItem(Armor item){
-		switch(item.type){
-		case Armor.armorType.head:
-				helmet = item;
-				break;
-		case Armor.armorType.chestplate:
-			chestPlate = item;
-			break;
-		}
-	}
 
-	void useUpgradeKit(ItemStats i){
-	}
 
-	void useUpgradePotion(){
-	}
+
 
 	void OnTriggerEnter(Collider c){
 		

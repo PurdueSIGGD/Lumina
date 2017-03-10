@@ -13,4 +13,7 @@ public class Magic : Weapon {
 	void Update () {
 		
 	}
+
+	override public void Attack(bool b){
+	}
 }

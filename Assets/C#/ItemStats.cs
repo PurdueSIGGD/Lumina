@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemStats : MonoBehaviour {
 
-	public enum Tier {Simple,Moderate,Epic};
+	public enum Tier {Simple,Moderate,Epic,Umbra};
 
 	public Tier tier = Tier.Simple;
 	public float condition = 100.0f;
