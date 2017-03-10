@@ -1,8 +1,10 @@
-﻿
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//use Unity Random
+using Random = UnityEngine.Random;
 
 [RequireComponent (typeof(Rigidbody))]
 public class GolemEnemy : BaseEnemy {
@@ -18,16 +20,16 @@ public class GolemEnemy : BaseEnemy {
     private Rigidbody rb;
 
     public Transform[] patrolPositions; //positions that golem will move around, don't have, golem stand still.
-    private bool isWalking; //if golem is walking, don't change direction
-    private int curDestination; //destination that golem is heading
+    private Transform curDestination;   //where golem is heading
+    public bool isPatrolling; //if golem is patrolling, don't change direction
+    private int curPatrolIndex; //index to keep track of where that golem is heading
     public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
  
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        curDestination = -1;
-        PatrolAround();
+        curPatrolIndex = -1;      
     }
 
 
@@ -38,20 +40,29 @@ public class GolemEnemy : BaseEnemy {
         //prepare
         yield return new WaitForSeconds(timeBetweenAttacks);
 
-        //if target escape while golem is prepare, prevent null exception
-        if (target == null) StopCoroutine(Attack());
-
-        float distanceFromTarget = 
+        //if target escape while golem is prepare, prevent null exception 
+        try
+        {
+            float distanceFromTarget =
             Vector3.Magnitude(target.transform.position - transform.position);
-        
-        //decide which attack to use
-        if (distanceFromTarget < meleeRange)       
-            Smash();            
-        else ThrowRock();
+            //decide which attack to use
+            if (distanceFromTarget < meleeRange)
+                Smash();
+            else ThrowRock();
 
-        //if isAttacking, attack again
-        if (isAttacking) StartCoroutine(Attack());
-        else StopCoroutine(Attack());
+            //if isAttacking, attack again
+            if (isAttacking) StartCoroutine(Attack());
+            else StopCoroutine(Attack());
+
+        }
+
+        catch (NullReferenceException)
+        {
+            StopCoroutine(Attack());
+        }
+        
+        
+        
 
     }
 
@@ -60,22 +71,28 @@ public class GolemEnemy : BaseEnemy {
      */
     public override void Movement()
     {
-       //golem stay in 1 place because it is lazy and love to sleep
-       if (target != null )
+        //golem stay in 1 place because it is lazy and love to sleep
+        if (target != null)
         {
-            //transform.LookAt(target); 
-            
+            transform.LookAt(target); 
+
         }
-        
-        else
+        //no enemy, golem patrol around
+        else if (!isPatrolling && patrolPositions.Length > 0)
         {
-            //PatrolAround();
+            StartCoroutine( PatrolAround() );
         }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //update this later, so that golem can attack other as well
         if (other.tag != "Player") return;
+
+        //stop patrol and start attack
+        StopPatrol();
         target = other.transform;
         isAttacking = true;
         StartCoroutine(Attack());
@@ -184,29 +201,79 @@ public class GolemEnemy : BaseEnemy {
     }
 
     /*
+     * if patrolPositions[] is assigned
+     * 
      * PatrolAround() golem will patrol around specific points
      * waiting for sth to attack
      */
-    private void PatrolAround()
+    private IEnumerator PatrolAround()
     {
-        //if there is no assigned positions, golem stand still 
+        //simple check against null
         if (patrolPositions == null || patrolPositions.Length == 0)
         {
-            return;
+            yield break;
         }
-        StartCoroutine( WaitForSomeTime());
-        curDestination = (curDestination + 1) % patrolPositions.Length;
-        transform.position = patrolPositions[curDestination].position;
+    
+        //if is (not patrolling) or isResting
+        //update new destination
+        if (!isPatrolling)
+        {
+            isPatrolling = true;
+            curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
+            curDestination = patrolPositions[curPatrolIndex];           
+        }
+
+        //start patrol
+        while (isPatrolling)
+        {
+            //update FixedUpdate()
+            yield return new WaitForFixedUpdate();
+           
+            //move to new position
+            transform.LookAt(curDestination);
+            Vector3 forward =
+                transform.position + transform.forward * Time.deltaTime * movementSpeed;
+            rb.MovePosition(forward);
+
+            //check if near destination
+            if (isNearDestination(curDestination.position))
+            {
+                //rest a bit
+                yield return new WaitForSeconds(timeBeforeChangeDirection);
+
+                //set isPatrolling to false
+                StopPatrol();                             
+            }
+            
+        }
+
+
     }
 
-    private IEnumerator WaitForSomeTime()
+    /*
+     * isNearDestination(): while golem is patrolling
+     * return true if golem is near its current destination
+     */ 
+    private bool isNearDestination(Vector3 destination)
     {
-        yield return new WaitForSeconds(timeBeforeChangeDirection);
-        StopCoroutine(WaitForSomeTime());
+        //calculate the distance
+        Vector3 distanceVect = destination - transform.position;
+        float distance = Vector3.Magnitude(distanceVect);
+
+        //simple check.
+        return distance < 3f;       
     }
 
+    /*
+     * simple check
+     * may add animation later.
+     */ 
+    private void StopPatrol()
+    {
+        isPatrolling = false;
+    }
 
-
+   
     
 
 }
