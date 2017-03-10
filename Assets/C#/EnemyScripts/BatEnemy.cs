@@ -35,7 +35,6 @@ public class BatEnemy : BaseEnemy
     {
         
         isAttacking = true;
-        Debug.Log("starting routine");
 
         while (isAttacking)
         {
