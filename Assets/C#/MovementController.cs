@@ -21,6 +21,7 @@ public class MovementController : MonoBehaviour {
 	public bool isJumping;
 	public bool isSprinting;
 	public GameObject cameraObj;
+    public Animator viewmodelAnimator;
 
 	// Use this for initialization
 	void Start () {
@@ -42,9 +43,10 @@ public class MovementController : MonoBehaviour {
 	* lr - the left and right movement from the keyboards
 	*/
 	public void SetMovement(float lr, float fb, bool sprintPressed){
-		//TODO: REMOVE THIS FROM FINAL GAME?
+        //TODO: REMOVE THIS FROM FINAL GAME?
 
-
+        viewmodelAnimator.SetBool("Running", this.isSprinting && (lr > 0 || fb > 0) && IsGrounded());
+        viewmodelAnimator.SetBool("Walking", (lr > 0 || fb > 0) && IsGrounded());
 		UpdateCooldowns ();
 		ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
 
+    public Animator viewmodelAnimator;
     private float interactCooldown;
 
 	void Start () {
@@ -16,6 +17,7 @@ public class InventoryController : MonoBehaviour {
         {
             if (Time.timeSinceLevelLoad - interactCooldown > 1)
             {
+                viewmodelAnimator.SetTrigger("Wave");
                 Debug.Log("Boop");
                 interactCooldown = Time.timeSinceLevelLoad;
             }
