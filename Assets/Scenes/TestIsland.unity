@@ -406,6 +406,18 @@ Prefab:
       propertyPath: m_Name
       value: Player_Thirdperson
       objectReference: {fileID: 0}
+    - target: {fileID: 400390, guid: c5ca281c0958dd0488db458bbf5f07d4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400390, guid: c5ca281c0958dd0488db458bbf5f07d4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400390, guid: c5ca281c0958dd0488db458bbf5f07d4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5ca281c0958dd0488db458bbf5f07d4, type: 3}
   m_IsPrefabParent: 0

@@ -17,7 +17,7 @@ public class InventoryController : MonoBehaviour {
         {
             if (Time.timeSinceLevelLoad - interactCooldown > 1)
             {
-                viewmodelAnimator.SetTrigger("Wave");
+                viewmodelAnimator.SetTrigger("RAttack");
                 Debug.Log("Boop");
                 interactCooldown = Time.timeSinceLevelLoad;
             }
