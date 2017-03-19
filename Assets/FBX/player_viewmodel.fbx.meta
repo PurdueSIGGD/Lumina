@@ -1480,6 +1480,14 @@ ModelImporter:
     7400028: rig|Both_Return
     7400030: body:RoadKillOut|Right_Wave
     7400032: body:RoadKillOut|Both_Return
+    7400034: rig|Fistcuffs_Running
+    7400036: rig|Fistcuffs_Walking
+    7400038: rig|Camera_Running.001
+    7400040: rig|Camera_Walking.001
+    7400042: rig|Left_Magic_Idle
+    7400044: rig|Left_Magic_Shoot_End
+    7400046: rig|Left_Magic_Shoot_Loop
+    7400048: rig|Left_Magic_Shoot_Start
     9500000: //RootNode
     13700000: body:RoadKillOut
   materials:
@@ -1489,14 +1497,14 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleCurves: 0
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
