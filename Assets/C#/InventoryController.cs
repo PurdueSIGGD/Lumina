@@ -8,23 +8,26 @@ public class InventoryController : MonoBehaviour {
 	//Vector3 cameraAim;
 	//public GameObject cameraObj;
 	public StatsController sC;
+	public GameObject cam;//camera
 	float upgradekits;
-	float upgradePotions;
+	float upgradeHealth;
+	float upgradeMagic;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	Armor helmet;
 	Armor chestPlate;
-
 	Armor Get;
 	Pickup Pick;
 
 
+
 	void Start () {
 		interactCooldown = 1;
+
 	}
 
 	void Update () {
-		hitObjs = Physics.RaycastAll (this.transform.position,transform.forward,30f);
+		hitObjs = Physics.RaycastAll (this.transform.position,cam.transform.forward,50f);
 		for(int i = 0; i < hitObjs.Length ;i++){
 			string itemTag = hitObjs[i].collider.gameObject.tag;
 			if (itemTag.CompareTo ("Armor") == 0) {
@@ -89,8 +92,11 @@ public class InventoryController : MonoBehaviour {
 			case Pickup.pickUpType.upgradeKit:
 				upgradekits += Pick.amount;
 				break;
-			case Pickup.pickUpType.upgradePotion:
-				upgradePotions += Pick.amount;
+			case Pickup.pickUpType.upgradeHealth:
+				upgradeHealth += Pick.amount;
+				break;
+			case Pickup.pickUpType.upgradeMagic:
+				upgradeMagic += Pick.amount;
 				break;
 			}
 			Destroy (Pick.gameObject);
@@ -99,9 +105,20 @@ public class InventoryController : MonoBehaviour {
 
 	void useUpgradeKit(ItemStats i){
 		//make sure to decrease durability on an item
+		i.condition -= (i.condition*.05f);
+		if (i.condition < i.minCondition)
+			i.condition = i.minCondition;
 	}
 
-	void useUpgradePotion(){
+	void useUpgradePotion(Pickup p){
+		switch (p.itemType) {
+		case Pickup.pickUpType.upgradeHealth:
+			sC.upgradeMaxHealth();
+			break;
+		case Pickup.pickUpType.upgradeMagic:
+			sC.upgradeMaxMagic();
+			break;
+		}
 	}
 
 }

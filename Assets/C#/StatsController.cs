@@ -14,8 +14,8 @@ public class StatsController : MonoBehaviour
 	float healthMax;
 	float magic;
 	float magicMax;
-	float light;
-	float lightMax;
+	float lightt;
+	float lighttMax;
 
 	bool outside;
 
@@ -49,12 +49,12 @@ public class StatsController : MonoBehaviour
 		return magicMax;
 	}
 
-	public float getlight(){
-		return light;
+	public float getlightt(){
+		return lightt;
 	}
 
-	public float getLightMax(){
-		return lightMax;
+	public float getLighttMax(){
+		return lighttMax;
 	}
 
 	public bool getOutside(){
@@ -69,8 +69,8 @@ public class StatsController : MonoBehaviour
 		this.magicMax += MAGIC_INCREASE_AMOUNT;
 	}
 
-	public void upgradeMaxLight(){
-		this.lightMax += LIGHT_INCREASE_AMOUNT;
+	public void upgradeMaxLightt(){
+		this.lighttMax += LIGHT_INCREASE_AMOUNT;
 	}
 
 	//Returns leftover (if any) ((can be negative))
@@ -124,25 +124,25 @@ public class StatsController : MonoBehaviour
 	}
 
 	//Returns leftovers (if any) ((can be negative))
-	public float updateLight(float amount) {
-		if (light < 0) {
-			light = 0;
+	public float updateLightt(float amount) {
+		if (lightt < 0) {
+			lightt = 0;
 		}
 		if (amount > 0) {
-			if (light + amount > lightMax) {
-				float leftover = light + amount - lightMax;
-				light = lightMax;
+			if (lightt + amount > lighttMax) {
+				float leftover = lightt + amount - lighttMax;
+				lightt = lighttMax;
 				return leftover;
 			}
-			light += amount;
+			lightt += amount;
 			return 0;
 		} else if (amount < 0) {
-			if (light + amount < 0) {
-				float leftover = light + amount;
-				light = 0;
+			if (lightt + amount < 0) {
+				float leftover = lightt + amount;
+				lightt = 0;
 				return leftover;
 			}
-			light += amount;
+			lightt += amount;
 			return 0;
 		}
 		return 0;

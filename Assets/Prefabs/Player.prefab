@@ -26,6 +26,9 @@ GameObject:
   - component: {fileID: 136498175254493160}
   - component: {fileID: 114976499150424436}
   - component: {fileID: 114843446769406110}
+  - component: {fileID: 136352742239540370}
+  - component: {fileID: 114409587252862614}
+  - component: {fileID: 114965523910108370}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -156,6 +159,17 @@ MonoBehaviour:
   isJumping: 0
   isSprinting: 0
   cameraObj: {fileID: 1556625647338804}
+--- !u!114 &114409587252862614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419025804602196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f178bdc88ed52304980b44df7023cf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114477616444819408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,7 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 114097777998435798}
-  playerInventory: {fileID: 114976499150424436}
+  playerInventory: {fileID: 114965523910108370}
 --- !u!114 &114843446769406110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,6 +195,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iC: {fileID: 114976499150424436}
+--- !u!114 &114965523910108370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419025804602196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96075bf6bfcc164f91a013495cae722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sC: {fileID: 114843446769406110}
+  cam: {fileID: 1556625647338804}
 --- !u!114 &114976499150424436
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sC: {fileID: 114843446769406110}
+  cam: {fileID: 0}
 --- !u!124 &124639707395344078
 Behaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +228,19 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1556625647338804}
   m_Enabled: 1
+--- !u!136 &136352742239540370
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419025804602196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136429524223387134
 CapsuleCollider:
   m_ObjectHideFlags: 1
