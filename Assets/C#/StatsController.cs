@@ -50,6 +50,7 @@ public class StatsController : MonoBehaviour
 	}
 
 	public void upgradeMaxHealth(){
+		
 	}
 
 	public void upgradeMaxMagic(){
