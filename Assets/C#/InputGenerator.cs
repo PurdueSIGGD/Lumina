@@ -51,33 +51,43 @@ public class InputGenerator : MonoBehaviour {
         // 1: Right Hand
         // 2: Left Hand
         // 3: Movement (Movement like shaking when running, or taking a hit from an enemy)
+        // 4: Right Hand Movement (Camera movement specifically from right hand movement)
+        // 5: Left Hand Movement (Camera movement specifically from left hand movement)
         // 
         // Layer 0 overrides all movement, so I have to manually disable the other right/left animations while one is running by setting their weight to zero
         // Once all that is over, each hand has a path they can take to "recover" from both hand movements, like coming back up from below.
         // I signal these methods by calling "DoneWithBoth" to be true.
         if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !playerMovement.viewmodelAnimator.IsInTransition(0)) {
+            // If the Both Hands layer is done with its shit, and not in transition
             // We want to reset the weights here when we are done, so we check to see if we are in the idle position (when both hands are finished, they will return to idle which is an empty state)
             this.playerMovement.viewmodelAnimator.SetLayerWeight(1, 1);
             this.playerMovement.viewmodelAnimator.SetLayerWeight(2, 1);
             this.playerMovement.viewmodelAnimator.SetBool("DoneWithBoth", true);
-        } 
-        if (Input.GetAxis ("Fire1") > 0){
-            // And if we want to initiate some two-hand movement here, we verify we are in idle
-            if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !playerMovement.viewmodelAnimator.IsInTransition(0)) {
-                // Stop the done with both flag (so they can't recover)
-                this.playerMovement.viewmodelAnimator.SetBool("DoneWithBoth", false);
-                // Send the double-hand movement we would like, in this case I have a method that uses both hands in a punch movement
-                this.playerMovement.viewmodelAnimator.SetTrigger("Both_Punch");
+        }
+       
+
+        if (Input.GetAxis ("Fire1") > 0) {            
+            // In order to signal the both hands animation, we have to stop the single hands animation
+            // So we call DoneWithBoth to be false, and they will start ending their own animation
+            this.playerMovement.viewmodelAnimator.SetBool("DoneWithBoth", false);
+            // We don't have to wait until they are done with their transitions if we want an instant snap
+            if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(1).IsName("ReturnFromBoth") &&
+           playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(2).IsName("ReturnFromBoth") &&
+           !playerMovement.viewmodelAnimator.IsInTransition(0)) {
+                // We set the weight to be zero
                 this.playerMovement.viewmodelAnimator.SetLayerWeight(1, 0);
                 this.playerMovement.viewmodelAnimator.SetLayerWeight(2, 0);
+
+                // Send the double-hand movement we would like, in this case I have a method that uses both hands in a punch movement
+                this.playerMovement.viewmodelAnimator.SetBool("Punching", true);
             }
-           
+
 
             //Debug.Log("WeaponController1 True");
 
         } else if(Input.GetAxis ("Fire1") == 0){
             //Debug.Log("WeaponController1 false");
-            
+            this.playerMovement.viewmodelAnimator.SetBool("Punching", false);
         }
 
         if (Input.GetAxis ("Fire2") > 0){
