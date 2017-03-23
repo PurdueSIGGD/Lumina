@@ -29,7 +29,13 @@ public class GolemEnemy : BaseEnemy {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        curPatrolIndex = -1;      
+        curPatrolIndex = -1;
+
+        //check if golem has rock
+        if (rocks == null || rocks.Length == 0)
+        {
+            Debug.Log("Please put in some rocks for golem :|");
+        }
     }
 
 
