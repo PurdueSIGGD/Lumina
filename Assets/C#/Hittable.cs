@@ -26,7 +26,7 @@ abstract public class Hittable : MonoBehaviour {
         }
     }
 
-    public enum DamageType { Neutral, Fire, Ice, Electric, Denim, Umbra };
+	public enum DamageType { Neutral, Fire, Ice, Electric, Denim, Umbra };
 
     /* You only have to implement this one function */
 

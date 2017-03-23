@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatsController : MonoBehaviour
+public class StatsController : Hittable
 {
 	const float DEFAULT_MAX_HEALTH = 100.0F;
 	const float DEFAULT_MAX_MAGIC = 100.0F;
@@ -29,8 +29,13 @@ public class StatsController : MonoBehaviour
 		healthMax = DEFAULT_MAX_HEALTH;
 		magic = 0;
 		magicMax = DEFAULT_MAX_MAGIC;
-		light = 0;
-		lightMax = DEFAULT_MAX_LIGHT;
+		lightt = 0;
+		lighttMax = DEFAULT_MAX_LIGHT;
+	}
+
+	public override void Hit(float damage, Vector3 Direction, DamageType type) {
+		float typeModifier = getDamageTypeModifier (type);
+		float armorModifier = 
 	}
 
 	public float getHealth(){
@@ -74,7 +79,7 @@ public class StatsController : MonoBehaviour
 	}
 
 	//Returns leftover (if any) ((can be negative))
-	public float updateHealth(float amount, DamageType type) {
+	public float updateHealth(float amount, Hittable.DamageType type) {
 		if (health < 0) {
 			health = 0;
 		}
@@ -146,6 +151,11 @@ public class StatsController : MonoBehaviour
 			return 0;
 		}
 		return 0;
+	}
+
+	public float getDamageTypeModifier(DamageType type) {
+		//TODO: Implement this.
+		return 1;
 	}
 }
 
