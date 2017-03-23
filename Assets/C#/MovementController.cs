@@ -21,13 +21,15 @@ public class MovementController : MonoBehaviour {
 	public bool isJumping;
 	public bool isSprinting;
 	public GameObject cameraObj;
+    public Animator viewmodelAnimator;
 
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
 		playerCollider = GetComponentInParent<CapsuleCollider> ();
 
-		distToGround = playerCollider.bounds.extents.y;
+		distToGround = playerCollider.bounds.extents.y/2.5f;
+        print(distToGround);
 		lastJump = 0;
 		sprintTime = 0;
 		sprintRecharge = 0;
@@ -42,6 +44,10 @@ public class MovementController : MonoBehaviour {
 	* lr - the left and right movement from the keyboards
 	*/
 	public void SetMovement(float lr, float fb, bool sprintPressed){
+        //TODO: REMOVE THIS FROM FINAL GAME?
+
+        viewmodelAnimator.SetBool("Running", this.isSprinting && (lr != 0 || fb != 0) && IsGrounded());
+        viewmodelAnimator.SetBool("Walking", (lr != 0 || fb != 0) && IsGrounded());
 		UpdateCooldowns ();
 		ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {
@@ -80,7 +86,6 @@ public class MovementController : MonoBehaviour {
 	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
 		ApplySprint (sprintPressed);
-        //print("SPRINTING= " +  sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
         float airborneModifier = IsGrounded() ? 1 : .75f;
@@ -101,10 +106,10 @@ public class MovementController : MonoBehaviour {
 	 * added in a time period that a person has to wait before using the raycast again
 	 */
 	private bool IsGrounded(){ 
-		if (lastJump < 0.3f ) {
+		if (lastJump < 0.5f ) {
 			return false;
 		}
-		return Physics.Raycast (this.transform.position, Vector3.down, distToGround + 0.2f);
+		return Physics.Raycast (this.transform.position, Vector3.down, distToGround);
 	}
 
 	/**
