@@ -74,10 +74,10 @@ public class InventoryController : MonoBehaviour {
 
 	public void pickUpItem(Armor item){
 		switch(item.type){
-		case Armor.armorType.helmet:
+		case Armor.ArmorPiece.helmet:
 			helmet = item;
 			break;
-		case Armor.armorType.chestplate:
+		case Armor.ArmorPiece.chestplate:
 			chestPlate = item;
 			break;
 		}
@@ -113,12 +113,18 @@ public class InventoryController : MonoBehaviour {
 	void useUpgradePotion(Pickup p){
 		switch (p.itemType) {
 		case Pickup.pickUpType.upgradeHealth:
-			sC.upgradeMaxHealth();
+			sC.UpgradeMaxHealth();
 			break;
 		case Pickup.pickUpType.upgradeMagic:
-			sC.upgradeMaxMagic();
+			sC.UpgradeMaxMagic();
 			break;
 		}
 	}
 
+	public List<Armor> GetEquippedArmor() {
+		List<Armor> armor = new List<Armor> ();
+		armor.Add (chestPlate);
+		armor.Add (helmet);
+		return armor;
+	}
 }

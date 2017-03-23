@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StatsController : Hittable
 {
@@ -9,6 +10,8 @@ public class StatsController : Hittable
 	const float HEALTH_INCREASE_AMOUNT = 10.0F;
 	const float MAGIC_INCREASE_AMOUNT = 10.0F;
 	const float LIGHT_INCREASE_AMOUNT = 10.0F;
+	const float WEAKNESS_MODIFIER = 1.1;
+	const float STRENGTH_MODIFIER = 0.9;
 
 	float health;
 	float healthMax;
@@ -16,6 +19,8 @@ public class StatsController : Hittable
 	float magicMax;
 	float lightt;
 	float lighttMax;
+	Hittable.DamageType weakAgainst;
+	Hittable.DamageType strongAgainst;
 
 	bool outside;
 
@@ -34,52 +39,56 @@ public class StatsController : Hittable
 	}
 
 	public override void Hit(float damage, Vector3 Direction, DamageType type) {
-		float typeModifier = getDamageTypeModifier (type);
-		float armorModifier = 
+		damage = ApplyDamageTypeHitMod (damage, type);
+		damage = ApplyArmorHitMod (damage, type);
+		float leftover = UpdateHealth(-1 * damage);
+		if (leftover < 0) {
+			Kill ();
+		}
 	}
 
-	public float getHealth(){
+	public float GetHealth(){
 		return health;
 	}
 
-	public float getHealthMax(){
+	public float GetHealthMax(){
 		return healthMax;
 	}
 
-	public float getMagic(){
+	public float GetMagic(){
 		return magic;
 	}
 
-	public float getMagicMax(){
+	public float GetMagicMax(){
 		return magicMax;
 	}
 
-	public float getlightt(){
+	public float GetLightt(){
 		return lightt;
 	}
 
-	public float getLighttMax(){
+	public float GetLighttMax(){
 		return lighttMax;
 	}
 
-	public bool getOutside(){
+	public bool GetOutside(){
 		return outside;
 	}
 
-	public void upgradeMaxHealth(){
+	public void UpgradeMaxHealth(){
 		this.healthMax += HEALTH_INCREASE_AMOUNT;
 	}
 
-	public void upgradeMaxMagic(){
+	public void UpgradeMaxMagic(){
 		this.magicMax += MAGIC_INCREASE_AMOUNT;
 	}
 
-	public void upgradeMaxLightt(){
+	public void UpgradeMaxLightt(){
 		this.lighttMax += LIGHT_INCREASE_AMOUNT;
 	}
 
 	//Returns leftover (if any) ((can be negative))
-	public float updateHealth(float amount, Hittable.DamageType type) {
+	public float UpdateHealth(float amount) {
 		if (health < 0) {
 			health = 0;
 		}
@@ -104,7 +113,7 @@ public class StatsController : Hittable
 	}
 
 	//Returns leftovers (if any) ((can be negative))
-	public float updateMagic(float amount) {
+	public float UpdateMagic(float amount) {
 		if (magic < 0) {
 			magic = 0;
 		}
@@ -129,7 +138,7 @@ public class StatsController : Hittable
 	}
 
 	//Returns leftovers (if any) ((can be negative))
-	public float updateLightt(float amount) {
+	public float UpdateLightt(float amount) {
 		if (lightt < 0) {
 			lightt = 0;
 		}
@@ -153,9 +162,60 @@ public class StatsController : Hittable
 		return 0;
 	}
 
-	public float getDamageTypeModifier(DamageType type) {
-		//TODO: Implement this.
-		return 1;
+	/* Applies a change in damage from the vulnerability of the creature
+	 * to a certain DamageType and returns the damage after modification.
+	 * 
+	 * @param  damage - the amount of damage before modification
+	 * @param  type - The type of damage being dealt
+	 * 
+	 * @return The amount to modify damage being dealt by (damage is multiplied by this)
+	 */
+	public float ApplyDamageTypeHitMod(float damage, DamageType type) {
+		if (type == Hittable.DamageType.Neutral)
+			return;
+		if (type == weakAgainst) {
+			damage = damage * WEAKNESS_MODIFIER;
+		} else if (type == strongAgainst) {
+			damage = damage * STRENGTH_MODIFIER;
+		}
+		return damage;
+	}
+
+	/* Applies a reduction of damage from a hit based on the creature's armor, and returns
+	 * the damage after modification
+	 * 
+	 * @param  damage - the amount of damage before modification
+	 * @param  type - The type of damage being dealt
+	 * 
+	 * @return The damage to deal after modification
+	 */
+	public float ApplyArmorHitMod(float damage, DamageType type) {
+		List<Armor> armor = iC.GetEquippedArmor ();
+
+		foreach (Armor amr in armor) {
+			if (type == amr.strongAgainst) {
+				
+			}
+		}
+
+		float flatDamageReduction = 0;
+		float percentDamageReduction = 0;
+		foreach (Armor amr in armor) {
+			flatDamageReduction += amr.flatDamageBlock;
+			percentDamageReduction += amr.percentDamageBlock;
+		}
+		float dmgRedFromPercent = damage * (0.01F * percentDamageReduction);
+		damage -= flatDamageReduction;
+		damage -= dmgRedFromPercent;
+		if (damage < 0)
+			damage = 0;
+		return damage;
+	}
+
+	/* Kills the entity.
+	 */
+	public void Kill () {
+		//TODO: PUT DEATH CODE HERE
 	}
 }
 
