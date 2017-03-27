@@ -15,8 +15,8 @@ public class InputGenerator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-		
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
