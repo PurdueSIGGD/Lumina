@@ -1,0 +1,108 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/**
+ * This class is for Enemies who usually moves around the fixed route
+ * Ex: a golem walking around, a skeleton patrolling
+ * How to use:
+ *  void Start() 
+ *      base.__init__()
+ *  void Movement()
+ *      StartCoroutine(PatrolAround())
+ */ 
+ [RequireComponent(typeof(Rigidbody))]
+public abstract class PatrolGroundEnemy : BaseEnemy {
+
+    public Transform[] patrolPositions; //positions that golem will move around, don't have, golem stand still.
+    protected Transform curDestination;   //where golem is heading
+
+    public bool isPatrolling; //if golem is patrolling, don't change direction
+    protected int curPatrolIndex; //index to keep track of where that golem is heading
+
+    public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
+
+    protected Rigidbody rb;
+
+
+    protected void __init__()
+    {
+        rb = GetComponent<Rigidbody>();
+        curPatrolIndex = -1;
+    }
+
+    /*
+    * if patrolPositions[] is assigned
+    * 
+    * PatrolAround() golem will patrol around specific points
+    * waiting for sth to attack
+    */
+    protected IEnumerator PatrolAround()
+    {
+        //simple check against null
+        if (patrolPositions == null || patrolPositions.Length == 0)
+        {
+            yield break;
+        }
+
+        //if is (not patrolling) or isResting
+        //update new destination
+        if (!isPatrolling)
+        {
+            isPatrolling = true;
+            curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
+            curDestination = patrolPositions[curPatrolIndex];
+        }
+
+        //start patrol
+        while (isPatrolling)
+        {
+            //update FixedUpdate()
+            yield return new WaitForFixedUpdate();
+
+            //move to new position
+            transform.LookAt(curDestination);
+            Vector3 forward =
+                transform.position + transform.forward * Time.deltaTime * movementSpeed;
+            rb.MovePosition(forward);
+
+            //check if near destination
+            if (isNearDestination(curDestination.position))
+            {
+                //rest a bit
+                yield return new WaitForSeconds(timeBeforeChangeDirection);
+
+                //set isPatrolling to false
+                StopPatrol();
+            }
+
+        }
+
+
+    }
+
+    /*
+     * isNearDestination(): while golem is patrolling
+     * return true if golem is near its current destination
+     */
+    protected bool isNearDestination(Vector3 destination)
+    {
+        //calculate the distance
+        Vector3 distanceVect = destination - transform.position;
+        float distance = Vector3.Magnitude(distanceVect);
+
+        //simple check.
+        return distance < 3f;
+    }
+
+    /*
+     * simple check
+     * may add animation later.
+     */
+    protected void StopPatrol()
+    {
+        isPatrolling = false;
+    }
+
+
+}

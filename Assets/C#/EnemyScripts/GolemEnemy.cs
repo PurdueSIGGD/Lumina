@@ -6,8 +6,7 @@ using UnityEngine;
 //use Unity Random
 using Random = UnityEngine.Random;
 
-[RequireComponent (typeof(Rigidbody))]
-public class GolemEnemy : BaseEnemy {
+public class GolemEnemy : PatrolGroundEnemy {
 
     public Transform target;    //target to attack, ex: player, animal
     public bool isAttacking;    //if golem is attacking
@@ -17,19 +16,12 @@ public class GolemEnemy : BaseEnemy {
     public float throwRange;    //range that golem will throw stuff at target, does not use right now :( 
 
     public GameObject[] rocks; //rocks that golem will use to throw, if don't have rocks, it will stare at you angrily  
-    private Rigidbody rb;
 
-    public Transform[] patrolPositions; //positions that golem will move around, don't have, golem stand still.
-    private Transform curDestination;   //where golem is heading
-    public bool isPatrolling; //if golem is patrolling, don't change direction
-    private int curPatrolIndex; //index to keep track of where that golem is heading
-    public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
- 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        curPatrolIndex = -1;
+        //must have this for PatrolGroundEnemy
+        base.__init__();
 
         //check if golem has rock
         if (rocks == null || rocks.Length == 0)
@@ -206,79 +198,7 @@ public class GolemEnemy : BaseEnemy {
         Destroy(rock, 2f);
     }
 
-    /*
-     * if patrolPositions[] is assigned
-     * 
-     * PatrolAround() golem will patrol around specific points
-     * waiting for sth to attack
-     */
-    private IEnumerator PatrolAround()
-    {
-        //simple check against null
-        if (patrolPositions == null || patrolPositions.Length == 0)
-        {
-            yield break;
-        }
-    
-        //if is (not patrolling) or isResting
-        //update new destination
-        if (!isPatrolling)
-        {
-            isPatrolling = true;
-            curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
-            curDestination = patrolPositions[curPatrolIndex];           
-        }
-
-        //start patrol
-        while (isPatrolling)
-        {
-            //update FixedUpdate()
-            yield return new WaitForFixedUpdate();
-           
-            //move to new position
-            transform.LookAt(curDestination);
-            Vector3 forward =
-                transform.position + transform.forward * Time.deltaTime * movementSpeed;
-            rb.MovePosition(forward);
-
-            //check if near destination
-            if (isNearDestination(curDestination.position))
-            {
-                //rest a bit
-                yield return new WaitForSeconds(timeBeforeChangeDirection);
-
-                //set isPatrolling to false
-                StopPatrol();                             
-            }
-            
-        }
-
-
-    }
-
-    /*
-     * isNearDestination(): while golem is patrolling
-     * return true if golem is near its current destination
-     */ 
-    private bool isNearDestination(Vector3 destination)
-    {
-        //calculate the distance
-        Vector3 distanceVect = destination - transform.position;
-        float distance = Vector3.Magnitude(distanceVect);
-
-        //simple check.
-        return distance < 3f;       
-    }
-
-    /*
-     * simple check
-     * may add animation later.
-     */ 
-    private void StopPatrol()
-    {
-        isPatrolling = false;
-    }
-
+   
    
     
 
