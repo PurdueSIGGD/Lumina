@@ -104,10 +104,44 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void useUpgradeKit(ItemStats i){
-		//make sure to decrease durability on an item
+
 		i.condition -= (i.condition*.05f);
 		if (i.condition < i.minCondition)
 			i.condition = i.minCondition;
+		i.tier++;
+
+		//The upgrades of your armor are more effective depending on the condition of your armor
+		if (i is Armor) {
+			((Armor)i).flatDamageBlock += (2.5f * i.condition);
+			((Armor)i).percentDamageBlock += (1.25f * i.condition);
+			return;
+		}
+
+		if (i is Weapon) {
+			switch(((Weapon)i).weaponType){
+			case Weapon.WeaponCategory.Magic:
+				((Weapon)i).weaponSpeed += 1 * i.condition;
+				((Weapon)i).coolDown += 1 * i.condition;
+				((Weapon)i).range += 1 * i.condition;
+				((Weapon)i).damage += 3 * i.condition;
+					break;
+			case Weapon.WeaponCategory.Melee:
+				((Weapon)i).weaponSpeed += 1 * i.condition;
+				((Weapon)i).coolDown += 1 * i.condition;
+				((Weapon)i).range += 1 * i.condition;
+				((Weapon)i).damage += 3 * i.condition;
+				break;
+			case Weapon.WeaponCategory.Projectile:
+				((Weapon)i).weaponSpeed += 1 * i.condition;
+				((Weapon)i).coolDown += 1 * i.condition;
+				((Weapon)i).range += 1 * i.condition;
+				((Weapon)i).damage += 3 * i.condition;
+				break;
+			}
+
+		}
+
+
 	}
 
 	void useUpgradePotion(Pickup p){

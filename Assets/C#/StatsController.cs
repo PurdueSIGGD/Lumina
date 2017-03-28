@@ -10,8 +10,8 @@ public class StatsController : Hittable
 	const float HEALTH_INCREASE_AMOUNT = 10.0F;
 	const float MAGIC_INCREASE_AMOUNT = 10.0F;
 	const float LIGHT_INCREASE_AMOUNT = 10.0F;
-	const float WEAKNESS_MODIFIER = 1.1;
-	const float STRENGTH_MODIFIER = 0.9;
+	const float WEAKNESS_MODIFIER = 1.1F;
+	const float STRENGTH_MODIFIER = 0.9F;
 
 	float health;
 	float healthMax;
@@ -172,7 +172,7 @@ public class StatsController : Hittable
 	 */
 	public float ApplyDamageTypeHitMod(float damage, DamageType type) {
 		if (type == Hittable.DamageType.Neutral)
-			return;
+			return damage;
 		if (type == weakAgainst) {
 			damage = damage * WEAKNESS_MODIFIER;
 		} else if (type == strongAgainst) {
