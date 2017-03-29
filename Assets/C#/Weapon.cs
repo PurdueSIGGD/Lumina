@@ -4,12 +4,11 @@ using UnityEngine;
 
 public abstract class Weapon : ItemStats {
 
-	public enum WeaponCategory {Melee, Projectile, Magic};
     public Hittable.DamageType damageType;
-	public float weaponSpeed; //Time inbetween pressing button and actually attacking
-	public float coolDown; //Time between end of attack and next attack
+	public float timeToAttack; //Time inbetween pressing button and actually attacking
+	public float cooldownLength; //Time between end of attack and next attack
+	public float timeSincePress;
 	public float range;
 	public float damage;
-    public abstract void Attack(bool mouseDown);
-
+    public abstract void Attack(float deltaTime, bool mouseDown);
 }

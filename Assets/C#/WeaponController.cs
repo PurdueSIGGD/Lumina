@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour {
 
     Weapon[] weapon = new Weapon[2];
     int weaponIndex;
+	//TODO: StatsController
 
 
 	// Use this for initialization
@@ -37,7 +38,7 @@ public class WeaponController : MonoBehaviour {
     }
 
     public Weapon getCurrentWeapon() {
-        
+		return weapon [weaponIndex];
     }
 
 
