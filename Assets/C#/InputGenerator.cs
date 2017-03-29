@@ -71,8 +71,8 @@ public class InputGenerator : MonoBehaviour {
             // So we call DoneWithBoth to be false, and they will start ending their own animation
             this.playerMovement.viewmodelAnimator.SetBool("DoneWithBoth", false);
             // We don't have to wait until they are done with their transitions if we want an instant snap
-            if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(1).IsName("ReturnFromBoth") &&
-           playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(2).IsName("ReturnFromBoth") &&
+            if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(1).IsTag("WaitUntilBothDone") &&
+           playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(2).IsTag("WaitUntilBothDone") &&
            !playerMovement.viewmodelAnimator.IsInTransition(0)) {
                 // We set the weight to be zero
                 this.playerMovement.viewmodelAnimator.SetLayerWeight(1, 0);
