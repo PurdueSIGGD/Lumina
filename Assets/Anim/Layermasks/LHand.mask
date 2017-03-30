@@ -1111,9 +1111,9 @@ AvatarMask:
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/ORG-shoulder.R/ORG-upper_arm.R/ORG-forearm.R/ORG-hand.R/palm.R/palm.R_end
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/shoulder.L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/shoulder.L/shoulder.L_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/shoulder.R
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/shoulder.R/shoulder.R_end
@@ -1269,9 +1269,9 @@ AvatarMask:
   - m_Path: rig/root/VIS-foot.ik.R/VIS-foot.ik.R_end
     m_Weight: 0
   - m_Path: rig/root/VIS-hand.ik.L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/VIS-hand.ik.L/VIS-hand.ik.L_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/VIS-hand.ik.R
     m_Weight: 0
   - m_Path: rig/root/VIS-hand.ik.R/VIS-hand.ik.R_end
@@ -1285,10 +1285,14 @@ AvatarMask:
   - m_Path: rig/root/VIS-thigh_pole.ik.R/VIS-thigh_pole.ik.R_end
     m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L/VIS-upper_arm_pole.ik.L_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R
     m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R/VIS-upper_arm_pole.ik.R_end
+    m_Weight: 0
+  - m_Path: rig/Weapon
+    m_Weight: 0
+  - m_Path: rig/Weapon/Weapon_end
     m_Weight: 0
