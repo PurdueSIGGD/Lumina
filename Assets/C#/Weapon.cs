@@ -10,5 +10,6 @@ public abstract class Weapon : ItemStats {
 	public float timeSincePress;
 	public float range;
 	public float damage;
+	public Animator anim;
     public abstract void Attack(float deltaTime, bool mouseDown);
 }

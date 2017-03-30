@@ -24,6 +24,9 @@ public class Magic : Weapon {
 		if (attacking) {
 			if (!mouseDown) { //TODO: || sC.getMagic < magicUsage
 				attacking = false;
+				releaseTime = 0;
+				onCooldown = true;
+				anim.SetBool ("active", false); //TODO: Check for accuracy
 			} else {
 				holdTime += deltaTime;
 				//TODO: sC.UpdateMagic(magicUsage)
@@ -45,6 +48,7 @@ public class Magic : Weapon {
 			} else {
 				attacking = true;
 				holdTime = 0;
+				anim.SetBool ("active", true); //TODO: Check for accuracy
 			}
 		}
 	}

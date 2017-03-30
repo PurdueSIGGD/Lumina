@@ -27,6 +27,7 @@ public class ProjectileWeapon : Weapon {
 			}
 		} else if (mouseDown) {
 			isShooting = true;
+			anim.SetTrigger ("shoot"); //TODO: Make sure this matches up later
 		}
 	}
 

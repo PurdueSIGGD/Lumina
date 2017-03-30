@@ -37,6 +37,7 @@ public class SwingingWeapon : Weapon {
 			}
 		} else if (mouseDown) {
 			isAttacking = true;
+			anim.SetTrigger ("attack"); //TODO: make sure this matches up later
 		}
     }
 }
