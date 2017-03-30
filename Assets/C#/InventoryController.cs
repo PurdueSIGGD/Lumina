@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
 
+    public Animator viewmodelAnimator;
     private float interactCooldown;
 	//Vector3 cameraAim;
 	//public GameObject cameraObj;
@@ -53,21 +54,12 @@ public class InventoryController : MonoBehaviour {
         // If value is true, pick up
         if (value)
         {
-			if (Time.timeSinceLevelLoad - interactCooldown > 1) {
-				interactCooldown = Time.timeSinceLevelLoad;
-			} else {
-				return;
-			}
-			Debug.Log ("Interacting");
-			for (int i = 0; i < hitObjs.Length; i++) {
-				Get = hitObjs [i].collider.gameObject.GetComponentInParent<Armor> ();
-				if (Get == null)
-					continue;
-				pickUpItem (Get);
-				Debug.Log ("player is Equipping Armor ");
-				Destroy (Get.gameObject);
-			}
-
+            if (Time.timeSinceLevelLoad - interactCooldown > 1)
+            {
+                viewmodelAnimator.SetTrigger("RAttack");
+                Debug.Log("Boop");
+                interactCooldown = Time.timeSinceLevelLoad;
+            }
         } 
 
     }
