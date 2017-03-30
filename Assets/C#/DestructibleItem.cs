@@ -12,7 +12,7 @@ public class DestructibleItem : Hittable {
      */
     
     public GameObject gibs;
-    public override void Hit(float f, Vector3 direction, DamageType damage) {
+    public override void Hit(float f, Vector3 direction, Hittable.DamageType damage) {
         print("was hit");
         this.GetComponent<Collider>().isTrigger = true;
 
