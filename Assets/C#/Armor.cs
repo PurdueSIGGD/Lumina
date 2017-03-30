@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,18 @@ public class Armor : ItemStats {
 	/* I (Andrew G) changed this from "armorType" to "ArmorPiece" because it
 	 * better describes what it was meant to show.
 	 */
+<<<<<<< HEAD
 	public enum ArmorPiece {helmet, chestplate};
+=======
+    public enum ArmorPiece {helmet, chestplate};
+>>>>>>> master
 
 	public ArmorPiece type;
 	public Hittable.DamageType strongAgainst; //TODO: Default to Hittable.DamageType.Neutral
 	public float flatDamageBlock; //TODO: Default 0
 	public float percentDamageBlock; //TODO: Default 0
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

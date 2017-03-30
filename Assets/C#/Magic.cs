@@ -50,4 +50,7 @@ public class Magic : Weapon {
 			}
 		}
 	}
+
+	override public void Attack(bool b){
+	}
 }
