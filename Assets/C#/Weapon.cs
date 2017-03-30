@@ -11,5 +11,6 @@ public abstract class Weapon : ItemStats {
 	public float range;
 	public float damage;
 	public Animator anim;
+	public GameObject lookObj;
     public abstract void Attack(float deltaTime, bool mouseDown);
 }

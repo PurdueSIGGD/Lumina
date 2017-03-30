@@ -8,7 +8,6 @@ public class Magic : Weapon {
 	//float magicUsage;
 	bool attacking;
 	bool onCooldown;
-	Camera thecamera;
 	//TODO: StatsController sC;
 
 	public void Start() {
@@ -17,7 +16,6 @@ public class Magic : Weapon {
 		attacking = false;
 		//magicUsage = 1F; //The amount of mana used per frame of attacking
 		onCooldown = false;
-		thecamera = GetComponentInParent<Camera> ();
 	}
 
 	public override void Attack(float deltaTime, bool mouseDown) {
@@ -30,11 +28,11 @@ public class Magic : Weapon {
 			} else {
 				holdTime += deltaTime;
 				//TODO: sC.UpdateMagic(magicUsage)
-				RaycastHit[] hits = Physics.RaycastAll(thecamera.transform.position, thecamera.transform.forward);
+				RaycastHit[] hits = Physics.RaycastAll(lookObj.transform.position, lookObj.transform.forward);
 				foreach (RaycastHit hit in hits) {
 					Hittable hittable = hit.collider.GetComponentInParent<Hittable> ();
 					if (hittable != null && hit.distance <= range) {
-						hittable.Hit (damage, thecamera.transform.forward, damageType);
+						hittable.Hit (damage, lookObj.transform.forward, damageType);
 					}
 				}
 			}
