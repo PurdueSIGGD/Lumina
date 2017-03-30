@@ -170,7 +170,7 @@ public class StatsController : Hittable
 	 * 
 	 * @return The amount to modify damage being dealt by (damage is multiplied by this)
 	 */
-	public float ApplyDamageTypeHitMod(float damage, DamageType type) {
+	private float ApplyDamageTypeHitMod(float damage, DamageType type) {
 		if (type == Hittable.DamageType.Neutral)
 			return damage;
 		if (type == weakAgainst) {
@@ -189,7 +189,7 @@ public class StatsController : Hittable
 	 * 
 	 * @return The damage to deal after modification
 	 */
-	public float ApplyArmorHitMod(float damage, DamageType type) {
+	private float ApplyArmorHitMod(float damage, DamageType type) {
 		List<Armor> armor = iC.GetEquippedArmor ();
 
 		foreach (Armor amr in armor) {
