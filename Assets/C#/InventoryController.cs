@@ -93,11 +93,11 @@ public class InventoryController : MonoBehaviour {
 			case Pickup.pickUpType.upgradeKit:
 				upgradekits += Pick.amount;
 				break;
-			case Pickup.pickUpType.upgradeHealth:
-				upgradeHealth += Pick.amount;
+			case Pickup.pickUpType.health:
+				sC.UpdateHealth(Pick.amount);
 				break;
-			case Pickup.pickUpType.upgradeMagic:
-				upgradeMagic += Pick.amount;
+			case Pickup.pickUpType.magic:
+				sC.UpdateMagic(Pick.amount);
 				break;
 			}
 			Destroy (Pick.gameObject);
@@ -152,6 +152,9 @@ public class InventoryController : MonoBehaviour {
 			break;
 		case Pickup.pickUpType.upgradeMagic:
 			sC.UpgradeMaxMagic();
+			break;
+		case Pickup.pickUpType.upgradeLight:
+			sC.UpgradeMaxLightt();
 			break;
 		}
 	}

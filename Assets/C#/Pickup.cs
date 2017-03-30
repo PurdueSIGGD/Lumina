@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pickup : MonoBehaviour {
 
 
-	public enum pickUpType{magic,health,upgradeHealth,upgradeMagic,upgradeKit};
+	public enum pickUpType{magic,health,upgradeHealth,upgradeMagic,upgradeLight,upgradeKit};
 
 	public float amount;
 
