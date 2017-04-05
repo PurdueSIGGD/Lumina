@@ -391,21 +391,21 @@ AvatarMask:
   - m_Path: rig/root/MCH-thigh.fk.L.socket2/thigh.fk.L/MCH-thigh_antistr.fk.L/shin.fk.L/MCH-shin_antistr.fk.L/foot.fk.L/MCH-foot.L/MCH-foot.L_end
     m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R/shin.fk.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R/shin.fk.R/MCH-shin_antistr.fk.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R/shin.fk.R/MCH-shin_antistr.fk.R/foot.fk.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R/shin.fk.R/MCH-shin_antistr.fk.R/foot.fk.R/MCH-foot.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-thigh.fk.R.socket2/thigh.fk.R/MCH-thigh_antistr.fk.R/shin.fk.R/MCH-shin_antistr.fk.R/foot.fk.R/MCH-foot.R/MCH-foot.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/MCH-upper_arm.fk.L.socket2
     m_Weight: 0
   - m_Path: rig/root/MCH-upper_arm.fk.L.socket2/upper_arm.fk.L
@@ -1281,9 +1281,9 @@ AvatarMask:
   - m_Path: rig/root/VIS-thigh_pole.ik.L/VIS-thigh_pole.ik.L_end
     m_Weight: 0
   - m_Path: rig/root/VIS-thigh_pole.ik.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-thigh_pole.ik.R/VIS-thigh_pole.ik.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L
     m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L/VIS-upper_arm_pole.ik.L_end
@@ -1292,7 +1292,11 @@ AvatarMask:
     m_Weight: 1
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R/VIS-upper_arm_pole.ik.R_end
     m_Weight: 1
-  - m_Path: rig/Weapon
+  - m_Path: rig/Weapon1
     m_Weight: 1
-  - m_Path: rig/Weapon/Weapon_end
+  - m_Path: rig/Weapon1/Weapon1_end
     m_Weight: 1
+  - m_Path: rig/Weapon2
+    m_Weight: 0
+  - m_Path: rig/Weapon2/Weapon2_end
+    m_Weight: 0

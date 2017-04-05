@@ -6,8 +6,10 @@ public class InputGenerator : MonoBehaviour {
 
 	public MovementController playerMovement;
     public InventoryController playerInventory;
+    public WeaponController leftPlayerWeaponController;
+    public WeaponController rightPlayerWeaponController;
 
-	Rigidbody playerPhysics;
+    Rigidbody playerPhysics;
 
 	float jumpInput;
 
@@ -44,6 +46,11 @@ public class InputGenerator : MonoBehaviour {
 	*/
 	void ButtonStates(){
         playerInventory.Interact(Input.GetAxis("Interact") > 0);
+        rightPlayerWeaponController.Attack(Input.GetAxis("Fire1") > 0);
+        if (Input.GetAxis("RightCycleWeapon") > 0) rightPlayerWeaponController.SwitchWeapon();
+        leftPlayerWeaponController.Attack(Input.GetAxis("Fire2") > 0);
+        if (Input.GetAxis("LeftCycleWeapon") > 0) leftPlayerWeaponController.SwitchWeapon();
+
 
         // Might need to explain myself here. This is crap for animation
         // For animation, we have 4 layers at the moment. Each with their corresponding bone masks
@@ -57,6 +64,7 @@ public class InputGenerator : MonoBehaviour {
         // Layer 0 overrides all movement, so I have to manually disable the other right/left animations while one is running by setting their weight to zero
         // Once all that is over, each hand has a path they can take to "recover" from both hand movements, like coming back up from below.
         // I signal these methods by calling "DoneWithBoth" to be true.
+        /*
         if (playerMovement.viewmodelAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !playerMovement.viewmodelAnimator.IsInTransition(0)) {
             // If the Both Hands layer is done with its shit, and not in transition
             // We want to reset the weights here when we are done, so we check to see if we are in the idle position (when both hands are finished, they will return to idle which is an empty state)
@@ -100,7 +108,7 @@ public class InputGenerator : MonoBehaviour {
             this.playerMovement.viewmodelAnimator.SetBool("LMagicAttack", false);
 
             //Debug.Log("WeaponController2 false");
-        }
+        }*/
 
 
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);

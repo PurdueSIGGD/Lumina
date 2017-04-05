@@ -29,7 +29,7 @@ public class MovementController : MonoBehaviour {
 		playerCollider = GetComponentInParent<CapsuleCollider> ();
 
 		distToGround = playerCollider.bounds.extents.y/2.5f;
-        print(distToGround);
+        //print(distToGround);
 		lastJump = 0;
 		sprintTime = 0;
 		sprintRecharge = 0;

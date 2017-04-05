@@ -13,17 +13,19 @@ public class DestructibleItem : Hittable {
     
     public GameObject gibs;
     public override void Hit(float f, Vector3 direction, Hittable.DamageType damage) {
-        print("was hit");
+
+        //print("was hit");
         this.GetComponent<Collider>().isTrigger = true;
+        Rigidbody myRigid = this.GetComponent<Rigidbody>();
 
         GameObject spawn = (GameObject)GameObject.Instantiate(gibs, transform.position, transform.rotation);
-        Rigidbody myRigid = this.GetComponent<Rigidbody>();
         Vector3 myVelocity = myRigid.velocity;
         
         foreach (Rigidbody r in spawn.GetComponentsInChildren<Rigidbody>()) {
             r.velocity = myRigid.GetPointVelocity(r.transform.position);
         }
         GameObject.Destroy(this.gameObject);
+
     }
     void Start() {
 		

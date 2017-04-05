@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54617167683268790}
   m_Layer: 0
   m_Name: Armor
-  m_TagString: Armor
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,3 +126,6 @@ MonoBehaviour:
   maxCondition: 100
   factor: 1
   type: 0
+  strongAgainst: 0
+  flatDamageBlock: 0
+  percentDamageBlock: 0

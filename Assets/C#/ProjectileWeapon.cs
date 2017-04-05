@@ -10,23 +10,23 @@ public class ProjectileWeapon : Weapon {
 	public Projectile projectilePrefab;
 	public float launchSpeed;
 
-    public override void Attack(float deltaTime, bool mouseDown)
+    public override void Attack(bool mouseDown)
     {
 		if (isShooting) {
-			timeSincePress += deltaTime;
-			if (timeSincePress >= timeToAttack) {
+            setTimeSincePress(getTimeSincePress() + Time.deltaTime);
+            if (getTimeSincePress() >= timeToAttack) {
 				//Spawn Projectile
-				Projectile projectile = Instantiate<Projectile>(projectilePrefab, lookObj.transform.position, lookObj.transform.rotation);
+				Projectile projectile = Instantiate<Projectile>(projectilePrefab, getLookObj().transform.position, getLookObj().transform.rotation);
 				projectile.damage = damage;
 				projectile.damageType = damageType;
-				projectile.GetComponent<Rigidbody> ().velocity = lookObj.transform.forward * launchSpeed;
-			} else if (timeSincePress > timeToAttack + cooldownLength) {
+				projectile.GetComponent<Rigidbody> ().velocity = getLookObj().transform.forward * launchSpeed;
+			} else if (getTimeSincePress() > timeToAttack + timeToCooldown) {
 				isShooting = false;
-				timeSincePress = 0;
+                setTimeSincePress(0);
 			}
 		} else if (mouseDown) {
 			isShooting = true;
-			anim.SetTrigger ("shoot"); //TODO: Make sure this matches up later
+            getPlayerAnim().SetTrigger (getControllerSide() + "Attack"); //TODO: Make sure this matches up later
 		}
 	}
 
