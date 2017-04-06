@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class SkeletonEnemy : PatrolGroundEnemy {
 
+    //private var
+    private Animator anim;
     private Transform target;
-
-    public GameObject objectToRotate;
-
 
 
     // Use this for initialization
@@ -17,6 +16,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         //use this for PatrolAround
         base.__init__();
 
+        anim = GetComponent<Animator>();
     }
 
     public override IEnumerator Attack()
@@ -26,16 +26,13 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     public override void Movement()
     {
-        if (!isPatrolling && patrolPositions.Length > 0)
+        //if skeleton do nothing, make it patrol around
+        if (!isPatrolling && !isResting && patrolPositions.Length > 0)
         {
-            //StartCoroutine(PatrolAround());
+            StartCoroutine(PatrolAround());
         }
 
-       transform.RotateAround(objectToRotate.transform.position, transform.up, 10 * Time.deltaTime);
-        
-        
-
-
+             
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +40,19 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     }
 
+    public override void StartPatrolling()
+    {
+        anim.SetBool(IS_RUNNING, true);
+        base.StartPatrolling();
+    }
 
+    public override IEnumerator WaitBeforeChangeDirection()
+    {
+       
+        //add animation
+        anim.SetBool(IS_RUNNING, false);
 
-
+        //use same
+        return base.WaitBeforeChangeDirection();
+    }
 }

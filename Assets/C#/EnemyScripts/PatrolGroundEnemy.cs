@@ -18,17 +18,23 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     protected Transform curDestination;   //where golem is heading
 
     public bool isPatrolling; //if golem is patrolling, don't change direction
+    public bool isResting; //when 
     protected int curPatrolIndex; //index to keep track of where that golem is heading
 
     public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
     protected Rigidbody rb;
+    //protected Animator anim;
+
+    //some const because I am too lazy typing them
+    protected const string IS_RUNNING = "isRunning";
 
 
     protected void __init__()
     {
         rb = GetComponent<Rigidbody>();
         curPatrolIndex = -1;
+        //anim = GetComponent<Animator>();
     }
 
     /*
@@ -49,9 +55,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         //update new destination
         if (!isPatrolling)
         {
-            isPatrolling = true;
-            curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
-            curDestination = patrolPositions[curPatrolIndex];
+            StartPatrolling();
         }
 
         //start patrol
@@ -69,11 +73,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
             //check if near destination
             if (isNearDestination(curDestination.position))
             {
-                //rest a bit
-                yield return new WaitForSeconds(timeBeforeChangeDirection);
-
-                //set isPatrolling to false
-                StopPatrol();
+                StartCoroutine(WaitBeforeChangeDirection());
             }
 
             
@@ -99,14 +99,42 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         float distance = Vector3.Magnitude(distanceVect);
 
         //simple check.
-        return distance < 3f;
+        return distance < 5f;
+    }
+
+
+    /*
+    * simple code to start patrol 
+    * add animation later
+    */
+    public virtual void StartPatrolling()
+    {
+        isPatrolling = true;
+        curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
+        curDestination = patrolPositions[curPatrolIndex];
     }
 
     /*
-     * simple check
-     * may add animation later.
-     */
-    protected void StopPatrol()
+     * Resting before change direction while 
+     * this enemy is Patrolling around
+     * Make it virtual: to add animation
+     */ 
+    public virtual IEnumerator WaitBeforeChangeDirection()
+    {
+        //arghhh resting...
+        isResting = true;
+        isPatrolling = false;
+
+        //rest a bit
+        yield return new WaitForSeconds(timeBeforeChangeDirection);
+
+        //start patrol again
+        isResting = false;
+              
+    }
+   
+
+    public virtual void StopPatrolling()
     {
         isPatrolling = false;
     }

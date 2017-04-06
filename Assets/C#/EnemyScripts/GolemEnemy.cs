@@ -90,7 +90,7 @@ public class GolemEnemy : PatrolGroundEnemy {
         if (other.tag != "Player") return;
 
         //stop patrol and start attack
-        StopPatrol();
+        StopPatrolling();
         target = other.transform;
         isAttacking = true;
         StartCoroutine(Attack());
