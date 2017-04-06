@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 	public Text healthAmount;
+	public Text magicAmount;
 	public Text upgradeAmount;
 	public HUDController hC;
 
@@ -31,8 +32,12 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void closeHUDOpenPause(){
+		gameObject.SetActive (true);
+		hC.gameObject.SetActive (false);
 	}
 
 	public void closePauseOpenHUD(){
+		gameObject.SetActive (false);
+		hC.gameObject.SetActive (true);
 	}
 }
