@@ -251,14 +251,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
-  condition: 100
-  minCondition: 1
+  minCondition: 30
   maxCondition: 100
-  factor: 1
   damageType: 0
   timeToAttack: 0.25
   timeToCooldown: 0.5
   range: 2
-  damage: 30
+  baseDamage: 0
   animationType: 1
   myAnim: {fileID: 0}

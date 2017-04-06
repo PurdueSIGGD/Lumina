@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
+    private static float GRAB_DISTANCE = 4;
+
 
     public WeaponController rightWeaponController;
     public WeaponController leftWeaponController;
@@ -28,7 +30,7 @@ public class InventoryController : MonoBehaviour {
 	}
 
 	void Update () {
-		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward,50f);
+		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward);
         //print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
@@ -131,41 +133,17 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void useUpgradeKit(ItemStats i){
-
-		i.condition -= (i.condition*.05f);
-		if (i.condition < i.minCondition)
-			i.condition = i.minCondition;
-		i.tier++;
+        i.Upgrade(10);
+		
 
 		//The upgrades of your armor are more effective depending on the condition of your armor
 		if (i is Armor) {
-			((Armor)i).flatDamageBlock += (2.5f * i.condition);
-			((Armor)i).percentDamageBlock += (1.25f * i.condition);
+			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
+			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
 			return;
 		}
 
-		if (i is Weapon) {
-            if (i is Magic) {
-                ((Weapon)i).timeToAttack += 1 * i.condition;
-                ((Weapon)i).timeToCooldown += 1 * i.condition;
-                ((Weapon)i).range += 1 * i.condition;
-                ((Weapon)i).damage += 3 * i.condition;
-            }
-			if (i is SwingingWeapon) { 
-				((Weapon)i).timeToAttack += 1 * i.condition;
-				((Weapon)i).timeToCooldown += 1 * i.condition;
-				((Weapon)i).range += 1 * i.condition;
-				((Weapon)i).damage += 3 * i.condition;
-            }
-			if (i is ProjectileWeapon) { 
-				((Weapon)i).timeToAttack += 1 * i.condition;
-				((Weapon)i).timeToCooldown += 1 * i.condition;
-				((Weapon)i).range += 1 * i.condition;
-				((Weapon)i).damage += 3 * i.condition;
-				
-			}
-
-		}
+		
     }
 
 

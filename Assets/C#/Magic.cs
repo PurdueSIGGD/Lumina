@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Magic : Weapon {
+    public ParticleSystem idleParticles;
+    public ParticleSystem shootParticles;
+    public Transform mesh;
+
 	float holdTime;
 	float releaseTime; //Time since mouse was released.
+    
 	//float magicUsage;
 	bool attacking;
 	bool onCooldown;
 	//TODO: StatsController sC;
 
 	public void Start() {
-		holdTime = 0F;
+        //idleParticles = this.GetComponent<ParticleSystem>();
+        //shootParticles = this.GetComponentInChildren<ParticleSystem>();
+        //print(shootParticles.isPlaying);
+        //print(idleParticles.isPlaying);
+        //shootParticles.Play();
+        idleParticles.Play();
+        
+
+        holdTime = 0F;
 		releaseTime = 0F;
 		attacking = false;
 		//magicUsage = 1F; //The amount of mana used per frame of attacking
@@ -19,20 +32,52 @@ public class Magic : Weapon {
 	}
 
 	public override void Attack(bool mouseDown) {
+        // Particle controls
+        if (attacking && mouseDown && holdTime > timeToAttack) {
+            if (!shootParticles.isPlaying) {
+                shootParticles.Play();
+            }
+            if (idleParticles.isPlaying) {
+                idleParticles.Stop();
+            }
+        } else if (!mouseDown) {
+            if (shootParticles.isPlaying) {
+                shootParticles.Stop();
+            }
+            if (!idleParticles.isPlaying) {
+                idleParticles.Play();
+            }
+        }
+
+        if (getPlayerAnim() && getPlayerAnim().GetCurrentAnimatorStateInfo(2).IsTag("Idle") && !getPlayerAnim().IsInTransition(2)) {
+            // Overrides
+            releaseTime = 0;
+            onCooldown = false;
+            attacking = false;
+        }
         if (attacking) {
             if (!mouseDown) { //TODO: || sC.getMagic < magicUsage
                 attacking = false;
                 releaseTime = 0;
                 onCooldown = true;
                 getPlayerAnim().SetBool(getControllerSide() + "MagicAttack", false); //TODO: Check for accuracy
+                
             } else {
                 holdTime += Time.deltaTime;
                 if (holdTime > timeToAttack) {
+                    if (!shootParticles.isPlaying) { 
+                        shootParticles.Play();
+                    }
+                    if (idleParticles.isPlaying) { 
+                        idleParticles.Stop();
+                    }
                     //TODO: sC.UpdateMagic(magicUsage)
                     //print("Shoooooot");
                     RaycastHit[] hits = Physics.RaycastAll(getLookObj().transform.position, getLookObj().transform.forward);
                     foreach (RaycastHit hit in hits) {
-                        if (hit.distance <= range && hit.collider.gameObject.tag != "Player") {
+                        if (hit.distance <= range && 
+                            hit.collider.gameObject.tag != "Player" &&
+                            !hit.collider.isTrigger ) {
                             // Push physics, regardless of hittable
                             Rigidbody r;
                             if (r = hit.collider.GetComponent<Rigidbody>()) {
@@ -42,7 +87,7 @@ public class Magic : Weapon {
                             // Hit with hittable
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                             if (hittable != null) {
-                                hittable.Hit(damage, getLookObj().transform.forward, damageType);
+                                hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
                             }
                         }
                     }
@@ -50,6 +95,7 @@ public class Magic : Weapon {
             }
         } else if (mouseDown) {
             if (onCooldown) {
+                
                 if (releaseTime + Time.deltaTime >= timeToCooldown) {
                     onCooldown = false;
                 } else {

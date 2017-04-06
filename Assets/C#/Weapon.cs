@@ -7,7 +7,7 @@ public abstract class Weapon : ItemStats {
 	public float timeToAttack; //Time inbetween pressing button and actually attacking
 	public float timeToCooldown; //Time between end of attack and next attack
 	public float range;
-	public float damage;
+	public float baseDamage; //The damage the weapon would do if at 100% condition
     public int animationType;
     private bool busy; // If busy, like reloading or something
     private float timeSincePress;

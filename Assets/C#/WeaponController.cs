@@ -49,13 +49,24 @@ public class WeaponController : MonoBehaviour {
             if (pendingPackType == "Pack" && pendingOldWeapon) { //We make sure the old weapon exists
                 // Packing
                 // Hide old weapon
+
                 pendingOldWeapon.transform.localScale = Vector3.zero;
+                if (pendingOldWeapon is Magic) {
+                    // Set the mesh to be scale 0
+                    ((Magic)pendingOldWeapon).mesh.localScale = Vector3.zero;
+
+                } 
             } else if (pendingPackType == "Drop" && pendingOldWeapon) { 
                 // Throwing
                 // Drop last item
                 pendingOldWeapon.transform.parent = null;
                 pendingOldWeapon.transform.position += cameraBone.transform.right * 2; //Throw to the right
                 pendingOldWeapon.transform.localScale = Vector3.one;
+                if (pendingOldWeapon is Magic) {
+                    // Set the mesh to be proper scale
+                    ((Magic)pendingOldWeapon).mesh.localScale = Vector3.one;
+                }
+                pendingOldWeapon.transform.localEulerAngles += new Vector3(0, 180, 0);
                 pendingOldWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 pendingOldWeapon.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
                 pendingOldWeapon.GetComponent<Collider>().isTrigger = false;
@@ -69,7 +80,12 @@ public class WeaponController : MonoBehaviour {
             //print("Adding new item");
             // Set this weapon to be active
             pendingNewWeapon.transform.parent = weaponBone;
+
             pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
+            if (pendingNewWeapon is Magic) {
+                // Set the mesh to be scale 0
+                ((Magic)pendingNewWeapon).mesh.localScale = Vector3.zero;
+            } 
             pendingNewWeapon.transform.localPosition = Vector3.zero;
             pendingNewWeapon.transform.localEulerAngles = Vector3.zero;
             pendingNewWeapon.GetComponent<Rigidbody>().isKinematic = true;
@@ -145,8 +161,17 @@ public class WeaponController : MonoBehaviour {
         //pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
         // Each animation is 1/2 second long, so I set the speed based off of that so it syncs
         // i.e. if a weapon's AttackSpeed is 1, I set the AttackSpeed to .5f, so it lasts 1 sec instead of half a second
-        viewmodelAnimator.SetFloat(controllerSide + "AttackSpeed", 1 / (2 * pendingNewWeapon.timeToAttack));
-        viewmodelAnimator.SetFloat(controllerSide + "CooldownSpeed", 1 / (2 * pendingNewWeapon.timeToCooldown));
+        if (pendingNewWeapon is Magic) {
+            // We cheat here because there is a tiny overlap where we have to compensate the magic
+            // So we make the speed a bit slower
+            viewmodelAnimator.SetFloat(controllerSide + "AttackSpeed", 1 / (2 * (pendingNewWeapon.timeToAttack + 0.1f)));
+            viewmodelAnimator.SetFloat(controllerSide + "CooldownSpeed", 1 / (2 * (pendingNewWeapon.timeToCooldown + 0.1f)));
+        } else {
+            viewmodelAnimator.SetFloat(controllerSide + "AttackSpeed", 1 / (2 * pendingNewWeapon.timeToAttack));
+            viewmodelAnimator.SetFloat(controllerSide + "CooldownSpeed", 1 / (2 * pendingNewWeapon.timeToCooldown));
+
+        }
+        
 
         pendingPackType = "";
     }
@@ -155,31 +180,7 @@ public class WeaponController : MonoBehaviour {
      * Should be called by inventory controller
      */
     public void EquipWeapon(Weapon newWeapon) {
-        if (newWeapon is Magic) {
-            pendingNewWeapon = newWeapon;
-
-            weapons[0] = newWeapon;
-            weaponCount = 1;
-            // Override for magic, we haven't filled out the animator workflow for this to work yet
-            // Set this weapon to be active
-            
-            viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
-            pendingNewWeapon = newWeapon;
-            pendingNewWeapon.transform.parent = weaponBone;
-            //pendingNewWeapon.transform.localScale = Vector3.zero;
-            pendingNewWeapon.transform.localPosition = Vector3.zero;
-            pendingNewWeapon.transform.localEulerAngles = Vector3.zero;
-            pendingNewWeapon.GetComponent<Rigidbody>().isKinematic = true;
-            pendingNewWeapon.GetComponent<Collider>().isTrigger = true;
-            pendingNewWeapon.setPlayerAnim(viewmodelAnimator);
-            pendingNewWeapon.setLookObj(cameraBone);
-            pendingNewWeapon.setControllerSide(controllerSide);
-
-            pendingNewWeapon.transform.GetChild(0).gameObject.SetActive(false);
-
-            SwitchWeaponFinished();
-            return;
-        }
+      
         if (
             weaponBusy || // Can't equip if reloading
             pendingPackType != ""
@@ -215,9 +216,12 @@ public class WeaponController : MonoBehaviour {
     }
 
     public void MoveToLayer(Transform root, int layer) {
+        // If we set our particels to be viewmodel, they get in the way
+        // So we have a layer set to never be a viewmodel
+        if (root.tag == "NeverViewmodel") return;
         root.gameObject.layer = layer;
         foreach (Transform child in root) {
-            MoveToLayer(child, layer);
+           MoveToLayer(child, layer);
         }
     }
 }

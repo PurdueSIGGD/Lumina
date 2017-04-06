@@ -20,8 +20,9 @@ public class SwingingWeapon : Weapon {
 			setTimeSincePress(getTimeSincePress() + Time.deltaTime);
 			if (!hasRaycasted && getTimeSincePress() >= timeToAttack) {
                 //print("Hitting now " + getLookObj());
-
-				RaycastHit[] hits = Physics.RaycastAll(getLookObj().transform.position, getLookObj().transform.forward);
+                // Apply ItemStats damage
+                this.DamageCondition(1);
+                RaycastHit[] hits = Physics.RaycastAll(getLookObj().transform.position, getLookObj().transform.forward);
 				foreach (RaycastHit hit in hits) {
                     if (hit.distance <= range &&
                         !hit.collider.isTrigger &&
@@ -36,7 +37,7 @@ public class SwingingWeapon : Weapon {
                         // Hit with hittable
                         Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                         if (hittable != null) {
-                            hittable.Hit(damage, getLookObj().transform.forward, damageType);
+                            hittable.Hit(baseDamage * (getCondition()/100), getLookObj().transform.forward, damageType);
                         }
                     }
                     

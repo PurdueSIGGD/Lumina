@@ -17,7 +17,7 @@ public class ProjectileWeapon : Weapon {
             if (getTimeSincePress() >= timeToAttack) {
 				//Spawn Projectile
 				Projectile projectile = Instantiate<Projectile>(projectilePrefab, getLookObj().transform.position, getLookObj().transform.rotation);
-				projectile.damage = damage;
+				projectile.damage = baseDamage;
 				projectile.damageType = damageType;
 				projectile.GetComponent<Rigidbody> ().velocity = getLookObj().transform.forward * launchSpeed;
 			} else if (getTimeSincePress() > timeToAttack + timeToCooldown) {

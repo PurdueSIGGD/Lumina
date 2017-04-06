@@ -667,15 +667,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5b1a581bf95adb44969de7189a4a430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier: 0
-  condition: 100
-  minCondition: 1
+  tier: 2
+  minCondition: 30
   maxCondition: 100
-  factor: 1
   damageType: 0
   timeToAttack: 0.5
   timeToCooldown: 0.5
   range: 2
-  damage: 20
+  baseDamage: 0
   animationType: 1
   myAnim: {fileID: 0}
