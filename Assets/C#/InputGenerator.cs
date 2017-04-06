@@ -6,6 +6,8 @@ public class InputGenerator : MonoBehaviour {
 
 	public MovementController playerMovement;
     public InventoryController playerInventory;
+	public HUDController playerHUD;
+	public PauseMenu playerPause;
 
 	Rigidbody playerPhysics;
 
@@ -108,6 +110,23 @@ public class InputGenerator : MonoBehaviour {
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
+
+		if (Input.GetAxis ("Pause") > 0) {
+			playerPause.changeState = true;
+		} else {
+			if(playerPause.changeState){
+				if (playerPause.getPause()) {
+					playerPause.setPause (false);
+					playerPause.closePauseOpenHUD ();
+					playerPause.changeState = false;
+				} else {
+					playerPause.setPause (true);
+					playerPause.closeHUDOpenPause ();
+					playerPause.changeState = false;
+				}
+			}
+		}
+			
 
 	}
 
