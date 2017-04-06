@@ -261,7 +261,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1897698298917214}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
@@ -2898,7 +2898,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1534782811612366}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
@@ -2945,7 +2945,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -2098214463
+  randomSeed: 626230288
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3761,10 +3761,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4280250070
+          rgba: 891252438
         key1:
           serializedVersion: 2
-          rgba: 2500134
+          rgba: 4280690214
         key2:
           serializedVersion: 2
           rgba: 0
@@ -3792,8 +3792,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 5975
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -3801,7 +3801,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         key0:
           serializedVersion: 2
