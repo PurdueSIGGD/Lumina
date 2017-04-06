@@ -76,8 +76,15 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
                 StopPatrol();
             }
 
+            
+
         }
 
+
+    }
+
+    protected void FindPath()
+    {
 
     }
 

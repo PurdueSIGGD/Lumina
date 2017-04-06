@@ -7,6 +7,8 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     private Transform target;
 
+    public GameObject objectToRotate;
+
 
 
     // Use this for initialization
@@ -26,9 +28,14 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     {
         if (!isPatrolling && patrolPositions.Length > 0)
         {
-            StartCoroutine(PatrolAround());
+            //StartCoroutine(PatrolAround());
         }
+
+       transform.RotateAround(objectToRotate.transform.position, transform.up, 10 * Time.deltaTime);
         
+        
+
+
     }
 
     private void OnTriggerEnter(Collider other)
