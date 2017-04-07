@@ -26,8 +26,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     protected Rigidbody rb;
     //protected Animator anim;
 
-    //some const because I am too lazy typing them
-    protected const string IS_RUNNING = "isRunning";
+    
 
 
     protected void __init__()
