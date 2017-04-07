@@ -39,6 +39,7 @@ public class StatsController : Hittable
 	}
 
 	public override void Hit(float damage, Vector3 Direction, DamageType type) {
+        print("Fuck I got hit" + transform);
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
 		float leftover = UpdateHealth(-1 * damage);

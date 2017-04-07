@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour {
+    private static float GRAB_DISTANCE = 4;
+
+
+    public WeaponController rightWeaponController;
+    public WeaponController leftWeaponController;
 
     public Animator viewmodelAnimator;
     private float interactCooldown;
-	//Vector3 cameraAim;
-	//public GameObject cameraObj;
 	public StatsController sC;
 	public GameObject cam;//camera
 	float upgradekits;
@@ -17,23 +20,24 @@ public class InventoryController : MonoBehaviour {
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	Armor helmet;
 	Armor chestPlate;
-	Armor Get;
 	Pickup Pick;
-
+    ItemStats get;
 
 
 	void Start () {
-		interactCooldown = 1;
+		interactCooldown = .3f;
 
 	}
 
 	void Update () {
-		hitObjs = Physics.RaycastAll (this.transform.position,cam.transform.forward,50f);
+		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
+        //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward);
+        //print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
 			string itemTag = hitObjs[i].collider.gameObject.tag;
-			if (itemTag.CompareTo ("Armor") == 0) {
-				Get = hitObjs [i].collider.gameObject.GetComponent<Armor>();
-				Debug.Log ("Seeing Armor "+Get.type);
+			if (itemTag == "Item") {
+				get = hitObjs [i].collider.gameObject.GetComponent<ItemStats>();
+				//if (get) Debug.Log ("Seeing item "+ get.gameObject.name);
 			}
 		}
 	}
@@ -54,34 +58,58 @@ public class InventoryController : MonoBehaviour {
         // If value is true, pick up
         if (value)
         {
-			if (Time.timeSinceLevelLoad - interactCooldown > 1) {
-				viewmodelAnimator.SetTrigger("RAttack");
-				interactCooldown = Time.timeSinceLevelLoad;
-			} else {
+			if (Time.timeSinceLevelLoad - interactCooldown <= 1) {
 				return;
 			}
-			Debug.Log ("Interacting");
+			//Debug.Log ("Interacting");
 			for (int i = 0; i < hitObjs.Length; i++) {
-				Get = hitObjs [i].collider.gameObject.GetComponentInParent<Armor> ();
-				if (Get == null)
+                get = hitObjs [i].collider.GetComponent<ItemStats> ();
+				if (get == null)
 					continue;
-				pickUpItem (Get);
-				Debug.Log ("player is Equipping Armor ");
-				Destroy (Get.gameObject);
-			}
+				pickUpItem (get);
+                //Debug.Log ("player is Equipping Armor ");
+                //Destroy (get.gameObject);
+                // Reset timer
+                interactCooldown = Time.timeSinceLevelLoad;
+
+            }
         } 
 
     }
 
-	public void pickUpItem(Armor item){
-		switch(item.type){
-		case Armor.ArmorPiece.helmet:
-			helmet = item;
-			break;
-		case Armor.ArmorPiece.chestplate:
-			chestPlate = item;
-			break;
-		}
+	public void pickUpItem(ItemStats item){
+        Transform lastItem = null;
+        if (item is Armor) { 
+            switch (((Armor)item).type){
+		    case Armor.ArmorPiece.helmet:
+                if (helmet) lastItem = helmet.transform;
+			    helmet = (Armor)item;
+			    break;
+		    case Armor.ArmorPiece.chestplate:
+                if (chestPlate) lastItem = chestPlate.transform;
+			    chestPlate = (Armor)item;
+			    break;
+		    }
+            if (lastItem) {
+                //Drop last item
+                lastItem.GetComponent<Rigidbody>().isKinematic = true;
+                lastItem.parent = null;
+                lastItem.GetComponent<Collider>().isTrigger = false;
+            }
+            // Set our newest item as our currently equipped item
+            item.transform.parent = this.transform;
+            item.transform.localPosition = Vector3.zero;
+            item.GetComponent<Rigidbody>().isKinematic = true;
+            item.GetComponent<Collider>().isTrigger = true;
+        }
+        if (item is Magic) {
+            //print("Picked up magic");
+            leftWeaponController.EquipWeapon((Weapon)item);
+        } else  if (item is Weapon) {
+            //print("Picked up weapon");
+            rightWeaponController.EquipWeapon((Weapon)item);
+        }
+
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -105,45 +133,20 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void useUpgradeKit(ItemStats i){
-
-		i.condition -= (i.condition*.05f);
-		if (i.condition < i.minCondition)
-			i.condition = i.minCondition;
-		i.tier++;
+        i.Upgrade(10);
+		
 
 		//The upgrades of your armor are more effective depending on the condition of your armor
 		if (i is Armor) {
-			((Armor)i).flatDamageBlock += (2.5f * i.condition);
-			((Armor)i).percentDamageBlock += (1.25f * i.condition);
+			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
+			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
 			return;
 		}
 
-		if (i is Weapon) {
-			switch(((Weapon)i).weaponType){
-			case Weapon.WeaponCategory.Magic:
-				((Weapon)i).weaponSpeed += 1 * i.condition;
-				((Weapon)i).coolDown += 1 * i.condition;
-				((Weapon)i).range += 1 * i.condition;
-				((Weapon)i).damage += 3 * i.condition;
-					break;
-			case Weapon.WeaponCategory.Melee:
-				((Weapon)i).weaponSpeed += 1 * i.condition;
-				((Weapon)i).coolDown += 1 * i.condition;
-				((Weapon)i).range += 1 * i.condition;
-				((Weapon)i).damage += 3 * i.condition;
-				break;
-			case Weapon.WeaponCategory.Projectile:
-				((Weapon)i).weaponSpeed += 1 * i.condition;
-				((Weapon)i).coolDown += 1 * i.condition;
-				((Weapon)i).range += 1 * i.condition;
-				((Weapon)i).damage += 3 * i.condition;
-				break;
-			}
-
-		}
+		
+    }
 
 
-	}
 
 	void useUpgradePotion(Pickup p){
 		switch (p.itemType) {
