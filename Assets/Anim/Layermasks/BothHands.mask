@@ -1292,7 +1292,11 @@ AvatarMask:
     m_Weight: 1
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R/VIS-upper_arm_pole.ik.R_end
     m_Weight: 1
-  - m_Path: rig/Weapon
-    m_Weight: 0
-  - m_Path: rig/Weapon/Weapon_end
-    m_Weight: 0
+  - m_Path: rig/Weapon1
+    m_Weight: 1
+  - m_Path: rig/Weapon1/Weapon1_end
+    m_Weight: 1
+  - m_Path: rig/Weapon2
+    m_Weight: 1
+  - m_Path: rig/Weapon2/Weapon2_end
+    m_Weight: 1
