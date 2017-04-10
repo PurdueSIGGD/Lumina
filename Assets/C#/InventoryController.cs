@@ -14,13 +14,12 @@ public class InventoryController : MonoBehaviour {
 	public StatsController sC;
 	public GameObject cam;//camera
 	float upgradekits;
-	float upgradeHealth;
-	float upgradeMagic;
+	float upgradePotions;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	Armor helmet;
 	Armor chestPlate;
-	Pickup Pick;
+	Pickup pick;
     ItemStats get;
 
 
@@ -115,20 +114,24 @@ public class InventoryController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
-			Pick = other.gameObject.GetComponentInParent<Pickup> ();
-			Debug.Log ("Player picked up " + Pick.itemType);
-			switch(Pick.itemType){
-			case Pickup.pickUpType.upgradeKit:
-				upgradekits += Pick.amount;
-				break;
-			case Pickup.pickUpType.health:
-				sC.UpdateHealth(Pick.amount);
-				break;
-			case Pickup.pickUpType.magic:
-				sC.UpdateMagic(Pick.amount);
-				break;
+			pick = other.gameObject.GetComponentInParent<Pickup> ();
+			Debug.Log ("Player picked up " + pick.itemType);
+            bool deletes = true;
+			switch(pick.itemType){
+			    case Pickup.pickUpType.upgradeKit:
+				    upgradekits += pick.amount;
+				    break;
+			    case Pickup.pickUpType.upgradePotion:
+                    upgradePotions++;
+                    break;
+                case Pickup.pickUpType.Magic:
+                    deletes = (sC.UpdateMagic(pick.amount) != pick.amount);
+                    break;
+                case Pickup.pickUpType.Health:
+                    deletes = (sC.UpdateHealth(pick.amount) != pick.amount);
+                    break;
 			}
-			Destroy (Pick.gameObject);
+			if (deletes) Destroy (pick.gameObject);
 		}
     }
 
@@ -148,24 +151,27 @@ public class InventoryController : MonoBehaviour {
 
 
 
-	void useUpgradePotion(Pickup p){
-		switch (p.itemType) {
-		case Pickup.pickUpType.upgradeHealth:
-			sC.UpgradeMaxHealth();
+	void useUpgradePotion(StatsController.StatType p){
+		switch (p) {
+		case StatsController.StatType.Health:
+			    sC.UpgradeMaxHealth();
+                upgradePotions--;
 			break;
-		case Pickup.pickUpType.upgradeMagic:
-			sC.UpgradeMaxMagic();
-			break;
-		case Pickup.pickUpType.upgradeLight:
-			sC.UpgradeMaxLightt();
-			break;
+		case StatsController.StatType.Magic:
+                sC.UpgradeMaxMagic();
+                upgradePotions--;
+                break;
+		case StatsController.StatType.Light:
+                sC.UpgradeMaxLightt();
+                upgradePotions--;
+                break;
 		}
 	}
 
 	public List<Armor> GetEquippedArmor() {
 		List<Armor> armor = new List<Armor> ();
-		armor.Add (chestPlate);
-		armor.Add (helmet);
+		if (chestPlate) armor.Add (chestPlate);
+		if (helmet) armor.Add (helmet);
 		return armor;
 	}
 }

@@ -4229,6 +4229,7 @@ GameObject:
   - component: {fileID: 114550067772635302}
   - component: {fileID: 114285480779047484}
   - component: {fileID: 114036529346635350}
+  - component: {fileID: 65759052724325460}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11605,7 +11606,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1089920163989490}
-  m_LocalRotation: {x: 0.112283655, y: 0.6132021, z: -0.57561684, w: 0.5291888}
+  m_LocalRotation: {x: 0.112283655, y: 0.61320215, z: -0.5756169, w: 0.5291889}
   m_LocalPosition: {x: 0.000045185865, y: 0.002531595, z: -0.000045886485}
   m_LocalScale: {x: 0.5585551, y: 1.4744246, z: 0.5585551}
   m_Children:
@@ -19087,6 +19088,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &65759052724325460
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419025804602196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 3, z: 5}
+  m_Center: {x: 0, y: 1.7, z: 0}
 --- !u!81 &81627596489543986
 AudioListener:
   m_ObjectHideFlags: 1
@@ -19143,6 +19156,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5dac981467f8445a47802098fdf1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  healthMax: 100
+  magic: 100
+  magicMax: 100
+  lightt: 100
+  lighttMax: 100
+  myAnim: {fileID: 95017676440113730}
   iC: {fileID: 114336645036764650}
 --- !u!114 &114097777998435798
 MonoBehaviour:
@@ -19157,6 +19177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumping: 0
   isSprinting: 0
+  canMove: 1
   cameraObj: {fileID: 1546172959024416}
   viewmodelAnimator: {fileID: 95017676440113730}
 --- !u!114 &114285480779047484
@@ -19173,6 +19194,7 @@ MonoBehaviour:
   weaponBone: {fileID: 4496211806550240}
   cameraBone: {fileID: 4873794288881744}
   viewmodelAnimator: {fileID: 95017676440113730}
+  myStats: {fileID: 114036529346635350}
   weapons:
   - {fileID: 0}
   - {fileID: 0}
@@ -19225,6 +19247,7 @@ MonoBehaviour:
   weaponBone: {fileID: 4530392123554952}
   cameraBone: {fileID: 4873794288881744}
   viewmodelAnimator: {fileID: 95017676440113730}
+  myStats: {fileID: 114036529346635350}
   weapons:
   - {fileID: 0}
   - {fileID: 0}

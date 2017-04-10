@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 199831329557557938}
   m_Layer: 0
   m_Name: Shoot Particles
-  m_TagString: Particles
+  m_TagString: NeverViewmodel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 198556945871469174}
   m_Layer: 0
   m_Name: Idle Particles
-  m_TagString: Particles
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
+  condition: 100
   minCondition: 1
   maxCondition: 100
   damageType: 2
@@ -241,6 +242,7 @@ MonoBehaviour:
   idleParticles: {fileID: 198556945871469174}
   shootParticles: {fileID: 198911113911230320}
   mesh: {fileID: 4643761097077648}
+  statsController: {fileID: 0}
 --- !u!135 &135522763868013500
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -2989,7 +2991,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 10
+      scalar: 20
       maxCurve:
         serializedVersion: 2
         m_Curve:

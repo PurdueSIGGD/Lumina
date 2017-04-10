@@ -9,6 +9,7 @@ public class WeaponController : MonoBehaviour {
     public Transform weaponBone;
     public Transform cameraBone;
     public Animator viewmodelAnimator;
+    public StatsController myStats;
 
     public Weapon[] weapons = new Weapon[2];
     public int weaponIndex;
@@ -85,6 +86,7 @@ public class WeaponController : MonoBehaviour {
             if (pendingNewWeapon is Magic) {
                 // Set the mesh to be scale 0
                 ((Magic)pendingNewWeapon).mesh.localScale = Vector3.zero;
+                ((Magic)pendingNewWeapon).statsController = myStats;
             } 
             pendingNewWeapon.transform.localPosition = Vector3.zero;
             pendingNewWeapon.transform.localEulerAngles = Vector3.zero;
@@ -224,4 +226,45 @@ public class WeaponController : MonoBehaviour {
            MoveToLayer(child, layer);
         }
     }
+
+    void Death() {
+        foreach (Weapon w in weapons) {
+            if (!w) continue;
+            w.Attack(false);
+            // Drop last item
+            w.transform.parent = null;
+            //w.transform.position += cameraBone.transform.right * 2; //Throw to the right
+            w.transform.localScale = Vector3.one;
+            if (w is Magic) {
+                // Set the mesh to be proper scale
+                ((Magic)w).mesh.localScale = Vector3.one;
+            }
+            //w.transform.localEulerAngles += new Vector3(0, 180, 0);
+            w.GetComponent<Rigidbody>().isKinematic = false;
+            //w.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
+            w.GetComponent<Collider>().isTrigger = false;
+            MoveToLayer(w.transform, 0); //Default layer
+            w.setLookObj(null);
+            w.setPlayerAnim(null);
+            w.setControllerSide("");
+        }
+        this.weaponCount = 0;
+        this.weaponIndex = 0;
+        this.weaponBusy = false;
+        this.pendingNewWeapon = null;
+        this.pendingOldWeapon = null;
+        this.pendingPackType = "";
+        viewmodelAnimator.SetLayerWeight(1, 0); // right hand
+        viewmodelAnimator.SetLayerWeight(2, 0); // left hand
+        viewmodelAnimator.SetLayerWeight(3, 0); // movement
+        viewmodelAnimator.SetLayerWeight(4, 0); // right hand camera
+        viewmodelAnimator.SetLayerWeight(5, 0); // left hand camera
+        viewmodelAnimator.SetTrigger("Death");
+
+
+    }
+    void NotDeath() {
+        viewmodelAnimator.SetTrigger("NotDeath");
+    }
+
 }
