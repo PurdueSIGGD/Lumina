@@ -34,10 +34,14 @@ public class PauseMenu : MonoBehaviour {
 	public void closeHUDOpenPause(){
 		gameObject.SetActive (true);
 		hC.gameObject.SetActive (false);
+		Cursor.visible = true;
+		Cursor.lockState = CursorLockMode.Confined;
 	}
 
 	public void closePauseOpenHUD(){
 		gameObject.SetActive (false);
 		hC.gameObject.SetActive (true);
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.None;
 	}
 }
