@@ -20,6 +20,7 @@ public class MovementController : MonoBehaviour {
 
 	public bool isJumping;
 	public bool isSprinting;
+    public bool canMove = true;
 	public GameObject cameraObj;
     public Animator viewmodelAnimator;
 
@@ -44,14 +45,15 @@ public class MovementController : MonoBehaviour {
 	* lr - the left and right movement from the keyboards
 	*/
 	public void SetMovement(float lr, float fb, bool sprintPressed){
-        //TODO: REMOVE THIS FROM FINAL GAME?
+
 
         viewmodelAnimator.SetBool("Running", this.isSprinting && (lr != 0 || fb != 0) && IsGrounded());
         viewmodelAnimator.SetBool("Walking", (lr != 0 || fb != 0) && IsGrounded());
 		UpdateCooldowns ();
 		ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {
-			if (IsGrounded()) {
+            if (!canMove) return;
+            if (IsGrounded()) {
 				playerPhysics.AddForce (new Vector3 (0, 300, 0));
 				lastJump = 0;
 			} else {
@@ -64,6 +66,8 @@ public class MovementController : MonoBehaviour {
 	*Getting the mouse movements and move your camera
 	*/
 	public void MoveCamera(float x, float y){
+        if (!canMove) return;
+
         float newDeltaX = -y * 5 + (rotationVector.x * -1);
         float newX = cameraObj.transform.rotation.eulerAngles.x + newDeltaX;
         //We do some fancy math to ensure 0 < newX < 360, nothing more
@@ -85,6 +89,8 @@ public class MovementController : MonoBehaviour {
 	 * Separate function for movement in the horizontal direction.
 	 */
 	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
+        if (!canMove) return;
+
 		ApplySprint (sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
@@ -157,4 +163,15 @@ public class MovementController : MonoBehaviour {
 		}
 		lastJump += Time.deltaTime;
 	}
+
+    /**
+     * Broadcasted by stats controller 
+     */
+    void Death() {
+        canMove = false;
+        cameraObj.transform.eulerAngles = new Vector3(0, cameraObj.transform.eulerAngles.y, cameraObj.transform.eulerAngles.z);
+    }
+    void NotDeath() {
+        canMove = true;
+    }
 }

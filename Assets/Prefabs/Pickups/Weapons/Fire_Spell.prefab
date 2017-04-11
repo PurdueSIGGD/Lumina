@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tier: 0
+  condition: 100
   minCondition: 1
   maxCondition: 100
   damageType: 1
@@ -241,6 +242,7 @@ MonoBehaviour:
   idleParticles: {fileID: 198235078090814050}
   shootParticles: {fileID: 198974714219414730}
   mesh: {fileID: 4569922837549708}
+  statsController: {fileID: 0}
 --- !u!135 &135711625284397372
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -261,7 +263,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1897698298917214}
   serializedVersion: 5
   lengthInSec: 5
-  speed: 1
+  simulationSpeed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
@@ -2898,7 +2900,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1534782811612366}
   serializedVersion: 5
   lengthInSec: 5
-  speed: 1
+  simulationSpeed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0

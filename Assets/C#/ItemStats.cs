@@ -7,7 +7,7 @@ public class ItemStats : MonoBehaviour {
 	public enum Tier {Simple,Moderate,Epic};
 
 	public Tier tier = Tier.Simple;
-	private float condition = 100.0f;
+	public float condition = 100.0f;
 	public float minCondition = 1.0f; // In percent (%)
 	public float maxCondition = 100.0f; // In percent (%)
     private float factor = 1.0f;
