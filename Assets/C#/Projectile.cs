@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
+	public Hittable.DamageType damageType;
+	public float damage;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+	public 
 	
 	// Update is called once per frame
 	void Update () {

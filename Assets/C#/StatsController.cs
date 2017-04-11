@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class StatsController : Hittable
 {
+    public enum StatType { Health, Magic, Light }
+
 	const float DEFAULT_MAX_HEALTH = 100.0F;
 	const float DEFAULT_MAX_MAGIC = 100.0F;
 	const float DEFAULT_MAX_LIGHT = 100.0F;
@@ -13,16 +15,19 @@ public class StatsController : Hittable
 	const float WEAKNESS_MODIFIER = 1.1F;
 	const float STRENGTH_MODIFIER = 0.9F;
 
-	float health;
-	float healthMax;
-	float magic;
-	float magicMax;
-	float lightt;
-	float lighttMax;
+	public float health;
+    public float healthMax;
+    public float magic;
+    public float magicMax;
+    public float lightt;
+    public float lighttMax;
 	Hittable.DamageType weakAgainst;
 	Hittable.DamageType strongAgainst;
 
+    public Animator myAnim;
+
 	bool outside;
+    bool dead;
 
 	public InventoryController iC;
 	public HUDController gui;
@@ -31,20 +36,34 @@ public class StatsController : Hittable
 	void Start ()
 	{
 		outside = true;
-		health = 0;
+        // We may want to change these to the prefab specifically
+		/*health = 0;
 		healthMax = DEFAULT_MAX_HEALTH;
 		magic = 0;
 		magicMax = DEFAULT_MAX_MAGIC;
 		lightt = 0;
-		lighttMax = DEFAULT_MAX_LIGHT;
+		lighttMax = DEFAULT_MAX_LIGHT;*/
 	}
 
 	public override void Hit(float damage, Vector3 Direction, DamageType type) {
+        // Setting the player's feedback for getting hit
+        myAnim.SetLayerWeight(6, Random.Range(0f, 1f));
+        float left = Random.Range(-.5f, .5f);
+        if (left > 0) {
+            myAnim.SetLayerWeight(7, left);
+            myAnim.SetLayerWeight(8, 0);
+        } else {
+            myAnim.SetLayerWeight(7, 0);
+            myAnim.SetLayerWeight(8, Mathf.Abs(left));
+        }
+        myAnim.SetTrigger("Damage");
+
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
 		float leftover = UpdateHealth(-1 * damage);
+
 		gui.GUIsetHealth (health);
-		if (leftover < 0) {
+		if (leftover < 0 && !dead) {
 			Kill ();
 		}
 	}
@@ -202,12 +221,14 @@ public class StatsController : Hittable
 	 */
 	private float ApplyArmorHitMod(float damage, DamageType type) {
 		List<Armor> armor = iC.GetEquippedArmor ();
+        if (armor.Count > 0) {
+            foreach (Armor amr in armor) {
+                if (type == amr.strongAgainst) {
 
-		foreach (Armor amr in armor) {
-			if (type == amr.strongAgainst) {
-				
-			}
-		}
+                }
+            }
+        }
+		
 
 		float flatDamageReduction = 0;
 		float percentDamageReduction = 0;
@@ -226,7 +247,12 @@ public class StatsController : Hittable
 	/* Kills the entity.
 	 */
 	public void Kill () {
-		//TODO: PUT DEATH CODE HERE
+        dead = true;
+        this.BroadcastMessage("Death");
 	}
+    public void UnKill() {
+        dead = false;
+        this.BroadcastMessage("NotDeath");
+    }
 }
 

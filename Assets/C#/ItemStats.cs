@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ItemStats : MonoBehaviour {
 
-	public enum Tier {Simple,Moderate,Epic,Umbra};
+	public enum Tier {Simple,Moderate,Epic};
 
 	public Tier tier = Tier.Simple;
 	public float condition = 100.0f;
-	public float minCondition = 1.0f;
-	public float maxCondition = 100.0f;
-	public float factor = 1.0f;
+	public float minCondition = 1.0f; // In percent (%)
+	public float maxCondition = 100.0f; // In percent (%)
+    private float factor = 1.0f;
+    public float getCondition() { return condition; }
+    
 
 	void Start() {
 		condition = Random.Range (minCondition, maxCondition);
@@ -24,12 +26,12 @@ public class ItemStats : MonoBehaviour {
 	 * damage: the amount of damage to give (percentage of max condition)
 	 * 
 	 **/
-	void DamageCondition(float damage) {
+	public void DamageCondition(float damage) {
 		factor += damage/maxCondition;
 		condition -= damage * factor;
 	}
 
-	/**
+    /**
 	 * 
 	 * Upgrades the condition of the item.
 	 * 
@@ -37,16 +39,16 @@ public class ItemStats : MonoBehaviour {
 	 * upgradeFactor: the amount to upgrade by (relative to maximum percentage of 
 	 * 
 	 **/
-	void Upgrade(float upgradeFactor) {
+    public void Upgrade(float upgradeFactor) {
 		condition += upgradeFactor;
 	}
 
-	/**
+    /**
 	 * 
 	 * Upgrades the condition of the item by a 10% increase.
 	 * 
 	 **/
-	void Upgrade() {
+    public void Upgrade() {
 		Upgrade (10.0f);
 	}
 

@@ -13,9 +13,9 @@ AvatarMask:
   - m_Path: body:RoadKillOut
     m_Weight: 0
   - m_Path: rig
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/DEF-hips
     m_Weight: 0
   - m_Path: rig/root/DEF-hips/DEF-hips_end
@@ -439,7 +439,7 @@ AvatarMask:
   - m_Path: rig/root/MCH-upper_arm.fk.R.socket2/upper_arm.fk.R/MCH-upper_arm_antistr.fk.R/forearm.fk.R/MCH-forearm_antistr.fk.R/hand.fk.R/MCH-hand.R/MCH-hand.R_end
     m_Weight: 1
   - m_Path: rig/root/ORG-hips
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/ORG-hips/DEF-spine
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/DEF-spine/DEF-spine_end
@@ -469,13 +469,13 @@ AvatarMask:
   - m_Path: rig/root/ORG-hips/MCH-hips_rh_ns_intr.001/MCH-hips_rh_ns_intr.001_end
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/DEF-chest
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/DEF-chest/DEF-chest_end
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/DEF-neck
     m_Weight: 0
   - m_Path: rig/root/ORG-hips/ORG-spine/ORG-chest/DEF-neck/DEF-neck_end
@@ -1215,80 +1215,88 @@ AvatarMask:
   - m_Path: rig/root/ORG-hips/ORG-thigh.R/ORG-shin.R/ORG-heel.R/ORG-heel.02.R/ORG-heel.02.R_end
     m_Weight: 0
   - m_Path: rig/root/torso
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/chest
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/chest/MCH-sub_chest
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/chest/MCH-sub_chest/MCH-sub_chest_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-hips.reverse
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-hips.reverse/MCH-hips.reverse_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-chest.flex_s
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-chest.flex_s/MCH-chest.flex
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-chest.flex_s/MCH-chest.flex/MCH-chest.reverse
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-chest.flex_s/MCH-chest.flex/MCH-chest.reverse/MCH-chest.reverse_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-spine.reverse
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-hips.flex_s/MCH-hips.flex/MCH-spine.flex_s/MCH-spine.flex/MCH-spine.reverse/MCH-spine.reverse_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-sub_hips
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/hips/MCH-sub_hips/MCH-sub_hips_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/MCH-par_spine
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/MCH-par_spine/spine
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/MCH-par_spine/spine/MCH-sub_spine
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/torso/MCH-par_spine/spine/MCH-sub_spine/MCH-sub_spine_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-foot.ik.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-foot.ik.L/VIS-foot.ik.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-foot.ik.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-foot.ik.R/VIS-foot.ik.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-hand.ik.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-hand.ik.L/VIS-hand.ik.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-hand.ik.R
     m_Weight: 1
   - m_Path: rig/root/VIS-hand.ik.R/VIS-hand.ik.R_end
     m_Weight: 1
   - m_Path: rig/root/VIS-thigh_pole.ik.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-thigh_pole.ik.L/VIS-thigh_pole.ik.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-thigh_pole.ik.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-thigh_pole.ik.R/VIS-thigh_pole.ik.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.L/VIS-upper_arm_pole.ik.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R
     m_Weight: 1
   - m_Path: rig/root/VIS-upper_arm_pole.ik.R/VIS-upper_arm_pole.ik.R_end
     m_Weight: 1
+  - m_Path: rig/Weapon1
+    m_Weight: 1
+  - m_Path: rig/Weapon1/Weapon1_end
+    m_Weight: 1
+  - m_Path: rig/Weapon2
+    m_Weight: 0
+  - m_Path: rig/Weapon2/Weapon2_end
+    m_Weight: 0

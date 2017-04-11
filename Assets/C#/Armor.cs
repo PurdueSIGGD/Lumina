@@ -10,7 +10,6 @@ public class Armor : ItemStats {
 	 * better describes what it was meant to show.
 	 */
     public enum ArmorPiece {helmet, chestplate};
-
 	public ArmorPiece type;
 	public Hittable.DamageType strongAgainst; //TODO: Default to Hittable.DamageType.Neutral
 	public float flatDamageBlock; //TODO: Default 0
