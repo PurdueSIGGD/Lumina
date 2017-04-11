@@ -43,7 +43,7 @@ public class Magic : Weapon {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-        } else if (!mouseDown) {
+		} else if (!mouseDown || statsController.GetMagic() <= 0) {
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }
@@ -59,7 +59,7 @@ public class Magic : Weapon {
             attacking = false;
         }
         if (attacking) {
-            if (!mouseDown) { //TODO: || sC.getMagic < magicUsage
+			if (!mouseDown || statsController.GetMagic() <= 0) {
                 attacking = false;
                 releaseTime = 0;
                 onCooldown = true;
@@ -94,9 +94,10 @@ public class Magic : Weapon {
                             }
                         }
                     }
+
                 }
             }
-        } else if (mouseDown) {
+		} else if (mouseDown && statsController.GetMagic() > 0) {
             if (onCooldown) {
                 
                 if (releaseTime + Time.deltaTime >= timeToCooldown) {
