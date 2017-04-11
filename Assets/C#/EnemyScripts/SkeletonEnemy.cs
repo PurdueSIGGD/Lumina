@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SkeletonEnemy : PatrolGroundEnemy {
 
+    public Transform tempTar;
+
     //private var
     private Animator anim;
     private Transform target;
@@ -26,7 +28,9 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         anim = GetComponent<Animator>();
 
         //set center: skeleton won't fall back & forth
-        rb.centerOfMass = new Vector3(0, -4, 0);
+        rb.centerOfMass = new Vector3(0, -10, 0);
+
+        isTurning = false;
     }
 
     public override IEnumerator Attack()
@@ -37,13 +41,38 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     public override void Movement()
     {
         //if skeleton do nothing, make it patrol around
-        if (!isPatrolling && !isResting && patrolPositions.Length > 0)
-        {
-            StartCoroutine(PatrolAround());
-        }
+        //if (!isPatrolling && !isResting && patrolPositions.Length > 0)
+        //{
+        //    StartCoroutine(PatrolAround());
+        //}
 
-        //transform.Rotate(transform.up * 3 *Time.deltaTime);
-        //try Vector3.RotateTowards(); 
+        //find if target: left || right
+        
+        
+
+        Vector3 targetDir = tempTar.position - transform.position;
+
+        //cos(a,b) = ( vector<a> . vector<b> ) / (...)
+        //cos(a,b) < 0: left
+        //cos(a,b) > 0: right
+        float cos_angle = Vector3.Dot(transform.right, targetDir);
+        if (cos_angle > 0)
+        {
+            anim.SetBool(IS_TURNING_LEFT, false);
+            anim.SetBool(IS_TURNING_RIGHT, true);
+        } else
+        {
+            anim.SetBool(IS_TURNING_RIGHT, false);
+            anim.SetBool(IS_TURNING_LEFT, true);
+        }
+        
+        
+        float step = movementSpeed * Time.deltaTime;
+
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        transform.rotation = Quaternion.LookRotation(newDir);
+        
+
     }
 
 
