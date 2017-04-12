@@ -23,9 +23,9 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
 
     public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
+    public float turningSpeed;
     protected Rigidbody rb;
-    //protected Animator anim;
-
+   
     
 
 
@@ -33,7 +33,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     {
         rb = GetComponent<Rigidbody>();
         curPatrolIndex = -1;
-        //anim = GetComponent<Animator>();
+       
     }
 
     /*
@@ -60,7 +60,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         //start patrol
         while (isPatrolling)
         {
-            //update FixedUpdate()
+            //move every FixedUpdate()
             yield return new WaitForFixedUpdate();
 
             //move to new position
@@ -73,10 +73,8 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
             if (isNearDestination(curDestination.position))
             {
                 StartCoroutine(WaitBeforeChangeDirection());
-            }
-
-            
-
+                yield break;
+            }           
         }
 
 
