@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1430667555586948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 247.8, y: 40, z: 180.1}
+  m_LocalPosition: {x: 226.74, y: 36.5, z: 172.85716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,15 +112,16 @@ MonoBehaviour:
   drops: []
   minDrops: 0
   maxDrops: 0
-  health: 5
+  health: 20
   movementSpeed: 0.25
   target: {fileID: 0}
-  thrust: 300
+  thrust: 1200
   isAttacking: 0
-  attackRange: 7
+  attackRange: 15
   timeBetweenAttacks: 1
-  flightHeight: 5
-  flightThrust: 50
+  flightHeight: 8
+  flightThrust: 200
+  damage: 10
 --- !u!135 &135459857778289816
 SphereCollider:
   m_ObjectHideFlags: 1

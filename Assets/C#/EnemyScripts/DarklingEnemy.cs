@@ -13,6 +13,7 @@ public class DarklingEnemy : BaseEnemy {
     public int teleDistance;                //The distance the darkling will teleport 
     public GameObject teleParticles;        //Particle system that spawns when the Darkling teleports
     Coroutine telePattern;
+    public float damage = 10;
 
     private Vector3 startPos;               //The slimes starting position
     private Rigidbody rb;                   //The slimes rigidbody which allows us to propel it
@@ -38,7 +39,16 @@ public class DarklingEnemy : BaseEnemy {
         isAttacking = true;
 
         yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-        rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
+        Hittable h;
+        if (target == null) {
+            //They moved out of range
+            StopCoroutine(Attack());
+        } else
+        if (Vector3.Distance(target.position, transform.position) < attackRange && health > 0 && (h = target.GetComponent<Hittable>())) {
+            h.Hit(damage);
+        }
+        
+        //rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
 
         // If still attacking, attack again
         if (isAttacking) StartCoroutine(Attack());
@@ -108,7 +118,7 @@ public class DarklingEnemy : BaseEnemy {
 	 */
     public void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player" && !isAttacking)
+        if (!col.isTrigger && col.tag == "Player" && !isAttacking)
         {
             target = col.transform;
             isAttacking = true;
@@ -118,7 +128,7 @@ public class DarklingEnemy : BaseEnemy {
 
     public void OnTriggerExit(Collider col)
     {
-        if (col.transform == target)
+        if (!col.isTrigger && col.transform == target)
         {
             target = null;
             isAttacking = false;
@@ -127,6 +137,7 @@ public class DarklingEnemy : BaseEnemy {
 
     public void Teleport()
     {
+        // TODO: try to make sure they don't teleport under you, because it will launch you. 
         transform.position = transform.position + transform.forward * teleDistance;
         GameObject g = Instantiate(teleParticles, transform.position, Quaternion.identity);
         Destroy(g, 3);
@@ -137,11 +148,20 @@ public class DarklingEnemy : BaseEnemy {
         //This coroutine randomizes the bats upward thrust for flying giving it a more eratic flight pattern for realism
         //The Movement () method just makes the bat fly forward now
         //Called from start() so as to not start the coroutine every frame
-        while (true)
+        while (health > 0)
         {
             yield return new WaitForSeconds(4f);
-            Teleport();
+            if (health > 0) {
+                Teleport();
+            }
             //yield return new WaitForSeconds(4f);
         }
+    }
+
+    public override void OnDeath() {
+        // IDK do whatever
+        StopCoroutine(MovementPattern());
+
+        rb.constraints = RigidbodyConstraints.None; //So they can fall and die or something
     }
 }

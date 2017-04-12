@@ -11,6 +11,7 @@ public class BatEnemy : BaseEnemy
     public float timeBetweenAttacks;        //How fast the slime jumps at you
     public float flightHeight;              //Height above the ground we want the bat to float
     public float flightThrust;              //Thrust power the bat will use to fly
+    public float damage = 10;
 
     private Vector3 startPos;               //The slimes starting position
     private Rigidbody rb;                   //The slimes rigidbody which allows us to propel it
@@ -33,15 +34,22 @@ public class BatEnemy : BaseEnemy
 	 */
     public override IEnumerator Attack()
     {
-        
+        print("attack");
         isAttacking = true;
 
         while (isAttacking)
         {
+
             yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-            rb.AddForce(transform.forward * thrust * 2 * forceMultiplier);
+            if (health <= 0) {
+                break;
+            }
+            rb.AddForce(rb.mass * transform.forward * thrust * 2 * forceMultiplier);
             yield return new WaitForSeconds(timeBetweenAttacks / 2); //Wait a single second before attack
-            rb.AddForce(forceMultiplier * transform.forward * thrust / 5 + Vector3.up * thrust / 5);
+            if (health <= 0) {
+                break;
+            }
+            //rb.AddForce(rb.mass * forceMultiplier * transform.forward * thrust / 5 + Vector3.up * thrust / 5);
         }
 
         
@@ -55,9 +63,13 @@ public class BatEnemy : BaseEnemy
         //This coroutine randomizes the bats upward thrust for flying giving it a more eratic flight pattern for realism
         //The Movement () method just makes the bat fly forward now
         //Called from start() so as to not start the coroutine every frame
-        while (true)
+        while (health > 0)
         {
             yield return new WaitForSeconds(0.15f);
+            if (health <= 0) {
+                break;
+            }
+            
             RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
             foreach (RaycastHit hit in raycastHits)
             {
@@ -66,7 +78,7 @@ public class BatEnemy : BaseEnemy
                     if (transform.position.y - hit.point.y < flightHeight)
                     {
                         float thrust = Random.Range(3 * flightThrust / 4, flightThrust);
-                        rb.AddForce(Vector3.up * thrust);
+                        rb.AddForce(rb.mass * Vector3.up * thrust);
                         //Debug.Log(thrust);
                     }
                 }
@@ -96,7 +108,7 @@ public class BatEnemy : BaseEnemy
                 transform.LookAt(target);
 
                 // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
-                rb.AddForce(transform.forward * movementSpeed * 5);
+                rb.AddForce(rb.mass * transform.forward * movementSpeed * 5);
 
                 /*RaycastHit[] raycastHits = Physics.RaycastAll(transform.position, Vector3.down, 100f);
                 foreach (RaycastHit hit in raycastHits)
@@ -159,7 +171,7 @@ public class BatEnemy : BaseEnemy
 	 */
     public void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player" && !isAttacking)
+        if (!col.isTrigger && col.tag == "Player" && !isAttacking && health > 0)
         {
             target = col.transform;
             isAttacking = true;
@@ -169,11 +181,26 @@ public class BatEnemy : BaseEnemy
 
     public void OnTriggerExit(Collider col)
     {
-        if (col.transform == target)
+        if (!col.isTrigger && col.transform == target)
         {
+            print("losing target");
             target = null;
             isAttacking = false;
             StopCoroutine(attackMethod);
         }
+    }
+
+    public void OnCollisionEnter(Collision col) {
+        Hittable h;
+        if (col.transform == target && health > 0 && (h = target.GetComponent<Hittable>())) {
+            h.Hit(damage);
+        }
+    }
+    
+    public override void OnDeath() {
+        print("should die here");
+        rb.useGravity = true;
+        StopCoroutine(MovementPattern());
+        // IDK do whatever
     }
 }

@@ -115,7 +115,7 @@ public class InventoryController : MonoBehaviour {
     {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
 			pick = other.gameObject.GetComponentInParent<Pickup> ();
-			Debug.Log ("Player picked up " + pick.itemType);
+			//Debug.Log ("Player picked up " + pick.itemType);
             bool deletes = true;
 			switch(pick.itemType){
 			    case Pickup.pickUpType.upgradeKit:

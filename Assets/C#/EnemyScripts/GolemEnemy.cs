@@ -11,7 +11,7 @@ public class GolemEnemy : PatrolGroundEnemy {
     public Transform target;    //target to attack, ex: player, animal
     public bool isAttacking;    //if golem is attacking
     public float timeBetweenAttacks;    //time between 2 attacks
-
+    public float smashDamage = 25;
     public float meleeRange;    //range that golem will smash target
     public float throwRange;    //range that golem will throw stuff at target, does not use right now :( 
 
@@ -87,18 +87,21 @@ public class GolemEnemy : PatrolGroundEnemy {
     private void OnTriggerEnter(Collider other)
     {
         //update this later, so that golem can attack other as well
-        if (other.tag != "Player") return;
+        if (!other.isTrigger || other.tag != "Player") return;
 
         //stop patrol and start attack
-        StopPatrolling();
-        target = other.transform;
-        isAttacking = true;
-        StartCoroutine(Attack());
+        if (health > 0) {
+            StopPatrolling();
+            target = other.transform;
+            isAttacking = true;
+            StartCoroutine(Attack());
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform == target)
+        if (!other.isTrigger && other.transform == target)
         {
             target = null;
             isAttacking = false;
@@ -111,6 +114,11 @@ public class GolemEnemy : PatrolGroundEnemy {
      */ 
     private void Smash()
     {
+        Hittable h;
+        if (health > 0 && (h = target.GetComponent<Hittable>())) {
+            h.Hit(smashDamage);
+        }
+    /*
         //incase target fast-escape
         if (target == null) return;
 
@@ -139,7 +147,7 @@ public class GolemEnemy : PatrolGroundEnemy {
         rockRb.AddForce(Vector3.down * 10, ForceMode.Impulse);
 
         //for keep things clean, destroy after 2 seconds
-        Destroy(rock, 2f);
+        Destroy(rock, 2f);*/
     }
 
     /*
@@ -198,8 +206,12 @@ public class GolemEnemy : PatrolGroundEnemy {
         Destroy(rock, 2f);
     }
 
-   
-   
-    
+
+
+    public override void OnDeath() {
+        // IDK do whatever
+        StopCoroutine(PatrolAround());
+        StopCoroutine(Attack());
+    }
 
 }

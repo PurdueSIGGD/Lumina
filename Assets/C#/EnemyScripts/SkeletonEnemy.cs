@@ -191,4 +191,8 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         
     }
 
+    public override void OnDeath() {
+        // IDK do whatever
+    }
+
 }

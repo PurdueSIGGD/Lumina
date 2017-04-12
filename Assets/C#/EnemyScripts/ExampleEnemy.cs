@@ -17,4 +17,7 @@ public class ExampleEnemy : BaseEnemy {
 		Debug.Log ("MOVING");
 		//Movement style of the particular enemy
 	}
+    public override void OnDeath() {
+        // IDK do whatever
+    }
 }

@@ -6,7 +6,7 @@ public class Magic : Weapon {
     public ParticleSystem idleParticles;
     public ParticleSystem shootParticles;
     public Transform mesh;
-
+    public float width = 1; // Width of the beam
 	float holdTime;
 	float releaseTime; //Time since mouse was released.
     
@@ -76,7 +76,7 @@ public class Magic : Weapon {
                     }
                     statsController.UpdateMagic(-1 * magicDraw * Time.deltaTime);
                     //print("Shoooooot");
-                    RaycastHit[] hits = Physics.RaycastAll(getLookObj().transform.position, getLookObj().transform.forward);
+                    RaycastHit[] hits = Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);
                     foreach (RaycastHit hit in hits) {
                         if (hit.distance <= range && 
                             hit.collider.gameObject.tag != "Player" &&
