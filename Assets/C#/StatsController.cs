@@ -31,6 +31,7 @@ public class StatsController : Hittable
 
 	public InventoryController iC;
 	public HUDController gui;
+	public PauseMenu pM;
 
 	// Use this for initialization
 	void Start ()
@@ -151,19 +152,24 @@ public class StatsController : Hittable
 			if (magic + amount > magicMax) {
 				float leftover = magic + amount - magicMax;
 				magic = magicMax;
+				gui.GUIsetMagic (magic);
 				return leftover;
 			}
 			magic += amount;
+			gui.GUIsetMagic (magic);
 			return 0;
 		} else if (amount < 0) {
 			if (magic + amount < 0) {
 				float leftover = magic + amount;
 				magic = 0;
+				gui.GUIsetMagic (magic);
 				return leftover;
 			}
 			magic += amount;
+			gui.GUIsetMagic (magic);
 			return 0;
 		}
+		gui.GUIsetMagic (magic);
 		return 0;
 	}
 

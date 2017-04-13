@@ -17,8 +17,8 @@ public class InventoryController : MonoBehaviour {
 	float upgradePotions;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
-	Armor helmet;
-	Armor chestPlate;
+	public Armor helmet;
+	public Armor chestPlate;
 	Pickup pick;
     ItemStats get;
 
@@ -121,21 +121,24 @@ public class InventoryController : MonoBehaviour {
 			    case Pickup.pickUpType.upgradeKit:
 				    upgradekits += pick.amount;
 				    break;
-			    case Pickup.pickUpType.upgradePotion:
-                    upgradePotions++;
+				case Pickup.pickUpType.upgradePotion:
+					upgradePotions++;
+					sC.pM.setUpgradeAmount (upgradePotions);
                     break;
                 case Pickup.pickUpType.Magic:
                     deletes = (sC.UpdateMagic(pick.amount) != pick.amount);
+					sC.pM.setMagicAmount (pick.amount);
                     break;
                 case Pickup.pickUpType.Health:
                     deletes = (sC.UpdateHealth(pick.amount) != pick.amount);
+					sC.pM.setHealthAmount (pick.amount);
                     break;
 			}
 			if (deletes) Destroy (pick.gameObject);
 		}
     }
 
-	void useUpgradeKit(ItemStats i){
+	public void useUpgradeKit(ItemStats i){
         i.Upgrade(10);
 		
 
@@ -151,19 +154,22 @@ public class InventoryController : MonoBehaviour {
 
 
 
-	void useUpgradePotion(StatsController.StatType p){
+	public void useUpgradePotion(StatsController.StatType p){
 		switch (p) {
 		case StatsController.StatType.Health:
-			    sC.UpgradeMaxHealth();
-                upgradePotions--;
-			break;
+				sC.UpgradeMaxHealth ();
+				upgradePotions--;
+			sC.pM.setUpgradeAmount (upgradePotions);
+				break;
 		case StatsController.StatType.Magic:
                 sC.UpgradeMaxMagic();
                 upgradePotions--;
+			sC.pM.setUpgradeAmount (upgradePotions);
                 break;
 		case StatsController.StatType.Light:
                 sC.UpgradeMaxLightt();
                 upgradePotions--;
+			sC.pM.setUpgradeAmount (upgradePotions);
                 break;
 		}
 	}
@@ -173,5 +179,13 @@ public class InventoryController : MonoBehaviour {
 		if (chestPlate) armor.Add (chestPlate);
 		if (helmet) armor.Add (helmet);
 		return armor;
+	}
+
+	public float getUpgradePotions(){
+		return upgradePotions;
+	}
+
+	public float getUpgradeKits(){
+		return upgradekits;
 	}
 }

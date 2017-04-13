@@ -49,11 +49,4 @@ public class HUDController : MonoBehaviour {
 	public void GUIsetUpgradeLight(float amount){
 		lightForceBar.maxValue = amount;
 	}
-
-	public void GUIsetHealthAmount(float amount){
-		pm.healthAmount.text = ""+amount;
-	}
-
-	public void GUIsetMagicAmount(float amount){
-	}
 }
