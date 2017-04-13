@@ -122,6 +122,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         isResting = true;
         isPatrolling = false;
 
+
         //rest a bit
         yield return new WaitForSeconds(timeBeforeChangeDirection);
 

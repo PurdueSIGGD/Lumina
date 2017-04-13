@@ -10,6 +10,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     public Transform target;
 
     public bool isTurning;
+    public bool isAttacking;
     private bool first;
 
     //some const because I am too lazy typing them
@@ -52,7 +53,13 @@ public class SkeletonEnemy : PatrolGroundEnemy {
             StartCoroutine(PatrolAround());
         }
 
-       
+        //if (target != null && !isFacingTarget(target.position) && !isTurning)
+        //{
+        //    StartCoroutine(TurnToFaceTarget(target.position));
+        //}
+
+
+
     }
 
     /**
@@ -61,48 +68,57 @@ public class SkeletonEnemy : PatrolGroundEnemy {
      */ 
     private IEnumerator TurnToFaceTarget(Vector3 targetPostion)
     {
-       
-        
-        //determine if Enemy is looking at target
-        if (isFacingTarget(targetPostion))
-        {
-            //make it look it target anyway
-            transform.LookAt(targetPostion);
-            anim.SetBool(IS_TURNING_RIGHT, false);
-            anim.SetBool(IS_TURNING_LEFT, false);
-
-            //stop coroutine
-            isTurning = false;
-            yield break;
-        }
-
-        //start animation
-        TargetSideDirection side = getTargetSideDirection(targetPostion);
-        if (side == TargetSideDirection.LEFT)
-        {
-            anim.SetBool(IS_TURNING_RIGHT, false);
-            anim.SetBool(IS_TURNING_LEFT, true);
-        }
-        else
-        {
-            anim.SetBool(IS_TURNING_LEFT, false);
-            anim.SetBool(IS_TURNING_RIGHT, true);
-        }
-            
-
-        //if not turning to face target, turn to target
-        Vector3 targetDir = targetPostion - transform.position;
+        print("found target");
         isTurning = true;
-        float cos_angle = Vector3.Dot(transform.right, targetDir);
-        float step = turningSpeed  * Time.deltaTime;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-        transform.rotation = Quaternion.LookRotation(newDir);
+        while (isTurning)
+        {
+            //determine if Enemy is looking at target
+            if (isFacingTarget(targetPostion))
+            {
+                //make it look it target anyway
+                transform.LookAt(targetPostion);
+                anim.SetBool(IS_TURNING_RIGHT, false);
+                anim.SetBool(IS_TURNING_LEFT, false);
 
-        yield return new WaitForFixedUpdate();
+                //stop coroutine
+                isTurning = false;
+                Debug.Log("look!");
+                yield break;
+            }
+            
+            //start animation
 
-        StartCoroutine(TurnToFaceTarget(targetPostion));
-        
-        
+
+            TargetSideDirection side = getTargetSideDirection(targetPostion);
+            if (side == TargetSideDirection.LEFT)
+            {
+                anim.SetBool(IS_TURNING_RIGHT, false);
+                anim.SetBool(IS_TURNING_LEFT, true);
+            }
+            else
+            {
+                anim.SetBool(IS_TURNING_LEFT, false);
+                anim.SetBool(IS_TURNING_RIGHT, true);
+            }
+
+
+            //if not turning to face target, turn to target
+            Vector3 targetDir = targetPostion - transform.position;
+            Debug.DrawRay(transform.position, targetDir);
+
+            float step = turningSpeed * Time.deltaTime;
+            Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+            
+            transform.rotation = Quaternion.LookRotation(newDir);
+
+            //rotate a bit every FixedUpdate()
+            yield return new WaitForFixedUpdate();
+
+        }
+
+
+
+
     }
 
     /**
@@ -118,14 +134,25 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Player" && health > 0)
+        {
+            target = other.transform;
+        }
+    }
 
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && health > 0)
+        {
+            target = null;
+        }
     }
 
 
     /**
      * check if this.Enemy is facing target. such as Player, or next destination
      * just for animation
-     */ 
+     */
     private bool isFacingTarget(Vector3 target)
     {
         Vector3 targetDir = (target - transform.position).normalized;
@@ -142,26 +169,28 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     /**
      * override base class, to add animation
-     */ 
+     */
     public override void StartPatrolling()
     {
         //calculate next destination
         base.StartPatrolling();
 
-        //face new destination
-        StartCoroutine(TurnToFaceTarget(curDestination.position));
+       
 
         //add is walking
         anim.SetBool(IS_WALKING, true);
-        
+
     }
 
-  
+
     public override IEnumerator WaitBeforeChangeDirection()
     {
        
         //add animation
         anim.SetBool(IS_WALKING, false);
+
+        //face new destination
+        StartCoroutine(TurnToFaceTarget(curDestination.position));
 
         //use same
         return base.WaitBeforeChangeDirection();
