@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-abstract public class BaseEnemy : MonoBehaviour {
+abstract public class BaseEnemy : Hittable {
 
 	public GameObject [] drops; 	//Array of possible drops for this enemy
 
@@ -16,7 +16,10 @@ abstract public class BaseEnemy : MonoBehaviour {
 	 * Then, for each of the individual drops, find a random GameObject in the drops array to drop
 	 * Instantiate that drop
 	 */
-	void OnDeath(){
+	void GenericDeath(){
+
+        OnDeath();
+
 		int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
 
 		for (int i = 0; i < numberOfDrops; i++) {
@@ -28,8 +31,19 @@ abstract public class BaseEnemy : MonoBehaviour {
 	/*
 	 * The damage done to the enemies health based on the parameter defined damage
 	 */
-	public void TakeDamage (float dmg){
-		health -= dmg;
+	public override void Hit(float damage, Vector3 direction, DamageType type) {
+        //print("enemy hit");
+        // TODO add enemy vulnerabilities for damage types
+        float originalHealth = health;
+        if (health - damage > 0) {
+            health -= damage;
+        } else {
+            health = 0;
+        }
+        
+        if (health <= 0 && originalHealth > 0) {
+            GenericDeath();
+        }
 	}
 
 	/*
@@ -38,14 +52,15 @@ abstract public class BaseEnemy : MonoBehaviour {
 	 * note: has to be public because it needs to be in order for the sub-class to use it
 	 */
 	public void Update () {
-		
-		Movement ();
+		if (health > 0) Movement ();
+        else {
 
-		if (health <= 0) {
-			OnDeath ();
-		}
+        }
 	}
+
+   
 
 	abstract public IEnumerator Attack();		//Abstract method that checks if the player is within range and then damages player
 	abstract public void Movement();			//Abstract method defining how the specific enemy moves 
+    abstract public void OnDeath();             //What to do when the enemy dies
 }

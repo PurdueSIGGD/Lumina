@@ -8,7 +8,7 @@ public class SlimeEnemy : BaseEnemy {
 	public bool isAttacking;				//If the enemy is currently attacking, return true
     public float timeBetweenAttacks;        //How fast the slime jumps at you
     public float attackRange;
-
+    public float damage = 5;
 	private Vector3 startPos;				//The slimes starting position
 	private Rigidbody rb;					//The slimes rigidbody which allows us to propel it
 	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
@@ -31,11 +31,17 @@ public class SlimeEnemy : BaseEnemy {
         isAttacking = true;
 
         yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-        rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
+        if (health >= 0) {
+            rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
+            // If still attacking, attack again
+            if (isAttacking) StartCoroutine(Attack());
+            else StopCoroutine(Attack());
+        } else {
+            isAttacking = false;
+            StopCoroutine(Attack());
+        }
 
-        // If still attacking, attack again
-        if (isAttacking) StartCoroutine(Attack());
-        else StopCoroutine(Attack());
+      
     }
 
 	/* This is a simple movement method, 
@@ -84,7 +90,7 @@ public class SlimeEnemy : BaseEnemy {
 	 * when triggered
 	 */
 	public void OnTriggerEnter(Collider col){
-        if (col.tag == "Player" && !isAttacking)
+        if (!col.isTrigger && col.tag == "Player" && !isAttacking)
         {
             target = col.transform;
             isAttacking = true;
@@ -95,10 +101,19 @@ public class SlimeEnemy : BaseEnemy {
 
     public void OnTriggerExit(Collider col)
     {
-        if (col.transform == target)
+        if (!col.isTrigger && col.transform == target)
         {
             target = null;
             isAttacking = false;
         }
+    }
+    public void OnCollisionEnter(Collision col) {
+        Hittable h;
+        if (col.transform == target && health > 0 && (h = target.GetComponent<Hittable>())) {
+            h.Hit(damage);
+        }
+    }
+    public override void OnDeath() {
+        // IDK do whatever
     }
 }

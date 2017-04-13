@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1571688623971518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 232.71646, y: 36.6, z: 168.45125}
+  m_LocalPosition: {x: 288.64252, y: 32.63, z: 149.52722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,16 +112,17 @@ MonoBehaviour:
   drops: []
   minDrops: 0
   maxDrops: 0
-  health: 0
+  health: 40
   movementSpeed: 1
   target: {fileID: 0}
   thrust: 0
   isAttacking: 0
-  timeBetweenAttacks: 0
-  attackRange: 0
+  timeBetweenAttacks: 4
+  attackRange: 3
   teleDistance: 5
   teleParticles: {fileID: 1909769648661230, guid: c2cb110069015ad4dbd653f4c3120026,
     type: 2}
+  damage: 10
 --- !u!135 &135824834877049416
 SphereCollider:
   m_ObjectHideFlags: 1
