@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
+/*********************************************************************
+ * 
  * This class is for Enemies who usually moves around the fixed route
  * Ex: a golem walking around, a skeleton patrolling
  * How to use:
@@ -10,8 +11,10 @@ using UnityEngine;
  *      base.__init__()
  *  void Movement()
  *      StartCoroutine(PatrolAround())
- */ 
- [RequireComponent(typeof(Rigidbody))]
+ *      
+ *      
+ **********************************************************************/
+[RequireComponent(typeof(Rigidbody))]
 public abstract class PatrolGroundEnemy : BaseEnemy {
 
     public Transform[] patrolPositions; //positions that golem will move around, don't have, golem stand still.
@@ -19,14 +22,21 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
 
     public bool isPatrolling; //if golem is patrolling, don't change direction
     public bool isResting; //when 
+    public bool isTurning;
     protected int curPatrolIndex; //index to keep track of where that golem is heading
 
     public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
     public float turningSpeed;
     protected Rigidbody rb;
-   
-    
+
+
+    public enum TargetSideDirection
+    {
+        LEFT,
+        RIGHT
+    }
+
 
 
     protected void __init__()
@@ -49,20 +59,31 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         {
             yield break;
         }
+       
+        //update new destination      
+        CalculateNextDestination();
+        
+        //turning slowly to face target
+        if (!isFacingTarget(curDestination.position))
+            StartTurning(curDestination.position);
 
-        //if is (not patrolling) or isResting
-        //update new destination
-        if (!isPatrolling)
+        while (!isFacingTarget(curDestination.position))
         {
-            StartPatrolling();
+            //rotate slowly
+            isTurning = true; 
+            RotateTowardsTarget(curDestination.position);
+
+            //rotate a bit every FixedUpdate()
+            yield return new WaitForFixedUpdate();
         }
 
+        //turn off isTurning
+        StopTurning();
+
         //start patrol
+        StartPatrolling();
         while (isPatrolling)
         {
-            //move every FixedUpdate()
-            yield return new WaitForFixedUpdate();
-
             //move to new position
             transform.LookAt(curDestination);
             Vector3 forward =
@@ -74,12 +95,70 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
             {
                 StartCoroutine(WaitBeforeChangeDirection());
                 yield break;
-            }           
+            }
+
+            //move every FixedUpdate()
+            yield return new WaitForFixedUpdate();
         }
 
-
+        StopPatrolling();
+       
     }
 
+    /**
+     * rotate a bit toward target
+     * helps animation
+     */ 
+    protected virtual void RotateTowardsTarget(Vector3 target)
+    {
+        //get final direction
+        Vector3 targetDir = target - transform.position;
+        Debug.DrawRay(transform.position, targetDir); //debug
+
+        //get next direction
+        float step = turningSpeed * Time.deltaTime;
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+
+        //assign new rotation
+        transform.rotation = Quaternion.LookRotation(newDir);
+    }
+
+
+    /**
+     * Simple first
+     * children can animation
+     */ 
+    protected virtual void StopTurning()
+    {
+        isTurning = false;
+    }
+
+    /**
+     * Need target because children will use that to determine which
+     * side to run. ex: LEFT, RIGHT
+     */ 
+    protected virtual void StartTurning(Vector3 target)
+    {
+        isTurning = true;
+    }
+
+
+    protected virtual void StartPatrolling()
+    {
+        isPatrolling = true;
+    }
+
+    protected virtual void StopPatrolling()
+    {
+        isPatrolling = false;
+    }
+
+    
+
+    /**
+     * Advanced FindPath(), look at obstacle, add new position
+     * to avoid obstacles
+     */
     protected void FindPath()
     {
 
@@ -101,12 +180,10 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
 
 
     /*
-    * simple code to start patrol 
-    * add animation later
+    * simple code to get next destination
     */
-    public virtual void StartPatrolling()
+    public virtual void CalculateNextDestination()
     {
-        isPatrolling = true;
         curPatrolIndex = (curPatrolIndex + 1) % patrolPositions.Length;
         curDestination = patrolPositions[curPatrolIndex];
     }
@@ -119,10 +196,9 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     public virtual IEnumerator WaitBeforeChangeDirection()
     {
         //arghhh resting...
+        StopPatrolling();
         isResting = true;
-        isPatrolling = false;
-
-
+        
         //rest a bit
         yield return new WaitForSeconds(timeBeforeChangeDirection);
 
@@ -132,9 +208,22 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     }
    
 
-    public virtual void StopPatrolling()
+    /**
+    * check if this.Enemy is facing target. such as Player, or next destination
+    * just for animation
+    */
+    protected bool isFacingTarget(Vector3 target)
     {
-        isPatrolling = false;
+        Vector3 targetDir = (target - transform.position).normalized;
+        float diff = Vector3.Dot(transform.forward, targetDir);
+
+        //if diff ~ 1.0, then it mostly look at target
+        //stop Coroutine
+        if (diff >= 0.99)
+        {
+            return true;
+        }
+        return false;
     }
 
 
