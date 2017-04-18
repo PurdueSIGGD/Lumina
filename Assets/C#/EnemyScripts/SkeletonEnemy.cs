@@ -8,6 +8,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     //private var
     private Animator anim;
     public Transform target;
+    public float runningSpeed;
 
     //public bool isTurning;
     public bool isAttacking;
@@ -42,39 +43,53 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     public override IEnumerator Attack() 
     {
-        //set true
-        isAttacking = true;
-
+        isAttacking = true;      
+        //if not facing target, try to do that
         while (isAttacking)
         {
-            //if not facing target, try to do that
-            while (!isFacingTarget(curDestination.position))
+            while (!isFacingTarget(target.position))
             {
+                if (target == null)
+                {
+                    StopAttacking();
+                }
                 //rotate slowly
-                isTurning = true;
-                RotateTowardsTarget(curDestination.position);
+                StartTurning(target.position);
+                RotateTowardsTarget(target.position);
 
                 //rotate a bit every FixedUpdate()
                 yield return new WaitForFixedUpdate();
             }
 
-            //run towards target
-
+            StopTurning();
+            //yield break;
         }
+        yield break;
+
+        //run towards target
+        //isAttacking = true;
+        //transform.LookAt(target);
+
+        
 
 
-        StopCoroutine(Attack());
-        Scream(); //because angry ><
-        isAttacking = false;
-
+       
         
     }
 
 
+    void StopAttacking()
+    {
+        StopCoroutine(Attack());
+        Scream(); //because angry ><
+        isAttacking = false;
+
+    }
+
     /**
      * pretty cool animation made by Andrew
      * lol
-     */ 
+     */
     private void Scream()
     {
         anim.SetTrigger(TRIGGER_SCREAMING);
@@ -83,10 +98,10 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     public override void Movement()
     {
         //if skeleton do nothing, make it patrol around
-        //if (!isDoingSomething() && patrolPositions.Length > 0)
-        //{
-        //    StartCoroutine(PatrolAround());
-        //}
+        if (!isDoingSomething() && patrolPositions.Length > 0)
+        {
+            StartCoroutine(PatrolAround());
+        }
 
         //if (target != null && !isFacingTarget(target.position) && !isTurning)
         //{
@@ -168,9 +183,18 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     {
         if (other.gameObject.tag == PLAYER_TAG && health > 0)
         {
+            //assign target
             target = other.transform;
-            Scream();
-            StartCoroutine(Attack());
+
+            //stop all other Coroutines like PatrolAround()
+            StopPatrolling();
+            StopTurning();
+
+            isAttacking = true;
+            anim.SetTrigger(TRIGGER_SCREAMING);
+            //start attacking
+            //Scream();
+            //StartCoroutine(Attack());
         }
 
 
@@ -182,6 +206,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         if (other.gameObject.tag == PLAYER_TAG && health > 0)
         {
             target = null;
+            isAttacking = false;
         }
     }
 
