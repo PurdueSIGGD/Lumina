@@ -24,6 +24,9 @@ ModelImporter:
     400014: String
     400016: String_end
     4300000: Bow_mesher
+    7400000: Bow|Bow_Pull
+    7400002: Bow|Bow_Release
+    7400004: Bow|Bow_Idle
     9500000: //RootNode
     13700000: Bow_mesher
   materials:
@@ -50,7 +53,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.2
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

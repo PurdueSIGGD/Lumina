@@ -10,6 +10,7 @@ public class WeaponController : MonoBehaviour {
     public Transform cameraBone;
     public Animator viewmodelAnimator;
     public StatsController myStats;
+    public WeaponController otherWeapon;
 
     public Weapon[] weapons = new Weapon[2];
     public int weaponIndex;
@@ -26,6 +27,8 @@ public class WeaponController : MonoBehaviour {
     private Weapon pendingOldWeapon;
     private Weapon pendingNewWeapon;
 
+    private bool bothHands;
+
 	// Use this for initialization
 	void Start () {
         pendingPackType = "";
@@ -40,12 +43,16 @@ public class WeaponController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        int layerIndex = controllerSide == "R" ? 1 : 2;
-
+        // If we are both hands, layerindex is 0
+        // Otherwise, L = 2, R = 1
+        int layerIndex = (bothHands) ? 0 : ( controllerSide == "R" ? 1 : 2 );
         weaponBusy = !(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("Idle") && !viewmodelAnimator.IsInTransition(layerIndex));
 
-        
-        if (pendingPackType != "" && (viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"))) {
+        //if (controllerSide == "R") print(pendingPackType + " " + viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
+        if (pendingPackType != "" && (!pendingNewWeapon.bothHands && viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone") || (pendingNewWeapon.bothHands && this.ReadyForBoth() && otherWeapon.ReadyForBoth()))) {
+            print(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
+            //print(this.ReadyForBoth() && otherWeapon.ReadyForBoth());
+            //print("done throwing or whatever");
             // If we are done throwing or packing or whatever
             if (pendingPackType == "Pack" && pendingOldWeapon) { //We make sure the old weapon exists
                 // Packing
@@ -76,9 +83,34 @@ public class WeaponController : MonoBehaviour {
                 pendingOldWeapon.setPlayerAnim(null);
                 pendingOldWeapon.setControllerSide("");
 
+                print(pendingOldWeapon.bothHands);
                 
+
+
+
+
             }
-            //print("Adding new item");
+            if (pendingOldWeapon && pendingOldWeapon.bothHands) {
+                //print("Old weapon is both hands");
+                this.otherWeapon.BothHandsDone();
+                BothHandsDone();
+            } else {
+                //print("Old weapon is not both hands");
+
+            }
+
+            if (pendingNewWeapon.bothHands) {
+               // print("New weapon is both hands");
+                viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
+                viewmodelAnimator.SetTrigger("BothHandsStart");
+                this.otherWeapon.BothHandsForceStop();
+                this.BothHandsForceStop();
+            } else {
+               // print("New weapon is not both hands");
+               // this.otherWeapon.BothHandsDone();
+                //BothHandsDone();
+            }
+            //print("Adding new item " + pendingNewWeapon);
             // Set this weapon to be active
             pendingNewWeapon.transform.parent = weaponBone;
 
@@ -139,23 +171,43 @@ public class WeaponController : MonoBehaviour {
      * packType: either "Pack" or "Drop" depending on what you want to do with the old weapon
      */
     public void SwitchWeapon(int newIndex, string packType) {
+        //print("pending pack:" + pendingPackType + " " + weaponCount);
         if (weaponCount == 0
             || pendingPackType != "") {
             return;
         }
-
-        int layerIndex = controllerSide == "R" ? 1 : 2;
+        //print("foo");
+        int layerIndex = (bothHands) ? 0 : (controllerSide == "R" ? 1 : 2);
         if (!viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("Idle")) return;
-
         //print("Switching, weapon index: " + newIndex + " weapon count: " + weaponCount);
 
         weaponIndex = newIndex;
         //We pack an item if switching from one to another, throw if we are dropping our current weapon
+        //print(bothHands);
 
         pendingPackType = packType;
-        viewmodelAnimator.SetTrigger(controllerSide + packType);
-        viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
+
+        // If we were already both hands
+        if (bothHands) {
+            viewmodelAnimator.SetTrigger("B" + packType);
+        } else if (!pendingNewWeapon.bothHands) {
+            // Glitch where it sets pack when new weapon is both hands
+            viewmodelAnimator.SetTrigger(controllerSide + packType);
+        }
+       
         
+
+        // If a two handed weapon, we need to tell the other weapon controllers to stop 
+        if (pendingNewWeapon.bothHands) {
+            BothHandsRequestStop();
+            otherWeapon.BothHandsRequestStop();
+            bothHands = true;
+        } else {
+            // If we are not switching to both hands, we tell the animation type. If we are both hands, we do it later.
+            viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
+        }
+        
+
 
 
     }
@@ -173,8 +225,6 @@ public class WeaponController : MonoBehaviour {
             viewmodelAnimator.SetFloat(controllerSide + "CooldownSpeed", 1 / (2 * pendingNewWeapon.timeToCooldown));
 
         }
-        
-
         pendingPackType = "";
     }
     /**
@@ -216,6 +266,36 @@ public class WeaponController : MonoBehaviour {
         
         
     }
+    void BothHandsRequestStop() {
+        foreach (Weapon w in weapons) {
+            if (!w) continue;
+            w.Attack(false);
+        }
+        viewmodelAnimator.SetBool("DoneWithBoth", false);
+        if (weapons[weaponIndex] is Magic) {
+            // Stop the particle effect
+        }
+
+    }
+    void BothHandsForceStop() {
+        
+        this.viewmodelAnimator.SetLayerWeight(1, 0);
+        this.viewmodelAnimator.SetLayerWeight(2, 0);
+    }
+    bool ReadyForBoth() {
+        int layerIndex = controllerSide == "R" ? 1 : 2;
+        return viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("WaitUntilBothDone") && !viewmodelAnimator.IsInTransition(layerIndex); 
+        //If we are locked and loaded, ready to move from two different hand animations to one
+    }
+    void BothHandsDone() {
+        bothHands = false;
+        this.viewmodelAnimator.SetLayerWeight(1, 1);
+        this.viewmodelAnimator.SetLayerWeight(2, 1);
+        viewmodelAnimator.SetBool("DoneWithBoth", true);
+        if (weapons[weaponIndex] is Magic) {
+            // Start the particle effect
+        }
+    }
 
     public void MoveToLayer(Transform root, int layer) {
         // If we set our particels to be viewmodel, they get in the way
@@ -228,6 +308,7 @@ public class WeaponController : MonoBehaviour {
     }
 
     void Death() {
+        bothHands = true;
         foreach (Weapon w in weapons) {
             if (!w) continue;
             w.Attack(false);
@@ -264,6 +345,7 @@ public class WeaponController : MonoBehaviour {
 
     }
     void NotDeath() {
+        bothHands = false;
         viewmodelAnimator.SetTrigger("NotDeath");
     }
 
