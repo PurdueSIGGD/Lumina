@@ -20,9 +20,9 @@ public class ChargedProjectileWeapon : Weapon {
 
     public override void Attack(bool mouseDown) {
         //print("attac");
-        print(mouseDown + " " + isAttacking);
+        //print(mouseDown + " " + isAttacking);
         if (mouseDown && isAttacking) {
-            print(getTimeSincePress());
+            //print(getTimeSincePress());
             if (getTimeSincePress() < maxChargeTime)
             {
                 setTimeSincePress(getTimeSincePress() + Time.deltaTime);
@@ -33,13 +33,14 @@ public class ChargedProjectileWeapon : Weapon {
 
         } else if (mouseDown && !isAttacking) {
             isAttacking = true;
-            getPlayerAnim().SetTrigger("RBowHold");
+            getPlayerAnim().SetBool("RBowHold", true);
             myAnim.SetBool("Pulling", true);
             //getPlayerAnim().SetInteger(getControllerSide() + "AttackNum", UnityEngine.Random.Range(0, 2));
         } else if (!mouseDown && isAttacking)
         {
-
+            //print("bowholdfalse");
             myAnim.SetBool("Pulling", false);
+            getPlayerAnim().SetBool("RBowHold", false);
 
             isAttacking = false;
             setTimeSincePress(0);

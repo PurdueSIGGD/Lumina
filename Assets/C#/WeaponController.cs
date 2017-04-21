@@ -50,7 +50,7 @@ public class WeaponController : MonoBehaviour {
 
         //if (controllerSide == "R") print(pendingPackType + " " + viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
         if (pendingPackType != "" && (!pendingNewWeapon.bothHands && viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone") || (pendingNewWeapon.bothHands && this.ReadyForBoth() && otherWeapon.ReadyForBoth()))) {
-            print(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
+            //print(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
             //print(this.ReadyForBoth() && otherWeapon.ReadyForBoth());
             //print("done throwing or whatever");
             // If we are done throwing or packing or whatever
@@ -140,6 +140,7 @@ public class WeaponController : MonoBehaviour {
         // We have a current weapon
         // And the weapon is not busy
         if (weaponCount > 0) {
+            
             if (weaponBusy && controllerSide == "R") mouseDown = false;
             // Attack
             weapons[weaponIndex].Attack(mouseDown);
