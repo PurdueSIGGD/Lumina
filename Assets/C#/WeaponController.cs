@@ -6,7 +6,7 @@ public class WeaponController : MonoBehaviour {
     private static Vector3 EQUIPPED_WEAPON_SCALE = new Vector3(0.008f, 0.008f, 0.008f);
     private static float WEAPON_SWITCH_TIME = .3f;
 
-    public Transform weaponBone;
+    public Transform weaponBone, weaponBone2;
     public Transform cameraBone;
     public Animator viewmodelAnimator;
     public StatsController myStats;
@@ -28,6 +28,7 @@ public class WeaponController : MonoBehaviour {
     private Weapon pendingNewWeapon;
 
     private bool bothHands;
+    private bool disableAttacks;
 
 	// Use this for initialization
 	void Start () {
@@ -83,7 +84,7 @@ public class WeaponController : MonoBehaviour {
                 pendingOldWeapon.setPlayerAnim(null);
                 pendingOldWeapon.setControllerSide("");
 
-                print(pendingOldWeapon.bothHands);
+                //print(pendingOldWeapon.bothHands);
                 
 
 
@@ -91,11 +92,24 @@ public class WeaponController : MonoBehaviour {
 
             }
             if (pendingOldWeapon && pendingOldWeapon.bothHands) {
+                // Put arrow back
+                Transform arrow = weaponBone2.FindChild("Arrow");
+                arrow.parent = pendingOldWeapon.transform;
+                arrow.localScale = Vector3.zero;
+                MoveToLayer(arrow, 1); //Regular layer for camera rendering
+
                 //print("Old weapon is both hands");
                 this.otherWeapon.BothHandsDone();
                 BothHandsDone();
-            } else {
+            } else if (pendingNewWeapon.bothHands) {
                 //print("Old weapon is not both hands");
+                //print(pendingNewWeapon);
+                Transform arrow = pendingNewWeapon.transform.FindChild("Arrow");
+                arrow.parent = weaponBone2;
+                arrow.localScale = EQUIPPED_WEAPON_SCALE;
+                arrow.localPosition = Vector3.zero;
+                arrow.localEulerAngles = new Vector3(-90, 0, 0);
+                MoveToLayer(arrow, 8); //Viewmodel layer for camera rendering
 
             }
 
@@ -139,9 +153,17 @@ public class WeaponController : MonoBehaviour {
     public void Attack(bool mouseDown) {
         // We have a current weapon
         // And the weapon is not busy
-        if (weaponCount > 0) {
+        if (weaponCount > 0 && !disableAttacks) {
             
-            if (weaponBusy && controllerSide == "R") mouseDown = false;
+            if (weaponBusy && controllerSide == "R") {
+                if (weapons[weaponIndex] is ChargedProjectileWeapon) {
+                    if (!((ChargedProjectileWeapon)weapons[weaponIndex]).isAttacking) {
+                        mouseDown = false;
+                    }
+                } else {
+                    mouseDown = false;
+                }
+            }
             // Attack
             weapons[weaponIndex].Attack(mouseDown);
         }
@@ -200,9 +222,9 @@ public class WeaponController : MonoBehaviour {
 
         // If a two handed weapon, we need to tell the other weapon controllers to stop 
         if (pendingNewWeapon.bothHands) {
+            bothHands = true;
             BothHandsRequestStop();
             otherWeapon.BothHandsRequestStop();
-            bothHands = true;
         } else {
             // If we are not switching to both hands, we tell the animation type. If we are both hands, we do it later.
             viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
@@ -274,7 +296,11 @@ public class WeaponController : MonoBehaviour {
         }
         viewmodelAnimator.SetBool("DoneWithBoth", false);
         if (weapons[weaponIndex] is Magic) {
+            disableAttacks = true;
+
             // Stop the particle effect
+            ((Magic)weapons[weaponIndex]).pauseParticles();
+
         }
 
     }
@@ -294,7 +320,11 @@ public class WeaponController : MonoBehaviour {
         this.viewmodelAnimator.SetLayerWeight(2, 1);
         viewmodelAnimator.SetBool("DoneWithBoth", true);
         if (weapons[weaponIndex] is Magic) {
+            disableAttacks = false;
+
             // Start the particle effect
+            ((Magic)weapons[weaponIndex]).playParticles();
+
         }
     }
 

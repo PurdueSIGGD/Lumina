@@ -89,7 +89,8 @@ public class Magic : Weapon {
                             }
                             // Hit with hittable
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
-                            if (hittable != null) {
+                            if (hittable != null && hit.collider.gameObject.tag != "Item") { //Sometimes may hit our item that we are holding
+                                print(hit.collider);
                                 hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
                             }
                         }
@@ -116,5 +117,18 @@ public class Magic : Weapon {
 
 	}
 
-	
+    public void pauseParticles() {
+        if (shootParticles.isPlaying) {
+            shootParticles.Stop();
+        }
+        if (idleParticles.isPlaying) {
+            idleParticles.Stop();
+        }
+    }
+    public void playParticles() {
+        idleParticles.Play();
+    }
+
+
+
 }
