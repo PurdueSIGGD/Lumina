@@ -11,7 +11,7 @@ public class ChargedProjectileWeapon : Weapon {
     public float launchSpeed = 1;
     public bool isAttacking;
     public bool hasShot;
-    static float maxChargeTime = 2; //The max amount of seconds we charge for
+    static float maxChargeTime = 1; //The max amount of seconds we charge for
     // Use this for initialization
     void Start() {
         isAttacking = false;
