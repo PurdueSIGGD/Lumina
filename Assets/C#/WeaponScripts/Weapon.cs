@@ -4,12 +4,14 @@ using UnityEngine;
 
 public abstract class Weapon : ItemStats {
     public Hittable.DamageType damageType;
+    public StatsController playerStats;
 	public float timeToAttack; //Time inbetween pressing button and actually attacking
 	public float timeToCooldown; //Time between end of attack and next attack
 	public float range;
 	public float baseDamage; //The damage the weapon would do if at 100% condition
     public int animationType;
     public bool bothHands = false;
+    public float storedAmmo = 10.0f;
     private bool busy; // If busy, like reloading or something
     private float timeSincePress;
     public Animator myAnim;

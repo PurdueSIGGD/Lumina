@@ -32,7 +32,7 @@ public class SwingingWeapon : Weapon {
                         // Push physics, regardless of hittable
                         Rigidbody r;
                         if (r = hit.collider.GetComponent<Rigidbody>()) {
-                            print("Adding force");
+                            //print("Adding force");
                             // Play around with a good factor here
                             
                             r.AddForceAtPosition(baseDamage * getLookObj().forward * 10, getLookObj().position);
@@ -41,7 +41,7 @@ public class SwingingWeapon : Weapon {
                         // Hit with hittable
                         Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                         if (hittable != null) {
-                            print("hit " + hit);
+                            //print("hit " + hit);
                             hittable.Hit(baseDamage * (getCondition()/100), getLookObj().transform.forward, damageType);
                         }
                     }

@@ -13,8 +13,7 @@ public class Magic : Weapon {
 	//float magicUsage;
 	bool attacking;
 	bool onCooldown;
-
-    public StatsController statsController;
+    
 
     float magicDraw = 1; //Magic per second this attack takes
 
@@ -43,7 +42,7 @@ public class Magic : Weapon {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-		} else if (!mouseDown || statsController.GetMagic() <= 0) {
+		} else if (!mouseDown || playerStats.GetMagic() <= 0) {
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }
@@ -59,7 +58,7 @@ public class Magic : Weapon {
             attacking = false;
         }
         if (attacking) {
-			if (!mouseDown || statsController.GetMagic() <= 0) {
+			if (!mouseDown || playerStats.GetMagic() <= 0) {
                 attacking = false;
                 releaseTime = 0;
                 onCooldown = true;
@@ -74,7 +73,7 @@ public class Magic : Weapon {
                     if (idleParticles.isPlaying) { 
                         idleParticles.Stop();
                     }
-                    statsController.UpdateMagic(-1 * magicDraw * Time.deltaTime);
+                    playerStats.UpdateMagic(-1 * magicDraw * Time.deltaTime);
                     //print("Shoooooot");
                     RaycastHit[] hits = Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);
                     foreach (RaycastHit hit in hits) {
@@ -98,7 +97,7 @@ public class Magic : Weapon {
 
                 }
             }
-		} else if (mouseDown && statsController.GetMagic() > 0) {
+		} else if (mouseDown && playerStats.GetMagic() > 0) {
             if (onCooldown) {
                 
                 if (releaseTime + Time.deltaTime >= timeToCooldown) {

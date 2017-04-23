@@ -78,7 +78,7 @@ public class WeaponController : MonoBehaviour {
                 pendingOldWeapon.transform.localEulerAngles += new Vector3(0, 180, 0);
                 pendingOldWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 pendingOldWeapon.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
-                pendingOldWeapon.GetComponent<Collider>().isTrigger = false;
+                pendingOldWeapon.GetComponent<Collider>().enabled = true;
                 MoveToLayer(pendingOldWeapon.transform, 0); //Default layer
                 pendingOldWeapon.setLookObj(null);
                 pendingOldWeapon.setPlayerAnim(null);
@@ -129,15 +129,26 @@ public class WeaponController : MonoBehaviour {
             pendingNewWeapon.transform.parent = weaponBone;
 
             pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
+            pendingNewWeapon.playerStats = myStats;
             if (pendingNewWeapon is Magic) {
                 // Set the mesh to be scale 0
                 ((Magic)pendingNewWeapon).mesh.localScale = Vector3.zero;
-                ((Magic)pendingNewWeapon).statsController = myStats;
+                //((Magic)pendingNewWeapon).playerStats = myStats;
             } 
+            if (pendingNewWeapon.storedAmmo > 0) {
+                if (pendingNewWeapon is Magic) {
+                    myStats.UpdateMagic(pendingNewWeapon.storedAmmo);
+                    pendingNewWeapon.storedAmmo = 0;
+                } else if (pendingNewWeapon is ProjectileWeapon) {
+                    myStats.UpdateArrows((int)pendingNewWeapon.storedAmmo);
+                    pendingNewWeapon.storedAmmo = 0;
+                    viewmodelAnimator.SetInteger("ArrowAmmo", myStats.arrowCount);
+                }
+            }
             pendingNewWeapon.transform.localPosition = Vector3.zero;
             pendingNewWeapon.transform.localEulerAngles = Vector3.zero;
             pendingNewWeapon.GetComponent<Rigidbody>().isKinematic = true;
-            pendingNewWeapon.GetComponent<Collider>().isTrigger = true;
+            pendingNewWeapon.GetComponent<Collider>().enabled = false;
             MoveToLayer(pendingNewWeapon.transform, 8); //Viewmodel layer for camera rendering
             pendingNewWeapon.setPlayerAnim(viewmodelAnimator);
             pendingNewWeapon.setLookObj(cameraBone);
@@ -157,12 +168,17 @@ public class WeaponController : MonoBehaviour {
             
             if (weaponBusy && controllerSide == "R") {
                 if (weapons[weaponIndex] is ChargedProjectileWeapon) {
+                    // Some logic since we have to hold down the trigger
                     if (!((ChargedProjectileWeapon)weapons[weaponIndex]).isAttacking) {
                         mouseDown = false;
                     }
                 } else {
                     mouseDown = false;
                 }
+            }
+            if (weapons[weaponIndex] is ProjectileWeapon) {
+                // ammo
+                
             }
             // Attack
             weapons[weaponIndex].Attack(mouseDown);
@@ -354,7 +370,7 @@ public class WeaponController : MonoBehaviour {
             //w.transform.localEulerAngles += new Vector3(0, 180, 0);
             w.GetComponent<Rigidbody>().isKinematic = false;
             //w.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
-            w.GetComponent<Collider>().isTrigger = false;
+            w.GetComponent<Collider>().enabled = true;
             MoveToLayer(w.transform, 0); //Default layer
             w.setLookObj(null);
             w.setPlayerAnim(null);
