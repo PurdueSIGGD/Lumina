@@ -11,6 +11,9 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     //public bool isTurning;
     public bool isAttacking;
+    public bool isScreaming;
+    public float timeScreaming = 3f;
+    public float runningSpeed;
     private bool first;
 
     //some const because I am too lazy typing them
@@ -21,7 +24,9 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     private const string TRIGGER_SCREAMING = "TriggerScreaming";
 
     private const string PLAYER_TAG = "Player";
-    
+
+    private const string STATE_SCREAMING = "Base Layer.rig|Detected";
+
 
     // Use this for initialization
     void Start()
@@ -42,40 +47,95 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     public override IEnumerator Attack() 
     {
-        //set true
+        print("start attacking...");
         isAttacking = true;
+        //set true
+        Scream();
+        isScreaming = true;
 
-        while (isAttacking)
+        //awkard way to wait until Skeleton done screaming
+        //but it works
+        yield return new WaitForSeconds(timeScreaming);
+        isScreaming = false;
+
+
+
+        //isAttacking = true;
+
+
+        //if not facing target, try to do that
+        while (!isFacingTarget(target.position))
         {
-            //if not facing target, try to do that
-            while (!isFacingTarget(curDestination.position))
+            //StartTurning(target.position);
+            if (target == null)
             {
-                //rotate slowly
-                isTurning = true;
-                RotateTowardsTarget(curDestination.position);
-
-                //rotate a bit every FixedUpdate()
-                yield return new WaitForFixedUpdate();
+                ReactTargetEscape();
+                yield break;
             }
+            //rotate slowly
+            isTurning = true;
+            RotateTowardsTarget(target.position);
 
-            //run towards target
-
+            //rotate a bit every FixedUpdate()
+            yield return new WaitForFixedUpdate();
         }
 
+        isTurning = false;
 
-        StopCoroutine(Attack());
-        Scream(); //because angry ><
-        isAttacking = false;
-
+        //run towards target
+        if (target == null)
+        {
+            isAttacking = false;
+            StopCoroutine(Attack());
+        }
+        transform.LookAt(target);
         
+
+        Vector3 distance = target.position - transform.position;
+
+        if (Vector3.Magnitude(distance) < 3f)
+        {
+            print("Hit!!");
+        }
+        else
+        {
+            Vector3 forward =
+                transform.position + transform.forward * Time.deltaTime * runningSpeed;
+            rb.MovePosition(forward);
+        }
+
+       
+        print("stop!!");
+        isAttacking = false;
+        StopCoroutine(Attack());
+        
+       
+
+
+
+
+
+
+        //StopCoroutine(Attack());
+        //Scream(); //because angry ><
+        //isAttacking = false;
+
+
     }
 
+    
+    void ReactTargetEscape()
+    {
+        StopTurning();
+        StopAttacking();
+        //Scream();
+    }
 
     /**
      * pretty cool animation made by Andrew
      * lol
      */ 
-    private void Scream()
+    void Scream()
     {
         anim.SetTrigger(TRIGGER_SCREAMING);
     }
@@ -92,8 +152,8 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         //{
         //    StartCoroutine(TurnToFaceTarget(target.position));
         //}
-
-
+    
+        
 
     }
    
@@ -147,8 +207,23 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         anim.SetBool(IS_TURNING_RIGHT, false);
     }
 
-
+    void StopAttacking()
+    {
+        isAttacking = false;
+       
+    }
    
+
+    bool isAnimatorPlaying()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length >
+            anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+    bool isAnimatorPlaying(string stateName)
+    {
+        return isAnimatorPlaying() && anim.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
 
 
     //}
@@ -166,10 +241,12 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == PLAYER_TAG && health > 0)
+        if (other.gameObject.tag == PLAYER_TAG && health > 0 && !isAttacking)
         {
             target = other.transform;
-            Scream();
+
+            //StopPatrolling();
+            
             StartCoroutine(Attack());
         }
 
