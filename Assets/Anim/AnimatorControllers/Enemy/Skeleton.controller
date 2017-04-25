@@ -8,6 +8,12 @@ AnimatorController:
   m_Name: Skeleton
   serializedVersion: 5
   m_AnimatorParameters:
+  - m_Name: isDancing
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: isRunning
     m_Type: 4
     m_DefaultFloat: 0
@@ -38,14 +44,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-  - m_Name: isAttacking
-    m_Type: 4
-=======
-<<<<<<< HEAD
-  - m_Name: isAttacking
-    m_Type: 4
-=======
   - m_Name: TriggerDeath
     m_Type: 9
     m_DefaultFloat: 0
@@ -54,8 +52,6 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: TriggerDance
     m_Type: 9
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -73,6 +69,27 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1101 &1101045613873214160
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102882923078012882}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8125
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &1101071589585011570
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -169,6 +186,30 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &1101263448430254668
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isWalking
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102043140958839174}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.875
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &1101286557319235422
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -193,15 +234,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
---- !u!1101 &1101344823090475126
-=======
-<<<<<<< HEAD
---- !u!1101 &1101344823090475126
-=======
 --- !u!1101 &1101287862306883178
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -209,82 +242,37 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-<<<<<<< HEAD
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
-    m_ConditionEvent: TriggerScreaming
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102296732179192520}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-=======
     m_ConditionEvent: TriggerDeath
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102361168375386546}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.875
+  m_ExitTime: 0.9
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
---- !u!1101 &1101417161725415712
-=======
-<<<<<<< HEAD
---- !u!1101 &1101417161725415712
-=======
 --- !u!1101 &1101323214457759696
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-<<<<<<< HEAD
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: isRunning
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: isAttacking
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102893802654827624}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-=======
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102303179778600544}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-  m_ExitTime: 0.625
-=======
-<<<<<<< HEAD
-  m_ExitTime: 0.625
-=======
   m_ExitTime: 0.7619048
   m_HasExitTime: 1
   m_HasFixedDuration: 1
@@ -307,8 +295,6 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.70000005
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -330,7 +316,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5
   m_HasExitTime: 1
@@ -354,27 +340,6 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.5161291
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &1101546115042908740
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102303179778600544}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.7619048
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -404,6 +369,30 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &1101599368011102568
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: TriggerScreaming
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102645103660643512}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.1
+  m_TransitionOffset: 0
+  m_ExitTime: 0.9
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &1101631738630590124
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -425,15 +414,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
---- !u!1101 &1101705363868711524
-=======
-<<<<<<< HEAD
---- !u!1101 &1101705363868711524
-=======
 --- !u!1101 &1101641523414031528
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -441,37 +422,14 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-<<<<<<< HEAD
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
-    m_ConditionEvent: isWalking
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102173721421467258}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-=======
     m_ConditionEvent: isDancing
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102623661454101032}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.875
-=======
-<<<<<<< HEAD
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.875
-=======
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.8333334
@@ -499,8 +457,6 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
   m_ExitTime: 0.9
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -525,6 +481,30 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.625
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &1101791313361643336
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isDancing
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102303179778600544}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8333334
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -575,27 +555,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &1101942232719007074
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102882923078012882}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.8125
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &1101944820628723444
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -612,7 +571,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.5161291
   m_HasExitTime: 1
@@ -644,27 +603,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &1101976335797070134
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102303179778600544}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.625
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &1102001248462855888
 AnimatorState:
   serializedVersion: 5
@@ -677,7 +615,6 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101899572088412062}
   - {fileID: 1101745733770053564}
-  - {fileID: 1101417161725415712}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -691,42 +628,17 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &1102101082816060648
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: rig|Idle_Turn_Right
-  m_Speed: 0.25
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 1101154984819242446}
-  - {fileID: 1101944820628723444}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400020, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
---- !u!1102 &1102173721421467258
+--- !u!1102 &1102043140958839174
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: rig|Walking_Start
-  m_Speed: 1
+  m_Speed: 0.75
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 1101942232719007074}
+  - {fileID: 1101045613873214160}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -740,17 +652,18 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &1102296732179192520
+--- !u!1102 &1102101082816060648
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: rig|Detected
+  m_Name: rig|Idle_Turn_Right
   m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 1101546115042908740}
+  - {fileID: 1101154984819242446}
+  - {fileID: 1101944820628723444}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -759,7 +672,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400014, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
+  m_Motion: {fileID: 7400020, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -778,17 +691,7 @@ AnimatorState:
   - {fileID: 1101093102033232164}
   - {fileID: 1101953640694977090}
   - {fileID: 1101071589585011570}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-  - {fileID: 1101705363868711524}
-  - {fileID: 1101344823090475126}
-=======
-<<<<<<< HEAD
-  - {fileID: 1101705363868711524}
-  - {fileID: 1101344823090475126}
-=======
   - {fileID: 1101263448430254668}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -798,6 +701,30 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400016, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
+  m_Tag: Idle
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &1102361168375386546
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: rig|Death_1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 1101328199464800596}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400008, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -826,6 +753,55 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &1102623661454101032
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: rig|Dance_1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 1101641523414031528}
+  - {fileID: 1101791313361643336}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400002, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
+  m_Tag: Dancing
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+--- !u!1102 &1102645103660643512
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: rig|Detected
+  m_Speed: 0.5
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 1101323214457759696}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 7400014, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &1102717714280265210
 AnimatorState:
   serializedVersion: 5
@@ -833,7 +809,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: rig|Idle_Turn_Left
-  m_Speed: 0.25
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101286557319235422}
@@ -858,7 +834,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: rig|Walking_Stop
-  m_Speed: 0.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101528155436272904}
@@ -882,7 +858,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: rig|Walking
-  m_Speed: 0.5
+  m_Speed: 0.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101099912500170552}
@@ -900,30 +876,6 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
---- !u!1102 &1102893802654827624
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: rig|Running_Attack
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 1101976335797070134}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400024, guid: ad577fac434d48949a74b935d1b294d8, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
 --- !u!1107 &1107211122347933076
 AnimatorStateMachine:
   serializedVersion: 5
@@ -934,13 +886,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102303179778600544}
-    m_Position: {x: 492, y: 72, z: 0}
+    m_Position: {x: 492, y: 96, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102552191190303244}
-    m_Position: {x: 936, y: -156, z: 0}
+    m_Position: {x: 780, y: -72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102001248462855888}
-    m_Position: {x: 696, y: -156, z: 0}
+    m_Position: {x: 492, y: -72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102882923078012882}
     m_Position: {x: 792, y: 216, z: 0}
@@ -954,21 +906,6 @@ AnimatorStateMachine:
     m_State: {fileID: 1102101082816060648}
     m_Position: {x: 132, y: -60, z: 0}
   - serializedVersion: 1
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-<<<<<<< HEAD
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
-    m_State: {fileID: 1102173721421467258}
-    m_Position: {x: 792, y: 108, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102296732179192520}
-    m_Position: {x: 828, y: 12, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102893802654827624}
-    m_Position: {x: 468, y: -156, z: 0}
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-=======
-=======
     m_State: {fileID: 1102043140958839174}
     m_Position: {x: 792, y: 96, z: 0}
   - serializedVersion: 1
@@ -980,27 +917,16 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102623661454101032}
     m_Position: {x: 144, y: 120, z: 0}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_ChildStateMachines: []
-  m_AnyStateTransitions: []
+  m_AnyStateTransitions:
+  - {fileID: 1101599368011102568}
+  - {fileID: 1101287862306883178}
+  - {fileID: 1101648722252096574}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-<<<<<<< HEAD:Assets/Anim/AnimatorControllers/Enemy/Skeleton.controller
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 804, y: 336, z: 0}
-=======
-<<<<<<< HEAD
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 804, y: 336, z: 0}
-=======
   m_AnyStatePosition: {x: -144, y: 36, z: 0}
   m_EntryPosition: {x: 48, y: 228, z: 0}
   m_ExitPosition: {x: -132, y: 204, z: 0}
->>>>>>> origin/EnemyAI
->>>>>>> origin/EnemyAI:Assets/Anim/AnimatorControllers/Skeleton.controller
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102303179778600544}
