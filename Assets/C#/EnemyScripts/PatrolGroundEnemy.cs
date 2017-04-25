@@ -102,7 +102,9 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         }
 
         StopPatrolling();
-        
+
+        yield break;
+
     }
 
     /**

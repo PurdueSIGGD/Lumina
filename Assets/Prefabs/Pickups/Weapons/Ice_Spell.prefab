@@ -242,6 +242,7 @@ MonoBehaviour:
   idleParticles: {fileID: 198556945871469174}
   shootParticles: {fileID: 198911113911230320}
   mesh: {fileID: 4643761097077648}
+  width: 1
   statsController: {fileID: 0}
 --- !u!135 &135522763868013500
 SphereCollider:
@@ -2991,7 +2992,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 20
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3123,7 +3124,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       minMaxState: 0
     startSize:
-      scalar: 1.25
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:

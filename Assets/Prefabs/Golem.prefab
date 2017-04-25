@@ -129,11 +129,14 @@ MonoBehaviour:
   patrolPositions: []
   isPatrolling: 0
   isResting: 0
+  isTurning: 0
   timeBeforeChangeDirection: 2
   turningSpeed: 0
   target: {fileID: 0}
   isAttacking: 0
   timeBetweenAttacks: 2
+  smashDamage: 25
+  rockDamage: 100
   meleeRange: 0
   throwRange: 0
   rocks:

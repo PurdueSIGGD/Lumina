@@ -170,8 +170,12 @@ public class MovementController : MonoBehaviour {
     void Death() {
         canMove = false;
         cameraObj.transform.eulerAngles = new Vector3(0, cameraObj.transform.eulerAngles.y, cameraObj.transform.eulerAngles.z);
+        // Stop friggin flying across the friggin place
+        playerPhysics.isKinematic = true;
     }
     void NotDeath() {
+        
+        playerPhysics.isKinematic = false;
         canMove = true;
     }
 }
