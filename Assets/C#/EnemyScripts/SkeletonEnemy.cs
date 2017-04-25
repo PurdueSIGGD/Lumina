@@ -8,7 +8,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
 {
     public Transform target;
     public float runningSpeed = 8f;
-    public float lookSphereRadius = 15f;
+    public float lookSphereRadius = 15f; //use for draw Gizmo, and detect target
     public float distanceMeleeAttack = 2f;
     public float timeBetweenAttacks = 2f;
     public bool isAllowedToAttack;
@@ -37,7 +37,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public readonly int HASH_TRIGGER_ATTACK_RUN = Animator.StringToHash("TriggerAttackRun");
     public readonly int HASH_IS_DANCING         = Animator.StringToHash("isDancing");
 
-    private const string PLAYER_TAG = "Player";
+    public const string PLAYER_TAG = "Player";
 
 
 
@@ -132,17 +132,6 @@ public class SkeletonEnemy : PatrolGroundEnemy
             rb.MovePosition(forward);
         }
     }
-
-    /**
-     * check if this guy is doing something
-     * later on, there will be more activies, so use this for short 
-     * :)
-     */
-    private bool isDoingSomething()
-    {
-        return isPatrolling || isResting || isTurning || isAttacking;
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {

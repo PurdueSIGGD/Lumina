@@ -10,13 +10,15 @@ abstract public class BaseEnemy : Hittable {
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
 
-	/*
+    
+
+    /*
 	 * Method called when enemy dies
 	 * Identifies the number of drops the enemy drops based on the minimum and maximum values
 	 * Then, for each of the individual drops, find a random GameObject in the drops array to drop
 	 * Instantiate that drop
 	 */
-	void GenericDeath(){
+    void GenericDeath(){
 
         OnDeath();
 
