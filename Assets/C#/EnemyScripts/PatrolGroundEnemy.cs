@@ -23,11 +23,11 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     public bool isPatrolling; //if golem is patrolling, don't change direction
     public bool isResting; //when 
     public bool isTurning;
-    protected int curPatrolIndex; //index to keep track of where that golem is heading
+    [HideInInspector] public int curPatrolIndex; //index to keep track of where that golem is heading
 
     public float timeBeforeChangeDirection; //time that golem will wait at the destination before change direction.
 
-    public float turningSpeed;
+    public float turningSpeed = 15f;
     protected Rigidbody rb;
 
 
@@ -109,18 +109,17 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
      * rotate a bit toward target
      * helps animation
      */ 
-    protected virtual void RotateTowardsTarget(Vector3 target)
+    public virtual void RotateTowardsTarget(Vector3 target)
     {
-        //get final direction
-        Vector3 targetDir = target - transform.position;
-        Debug.DrawRay(transform.position, targetDir); //debug
+        //get target direction
+        Vector3 targetDirection = target - transform.position;
 
-        //get next direction
-        float step = turningSpeed * Time.deltaTime;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+        //get new rotation
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+        Quaternion newRotation = Quaternion.Lerp(transform.rotation, targetRotation, turningSpeed * Time.deltaTime);
 
-        //assign new rotation
-        transform.rotation = Quaternion.LookRotation(newDir);
+        //set new rotation
+        transform.rotation = newRotation;
     }
 
 
@@ -168,7 +167,7 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
      * isNearDestination(): while golem is patrolling
      * return true if golem is near its current destination
      */
-    protected bool isNearDestination(Vector3 destination)
+    public bool isNearDestination(Vector3 destination)
     {
         //calculate the distance
         Vector3 distanceVect = destination - transform.position;
@@ -229,5 +228,28 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
         return false;
     }
 
+
+    /**
+     * if the target is on the LEFT or RIGHT
+     * used for animation
+     */
+    public TargetSideDirection getTargetSideDirection(Vector3 target)
+    {
+        //Calculus 1, :-/
+        //cos(a,b) = ( vector<a> . vector<b> ) / (...)
+        //cos(a,b) < 0: left
+        //cos(a,b) > 0: right
+
+        Vector3 targetDirection = target - transform.position;
+        float cos_angle = Vector3.Dot(targetDirection, transform.right);
+
+        if (cos_angle > 0)
+        {
+            return TargetSideDirection.RIGHT;
+        }
+
+        return TargetSideDirection.LEFT;
+
+    }
 
 }

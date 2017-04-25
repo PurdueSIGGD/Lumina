@@ -13,7 +13,7 @@ using UnityEngine;
 public class EnemyStateController : MonoBehaviour {
 
     public EnemyState currentState;
-    public EnemyState remainState;
+    public EnemyState placeHolderState;
 
     [HideInInspector] public BaseEnemy enemy;
     public void SetupStateController(BaseEnemy enemy)
@@ -23,6 +23,15 @@ public class EnemyStateController : MonoBehaviour {
 
     public void UpdateStateController()
     {
-        currentState.UpdateState(enemy);
+        currentState.UpdateState(this);
+    }
+
+    public void TransitionToNextState(EnemyState nextState)
+    {
+        if (nextState == placeHolderState)
+            return;
+
+        currentState.OnExitState(this);
+        currentState = nextState;
     }
 }

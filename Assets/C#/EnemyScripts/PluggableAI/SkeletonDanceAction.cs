@@ -7,9 +7,9 @@ using UnityEngine;
 public class SkeletonDanceAction : EnemyAction {
 
 
-    public override void Act(BaseEnemy enemy)
+    public override void Act(EnemyStateController controller)
     {
-        SkeletonEnemy skeleton = (SkeletonEnemy)enemy;
+        SkeletonEnemy skeleton = (SkeletonEnemy)controller.enemy;
         Dance(skeleton);
     }
 
@@ -19,7 +19,7 @@ public class SkeletonDanceAction : EnemyAction {
         if (skeleton.isDancing)
             return;
 
-        skeleton.StartDancing();
+        skeleton.StartDancingAnimation();
     }
 
 }

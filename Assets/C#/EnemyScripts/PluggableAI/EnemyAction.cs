@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class EnemyAction : ScriptableObject {
 
-    public abstract void Act(BaseEnemy enemy);
+    public abstract void Act(EnemyStateController controller);
 }
