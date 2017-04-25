@@ -15,13 +15,19 @@ public class SkeletonScanDecision : EnemyDecision {
     }
 
     /*
-     * just use TriggerEnter for now
+     * Scan(), use OnTriggerEnter to set target
+     * return true if Enemy is detected
+     * return false if not
      */ 
     private bool Scan(SkeletonEnemy skeleton)
     {
-        if (skeleton.target != null)
-            return true;
-        return false;
+        //if there is no target
+        if (skeleton.target == null)
+            return false;
+        
+       
+        return true;
+
     }
    
 }

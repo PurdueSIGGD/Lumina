@@ -80,7 +80,17 @@ public class SkeletonEnemy : PatrolGroundEnemy
     }
 
 
-   
+    public bool isFarEnoughFromTarget(Vector3 target, float distance)
+    {
+        //calculate the distance
+        Vector3 distanceVect = target - transform.position;
+        float tempdistance = Vector3.Magnitude(distanceVect);
+
+        //simple check.
+        return tempdistance > distance;
+    }
+
+
     /**
      * pretty cool animation made by Andrew
      * lol
@@ -144,15 +154,19 @@ public class SkeletonEnemy : PatrolGroundEnemy
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == PLAYER_TAG && health > 0)
+        if (target == null || other.gameObject.tag != PLAYER_TAG)
+            return;
+
+        //a hack way to make sure that target has to be far enough
+        //before let target go
+        if (isFarEnoughFromTarget(target.position, lookSphereRadius))
         {
             target = null;
         }
     }
 
-    
 
     public override void OnDeath()
     {
