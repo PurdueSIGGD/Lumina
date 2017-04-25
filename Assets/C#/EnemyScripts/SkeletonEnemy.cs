@@ -65,30 +65,30 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public override IEnumerator Attack()
     {
 
+
         return null;
 
     }
 
 
-        void ReactTargetEscape()
-    {
-            StopTurning();
-            StopAttacking();
-            //Scream();
-        }
 
-
+      
 
 
 
         void StopAttacking()
     {
-            StopCoroutine(Attack());
+	StopCoroutine(Attack());
             Scream(); //because angry ><
             isAttacking = false;
 
-        }
+    }
 
+   
+ 
+
+
+   
     /**
      * pretty cool animation made by Andrew
      * lol
@@ -157,7 +157,6 @@ public class SkeletonEnemy : PatrolGroundEnemy
         animator.SetBool(IS_TURNING_LEFT, false);
         animator.SetBool(IS_TURNING_RIGHT, false);
     }
-
 
 
 
