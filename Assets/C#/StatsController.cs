@@ -15,13 +15,16 @@ public class StatsController : Hittable
 	const float WEAKNESS_MODIFIER = 1.1F;
 	const float STRENGTH_MODIFIER = 0.9F;
 
+
 	public float health;
     public float healthMax;
     public float magic;
     public float magicMax;
     public float lightt;
     public float lighttMax;
-	Hittable.DamageType weakAgainst;
+    public int arrowCount;
+    public int arrowMax;
+    Hittable.DamageType weakAgainst;
 	Hittable.DamageType strongAgainst;
 
     public Animator myAnim;
@@ -154,6 +157,29 @@ public class StatsController : Hittable
 		}
 		return 0;
 	}
+    public int UpdateArrows(int amount) {
+        if (arrowCount < 0) {
+            arrowCount = 0;
+        }
+        if (amount > 0) {
+            if (arrowCount + amount > arrowMax) {
+                int leftover = arrowCount + amount - arrowMax;
+                arrowCount = arrowMax;
+                return leftover;
+            }
+            arrowCount += amount;
+            return 0;
+        } else if (amount < 0) {
+            if (arrowCount + amount < 0) {
+                int leftover = arrowCount + amount;
+                arrowCount = 0;
+                return leftover;
+            }
+            arrowCount += amount;
+            return 0;
+        }
+        return 0;
+    }
 
 	//Returns leftovers (if any) ((can be negative))
 	public float UpdateLightt(float amount) {
