@@ -27,7 +27,7 @@ public class ChargedProjectileWeapon : ProjectileWeapon {
                 setTimeSincePress(maxChargeTime);
             }
 
-        } else if (mouseDown && !isAttacking) {
+        } else if (mouseDown && !isAttacking && playerStats.arrowCount > 0) {
             isAttacking = true;
             hasShot = false;
             getPlayerAnim().SetBool("RBowHold", true);
