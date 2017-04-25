@@ -3,26 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonEnemy : PatrolGroundEnemy {
+[RequireComponent(typeof(EnemyStateController))]
+public class SkeletonEnemy : PatrolGroundEnemy
+{
 
-    //private var
-    private Animator anim;
+
     public Transform target;
     public float runningSpeed;
+    public float turnSmoothing = 15f;
+    public float lookSphereRadius = 15f;
+
+    [HideInInspector]
+    public Animator animator;
 
     //public bool isTurning;
     public bool isAttacking;
-    private bool first;
+    public bool isDancing;
+    private bool aiActive;
+    private EnemyStateController stateController;
 
     //some const because I am too lazy typing them
     private const string IS_RUNNING = "isRunning";
     private const string IS_WALKING = "isWalking";
-    private const string IS_TURNING_LEFT  = "isTurningLeft";
+    private const string IS_TURNING_LEFT = "isTurningLeft";
     private const string IS_TURNING_RIGHT = "isTurningRight";
-    private const string TRIGGER_SCREAMING = "TriggerScreaming";
+
+    private readonly int HASH_TRIGGER_SCREAMING = Animator.StringToHash("TriggerScreaming");
+    private readonly int HASH_IDLE_TAG = Animator.StringToHash("Idle");
+    private readonly int HASH_TRIGGER_DEATH = Animator.StringToHash("TriggerDeath");
+    private readonly int HASH_TRIGGER_DANCE = Animator.StringToHash("TriggerDance");
+    private readonly int HASH_DANCING_TAG = Animator.StringToHash("Dancing");
+    public readonly int HASH_IS_DANCING = Animator.StringToHash("isDancing");
 
     private const string PLAYER_TAG = "Player";
-    
+
+
+
 
     // Use this for initialization
     void Start()
@@ -30,20 +46,23 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         //use this for PatrolAround
         base.__init__();
 
-        anim = GetComponent<Animator>();
-
         //set center: skeleton won't fall back & forth
         rb.centerOfMass = new Vector3(0, -10, 0);
 
-        isTurning = false;
-        first = true;
+        //set up some variables
+        animator = GetComponent<Animator>();
+
+        //set up AI
+        aiActive = true;
+        stateController = GetComponent<EnemyStateController>();
+        stateController.SetupStateController(this);
     }
 
 
 
-    public override IEnumerator Attack() 
+    public override IEnumerator Attack()
     {
-        isAttacking = true;      
+        isAttacking = true;
         //if not facing target, try to do that
         while (isAttacking)
         {
@@ -70,11 +89,11 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         //isAttacking = true;
         //transform.LookAt(target);
 
-        
 
 
-       
-        
+
+
+
     }
 
 
@@ -92,37 +111,28 @@ public class SkeletonEnemy : PatrolGroundEnemy {
      */
     private void Scream()
     {
-        anim.SetTrigger(TRIGGER_SCREAMING);
+        animator.SetTrigger(HASH_TRIGGER_SCREAMING);
     }
 
     public override void Movement()
     {
-        //if skeleton do nothing, make it patrol around
-        if (!isDoingSomething() && patrolPositions.Length > 0)
-        {
-            StartCoroutine(PatrolAround());
-        }
+        if (!aiActive)
+            return;
 
-        //if (target != null && !isFacingTarget(target.position) && !isTurning)
-        //{
-        //    StartCoroutine(TurnToFaceTarget(target.position));
-        //}
-
-
-
+        this.stateController.UpdateStateController();
     }
-   
+
 
     protected override void StartPatrolling()
     {
         base.StartPatrolling();
-        anim.SetBool(IS_WALKING, true);
+        animator.SetBool(IS_WALKING, true);
     }
 
     protected override void StopPatrolling()
     {
         base.StopPatrolling();
-        anim.SetBool(IS_WALKING, false);
+        animator.SetBool(IS_WALKING, false);
     }
 
 
@@ -139,13 +149,13 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         TargetSideDirection side = getTargetSideDirection(target);
         if (side == TargetSideDirection.LEFT)
         {
-            anim.SetBool(IS_TURNING_RIGHT, false);
-            anim.SetBool(IS_TURNING_LEFT, true);
+            animator.SetBool(IS_TURNING_RIGHT, false);
+            animator.SetBool(IS_TURNING_LEFT, true);
         }
         else
         {
-            anim.SetBool(IS_TURNING_LEFT, false);
-            anim.SetBool(IS_TURNING_RIGHT, true);
+            animator.SetBool(IS_TURNING_LEFT, false);
+            animator.SetBool(IS_TURNING_RIGHT, true);
         }
 
     }
@@ -158,12 +168,12 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     protected override void StopTurning()
     {
         base.StopTurning();
-        anim.SetBool(IS_TURNING_LEFT, false);
-        anim.SetBool(IS_TURNING_RIGHT, false);
+        animator.SetBool(IS_TURNING_LEFT, false);
+        animator.SetBool(IS_TURNING_RIGHT, false);
     }
 
 
-   
+
 
 
     //}
@@ -187,11 +197,11 @@ public class SkeletonEnemy : PatrolGroundEnemy {
             target = other.transform;
 
             //stop all other Coroutines like PatrolAround()
-            StopPatrolling();
-            StopTurning();
+            //StopPatrolling();
+            // StopTurning();
 
-            isAttacking = true;
-            anim.SetTrigger(TRIGGER_SCREAMING);
+            //isAttacking = true;
+            animator.SetTrigger(HASH_TRIGGER_SCREAMING);
             //start attacking
             //Scream();
             //StartCoroutine(Attack());
@@ -212,7 +222,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
 
     //public override IEnumerator WaitBeforeChangeDirection()
     //{
-       
+
     //    //add animation
     //    anim.SetBool(IS_WALKING, false);
 
@@ -227,7 +237,7 @@ public class SkeletonEnemy : PatrolGroundEnemy {
     /**
      * if the target is on the LEFT or RIGHT
      * used for animation
-     */ 
+     */
     public TargetSideDirection getTargetSideDirection(Vector3 target)
     {
         //Calculus 1, :-/
@@ -242,13 +252,41 @@ public class SkeletonEnemy : PatrolGroundEnemy {
         {
             return TargetSideDirection.RIGHT;
         }
-        
+
         return TargetSideDirection.LEFT;
-        
+
     }
 
-    public override void OnDeath() {
-        // IDK do whatever
+    public override void OnDeath()
+    {
+
+        animator.SetTrigger(HASH_TRIGGER_DEATH);
     }
 
+    public bool isIdleState()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).tagHash == HASH_IDLE_TAG;
+    }
+
+    public void StartDancing()
+    {
+        isDancing = true;
+        animator.SetTrigger(HASH_TRIGGER_DANCE);
+        animator.SetBool(HASH_IS_DANCING, true);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        //on draw when it is playing
+        if (!Application.isPlaying) return;
+
+        //draw color based on state
+        EnemyState currentState = stateController.currentState;
+        if (currentState != null)
+        {
+            Gizmos.color = currentState.sceneGizmoColor;
+            Gizmos.DrawWireSphere(transform.position, lookSphereRadius);
+        }
+    }
 }
