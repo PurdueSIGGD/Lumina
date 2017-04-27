@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class EnemyDecision : ScriptableObject {
 
-    public abstract bool Decide(EnemyStateController enemy);
+    public abstract bool Decide(EnemyStateController controller);
 }
