@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour {
             // Don't hit creator
             col.transform == creator
             ) return;
-        print("succ hit");
+        //print(col.collider.transform);
         // Push on it, as if it was a real collision
         if (pushesOnHit && col.rigidbody) {
             col.rigidbody.AddForce(myRigid.velocity);
@@ -75,9 +75,9 @@ public class Projectile : MonoBehaviour {
             if (Vector3.Magnitude(velocity) > 10) {
                 //myRigid.drag = 10;
                 //myRigid.velocity = myRigid.velocity / 10; //slow dooown
-                this.transform.parent = col.transform;
+                this.transform.parent = col.collider.transform;
                 // Disable collider
-                this.GetComponent<Collider>().isTrigger = true;
+                this.GetComponent<Collider>().enabled = false;
                 myRigid.isKinematic = true;
             } else {
                 this.GetComponent<Collider>().isTrigger = false;

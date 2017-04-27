@@ -117,6 +117,9 @@ public class DarklingAirEnemy : AirEnemy {
     {
         
     }
+    public override void OnDamage(float damage) {
+        throw new NotImplementedException();
+    }
 
     /*
      * Draw color around this Enemy on Scene

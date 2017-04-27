@@ -7,10 +7,11 @@ using UnityEngine;
 public class SkeletonEnemy : PatrolGroundEnemy
 {
     public Transform target;
-    public float runningSpeed = 8f;
     public float lookSphereRadius = 15f; //use for draw Gizmo, and detect target
     public float distanceMeleeAttack = 2f;
     public float timeBetweenAttacks = 2f;
+    public float attackDamage = 10;
+    public Hittable.DamageType attackType = Hittable.DamageType.Neutral;
     public bool isAllowedToAttack;
 
     [HideInInspector] public float stateTimeElapsed;
@@ -164,7 +165,13 @@ public class SkeletonEnemy : PatrolGroundEnemy
         aiActive = false;
         animator.SetTrigger(HASH_TRIGGER_DEATH);
     }
+    public override void OnDamage(float damage) {
+        // Animation for taking damage
+        if (health > 0 && !animator.GetCurrentAnimatorStateInfo(1).IsTag("Damage")) {
+            animator.SetTrigger("Damage");
 
+        }
+    }
     public bool isIdleState()
     {
         return animator.GetCurrentAnimatorStateInfo(0).tagHash == HASH_IDLE_TAG;

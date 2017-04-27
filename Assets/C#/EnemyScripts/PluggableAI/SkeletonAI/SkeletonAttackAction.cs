@@ -37,7 +37,7 @@ public class SkeletonAttackAction : EnemyAction
             bool succeed = skeleton.StartRunningAnimation();
             if (succeed)
             {
-                skeleton.MoveToward(skeleton.target.position, skeleton.runningSpeed);
+                skeleton.MoveToward(skeleton.target.position, skeleton.movementSpeed);
             }
 
             //if target get outside zone, skeleton is allowed to attack
@@ -50,6 +50,10 @@ public class SkeletonAttackAction : EnemyAction
             //attack him/her
             if (skeleton.isAllowedToAttack)
             {
+                Hittable h;
+                if (skeleton.health > 0 && (h = skeleton.target.GetComponent<Hittable>())) {
+                    h.Hit(skeleton.attackDamage, skeleton.attackType);
+                }
                 //play attack animation
                 skeleton.animator.SetTrigger(skeleton.HASH_TRIGGER_ATTACK_RUN);               
                 skeleton.isAllowedToAttack = false;
