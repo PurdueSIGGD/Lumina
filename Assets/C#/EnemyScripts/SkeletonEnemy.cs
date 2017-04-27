@@ -120,7 +120,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public void MoveToward(Vector3 target, float speed)
     {
 
-        if (!isFacingTarget(target))
+        if (!isFacingTarget(target) && !animator.GetCurrentAnimatorStateInfo(0).IsTag("Detected"))
         {
             RotateTowardsTarget(target);
         }
@@ -129,7 +129,9 @@ public class SkeletonEnemy : PatrolGroundEnemy
             transform.LookAt(target);
             Vector3 forward =
                 transform.position + transform.forward * Time.deltaTime * speed;
-            rb.MovePosition(forward);
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("Detected")) {
+                rb.MovePosition(forward);
+            }
         }
     }
 

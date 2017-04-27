@@ -22,7 +22,12 @@ abstract public class BaseEnemy : Hittable {
 
         OnDeath();
 
-		int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
+        // Prevent from moving
+        //TODO ragdoll
+        this.GetComponent<Rigidbody>().freezeRotation = true;
+
+
+        int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
 
 		for (int i = 0; i < numberOfDrops; i++) {
 			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Length));
