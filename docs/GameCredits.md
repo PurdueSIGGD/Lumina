@@ -1,7 +1,7 @@
 # Lumina Credits
 
 This is an incomplete list and the team is constantly growing.
-Apologies in advance for any omissions, contact [Our president](https://github.com/Lonswaya) if you believe you've been missed ^^
+Apologies in advance for any omissions, contact [Our president](siggd.purdue@gmail.com) if you believe you've been missed ^^
 
 ## Special thanks
 Special thanks for Purdue University and Purdue ACM have provided us a lot of opportunities and facilities to meet and develop
@@ -17,9 +17,10 @@ Some of us have worked on various parts, so sorry again if you think you are for
 	* [Andrew Lonsway](https://github.com/Lonswaya)
 	* [Vinson](https://github.com/VinsonL19)
 	* [Issac](https://github.com/MrCarpenter)
-* Logics, Stats Controller:
+* Logics, Stats Controller, Weapons Controller:
 	* [Andrew Graber](https://github.com/AndrewGraber)
-* GUI works
+	* [Andrew Lonsway](https://github.com/Lonswaya)
+* GUI works, Inventory Controller
 	* [Everet](https://github.com/EverettG)
 
 ## Additional Notes
