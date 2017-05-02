@@ -1,7 +1,9 @@
 # Lumina
 
-[![Build status](http://web.ics.purdue.edu/~cnguyenm/svg/build.svg)](https://github.com/PurdueSIGGD/Lumina)
-[![Release](http://web.ics.purdue.edu/~cnguyenm/svg/release.svg)](https://github.com/PurdueSIGGD/Lumina)
+[![Build status](https://img.shields.io/badge/Build-TBD-red.svg)](#)
+[![Release](https://img.shields.io/badge/Release-TBD-red.svg)](#)
+[![Downloads](https://img.shields.io/badge/Downloads-Upcoming-brightgreen.svg)](#)
+[![Developing](https://img.shields.io/badge/Developing-On%20Progress-brightgreen.svg)](#)
 
 Welcome!
 
