@@ -1,10 +1,9 @@
 # Lumina
 
+[![Build status](http://web.ics.purdue.edu/~cnguyenm/svg/build.svg)](https://github.com/PurdueSIGGD/Lumina)
+[![Release](http://web.ics.purdue.edu/~cnguyenm/svg/release.svg)](https://github.com/PurdueSIGGD/Lumina)
 
 Welcome!
-[![Build status](/docs/svg/build.svg)](https://github.com/PurdueSIGGD/Lumina)
-[![Release](/docs/svg/release.svg)](https://github.com/PurdueSIGGD/Lumina)
-
 
 Lumina is the new SIGGD game determined for 2017. It is planned to be a first person fantasy dungeon crawling game, fine tuned to challenge the player as much as possible with adaptive AI and multiple gameplay challenges. 
 
@@ -16,9 +15,9 @@ We encourage contributions from anybody and try to keep a warm and friendly comm
 
 ## Playing
 
-Lumina requires Unity 5.5 or higher. [download it here] (https://unity3d.com/)
+Lumina requires Unity 5.5 or higher. [download it here](https://unity3d.com/)
 
-We don't have official release yet, so now you can play around in Unity Editor
+We don't have official release yet, so now you can download project, open it and play around in Unity Editor
 
 ## Developing
 
@@ -26,15 +25,16 @@ We mostly use Unity 5.5 as the main game framework. We also use various graphics
 
 For more information on developing
 
-* [Design documents] (https://docs.google.com/document/d/1uZ1wx6DN1mNjp1940bOb4Yfj8P1fLP-QaGBK5nrizCU/edit?usp=sharing)
-* [Coding style] (https://docs.google.com/document/d/1lrUctQYQ6IzjEq7XxkKkJU5hLu5B7-ToxoxFPRSfydQ/edit?usp=sharing
+* [Design documents](https://docs.google.com/document/d/1uZ1wx6DN1mNjp1940bOb4Yfj8P1fLP-QaGBK5nrizCU/edit?usp=sharing)
+* [Coding style](https://docs.google.com/document/d/1lrUctQYQ6IzjEq7XxkKkJU5hLu5B7-ToxoxFPRSfydQ/edit?usp=sharing)
 
-* See [our website] (http://purduesiggd.github.io/) 
-* Reach out to us at Purdue University, ACM SIGGD, (just email our [president] (https://github.com/Lonswaya) basically) 
+* See [our website](http://purduesiggd.github.io/) 
+* Reach out to us at Purdue University, ACM SIGGD, (just email our [president](https://github.com/Lonswaya) basically)
 
 ## Links
 * [Game Credits](/docs/GameCredits.md)
 * [Our website](http://purduesiggd.github.io/)
+* [Purdue ACM website](https://acm.cs.purdue.edu/)
 * [Purdue University](http://www.purdue.edu/)
 * [Facebook](https://www.facebook.com/PurdueSIGGD/)
 
