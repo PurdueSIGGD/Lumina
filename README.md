@@ -30,7 +30,7 @@ For more information on developing
 * [Design documents](https://docs.google.com/document/d/1uZ1wx6DN1mNjp1940bOb4Yfj8P1fLP-QaGBK5nrizCU/edit?usp=sharing)
 * [Coding style](https://docs.google.com/document/d/1lrUctQYQ6IzjEq7XxkKkJU5hLu5B7-ToxoxFPRSfydQ/edit?usp=sharing)
 
-* See [our website](http://purduesiggd.github.io/) 
+* See [our website](http://purduesiggd.github.io/) for meeting and event information
 * Reach out to us at Purdue University, ACM SIGGD, (just email our [president](https://github.com/Lonswaya) basically)
 
 ## Links
