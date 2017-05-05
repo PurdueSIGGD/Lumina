@@ -165,7 +165,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
         aiActive = false;
         animator.SetTrigger(HASH_TRIGGER_DEATH);
     }
-    public override void OnDamage(float damage) {
+    public override void OnDamage(float damage, DamageType type) {
         // Animation for taking damage
         if (health > 0 && !animator.GetCurrentAnimatorStateInfo(1).IsTag("Damage")) {
             animator.SetTrigger("Damage");

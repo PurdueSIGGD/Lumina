@@ -37,7 +37,9 @@ public class SkeletonAttackAction : EnemyAction
             bool succeed = skeleton.StartRunningAnimation();
             if (succeed)
             {
-                skeleton.MoveToward(skeleton.target.position, skeleton.movementSpeed);
+                //running is faster than walking
+                float runningSpeed = skeleton.movementSpeed * 2;
+                skeleton.MoveToward(skeleton.target.position, runningSpeed);
             }
 
             //if target get outside zone, skeleton is allowed to attack

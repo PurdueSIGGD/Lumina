@@ -72,9 +72,7 @@ public abstract class AirEnemy : BaseEnemy {
    */
     public bool isFacingTarget(Vector3 target)
     {
-        if (target == null)
-            return false;
-
+        
         Vector3 targetDir = (target - transform.position).normalized;
         float diff = Vector3.Dot(transform.forward, targetDir);
 
@@ -138,4 +136,15 @@ public abstract class AirEnemy : BaseEnemy {
         //simple check.
         return distance < stoppingDistance;
     }
+
+    public bool isCloseEnoughToTarget(Vector3 target, float distance)
+    {
+        //calculate the distance
+        Vector3 distanceVect = target - transform.position;
+        float tempdistance = Vector3.Magnitude(distanceVect);
+
+        //simple check.
+        return tempdistance <= distance;
+    }
+
 }

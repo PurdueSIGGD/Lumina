@@ -5632,8 +5632,8 @@ GameObject:
   - component: {fileID: 95889877162910046}
   - component: {fileID: 136160539227422924}
   - component: {fileID: 135838073853081260}
-  - component: {fileID: 114420766072819304}
   - component: {fileID: 54699737092220264}
+  - component: {fileID: 114420766072819304}
   - component: {fileID: 114564053662472216}
   m_Layer: 0
   m_Name: DarklingAir
@@ -12831,7 +12831,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627884820039026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 215.1, y: 34.8, z: 141.1}
+  m_LocalPosition: {x: 266.38, y: 31.72, z: 183.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4907646683300432}
@@ -18264,10 +18264,13 @@ MonoBehaviour:
   darklingModel: {fileID: 1807990265070070}
   lookSphereRadius: 15
   timeBetweenAttacks: 2
-  timeBetweenTeleMin: 3
-  timeBetweenTeleMax: 10
+  timeBetweenTele: 4
   timeBeforeAppear: 0.5
-  distanceFlyMin: 50
+  distanceMeleeAttack: 4
+  distanceFlyMin: 20
+  distanceRunAfterAttack: 20
+  attackDamage: 10
+  attackType: 4
   isAllowedToAttack: 0
   teleportDistance: 6
   teleParticles: {fileID: 1909769648661230, guid: c2cb110069015ad4dbd653f4c3120026,
@@ -18279,8 +18282,9 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   destinationPending: 0
   nextDestinationDirectionPick: 0
-  isWalking: 0
+  isAttacking: 0
   isTeleporting: 0
+  isRunningAway: 0
 --- !u!135 &135838073853081260
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -18291,7 +18295,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 35
   m_Center: {x: 0, y: 7, z: 0}
 --- !u!136 &136160539227422924
 CapsuleCollider:

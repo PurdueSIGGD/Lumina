@@ -20,7 +20,7 @@ public class ExampleEnemy : BaseEnemy {
     public override void OnDeath() {
         // IDK do whatever
     }
-    public override void OnDamage(float damage) {
+    public override void OnDamage(float damage, DamageType type) {
 
     }
 }

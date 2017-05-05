@@ -164,7 +164,7 @@ public class DarklingEnemy : BaseEnemy {
 
         rb.constraints = RigidbodyConstraints.None; //So they can fall and die or something
     }
-    public override void OnDamage(float damage) {
+    public override void OnDamage(float damage, DamageType type) {
 
     }
 }

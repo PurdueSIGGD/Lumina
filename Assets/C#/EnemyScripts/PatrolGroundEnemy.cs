@@ -213,8 +213,9 @@ public abstract class PatrolGroundEnemy : BaseEnemy {
     */
     protected bool isFacingTarget(Vector3 target)
     {
-        if (target == null)
-            return false;
+        //comparing Vector3 == null: return false
+        //if (target == null)
+        //    return false;
 
         Vector3 targetDir = (target - transform.position).normalized;
         float diff = Vector3.Dot(transform.forward, targetDir);

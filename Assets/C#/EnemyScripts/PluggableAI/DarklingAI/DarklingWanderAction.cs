@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/******************************************************************************
+ * 
+ * UPGRADE NOTE: Use Addforce to make darkling fly more naturally
+ *
+ ******************************************************************************/
+
+
 [CreateAssetMenu(menuName = "PluggableAI/Actions/Darkling/Wander")]
 public class DarklingWanderAction : EnemyAction
 {
@@ -61,7 +68,8 @@ public class DarklingWanderAction : EnemyAction
         
 
         //count down time for next teleport
-        if (darkling.CheckIfFlyCountDownElapsed(darkling.timeBetweenTeleMin))
+        //ex: fly 4 seconds, then Teleport
+        if (darkling.CheckIfFlyCountDownElapsed(darkling.timeBetweenTele))
         {
             darkling.isAllowedToTeleport = true;
         }

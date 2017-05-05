@@ -203,7 +203,7 @@ public class BatEnemy : BaseEnemy
         StopCoroutine(MovementPattern());
         // IDK do whatever
     }
-    public override void OnDamage(float damage) {
+    public override void OnDamage(float damage, DamageType type) {
 
     }
 }

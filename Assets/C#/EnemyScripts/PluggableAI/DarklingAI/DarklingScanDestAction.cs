@@ -31,6 +31,8 @@ public class DarklingScanDestAction : EnemyAction
         RaycastHit hit; //use later
 
         //if there is sth in the way, rotate a bit
+        Debug.DrawRay(darkling.eyes.position, darkling.eyes.forward.normalized * darkling.distanceFlyMin, Color.green);
+
         if (Physics.Raycast(darkling.eyes.position, darkling.eyes.forward, darkling.distanceFlyMin))
         {
             darkling.transform.Rotate(0, darkling.turningSpeed * Time.deltaTime, 0);

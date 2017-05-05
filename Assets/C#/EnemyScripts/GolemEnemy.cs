@@ -216,7 +216,7 @@ public class GolemEnemy : PatrolGroundEnemy {
         StopCoroutine(PatrolAround());
         StopCoroutine(Attack());
     }
-    public override void OnDamage(float damage) {
+    public override void OnDamage(float damage, DamageType type) {
         throw new NotImplementedException();
     }
 
