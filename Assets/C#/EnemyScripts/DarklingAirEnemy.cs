@@ -27,6 +27,7 @@ public class DarklingAirEnemy : AirEnemy {
     public float timeBetweenTele = 4f;   //for now, it will teleport every 4s, regardless of which state it is in
     public float timeBeforeAppear = 0.5f;
     public float distanceMeleeAttack = 4f;
+    public float distanceMeleeZone = 15f; //if target is in this zone, then switch to melee attack state
     public float distanceFlyMin = 20f;
     public float distanceEscape = 20f;  //how far the darkling will 
     public float distanceRunAfterAttack = 20f;  //after attack, this guy will run, then attack again
@@ -38,6 +39,8 @@ public class DarklingAirEnemy : AirEnemy {
     public float teleportDistance = 6f;  
     public GameObject teleParticles;     //Particle system that spawns when the Darkling teleports
 
+    [HideInInspector] public Transform idlePosition;
+    [HideInInspector] public bool hasDoneAttacking;
     [HideInInspector] public bool isAllowedToTeleport;
     [HideInInspector] public bool isAllowedToEscape; //after reach target, attack, darkling will fly away
     [HideInInspector] public float flyTimeElapsed; //measure fly duration
@@ -49,6 +52,7 @@ public class DarklingAirEnemy : AirEnemy {
     [HideInInspector] public bool nextDestinationDirectionPick; //true if Darkling has chosen a direction for new destination
 
     public bool isAttacking;
+    public bool isChasing;
     public bool isTeleporting;
     public bool isRunningAway;
     private bool aiActive;
@@ -56,10 +60,13 @@ public class DarklingAirEnemy : AirEnemy {
 
 
     public readonly int HASH_TELE_START = Animator.StringToHash("TriggerTeleportStart");
-    public readonly int HASH_TELE_STOP  = Animator.StringToHash("TriggerTeleportStop");  
+    public readonly int HASH_TELE_END  = Animator.StringToHash("TriggerTeleportEnd");  
     public readonly int HASH_MELEE_ATTACK = Animator.StringToHash("TriggerMeleeAttack");
     public const string PLAYER_TAG = "Player";
-   
+    public const string TAG_TELE_START = "Teleport_Start";
+    public const string TAG_TELE_END = "Teleport_End";
+
+
     private void Start()
     {
         //call AirEnemy setup
@@ -73,6 +80,10 @@ public class DarklingAirEnemy : AirEnemy {
         aiActive = true;
         stateController.SetupStateController(this);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        //so darkling know where to return
+        this.idlePosition = transform;
+
     }
 
     public override IEnumerator Attack()
@@ -85,7 +96,7 @@ public class DarklingAirEnemy : AirEnemy {
         if (!aiActive)
             return;
 
-        //stateController.UpdateStateController();
+        stateController.UpdateStateController();
     }
 
    
@@ -97,7 +108,7 @@ public class DarklingAirEnemy : AirEnemy {
 
     public void StartTeleAnimationStop()
     {
-        animator.SetTrigger(HASH_TELE_STOP);
+        animator.SetTrigger(HASH_TELE_END);
     }
 
     public void StartMeleeAttackAnimation()

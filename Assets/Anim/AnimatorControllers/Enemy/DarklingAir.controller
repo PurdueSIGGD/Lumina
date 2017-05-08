@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DarklingGround
+  m_Name: DarklingAir
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: TriggerTeleportStart
@@ -262,7 +262,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400004, guid: 7b958da715035024f94393411e3cb9e5, type: 3}
-  m_Tag: 
+  m_Tag: Teleport_End
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -310,7 +310,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_Motion: {fileID: 7400006, guid: 7b958da715035024f94393411e3cb9e5, type: 3}
-  m_Tag: 
+  m_Tag: Teleport_Start
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 

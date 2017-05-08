@@ -12831,7 +12831,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627884820039026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 266.38, y: 31.72, z: 183.78}
+  m_LocalPosition: {x: 266.38, y: 31.72, z: 171.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4907646683300432}
@@ -18235,7 +18235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49df15b8a29b5504783a58b0d9ffdd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: dab1de6fd963f4244b31657b5e90f9d9, type: 2}
+  currentState: {fileID: 11400000, guid: b92b52e5f73d62640b951b3bddbbab1c, type: 2}
   placeHolderState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
   enemy: {fileID: 0}
 --- !u!114 &114564053662472216
@@ -18267,7 +18267,9 @@ MonoBehaviour:
   timeBetweenTele: 4
   timeBeforeAppear: 0.5
   distanceMeleeAttack: 4
+  distanceMeleeZone: 15
   distanceFlyMin: 20
+  distanceEscape: 20
   distanceRunAfterAttack: 20
   attackDamage: 10
   attackType: 4
@@ -18276,13 +18278,16 @@ MonoBehaviour:
   teleParticles: {fileID: 1909769648661230, guid: c2cb110069015ad4dbd653f4c3120026,
     type: 2}
   isAllowedToTeleport: 0
+  isAllowedToEscape: 0
   flyTimeElapsed: 0
   teleTimeElapsed: 0
+  attackTimeElapsed: 0
   animator: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
   destinationPending: 0
   nextDestinationDirectionPick: 0
   isAttacking: 0
+  isChasing: 0
   isTeleporting: 0
   isRunningAway: 0
 --- !u!135 &135838073853081260

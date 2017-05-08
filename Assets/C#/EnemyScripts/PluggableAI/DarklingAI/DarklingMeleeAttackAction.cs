@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/******************************************************************************
+ * 
+ * Darkling Melee Attack
+ * 
+ * basically charge right into destination
+ * 
+ ******************************************************************************/
+
 [CreateAssetMenu(menuName = "PluggableAI/Actions/Darkling/MeleeAttack")]
 public class DarklingMeleeAttackAction : EnemyAction
 {
@@ -15,71 +24,65 @@ public class DarklingMeleeAttackAction : EnemyAction
 
     private void Attack(DarklingAirEnemy darkling)
     {
-        //if this is first time enter attack-mode
+       
+        //set destination to charge right in
         if (!darkling.isAttacking)
         {
             darkling.isAttacking = true;
-            darkling.flyTimeElapsed = 0; //reset time to target
-        }
-
-        //careful with null refence
-        if (darkling.target == null)
-            return;
-
-        //if not close enough, narrow down distance
-        if (!darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeAttack))
-        {
-            darkling.MoveToward(darkling.target.position, darkling.movementSpeed);
             darkling.isAllowedToAttack = true;
+            darkling.hasDoneAttacking = false;
 
-            //give target some seconds to run before teleport
-            if (darkling.CheckIfFlyCountDownElapsed(darkling.timeBetweenTele))
+            //set destination for darkling to charge right in
+            //careful with null ref
+            if (darkling.target != null)
             {
-                //basically fly to front of target
-                Vector3 newPos =
-                    darkling.target.position + (-1) * darkling.transform.forward.normalized * darkling.distanceMeleeAttack * 2;
-                darkling.transform.position = newPos;
+                darkling.transform.LookAt(darkling.target);
 
-                //reset fly countdown
-                darkling.flyTimeElapsed = 0;
+                //make the destination further back, so it feels like darkling cannot stop ==
+                darkling.destination =
+                    darkling.target.position + darkling.transform.forward.normalized * darkling.distanceRunAfterAttack;
             }
-          
+            else
+            {
+                darkling.destination = darkling.transform.position;
+            }
+                   
         }
 
-        //else if close enough
-        else
-        {
-            //attack
-            if (darkling.isAllowedToAttack)
-            {
-                //damage target
-                Hittable h;
-                if (darkling.health > 0 && (h = darkling.target.GetComponent<Hittable>()))
-                {
-                    h.Hit(darkling.attackDamage, darkling.attackType);
-                }
+        ChargeAtTarget(darkling, darkling.destination);
 
-                //play attack animations
-                darkling.StartMeleeAttackAnimation();
-                darkling.isAllowedToAttack = false;
-
-                //if target still within Melee zone, reset count down
-                darkling.attackTimeElapsed = 0;
-            }
-
-            //after reaching ,and attack target, darkling will run away
-            darkling.isAllowedToEscape = true;
-
-            //give target some time before next attack.
-            //this code will never executed but who knows
-            if (darkling.CheckIfAttackCountDownElapsed(darkling.timeBetweenAttacks))
-            {
-                darkling.isAllowedToAttack = true;
-            }
-        }                       
     }
         
+    void ChargeAtTarget(DarklingAirEnemy darkling, Vector3 target)
+    {
+        //charge into destination
+        darkling.MoveToward(target, darkling.movementSpeed * 3);
 
+        //if encounter player, hit it
+        RaycastHit hit;
+        if (Physics.Raycast(darkling.eyes.position, darkling.eyes.forward, out hit, darkling.distanceMeleeAttack))
+        {
+            //get Hittable component
+            GameObject obj = hit.transform.gameObject;
+            Hittable h;
+            if (obj.CompareTag("Player") 
+                && (h = obj.GetComponent<Hittable>()) 
+                && darkling.isAllowedToAttack)
+            {
+                //attack target
+                darkling.StartMeleeAttackAnimation();
+                h.Hit(darkling.attackDamage, darkling.attackType);
+                darkling.isAllowedToAttack = false;
+            }
+        }
+
+       //when reach destination, ready for next attack
+       if (darkling.isCloseEnoughToTarget(darkling.destination, 5))
+        {
+            darkling.hasDoneAttacking = true;
+        }
+
+    }
         
                
     

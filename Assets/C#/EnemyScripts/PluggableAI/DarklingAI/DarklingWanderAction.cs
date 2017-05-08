@@ -26,6 +26,7 @@ public class DarklingWanderAction : EnemyAction
      */ 
     private void Wander(DarklingAirEnemy darkling)
     {
+
         //teleport
         if (darkling.isAllowedToTeleport)
         {
@@ -36,7 +37,7 @@ public class DarklingWanderAction : EnemyAction
             //teleport
             darkling.StartTeleAnimationStart();
             darkling.isTeleporting = true;
-            darkling.teleTimeElapsed = 0;                               
+            darkling.teleTimeElapsed = 0;
             return;
         }
 
@@ -53,6 +54,11 @@ public class DarklingWanderAction : EnemyAction
             Destroy(g, 3);
         }
 
+        //if darkling is in disappear mode, don't make it move       
+        if (darkling.isTeleporting)
+        {            
+            return;
+        }
 
         //if too low, increase height
         //if (darkling.GetFlyHeightFromGround() < darkling.flyHeight)
@@ -64,8 +70,8 @@ public class DarklingWanderAction : EnemyAction
         //else move toward destination       
         darkling.MoveToward(darkling.destination, darkling.movementSpeed);
 
-        
-        
+
+
 
         //count down time for next teleport
         //ex: fly 4 seconds, then Teleport
