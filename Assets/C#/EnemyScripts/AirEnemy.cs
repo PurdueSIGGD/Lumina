@@ -12,8 +12,7 @@ using UnityEngine;
  [RequireComponent(typeof(Rigidbody))]
 public abstract class AirEnemy : BaseEnemy {
 
-    
-    public float lookSphereCastRadius = 3f;
+   
     public float flyHeight = 10f;
     public float turningSpeed = 15f;
     public float stoppingDistance = 5f;
@@ -28,26 +27,27 @@ public abstract class AirEnemy : BaseEnemy {
     }
 
     /*
-     * MoveToward()
-     * purely move Rigibody towards target
-     * no animation involved
-     */
+    * MoveToward()
+    * purely move Rigibody towards target
+    * no animation involved
+    */
     public void MoveToward(Vector3 target, float speed)
     {
 
         if (!isFacingTarget(target))
         {
             RotateTowardsTarget(target);
+            return;
         }
-        else
-        {
-            transform.LookAt(target);
-            Vector3 forward =
-                transform.position + transform.forward * Time.deltaTime * speed;
-            rb.MovePosition(forward);
-            //transform.position = forward;
-        }
+
+        transform.LookAt(target);
+        Vector3 forward =
+            transform.position + transform.forward * Time.deltaTime * speed;
+        rb.MovePosition(forward);
+
+
     }
+
 
     /**
     * rotate a bit toward target
@@ -145,6 +145,16 @@ public abstract class AirEnemy : BaseEnemy {
 
         //simple check.
         return tempdistance <= distance;
+    }
+
+    public bool isFarEnoughFromTarget(Vector3 target, float distance)
+    {
+        //calculate the distance
+        Vector3 distanceVect = target - transform.position;
+        float tempdistance = Vector3.Magnitude(distanceVect);
+
+        //simple check.
+        return tempdistance > distance;
     }
 
 }

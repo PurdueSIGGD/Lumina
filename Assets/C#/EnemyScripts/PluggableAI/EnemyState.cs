@@ -29,6 +29,7 @@ public class EnemyState : ScriptableObject {
     {
         for (int i = 0; i < transitions.Length; i++)
         {
+           
             bool transitionSucceed = transitions[i].decision.Decide(controller);
 
             if (transitionSucceed)

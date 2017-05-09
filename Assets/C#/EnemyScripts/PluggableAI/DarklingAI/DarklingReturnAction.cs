@@ -12,7 +12,7 @@ using UnityEngine;
  * 
  ******************************************************************************/
 
-
+[CreateAssetMenu(menuName = "PluggableAI/Actions/Darkling/ReturnToStartPoint")]
 public class DarklingReturnAction : EnemyAction
 {
     public override void Act(EnemyStateController controller)
@@ -24,20 +24,14 @@ public class DarklingReturnAction : EnemyAction
 
     private void GoBack(DarklingAirEnemy darkling)
     {
-        //simple check
-        if (darkling.idlePosition == null)
-        {
-            Debug.Log("Darkling Air: Idle Position is not set");
-            return;
-        }
-
-        darkling.MoveToward(darkling.idlePosition.position, darkling.movementSpeed);
+      
+        darkling.MoveToward(darkling.idlePosition, darkling.movementSpeed);
 
         //if close enough, snap darkling to target
-        if (darkling.isCloseEnoughToTarget(darkling.idlePosition.position, 3))
+        if (darkling.isCloseEnoughToTarget(darkling.idlePosition, 3))
         {
-            darkling.transform.position = darkling.idlePosition.position;
-            darkling.transform.rotation = darkling.idlePosition.rotation;
+            darkling.transform.position = darkling.idlePosition;
+            darkling.transform.rotation = darkling.idleRotation;
         }
 
     }

@@ -17,7 +17,7 @@ public class SkeletonStopAttackAction : EnemyAction
 {
     public override void Act(EnemyStateController controller)
     {
-        Debug.Log("Skeleton: stop attack");
+
         //simple cast
         SkeletonEnemy skeleton = (SkeletonEnemy)controller.enemy;
 

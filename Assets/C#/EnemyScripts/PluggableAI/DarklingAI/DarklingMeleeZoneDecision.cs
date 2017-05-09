@@ -12,8 +12,8 @@ using UnityEngine;
  ******************************************************************************/
 
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/Darkling/Melee Attack")]
-public class DarklingMeleeAttackDecision : EnemyDecision
+[CreateAssetMenu(menuName = "PluggableAI/Decisions/Darkling/Melee Zone")]
+public class DarklingMeleeZoneDecision : EnemyDecision
 {
     public override bool Decide(EnemyStateController controller)
     {
@@ -25,6 +25,9 @@ public class DarklingMeleeAttackDecision : EnemyDecision
 
     private bool detectTarget(DarklingAirEnemy darkling)
     {
+        if (darkling.target == null)
+            return false;
+
         bool isTargetInZone = darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeZone);
         return isTargetInZone;
     }

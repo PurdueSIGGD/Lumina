@@ -30,12 +30,39 @@ public class DarklingChaseAction : EnemyAction
         {
             darkling.isChasing = true;
             darkling.flyTimeElapsed = 0; //reset time to target
+            darkling.teleTimeElapsed = 0;
             darkling.isAllowedToTeleport = false;
+            darkling.isTeleporting = false;
         }
 
         //careful with null refence
         if (darkling.target == null)
             return;
+
+        //because animation is slow compared with CPU
+        if (darkling.isTeleporting && darkling.CheckIfTeleCountDownElapsed(darkling.timeBeforeAppear))
+        {
+
+            darkling.transform.position = darkling.destination;
+            darkling.StartTeleAnimationStop();
+            darkling.isTeleporting = false;
+            darkling.isAllowedToTeleport = false;
+            GameObject g =
+                Instantiate(darkling.teleParticles, darkling.transform.position, Quaternion.identity);
+            Destroy(g, 3);
+        }
+
+        //if darkling is in teleport mode, don't move or count time
+        if (darkling.isTeleporting)
+        {
+            return;
+        }
+
+        //if darkling has fly long enough, allow it to teleport
+        if (darkling.CheckIfFlyCountDownElapsed(darkling.timeBetweenTele))
+        {
+            darkling.isAllowedToTeleport = true;
+        }
 
         //if not close enough, narrow down distance
         if (!darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeAttack))
@@ -47,6 +74,8 @@ public class DarklingChaseAction : EnemyAction
             if (darkling.isAllowedToTeleport)
             {
                 //basically fly to front of target
+                darkling.transform.LookAt(darkling.target);
+
                 Vector3 newPos =
                     darkling.target.position + (-1) * darkling.transform.forward.normalized * darkling.distanceMeleeAttack * 2;
 
@@ -64,29 +93,9 @@ public class DarklingChaseAction : EnemyAction
 
         }
 
-        //because animation is slow compared with CPU
-        if (darkling.isTeleporting && darkling.CheckIfTeleCountDownElapsed(darkling.timeBeforeAppear))
-        {
+      
 
-            darkling.transform.position = darkling.destination;
-            darkling.StartTeleAnimationStop();
-            darkling.isTeleporting = false;
-            GameObject g =
-                Instantiate(darkling.teleParticles, darkling.transform.position, Quaternion.identity);
-            Destroy(g, 3);
-        }
 
-        //if darkling is in teleport mode, don't do anything
-        if (darkling.isTeleporting)
-        {
-            return;
-        }
-
-        //if darkling has fly long enough, allow it to teleport
-        if (darkling.CheckIfFlyCountDownElapsed(darkling.timeBetweenTele))
-        {
-            darkling.isAllowedToTeleport = true;
-        }
 
     }
 }

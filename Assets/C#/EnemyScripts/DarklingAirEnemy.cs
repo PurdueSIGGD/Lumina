@@ -39,10 +39,10 @@ public class DarklingAirEnemy : AirEnemy {
     public float teleportDistance = 6f;  
     public GameObject teleParticles;     //Particle system that spawns when the Darkling teleports
 
-    [HideInInspector] public Transform idlePosition;
+    [HideInInspector] public Vector3 idlePosition;
+    [HideInInspector] public Quaternion idleRotation;
     [HideInInspector] public bool hasDoneAttacking;
     [HideInInspector] public bool isAllowedToTeleport;
-    [HideInInspector] public bool isAllowedToEscape; //after reach target, attack, darkling will fly away
     [HideInInspector] public float flyTimeElapsed; //measure fly duration
     [HideInInspector] public float teleTimeElapsed; //measure teleport time duration
     [HideInInspector] public float attackTimeElapsed; //measure time between attacks
@@ -76,13 +76,14 @@ public class DarklingAirEnemy : AirEnemy {
         stateController = GetComponent<EnemyStateController>();
 
         //set up AI
-        SetFlyHeightFromGround(flyHeight);
+        //SetFlyHeightFromGround(flyHeight);
         aiActive = true;
         stateController.SetupStateController(this);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         //so darkling know where to return
-        this.idlePosition = transform;
+        this.idlePosition = transform.position;
+        this.idleRotation = transform.rotation;
 
     }
 
@@ -141,6 +142,8 @@ public class DarklingAirEnemy : AirEnemy {
     {
         Collider collider = GetComponent<Collider>();
         Collider otherCollider = collision.gameObject.GetComponent<Collider>();
+
+      
         Physics.IgnoreCollision(collider, otherCollider);
     }
 
@@ -151,6 +154,20 @@ public class DarklingAirEnemy : AirEnemy {
 
         if (other.gameObject.tag == PLAYER_TAG)
             target = other.transform;
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (target == null || other.gameObject.tag != PLAYER_TAG)
+            return;
+
+        //a hack way to make sure that target has to be far enough
+        //before let target go
+        if (isFarEnoughFromTarget(target.position, lookSphereRadius))
+        {
+            target = null;
+        }
     }
 
     public override void OnDeath()

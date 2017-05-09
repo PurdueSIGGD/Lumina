@@ -5,20 +5,21 @@ using UnityEngine;
 
 /******************************************************************************
  * 
- * Darkling Escape Decision
- * if darkling is Allowed to Escape, go to next state
+ * Darkling Chase Done: 
+ * 
+ * simply turn off some variable
  * 
  ******************************************************************************/
 
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/Darkling/Escape")]
-public class DarklingEscapeDecision : EnemyDecision
+[CreateAssetMenu(menuName = "PluggableAI/Actions/Darkling/Chase Done")]
+public class DarklingChaseDoneAction : EnemyAction
 {
-    public override bool Decide(EnemyStateController controller)
+    public override void Act(EnemyStateController controller)
     {
         DarklingAirEnemy darkling = (DarklingAirEnemy)controller.enemy;
-        return darkling.isAllowedToEscape;
+
+        darkling.isChasing = false;
+        darkling.isAllowedToTeleport = false;
     }
-
-
 }

@@ -9,12 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77c1972d83fc2ec408e3f262ec61238b, type: 3}
-  m_Name: DarklingIdleState
+  m_Name: DarklingIdle MeleeAttackState
   m_EditorClassIdentifier: 
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: ec6f0b4f63b167a4b8859eeca85444f6, type: 2}
   transitions:
   - decision: {fileID: 11400000, guid: 5199c87f5cc8ade45b6c0c9f48ac824f, type: 2}
+    trueState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+    falseState: {fileID: 11400000, guid: 551756db0c4bcbf4faa3a0a8681b0007, type: 2}
+  - decision: {fileID: 11400000, guid: 920d42637bb9cb94faf37b91c1d771b5, type: 2}
     trueState: {fileID: 11400000, guid: c997fa90ab151da45ac8fb40b18af192, type: 2}
     falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
   exitAction: {fileID: 0}
-  sceneGizmoColor: {r: 0.0655277, g: 0.15425362, b: 0.74264705, a: 1}
+  sceneGizmoColor: {r: 0.75735295, g: 0.1002379, b: 0.1002379, a: 1}

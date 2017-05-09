@@ -59,27 +59,29 @@ public class DarklingMeleeAttackAction : EnemyAction
         darkling.MoveToward(target, darkling.movementSpeed * 3);
 
         //if encounter player, hit it
-        RaycastHit hit;
-        if (Physics.Raycast(darkling.eyes.position, darkling.eyes.forward, out hit, darkling.distanceMeleeAttack))
+        if (darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeAttack))
         {
             //get Hittable component
-            GameObject obj = hit.transform.gameObject;
             Hittable h;
-            if (obj.CompareTag("Player") 
-                && (h = obj.GetComponent<Hittable>()) 
+            if (
+                (h = darkling.target.GetComponent<Hittable>())
                 && darkling.isAllowedToAttack)
             {
                 //attack target
+                Debug.Log("Darkling: hit");
                 darkling.StartMeleeAttackAnimation();
                 h.Hit(darkling.attackDamage, darkling.attackType);
                 darkling.isAllowedToAttack = false;
             }
+           
         }
+       
 
        //when reach destination, ready for next attack
        if (darkling.isCloseEnoughToTarget(darkling.destination, 5))
         {
             darkling.hasDoneAttacking = true;
+            darkling.isAttacking = false;
         }
 
     }
