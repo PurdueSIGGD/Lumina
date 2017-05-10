@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(EnemyStateController))]
 public class SkeletonEnemy : PatrolGroundEnemy
@@ -16,6 +17,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public SaveTransform startTransform; //position where skeleton first appear
 
     public bool isAttacking;
     public bool isWalking;
@@ -40,7 +42,11 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
     public const string PLAYER_TAG = "Player";
 
-
+    //number of animations available in animator
+    private const int numDeathAnimations = 3;
+    private const int numDanceAnimations = 2;
+    private const string TRIGGER_DEATH = "TriggerDeath";
+    private const string TRIGGER_DANCE = "TriggerDance";
 
 
     // Use this for initialization
@@ -58,6 +64,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
         //set up AI
         aiActive = true;
+        this.startTransform = new SaveTransform(this.transform);
         stateController = GetComponent<EnemyStateController>();
         stateController.SetupStateController(this);
     }
@@ -163,7 +170,13 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public override void OnDeath()
     {
         aiActive = false;
-        animator.SetTrigger(HASH_TRIGGER_DEATH);
+
+        //choose random death animations: 1,2,3
+        int randomDeathAnimation = Random.Range(1, numDeathAnimations + 1);
+
+        //set trigger
+        string triggerDeath = TRIGGER_DEATH + randomDeathAnimation.ToString();
+        animator.SetTrigger(triggerDeath);
     }
     public override void OnDamage(float damage, DamageType type) {
         // Animation for taking damage
@@ -230,8 +243,15 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
     public void StartDancingAnimation()
     {
+        //set important bool
         isDancing = true;
-        animator.SetTrigger(HASH_TRIGGER_DANCE);
+
+        //get random dance animations
+        int randomDanceAnimation = Random.Range(1, numDanceAnimations + 1);
+        string triggerDance = TRIGGER_DANCE + randomDanceAnimation.ToString();
+
+        //set trigger
+        animator.SetTrigger(triggerDance);
         animator.SetBool(HASH_IS_DANCING, true);
     }
 

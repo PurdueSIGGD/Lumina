@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77c1972d83fc2ec408e3f262ec61238b, type: 3}
-  m_Name: SkeletonDance_AttackState
+  m_Name: SkeletonPatrol AttackState
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 11400000, guid: c7fb7b19e8b79024b80f38e14d6d02e0, type: 2}
   transitions:
   - decision: {fileID: 11400000, guid: f955298ac5000f245aaae8f193ed9322, type: 2}
     trueState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
-    falseState: {fileID: 11400000, guid: c92f106a53ea9994ba2ebd10e9c4168b, type: 2}
+    falseState: {fileID: 11400000, guid: 60eedba7f89680d4393eebbec22e55d7, type: 2}
   exitAction: {fileID: 11400000, guid: 3b531901dff9bd54bb4952c8db220663, type: 2}
-  sceneGizmoColor: {r: 0.8308824, g: 0.15273573, b: 0.15273573, a: 1}
+  sceneGizmoColor: {r: 0.7647059, g: 0.09558824, b: 0.09558824, a: 1}

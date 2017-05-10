@@ -25,13 +25,13 @@ public class DarklingReturnAction : EnemyAction
     private void GoBack(DarklingAirEnemy darkling)
     {
       
-        darkling.MoveToward(darkling.idlePosition, darkling.movementSpeed);
+        darkling.MoveToward(darkling.startTransform.position, darkling.movementSpeed);
 
         //if close enough, snap darkling to target
-        if (darkling.isCloseEnoughToTarget(darkling.idlePosition, 3))
+        if (darkling.isCloseEnoughToTarget(darkling.startTransform.position, 3))
         {
-            darkling.transform.position = darkling.idlePosition;
-            darkling.transform.rotation = darkling.idleRotation;
+            darkling.transform.position = darkling.startTransform.position;
+            darkling.transform.rotation = darkling.startTransform.rotation;
         }
 
     }

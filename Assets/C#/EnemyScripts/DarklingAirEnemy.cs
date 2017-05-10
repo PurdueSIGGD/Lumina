@@ -18,7 +18,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStateController))]
 public class DarklingAirEnemy : AirEnemy {
 
-
+   
     public Transform target;
     public Transform eyes;
     public GameObject darklingModel; //use for making it disappear
@@ -39,8 +39,7 @@ public class DarklingAirEnemy : AirEnemy {
     public float teleportDistance = 6f;  
     public GameObject teleParticles;     //Particle system that spawns when the Darkling teleports
 
-    [HideInInspector] public Vector3 idlePosition;
-    [HideInInspector] public Quaternion idleRotation;
+    [HideInInspector] public SaveTransform startTransform;
     [HideInInspector] public bool hasDoneAttacking;
     [HideInInspector] public bool isAllowedToTeleport;
     [HideInInspector] public float flyTimeElapsed; //measure fly duration
@@ -74,7 +73,7 @@ public class DarklingAirEnemy : AirEnemy {
         //set variable
         animator = GetComponent<Animator>();
         stateController = GetComponent<EnemyStateController>();
-
+       
         //set up AI
         //SetFlyHeightFromGround(flyHeight);
         aiActive = true;
@@ -82,8 +81,7 @@ public class DarklingAirEnemy : AirEnemy {
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         //so darkling know where to return
-        this.idlePosition = transform.position;
-        this.idleRotation = transform.rotation;
+        this.startTransform = new SaveTransform(this.transform);
 
     }
 

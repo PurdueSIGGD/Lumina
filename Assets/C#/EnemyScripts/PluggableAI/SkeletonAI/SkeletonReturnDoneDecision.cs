@@ -6,25 +6,25 @@ using UnityEngine;
 
 /******************************************************************************
  * 
- * Darkling Return Decision
+ * Skeleton Return Decision
  * 
  * return true when Darkling has reach home
  * 
  * so it can go back to Guard State or something else
  ******************************************************************************/
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/Darkling/Return Done")]
-public class DarklingReturnDoneDecision : EnemyDecision
+[CreateAssetMenu(menuName = "PluggableAI/Decisions/Skeleton/Return Done")]
+public class SkeletonReturnDoneDecision : EnemyDecision
 {
     public override bool Decide(EnemyStateController controller)
     {
-        DarklingAirEnemy darkling = (DarklingAirEnemy)controller.enemy;
+        SkeletonEnemy skeleton = (SkeletonEnemy)controller.enemy;
 
-      
-        if (darkling.isCloseEnoughToTarget(darkling.startTransform.position, 1))
+        if (skeleton.isCloseEnoughToTarget(skeleton.startTransform.position, 1))
         {
             return true;
         }
+
         return false;
     }
 }
