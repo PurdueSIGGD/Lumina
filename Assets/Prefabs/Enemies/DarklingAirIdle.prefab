@@ -5658,7 +5658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1629564653238468
 GameObject:
   m_ObjectHideFlags: 1
@@ -18302,7 +18302,7 @@ MonoBehaviour:
   distanceFlyMin: 20
   distanceEscape: 20
   distanceRunAfterAttack: 20
-  attackDamage: 10
+  attackDamage: 20
   attackType: 4
   isAllowedToAttack: 0
   teleportDistance: 6
