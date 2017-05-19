@@ -59,7 +59,7 @@ public class DarklingMeleeAttackAction : EnemyAction
         darkling.MoveToward(target, darkling.movementSpeed * 3);
 
         //if encounter player, hit it
-        if (darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeAttack))
+        if (darkling.target && darkling.isCloseEnoughToTarget(darkling.target.position, darkling.distanceMeleeAttack))
         {
             //get Hittable component
             Hittable h;

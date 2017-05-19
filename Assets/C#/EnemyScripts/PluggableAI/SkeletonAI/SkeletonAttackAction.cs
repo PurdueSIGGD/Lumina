@@ -54,6 +54,7 @@ public class SkeletonAttackAction : EnemyAction
             {
                 Hittable h;
                 if (skeleton.health > 0 && (h = skeleton.target.GetComponent<Hittable>())) {
+                    //Debug.Log("Skeleton attack");
                     h.Hit(skeleton.attackDamage, skeleton.attackType);
                 }
                 //play attack animation

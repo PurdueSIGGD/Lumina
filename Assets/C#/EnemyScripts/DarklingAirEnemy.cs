@@ -170,6 +170,13 @@ public class DarklingAirEnemy : AirEnemy {
 
     public override void OnDeath()
     {
+        this.GetComponentInChildren<ParticleSystem>().Stop();
+
+        Collider[] colliders = this.GetComponents<Collider>();
+        foreach (Collider c in colliders) {
+            c.isTrigger = true; // disable collision
+        }
+        animator.SetBool("Death", true);
         
     }
     public override void OnDamage(float damage, DamageType type) {
@@ -181,6 +188,7 @@ public class DarklingAirEnemy : AirEnemy {
         {
             print("Darkling Air: Ice ice!");
         }
+        
     }
 
     /*

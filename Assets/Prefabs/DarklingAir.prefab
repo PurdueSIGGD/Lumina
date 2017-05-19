@@ -12366,7 +12366,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1761725077943594}
-  m_LocalRotation: {x: -0.56112504, y: 0.32560125, z: 0.7085996, w: 0.2775051}
+  m_LocalRotation: {x: -0.5611251, y: 0.32560128, z: 0.7085997, w: 0.27750513}
   m_LocalPosition: {x: -0.000830486, y: 0.0074638836, z: 0.00016686629}
   m_LocalScale: {x: 0.9999998, y: 0.99999976, z: 0.99999994}
   m_Children:
@@ -12845,9 +12845,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627884820039026}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 287.77, y: 35.95, z: 181.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.99591947, z: -0, w: 0.090246715}
+  m_LocalPosition: {x: 295.33, y: 31.12, z: 215.87}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4907646683300432}
   - {fileID: 4312390038139096}
@@ -12855,7 +12855,7 @@ Transform:
   - {fileID: 4686756784928222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 169.64401, z: 0}
 --- !u!4 &4381019592559730
 Transform:
   m_ObjectHideFlags: 1
@@ -18231,7 +18231,7 @@ Rigidbody:
   m_GameObject: {fileID: 1627884820039026}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -18280,12 +18280,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc155af559cd9f479192959f88bd3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
-  minDrops: 0
-  maxDrops: 0
+  drops:
+  - {fileID: 1316667486863618, guid: 3701b18cb9b2abf47b9df6610d3f7b72, type: 2}
+  minDrops: 1
+  maxDrops: 2
   health: 10
-  movementSpeed: 6
-  flyHeight: 4
+  movementSpeed: 3
+  flyHeight: 5.03
   turningSpeed: 15
   stoppingDistance: 5
   rb: {fileID: 54699737092220264}
@@ -18341,7 +18342,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 4
+  m_Radius: 2.08
   m_Height: 12
   m_Direction: 1
   m_Center: {x: 0, y: 7, z: 0}
