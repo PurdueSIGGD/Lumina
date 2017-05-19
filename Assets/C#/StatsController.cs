@@ -63,7 +63,7 @@ public class StatsController : Hittable
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
 		float leftover = UpdateHealth(-1 * damage);
-		if (leftover < 0 && !dead) {
+		if (health <= 0 && !dead) {
 			Kill ();
 		}
 	}
