@@ -110,7 +110,7 @@ public class StatsController : Hittable
 
 	//Returns leftover (if any) ((can be negative))
 	public float UpdateHealth(float amount) {
-		if (health < 0) {
+		if (health <= 0) {
 			health = 0;
 		}
 		if (amount > 0) {

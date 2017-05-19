@@ -12456,7 +12456,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1489770685358098}
-  m_LocalRotation: {x: 0.64137787, y: -0.64137626, z: 0.29771492, w: 0.29771957}
+  m_LocalRotation: {x: 0.6413778, y: -0.6413762, z: 0.2977149, w: 0.29771954}
   m_LocalPosition: {x: 0.0003800049, y: 0.00054619217, z: 0.0006736655}
   m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
   m_Children:
@@ -15180,15 +15180,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1530143229313342}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 243.54987, y: 30.919407, z: 188.98}
+  m_LocalRotation: {x: -0, y: -0.3692194, z: -0, w: 0.92934227}
+  m_LocalPosition: {x: 242.97733, y: 31.07768, z: 166.57779}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4229030456533670}
   - {fileID: 4387986323051396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -43.335003, z: 0}
 --- !u!4 &4597442943254468
 Transform:
   m_ObjectHideFlags: 1
@@ -19068,7 +19068,7 @@ MonoBehaviour:
   target: {fileID: 0}
   lookSphereRadius: 15
   distanceMeleeAttack: 4
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 2
   attackDamage: 10
   attackType: 0
   isAllowedToAttack: 0

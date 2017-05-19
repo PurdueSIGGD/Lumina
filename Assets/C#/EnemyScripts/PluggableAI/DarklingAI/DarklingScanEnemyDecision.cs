@@ -26,6 +26,17 @@ public class DarklingScanEnemyDecision : EnemyDecision
     {
         if (darkling.target == null)
             return false;
+
+        //see if target is alive
+        StatsController stats;
+
+        if (stats = darkling.target.GetComponent<StatsController>())
+        {
+            if (stats.GetHealth() <= 0)
+                return false;
+        }
+
+
         return true;
     }
 }

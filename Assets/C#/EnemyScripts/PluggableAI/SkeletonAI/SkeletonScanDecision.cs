@@ -16,7 +16,7 @@ public class SkeletonScanDecision : EnemyDecision {
 
     /*
      * Scan(), use OnTriggerEnter to set target
-     * return true if Enemy is detected
+     * return true if (target is detected && target is alive)
      * return false if not
      */ 
     private bool Scan(SkeletonEnemy skeleton)
@@ -24,7 +24,15 @@ public class SkeletonScanDecision : EnemyDecision {
         //if there is no target
         if (skeleton.target == null)
             return false;
-        
+
+        //see if target is alive
+        StatsController stats;
+
+        if (stats = skeleton.target.GetComponent<StatsController>())
+        {
+            if (stats.GetHealth() <= 0)
+                return false;
+        }
        
         return true;
 
