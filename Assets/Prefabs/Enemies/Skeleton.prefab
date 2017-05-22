@@ -14965,7 +14965,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011267500737290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 243.54987, y: 30.919407, z: 191.74167}
+  m_LocalPosition: {x: 273.0415, y: 31.083328, z: 191.54886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4109946900846836}
@@ -19056,7 +19056,7 @@ MonoBehaviour:
   - {fileID: 1530235444850510, guid: 9336deeba1db4784c954dc2d60fcb89f, type: 2}
   minDrops: 0
   maxDrops: 0
-  health: 80
+  health: 100
   movementSpeed: 10
   patrolPositions: []
   isPatrolling: 0
@@ -19078,6 +19078,13 @@ MonoBehaviour:
   isWalking: 0
   isRunning: 0
   isDancing: 0
+  skeletonType: 1
+  skeletonIdleStartState: {fileID: 11400000, guid: 227e1745b8a44ae46914fd03622778ae,
+    type: 2}
+  skeletonDanceStartState: {fileID: 11400000, guid: c92f106a53ea9994ba2ebd10e9c4168b,
+    type: 2}
+  skeletonPatrolStartState: {fileID: 11400000, guid: 60eedba7f89680d4393eebbec22e55d7,
+    type: 2}
 --- !u!135 &135887905180400170
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -18,27 +18,34 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStateController))]
 public class DarklingAirEnemy : AirEnemy {
 
+    public enum DarklingType
+    {
+        Idle, //darkling will stay in 1 place
+        Wander //darkling will wander around
+    }
    
     public Transform target;
     public Transform eyes;
     public GameObject darklingModel; //use for making it disappear
+
+   
     public float lookSphereRadius = 15f;    //use for draw Gizmo, and detect target
     public float timeBetweenAttacks = 2f;
     public float timeBetweenTele = 4f;   //for now, it will teleport every 4s, regardless of which state it is in
     public float timeBeforeAppear = 0.5f;
+    public float distanceRunAfterAttack = 20f;
     public float distanceMeleeAttack = 4f;
     public float distanceMeleeZone = 15f; //if target is in this zone, then switch to melee attack state
     public float distanceFlyMin = 20f;
-    public float distanceEscape = 20f;  //how far the darkling will 
-    public float distanceRunAfterAttack = 20f;  //after attack, this guy will run, then attack again
-
+    
     public float attackDamage = 10;
     public Hittable.DamageType attackType = DamageType.Denim;
-    public bool isAllowedToAttack;
+    
     
     public float teleportDistance = 6f;  
     public GameObject teleParticles;     //Particle system that spawns when the Darkling teleports
 
+    [HideInInspector] public bool isAllowedToAttack;
     [HideInInspector] public SaveTransform startTransform;
     [HideInInspector] public bool hasDoneAttacking;
     [HideInInspector] public bool isAllowedToTeleport;
@@ -55,7 +62,13 @@ public class DarklingAirEnemy : AirEnemy {
     public bool isTeleporting;
     public bool isRunningAway;
     private bool aiActive;
+
+    
     private EnemyStateController stateController;
+    public EnemyState darklingIdleStartState;
+    public EnemyState darklingWanderStartState;
+    public DarklingType darklingType = DarklingType.Idle; //default enemy type
+
 
 
     public readonly int HASH_TELE_START = Animator.StringToHash("TriggerTeleportStart");
@@ -70,11 +83,20 @@ public class DarklingAirEnemy : AirEnemy {
     {
         //call AirEnemy setup
         base.Setup();
+
         //set variable
         animator = GetComponent<Animator>();
-        stateController = GetComponent<EnemyStateController>();
-       
+
         //set up AI
+        SetupAI();
+
+    }
+
+    private void SetupAI()
+    {
+        //get enemy state controller
+        stateController = GetComponent<EnemyStateController>();
+        
         //SetFlyHeightFromGround(flyHeight);
         aiActive = true;
         stateController.SetupStateController(this);
@@ -83,6 +105,22 @@ public class DarklingAirEnemy : AirEnemy {
         //so darkling know where to return
         this.startTransform = new SaveTransform(this.transform);
 
+        //assign type for darkling
+        switch(darklingType)
+        {
+            case DarklingType.Idle:
+                stateController.currentState = darklingIdleStartState;
+                break;
+
+            case DarklingType.Wander:
+                stateController.currentState = darklingWanderStartState;
+                break;
+            
+            //if not assign, leave it there
+            default:
+                break;
+
+        }
     }
 
     public override IEnumerator Attack()

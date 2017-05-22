@@ -7,6 +7,13 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(EnemyStateController))]
 public class SkeletonEnemy : PatrolGroundEnemy
 {
+    public enum SkeletonType
+    {
+        Idle, //stand still, like a guard
+        Dance,
+        Patrol //go around certain positions
+    }
+
     public Transform target;
     public float lookSphereRadius = 15f; //use for draw Gizmo, and detect target
     public float distanceMeleeAttack = 2f;
@@ -24,8 +31,13 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public bool isRunning;
     public bool isDancing;
     private bool aiActive;
-    private EnemyStateController stateController;
 
+
+    private EnemyStateController stateController;
+    public SkeletonType skeletonType;
+    public EnemyState skeletonIdleStartState;
+    public EnemyState skeletonDanceStartState;
+    public EnemyState skeletonPatrolStartState;
 
     //some const because I am too lazy typing them  
     private const string IS_TURNING_LEFT = "isTurningLeft";
@@ -60,13 +72,43 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
         //set up some variables
         animator = GetComponent<Animator>();
-        curPatrolIndex = 0;
 
+        //set up AI
+        SetupAI();
+        
+    }
+
+
+    void SetupAI()
+    {
         //set up AI
         aiActive = true;
         this.startTransform = new SaveTransform(this.transform);
         stateController = GetComponent<EnemyStateController>();
         stateController.SetupStateController(this);
+
+        //set up for Patrol skeleton
+        curPatrolIndex = 0;
+
+        //set up start state
+        switch (skeletonType)
+        {
+            case SkeletonType.Idle:
+                stateController.currentState = skeletonIdleStartState;
+                break;
+
+            case SkeletonType.Dance:
+                stateController.currentState = skeletonDanceStartState;
+                break;
+
+            case SkeletonType.Patrol:
+                stateController.currentState = skeletonPatrolStartState;
+                break;
+
+            default:
+                break;
+        }
+
     }
 
 
