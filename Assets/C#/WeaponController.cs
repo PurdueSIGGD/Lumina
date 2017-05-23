@@ -246,9 +246,6 @@ public class WeaponController : MonoBehaviour {
             viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
         }
         
-
-
-
     }
     public void SwitchWeaponFinished() {
         //pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;

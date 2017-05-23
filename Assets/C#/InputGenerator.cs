@@ -6,6 +6,8 @@ public class InputGenerator : MonoBehaviour {
 
 	public MovementController playerMovement;
     public InventoryController playerInventory;
+	public HUDController playerHUD;
+	public PauseMenu playerPause;
     public WeaponController leftPlayerWeaponController;
     public WeaponController rightPlayerWeaponController;
 
@@ -34,7 +36,8 @@ public class InputGenerator : MonoBehaviour {
     void CursorStates()
     {
         // If we are paused, mouse will appear
-		if (Time.timeScale != 0 || Input.GetAxis ("Cancel") != 0) {
+		//if ( playerpause.isPausing()) {
+		if((!playerPause || playerPause.getPause() == false)){
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -116,6 +119,23 @@ public class InputGenerator : MonoBehaviour {
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
+        if (!playerPause) return;
+		if (Input.GetAxis ("Pause") > 0) {
+			playerPause.changeState = true;
+		} else {
+			if(playerPause.changeState){
+				if (playerPause.getPause()) {
+					playerPause.setPause (false);
+					playerPause.closePauseOpenHUD ();
+					playerPause.changeState = false;
+				} else {
+					playerPause.setPause (true);
+					playerPause.closeHUDOpenPause ();
+					playerPause.changeState = false;
+				}
+			}
+		}
+			
 
 	}
 
