@@ -155,8 +155,6 @@ public class WeaponController : MonoBehaviour {
         pendingPackType = packType;
         viewmodelAnimator.SetTrigger(controllerSide + packType);
         viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", pendingNewWeapon.animationType);
-        
-
 
     }
     public void SwitchWeaponFinished() {

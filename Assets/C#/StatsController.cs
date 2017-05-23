@@ -30,6 +30,8 @@ public class StatsController : Hittable
     bool dead;
 
 	public InventoryController iC;
+	public HUDController gui;
+	public PauseMenu pM;
 
 	// Use this for initialization
 	void Start ()
@@ -60,6 +62,8 @@ public class StatsController : Hittable
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
 		float leftover = UpdateHealth(-1 * damage);
+
+		gui.GUIsetHealth (health);
 		if (leftover < 0 && !dead) {
 			Kill ();
 		}
@@ -95,14 +99,17 @@ public class StatsController : Hittable
 
 	public void UpgradeMaxHealth(){
 		this.healthMax += HEALTH_INCREASE_AMOUNT;
+		gui.GUIsetUpgradeHealth (healthMax);
 	}
 
 	public void UpgradeMaxMagic(){
 		this.magicMax += MAGIC_INCREASE_AMOUNT;
+		gui.GUIsetUpgradeMagic (magicMax);
 	}
 
 	public void UpgradeMaxLightt(){
 		this.lighttMax += LIGHT_INCREASE_AMOUNT;
+		gui.GUIsetUpgradeLight (lighttMax);
 	}
 
 	//Returns leftover (if any) ((can be negative))
@@ -114,19 +121,25 @@ public class StatsController : Hittable
 			if (health + amount > healthMax) {
 				float leftover = health + amount - healthMax;
 				health = healthMax;
+				gui.GUIsetHealth (health);
 				return leftover;
 			}
 			health += amount;
+			gui.GUIsetHealth (health);
 			return 0;
 		} else if (amount < 0) {
 			if (health + amount < 0) {
 				float leftover = health + amount;
 				health = 0;
+				gui.GUIsetHealth (health);
+				gui.GUIsetHealth (health);
 				return leftover;
 			}
 			health += amount;
+			gui.GUIsetHealth (health);
 			return 0;
 		}
+		gui.GUIsetHealth (health);
 		return 0;
 	}
 
@@ -139,19 +152,24 @@ public class StatsController : Hittable
 			if (magic + amount > magicMax) {
 				float leftover = magic + amount - magicMax;
 				magic = magicMax;
+				gui.GUIsetMagic (magic);
 				return leftover;
 			}
 			magic += amount;
+			gui.GUIsetMagic (magic);
 			return 0;
 		} else if (amount < 0) {
 			if (magic + amount < 0) {
 				float leftover = magic + amount;
 				magic = 0;
+				gui.GUIsetMagic (magic);
 				return leftover;
 			}
 			magic += amount;
+			gui.GUIsetMagic (magic);
 			return 0;
 		}
+		gui.GUIsetMagic (magic);
 		return 0;
 	}
 
