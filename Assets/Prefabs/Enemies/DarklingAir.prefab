@@ -16065,7 +16065,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047052981932074}
   m_LocalRotation: {x: -0, y: 0.99591947, z: -0, w: 0.090246715}
-  m_LocalPosition: {x: 276.6601, y: 30.961445, z: 195.008}
+  m_LocalPosition: {x: 268.36624, y: 31.120552, z: 175.29948}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4240063353990232}
@@ -18284,7 +18284,7 @@ MonoBehaviour:
   - {fileID: 1316667486863618, guid: 3701b18cb9b2abf47b9df6610d3f7b72, type: 2}
   minDrops: 1
   maxDrops: 2
-  health: 10
+  health: 50
   movementSpeed: 3
   flyHeight: 5.03
   turningSpeed: 15
@@ -18324,7 +18324,7 @@ MonoBehaviour:
     type: 2}
   darklingWanderStartState: {fileID: 11400000, guid: dab1de6fd963f4244b31657b5e90f9d9,
     type: 2}
-  darklingType: 0
+  darklingType: 1
 --- !u!135 &135689901131356298
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -18814,7 +18814,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1962271802386812}
   serializedVersion: 5
   lengthInSec: 5
-  speed: 1
+  simulationSpeed: 1
   looping: 1
   prewarm: 1
   playOnAwake: 1

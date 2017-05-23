@@ -49,6 +49,14 @@ ModelImporter:
     100082: WallRock1_Armature
     100084: WallRockAndBrick1_Armature
     100086: WallRockAndBrick2_Armature
+    100088: Door_4
+    100090: Door_Armature
+    100092: WallRockAndBrick2_001
+    100094: Gate_0
+    100096: Root
+    100098: DescenderRockAndBrick1_001
+    100100: Door_5
+    100102: TrapDoor
     400000: 2x2x1
     400002: 2x2x1_1
     400004: 2x2x2
@@ -93,6 +101,14 @@ ModelImporter:
     400082: WallRock1_Armature
     400084: WallRockAndBrick1_Armature
     400086: WallRockAndBrick2_Armature
+    400088: Door_4
+    400090: Door_Armature
+    400092: WallRockAndBrick2_001
+    400094: Gate_0
+    400096: Root
+    400098: DescenderRockAndBrick1_001
+    400100: Door_5
+    400102: TrapDoor
     2300000: 2x2x1
     2300002: 2x2x1_1
     2300004: 2x2x2
@@ -189,6 +205,9 @@ ModelImporter:
     4300058: Cube_001
     4300060: Cube
     4300062: Torch
+    4300064: WallRockAndBrick2_001
+    4300066: Door
+    4300068: DescenderRockAndBrick1_001
     7400000: Default Take
     7400002: Door_Open
     7400004: TrapDoor_Open
@@ -198,8 +217,11 @@ ModelImporter:
     13700004: WallRock1
     13700006: WallRockAndBrick1
     13700008: WallRockAndBrick2
+    13700010: WallRockAndBrick2_001
+    13700012: Door
+    13700014: DescenderRockAndBrick1_001
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -219,17 +241,17 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
+    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
@@ -241,7 +263,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
