@@ -37,7 +37,7 @@ public class InputGenerator : MonoBehaviour {
     {
         // If we are paused, mouse will appear
 		//if ( playerpause.isPausing()) {
-		if((playerPause.getPause() == false)){
+		if((!playerPause || playerPause.getPause() == false)){
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -119,7 +119,7 @@ public class InputGenerator : MonoBehaviour {
 		if((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
-
+        if (!playerPause) return;
 		if (Input.GetAxis ("Pause") > 0) {
 			playerPause.changeState = true;
 		} else {

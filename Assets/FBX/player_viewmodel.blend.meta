@@ -546,6 +546,12 @@ ModelImporter:
     101076: Empty
     101078: Weapon2
     101080: Weapon1
+    101082: Arrow
+    101084: Bow
+    101086: Bow_mesher
+    101088: Frame
+    101090: String
+    101092: Player_Viewmodel
     400000: body_RoadKillOut
     400002: chest
     400004: Cube
@@ -1087,6 +1093,12 @@ ModelImporter:
     401076: Empty
     401078: Weapon2
     401080: Weapon1
+    401082: Arrow
+    401084: Bow
+    401086: Bow_mesher
+    401088: Frame
+    401090: String
+    401092: Player_Viewmodel
     2300000: Cube
     2300002: Cube_001
     2300004: Plane
@@ -2040,6 +2052,7 @@ ModelImporter:
     4300632: pCube1
     4300634: pCube8
     4300636: pCylinder6
+    4300638: Bow_mesher
     7400000: Default Take
     7400002: Camera_Idle
     7400004: Camera_Walking
@@ -2056,34 +2069,56 @@ ModelImporter:
     7400026: Left_Magic_Shoot_End
     7400028: Left_Magic_Shoot_Loop
     7400030: Left_Magic_Shoot_Start
-    7400032: Camera_Damage_Down
-    7400034: Camera_Damage_Left
-    7400036: Camera_Damage_Right
-    7400038: Left_Magic_Drop_Fire
-    7400040: Left_Magic_Equip_Fire
-    7400042: Left_Magic_Transfer
-    7400044: Right_Spear_Draw
-    7400046: Right_Spear_Drop
-    7400048: Right_Spear_Idle
-    7400050: Right_Spear_Pack
-    7400052: Right_Spear_Strike1
-    7400054: Right_Spear_Strike1_Cooldown
-    7400056: Right_Spear_Strike2
-    7400058: Right_Spear_Strike2_Cooldown
-    7400060: Right_Sword_Draw
-    7400062: Right_Sword_Drop
-    7400064: Right_Sword_Idle
-    7400066: Right_Sword_Pack
-    7400068: Right_Sword_Strike1
-    7400070: Right_Sword_Strike1_Cooldown
-    7400072: Right_Sword_Strike2
-    7400074: Right_Sword_Strike2_Cooldown
-    7400076: Right_Sword_Strike3
-    7400078: Right_Sword_Strike3_Cooldown
-    7400080: TPose
+    7400032: Bow_Idle
+    7400034: Bow_Pull
+    7400036: Bow_Release
+    7400038: Camera_Damage_Down
+    7400040: Camera_Damage_Left
+    7400042: Camera_Damage_Right
+    7400044: Camera_Death_1_001
+    7400046: Camera_Death_1
+    7400048: Left_Magic_Drop_Fire
+    7400050: Left_Magic_Equip_Fire
+    7400052: Left_Magic_Transfer
+    7400054: Right_Bow_Draw
+    7400056: Right_Bow_Drop
+    7400058: Right_Bow_Hold
+    7400060: Right_Bow_Idle
+    7400062: Right_Bow_Load
+    7400064: Right_Bow_Pack
+    7400066: Right_Bow_Pull
+    7400068: Right_Bow_Release
+    7400070: Right_Spear_Draw
+    7400072: Right_Spear_Drop
+    7400074: Right_Spear_Idle
+    7400076: Right_Spear_Pack
+    7400078: Right_Spear_Strike1
+    7400080: Right_Spear_Strike1_Cooldown
+    7400082: Right_Spear_Strike2
+    7400084: Right_Spear_Strike2_Cooldown
+    7400086: Right_Sword_Draw
+    7400088: Right_Sword_Drop
+    7400090: Right_Sword_Idle
+    7400092: Right_Sword_Pack
+    7400094: Right_Sword_Strike1
+    7400096: Right_Sword_Strike1_Cooldown
+    7400098: Right_Sword_Strike2
+    7400100: Right_Sword_Strike2_Cooldown
+    7400102: Right_Sword_Strike3
+    7400104: Right_Sword_Strike3_Cooldown
+    7400106: TPose
+    7400108: Both_Return_2
+    7400110: Camera_Death_2
+    7400112: Fistcuffs_Idle_2
+    7400114: Right_Bow_Draw_Empty
+    7400116: Right_Bow_Drop_Empty
+    7400118: Right_Bow_Idle_Empty
+    7400120: Right_Bow_Load_2
+    7400122: Right_Bow_Pack_Empty
     9500000: //RootNode
     13700000: body_RoadKillOut
     13700002: body_RoadKillOut_001
+    13700004: Bow_mesher
   materials:
     importMaterials: 1
     materialName: 0

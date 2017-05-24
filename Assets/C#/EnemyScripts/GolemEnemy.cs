@@ -12,6 +12,7 @@ public class GolemEnemy : PatrolGroundEnemy {
     public bool isAttacking;    //if golem is attacking
     public float timeBetweenAttacks;    //time between 2 attacks
     public float smashDamage = 25;
+    public float rockDamage = 25;
     public float meleeRange;    //range that golem will smash target
     public float throwRange;    //range that golem will throw stuff at target, does not use right now :( 
 
@@ -178,7 +179,9 @@ public class GolemEnemy : PatrolGroundEnemy {
             rocks[Random.Range(0, rocks.Length)], 
             transform.localPosition + transform.up,
             Quaternion.identity);
-
+        Projectile proj = rock.GetComponent<Projectile>();
+        proj.creator = transform;
+        proj.damage = this.rockDamage;
        
         //add Rigid body to rock in curve direction        
         Rigidbody rockRb = rock.GetComponent<Rigidbody>();
@@ -212,6 +215,9 @@ public class GolemEnemy : PatrolGroundEnemy {
         // IDK do whatever
         StopCoroutine(PatrolAround());
         StopCoroutine(Attack());
+    }
+    public override void OnDamage(float damage, DamageType type) {
+        throw new NotImplementedException();
     }
 
 }

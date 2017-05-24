@@ -10,17 +10,24 @@ abstract public class BaseEnemy : Hittable {
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
 
-	/*
+    
+
+    /*
 	 * Method called when enemy dies
 	 * Identifies the number of drops the enemy drops based on the minimum and maximum values
 	 * Then, for each of the individual drops, find a random GameObject in the drops array to drop
 	 * Instantiate that drop
 	 */
-	void GenericDeath(){
+    void GenericDeath(){
 
         OnDeath();
 
-		int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
+        // Prevent from moving
+        //TODO ragdoll
+        this.GetComponent<Rigidbody>().freezeRotation = true;
+
+
+        int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
 
 		for (int i = 0; i < numberOfDrops; i++) {
 			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Length));
@@ -43,6 +50,8 @@ abstract public class BaseEnemy : Hittable {
         
         if (health <= 0 && originalHealth > 0) {
             GenericDeath();
+        } else {
+            OnDamage(damage, type);
         }
 	}
 
@@ -63,4 +72,5 @@ abstract public class BaseEnemy : Hittable {
 	abstract public IEnumerator Attack();		//Abstract method that checks if the player is within range and then damages player
 	abstract public void Movement();			//Abstract method defining how the specific enemy moves 
     abstract public void OnDeath();             //What to do when the enemy dies
+    abstract public void OnDamage(float damage, DamageType type);            //What do to when the enemy takes damage
 }

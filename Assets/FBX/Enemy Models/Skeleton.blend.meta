@@ -220,6 +220,7 @@ ModelImporter:
     100424: toe_R
     100426: upper_arm_L
     100428: upper_arm_R
+    100430: Skeleton
     400000: chest
     400002: DEF-chest
     400004: DEF-f_index_01_L_01
@@ -435,24 +436,29 @@ ModelImporter:
     400424: toe_R
     400426: upper_arm_L
     400428: upper_arm_R
+    400430: Skeleton
     4300000: skeleton2_RoadKillOut
     7400000: Default Take
     7400002: _Default
-    7400004: Dance_1
-    7400006: Dance_2
-    7400008: Dance_3
-    7400010: Death_1
-    7400012: Death_2
-    7400014: Death_3
-    7400016: Detected
-    7400018: Idle
-    7400020: Idle_Turn_Left
-    7400022: Idle_Turn_Right
-    7400024: Running
-    7400026: Running_Attack
-    7400028: Running_Start
-    7400030: Walking
-    7400032: Walking_Stop
+    7400004: Attack
+    7400006: Dance_1
+    7400008: Dance_2
+    7400010: Dance_3
+    7400012: Death_1
+    7400014: Death_2
+    7400016: Death_3
+    7400018: Detected
+    7400020: Idle
+    7400022: Idle_2
+    7400024: Idle_Turn_Left
+    7400026: Idle_Turn_Right
+    7400028: Running
+    7400030: Running_Attack
+    7400032: Running_Start
+    7400034: Take_Damage
+    7400036: Walking
+    7400038: Walking_Start
+    7400040: Walking_Stop
     9500000: //RootNode
     13700000: skeleton2_RoadKillOut
   materials:
@@ -498,7 +504,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

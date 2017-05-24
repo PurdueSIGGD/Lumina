@@ -116,4 +116,7 @@ public class SlimeEnemy : BaseEnemy {
     public override void OnDeath() {
         // IDK do whatever
     }
+    public override void OnDamage(float damage, DamageType type) {
+
+    }
 }

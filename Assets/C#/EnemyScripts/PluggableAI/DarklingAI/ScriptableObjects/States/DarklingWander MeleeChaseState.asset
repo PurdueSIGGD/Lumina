@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c1972d83fc2ec408e3f262ec61238b, type: 3}
+  m_Name: DarklingWander MeleeChaseState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: cf384dfadb22cf44ba3b647422d8f72d, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 5199c87f5cc8ade45b6c0c9f48ac824f, type: 2}
+    trueState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+    falseState: {fileID: 11400000, guid: b6c4059a07858f34eb74d6bee716f576, type: 2}
+  - decision: {fileID: 11400000, guid: 3ce98a16dd4eea941998156e6c1d9ad1, type: 2}
+    trueState: {fileID: 11400000, guid: d8d91040594b66746bec993a93d24829, type: 2}
+    falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+  exitAction: {fileID: 11400000, guid: 572bbadf00a10d94a86f2955e23bdb81, type: 2}
+  sceneGizmoColor: {r: 0.60786736, g: 0.10413063, b: 0.78676474, a: 1}

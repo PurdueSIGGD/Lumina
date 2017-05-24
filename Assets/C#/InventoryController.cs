@@ -140,6 +140,9 @@ public class InventoryController : MonoBehaviour {
                     deletes = (sC.UpdateHealth(pick.amount) != pick.amount);
 					sC.pM.setHealthAmount (pick.amount);
                     break;
+                case Pickup.pickUpType.Arrow:
+                    deletes = (sC.UpdateArrows((int)(pick.amount)) != pick.amount);
+                    break;
 			}
 			if (deletes) Destroy (pick.gameObject);
 		}

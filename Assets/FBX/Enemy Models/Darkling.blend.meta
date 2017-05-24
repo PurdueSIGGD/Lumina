@@ -227,6 +227,7 @@ ModelImporter:
     100438: toe_R
     100440: upper_arm_L
     100442: upper_arm_R
+    100444: Darkling
     400000: Bone_001
     400002: chest
     400004: //RootNode
@@ -449,12 +450,13 @@ ModelImporter:
     400438: toe_R
     400440: upper_arm_L
     400442: upper_arm_R
+    400444: Darkling
     4300000: darkling1_RoadKillOut
     7400000: Default Take
     9500000: //RootNode
     13700000: darkling1_RoadKillOut
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -474,17 +476,17 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
+    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
@@ -496,7 +498,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
