@@ -32,9 +32,9 @@ public class StatsController : Hittable
 	bool outside;
     bool dead;
 
-	public InventoryController iC;
+	public InventoryController inventoryController;
 	public HUDController gui;
-	public PauseMenu pM;
+	public PauseMenu pauseMenu;
 
 	// Use this for initialization
 	void Start ()
@@ -64,7 +64,8 @@ public class StatsController : Hittable
 
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
-		float leftover = UpdateHealth(-1 * damage);
+
+        float leftover = UpdateHealth(-1 * damage);
 
 		gui.GUIsetHealth (health);
 		if (health <= 0 && !dead) {
@@ -135,7 +136,7 @@ public class StatsController : Hittable
 				float leftover = health + amount;
 				health = 0;
 				gui.GUIsetHealth (health);
-				gui.GUIsetHealth (health);
+				
 				return leftover;
 			}
 			health += amount;
@@ -252,7 +253,12 @@ public class StatsController : Hittable
 	 * @return The damage to deal after modification
 	 */
 	private float ApplyArmorHitMod(float damage, DamageType type) {
-		List<Armor> armor = iC.GetEquippedArmor ();
+		List<Armor> armor = inventoryController.GetEquippedArmor ();
+
+        //fix null ref
+        if (armor == null || armor.Count == 0)
+            return damage;
+
         if (armor.Count > 0) {
             foreach (Armor amr in armor) {
                 if (type == amr.strongAgainst) {

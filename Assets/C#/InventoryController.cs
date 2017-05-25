@@ -11,7 +11,7 @@ public class InventoryController : MonoBehaviour {
 
     public Animator viewmodelAnimator;
     private float interactCooldown;
-	public StatsController sC;
+	public StatsController statsController;
 	public GameObject cam;//camera
 	float upgradekits;
 	float upgradePotions;
@@ -83,12 +83,12 @@ public class InventoryController : MonoBehaviour {
 		    case Armor.ArmorPiece.helmet:
                 if (helmet) lastItem = helmet.transform;
 			    helmet = (Armor)item;
-				sC.pM.setEquipDescription (sC.pM.helmet,helmet);
+				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,helmet);
 			    break;
 		    case Armor.ArmorPiece.chestplate:
                 if (chestPlate) lastItem = chestPlate.transform;
 			    chestPlate = (Armor)item;
-				sC.pM.setEquipDescription (sC.pM.chestplate,chestPlate);
+				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,chestPlate);
 			    break;
 		    }
             if (lastItem) {
@@ -106,13 +106,13 @@ public class InventoryController : MonoBehaviour {
         if (item is Magic) {
             //print("Picked up magic");
             leftWeaponController.EquipWeapon((Weapon)item);
-			sC.pM.setEquipDescription (sC.pM.weapL1,leftWeaponController.weapons[0]);
-			sC.pM.setEquipDescription (sC.pM.weapL2,leftWeaponController.weapons[1]);
+			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL1,leftWeaponController.weapons[0]);
+			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL2,leftWeaponController.weapons[1]);
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
-			sC.pM.setEquipDescription (sC.pM.weapR1,rightWeaponController.weapons[0]);
-			sC.pM.setEquipDescription (sC.pM.weapR2,rightWeaponController.weapons[1]);
+			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR1,rightWeaponController.weapons[0]);
+			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR2,rightWeaponController.weapons[1]);
         }
 
 	}
@@ -126,22 +126,22 @@ public class InventoryController : MonoBehaviour {
 			switch(pick.itemType){
 			    case Pickup.pickUpType.upgradeKit:
 				    upgradekits += pick.amount;
-					sC.pM.setUpgradeKAmount (upgradekits);
+					statsController.pauseMenu.setUpgradeKAmount (upgradekits);
 				    break;
 				case Pickup.pickUpType.upgradePotion:
 					upgradePotions++;
-					sC.pM.setUpgradePAmount (upgradePotions);
+					statsController.pauseMenu.setUpgradePAmount (upgradePotions);
                     break;
                 case Pickup.pickUpType.Magic:
-                    deletes = (sC.UpdateMagic(pick.amount) != pick.amount);
-					sC.pM.setMagicAmount (pick.amount);
+                    deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
+					statsController.pauseMenu.setMagicAmount (pick.amount);
                     break;
                 case Pickup.pickUpType.Health:
-                    deletes = (sC.UpdateHealth(pick.amount) != pick.amount);
-					sC.pM.setHealthAmount (pick.amount);
+                    deletes = (statsController.UpdateHealth(pick.amount) != pick.amount);
+					statsController.pauseMenu.setHealthAmount (pick.amount);
                     break;
                 case Pickup.pickUpType.Arrow:
-                    deletes = (sC.UpdateArrows((int)(pick.amount)) != pick.amount);
+                    deletes = (statsController.UpdateArrows((int)(pick.amount)) != pick.amount);
                     break;
 			}
 			if (deletes) Destroy (pick.gameObject);
@@ -157,11 +157,11 @@ public class InventoryController : MonoBehaviour {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
 			upgradekits-=10;
-			sC.pM.setUpgradeKAmount (upgradekits);
+			statsController.pauseMenu.setUpgradeKAmount (upgradekits);
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
-				sC.pM.setEquipDescription (sC.pM.helmet,i);
+				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,i);
 			}else{
-				sC.pM.setEquipDescription (sC.pM.chestplate,i);
+				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,i);
 			}
 			return;
 		}
@@ -174,19 +174,19 @@ public class InventoryController : MonoBehaviour {
 	public void useUpgradePotion(StatsController.StatType p){
 		switch (p) {
 		case StatsController.StatType.Health:
-				sC.UpgradeMaxHealth ();
+				statsController.UpgradeMaxHealth ();
 				upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
+				statsController.pauseMenu.setUpgradePAmount (upgradePotions);
 				break;
 		case StatsController.StatType.Magic:
-                sC.UpgradeMaxMagic();
+                statsController.UpgradeMaxMagic();
                 upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
+				statsController.pauseMenu.setUpgradePAmount (upgradePotions);
                 break;
 		case StatsController.StatType.Light:
-                sC.UpgradeMaxLightt();
+                statsController.UpgradeMaxLightt();
                 upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
+				statsController.pauseMenu.setUpgradePAmount (upgradePotions);
                 break;
 		}
 	}

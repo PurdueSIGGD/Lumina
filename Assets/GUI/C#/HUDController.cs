@@ -4,20 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour {
-	//GUI file to easily edit other parts of the GUI through code
+	
+    //GUI file to easily edit other parts of the GUI through code
 	public Slider healthBar;
 	public Slider magicBar;
 	public Slider lightForceBar;
 
-	public StatsController sC;
-	public PauseMenu pm;
+	public StatsController statsController;
+	public PauseMenu pauseMenu;
 
 	// Use this for initialization
 	void Start () {
 
-		GUIsetHealth (sC.GetHealth());
-		GUIsetMagic (sC.GetMagic());
-		GUIsetLight (sC.GetLightt());
+        SetupBar();
 	}
 	
 	// Update is called once per frame
@@ -25,7 +24,23 @@ public class HUDController : MonoBehaviour {
 
 	}
 
-	public void GUIsetHealth(float amount){
+
+    public void SetupBar()
+    {
+        //health
+        healthBar.maxValue = statsController.healthMax;
+        healthBar.value = statsController.health;
+
+        //magic
+        magicBar.maxValue = statsController.magicMax;
+        magicBar.value = statsController.magic;
+
+        //light
+        lightForceBar.maxValue = statsController.lighttMax;
+        lightForceBar.value = statsController.lightt;
+    }
+
+    public void GUIsetHealth(float amount){
 		healthBar.value = amount;
 	}
 
