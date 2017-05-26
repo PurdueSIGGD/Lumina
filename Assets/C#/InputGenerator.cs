@@ -7,6 +7,7 @@ public class InputGenerator : MonoBehaviour {
 	public MovementController playerMovement;
     public InventoryController playerInventory;
 	public HUDController playerHUD;
+    public SettingsController settingsController;
 	public PauseMenu playerPause;
     public WeaponController leftPlayerWeaponController;
     public WeaponController rightPlayerWeaponController;
@@ -115,14 +116,25 @@ public class InputGenerator : MonoBehaviour {
 
 
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
-		playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
-		if((jumpInput = Input.GetAxis ("Jump")) > 0){
+
+        //if game is pausing, stop moving the camera
+        if (!playerPause.getPause())
+            playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
+
+
+        if ((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
+
+
         if (!playerPause) return;
+
+
 		if (Input.GetAxis ("Pause") > 0) {
 			playerPause.changeState = true;
-		} else {
+		}
+
+        else {
 			if(playerPause.changeState){
 				if (playerPause.getPause()) {
 					playerPause.setPause (false);

@@ -15,8 +15,8 @@ public class PauseMenu : MonoBehaviour {
 	public Text weapR2;
 	public Text weapL1;
 	public Text weapL2;
-	public HUDController hC;
-	public InventoryController iC;
+	public HUDController hudController;
+	public InventoryController inventoryController;
 
 	public bool changeState;
 
@@ -44,14 +44,14 @@ public class PauseMenu : MonoBehaviour {
 
 	public void closeHUDOpenPause(){
 		gameObject.SetActive (true);
-		hC.gameObject.SetActive (false);
+		hudController.gameObject.SetActive (false);
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
 	}
 
 	public void closePauseOpenHUD(){
 		gameObject.SetActive (false);
-		hC.gameObject.SetActive (true);
+		hudController.gameObject.SetActive (true);
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
@@ -93,8 +93,8 @@ public class PauseMenu : MonoBehaviour {
 	public void clickHealth(){
 		Debug.Log ("Clicked Health");
 		if (upgrading) {
-			if (iC.getUpgradePotions () > 0) {
-				iC.useUpgradePotion (StatsController.StatType.Health);
+			if (inventoryController.getUpgradePotions () > 0) {
+				inventoryController.useUpgradePotion (StatsController.StatType.Health);
 			}
 		}
 	}
@@ -102,8 +102,8 @@ public class PauseMenu : MonoBehaviour {
 	public void clickMagic(){
 		Debug.Log ("Clicked Magic");
 		if(upgrading){
-			if (iC.getUpgradePotions () > 0) {
-				iC.useUpgradePotion (StatsController.StatType.Magic);
+			if (inventoryController.getUpgradePotions () > 0) {
+				inventoryController.useUpgradePotion (StatsController.StatType.Magic);
 			}
 		}
 	}
@@ -111,56 +111,56 @@ public class PauseMenu : MonoBehaviour {
 	public void clickLightt(){
 		Debug.Log ("Clicked Light");
 		if(upgrading){
-			if (iC.getUpgradePotions () > 0) {
-				iC.useUpgradePotion (StatsController.StatType.Light);
+			if (inventoryController.getUpgradePotions () > 0) {
+				inventoryController.useUpgradePotion (StatsController.StatType.Light);
 			}
 		}
 	}
 
 	public void clickWeaponL1(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.leftWeaponController.weapons [0]);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.leftWeaponController.weapons [0]);
 			}
 		}
 	}
 
 	public void clickWeaponL2(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.leftWeaponController.weapons [1]);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.leftWeaponController.weapons [1]);
 			}
 		}
 	}
 
 	public void clickWeaponR1(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.rightWeaponController.weapons [0]);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.rightWeaponController.weapons [0]);
 			}
 		}
 	}
 
 	public void clickWeaponR2(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.rightWeaponController.weapons [1]);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.rightWeaponController.weapons [1]);
 			}
 		}
 	}
 
 	public void clickHelmet(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.helmet);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.helmet);
 			}
 		}
 	}
 
 	public void clickChestplate(){
 		if(upgrading){
-			if (iC.getUpgradeKits () > 0) {
-				iC.useUpgradeKit (iC.chestPlate);
+			if (inventoryController.getUpgradeKits () > 0) {
+				inventoryController.useUpgradeKit (inventoryController.chestPlate);
 			}
 		}
 	}
