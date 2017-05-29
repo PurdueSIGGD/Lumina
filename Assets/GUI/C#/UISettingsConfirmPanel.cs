@@ -36,6 +36,9 @@ public class UISettingsConfirmPanel : UIConfirmPanel {
 
     public override void Close()
     {
+        //make nav interactable again
+        controller.navPanel.interactable = true;
+
         //close
         anim.SetTrigger("Close");
 
@@ -44,10 +47,7 @@ public class UISettingsConfirmPanel : UIConfirmPanel {
     }
 
     public override void OnNoClick()
-    {
-        //make nav interactable again
-        controller.navPanel.interactable = true;
-
+    {        
         //close
         Close();
     }
