@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputGenerator : MonoBehaviour {
 
+    public bool isGamePausing;
+
 	public MovementController playerMovement;
     public InventoryController playerInventory;
 	public HUDController playerHUD;
@@ -38,7 +40,8 @@ public class InputGenerator : MonoBehaviour {
     {
         // If we are paused, mouse will appear
 		//if ( playerpause.isPausing()) {
-		if((!playerPause || playerPause.getPause() == false)){
+		//if((!playerPause || playerPause.getPause() == false || !isGamePausing)){
+        if (!isGamePausing) { 
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -118,9 +121,14 @@ public class InputGenerator : MonoBehaviour {
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
 
         //if game is pausing, stop moving the camera
-        if (!playerPause.getPause())
+        if (!playerPause.getPause() && !isGamePausing)
             playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 
+        //if press Escape
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {            
+            settingsController.ToggleSettingsCanvas();
+        }
 
         if ((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
