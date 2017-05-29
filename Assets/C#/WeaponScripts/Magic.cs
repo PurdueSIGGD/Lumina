@@ -89,7 +89,7 @@ public class Magic : Weapon {
                             // Hit with hittable
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                             if (hittable != null && hit.collider.gameObject.tag != "Item") { //Sometimes may hit our item that we are holding
-                                print(hit.collider);
+                                //print(hit.collider);
                                 hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
                             }
                         }

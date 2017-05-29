@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: bc3584cc71e2b8b46821bdd6abfe382a
+timeCreated: 1496081160
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 2x2x.5_1
+    100002: 2x2x1
+    100004: 2x2x1_1
+    100006: 2x2x2
+    100008: 2x2x2_1
+    100010: Camera
+    100012: Cube
+    100014: Cube.001
+    100016: Cube.003
+    100018: Cube.004
+    100020: Cube.005
+    100022: Cube.006
+    100024: Cube.007
+    100026: Cube.008
+    100028: Cube.010
+    100030: DescenderRockAndBrick1
+    100032: DescenderRockAndBrick1.001
+    100034: DescenderRockAndBrick1_Armature
+    100036: Door
+    100038: Door 1
+    100040: Door 2
+    100042: Door 3
+    100044: Door 4
+    100046: Door 5
+    100048: Door 6
+    100050: Door_Armature
+    100052: Door_end
+    100054: Door_end 1
+    100056: Door_end 2
+    100058: Door_end 3
+    100060: Door_end 4
+    100062: Door_end 5
+    100064: Floor12x12
+    100066: Floor12x12_MeshPart0
+    100068: Floor12x12_MeshPart1
+    100070: Gate
+    100072: Gate 1
+    100074: Gate_end
+    100076: LeftDoor
+    100078: LeftDoor_end
+    100080: RightDoor
+    100082: RightDoor_end
+    100084: Rock1
+    100086: Rock2
+    100088: Rock3
+    100090: Rock4
+    100092: Rock5
+    100094: Rock6
+    100096: Rock7
+    100098: Root
+    100100: Sun
+    100102: Torch
+    100104: TrapDoor
+    100106: Trapdoor
+    100108: WallBrick1
+    100110: WallBrick1_Armature
+    100112: WallRock1
+    100114: WallRock1_Armature
+    100116: WallRockAndBrick1
+    100118: WallRockAndBrick1_Armature
+    100120: WallRockAndBrick2
+    100122: WallRockAndBrick2_Armature
+    100124: Well
+    100126: //RootNode
+    100128: Well.001
+    100130: Well_Armature
+    100132: Root_end
+    400000: 2x2x.5_1
+    400002: 2x2x1
+    400004: 2x2x1_1
+    400006: 2x2x2
+    400008: 2x2x2_1
+    400010: Camera
+    400012: Cube
+    400014: Cube.001
+    400016: Cube.003
+    400018: Cube.004
+    400020: Cube.005
+    400022: Cube.006
+    400024: Cube.007
+    400026: Cube.008
+    400028: Cube.010
+    400030: DescenderRockAndBrick1
+    400032: DescenderRockAndBrick1.001
+    400034: DescenderRockAndBrick1_Armature
+    400036: Door
+    400038: Door 1
+    400040: Door 2
+    400042: Door 3
+    400044: Door 4
+    400046: Door 5
+    400048: Door 6
+    400050: Door_Armature
+    400052: Door_end
+    400054: Door_end 1
+    400056: Door_end 2
+    400058: Door_end 3
+    400060: Door_end 4
+    400062: Door_end 5
+    400064: Floor12x12
+    400066: Floor12x12_MeshPart0
+    400068: Floor12x12_MeshPart1
+    400070: Gate
+    400072: Gate 1
+    400074: Gate_end
+    400076: LeftDoor
+    400078: LeftDoor_end
+    400080: RightDoor
+    400082: RightDoor_end
+    400084: Rock1
+    400086: Rock2
+    400088: Rock3
+    400090: Rock4
+    400092: Rock5
+    400094: Rock6
+    400096: Rock7
+    400098: Root
+    400100: Sun
+    400102: Torch
+    400104: TrapDoor
+    400106: Trapdoor
+    400108: WallBrick1
+    400110: WallBrick1_Armature
+    400112: WallRock1
+    400114: WallRock1_Armature
+    400116: WallRockAndBrick1
+    400118: WallRockAndBrick1_Armature
+    400120: WallRockAndBrick2
+    400122: WallRockAndBrick2_Armature
+    400124: //RootNode
+    400126: Well
+    400128: Well.001
+    400130: Well_Armature
+    400132: Root_end
+    2300000: 2x2x.5_1
+    2300002: 2x2x1
+    2300004: 2x2x1_1
+    2300006: 2x2x2
+    2300008: 2x2x2_1
+    2300010: Cube
+    2300012: Cube.001
+    2300014: Cube.003
+    2300016: Cube.004
+    2300018: Cube.005
+    2300020: Cube.006
+    2300022: Cube.007
+    2300024: Cube.008
+    2300026: Cube.010
+    2300028: Floor12x12_MeshPart0
+    2300030: Floor12x12_MeshPart1
+    2300032: Gate
+    2300034: Rock1
+    2300036: Rock2
+    2300038: Rock3
+    2300040: Rock4
+    2300042: Rock5
+    2300044: Rock6
+    2300046: Rock7
+    2300048: Torch
+    2300050: Trapdoor
+    2300052: Well
+    2300054: //RootNode
+    3300000: 2x2x.5_1
+    3300002: 2x2x1
+    3300004: 2x2x1_1
+    3300006: 2x2x2
+    3300008: 2x2x2_1
+    3300010: Cube
+    3300012: Cube.001
+    3300014: Cube.003
+    3300016: Cube.004
+    3300018: Cube.005
+    3300020: Cube.006
+    3300022: Cube.007
+    3300024: Cube.008
+    3300026: Cube.010
+    3300028: Floor12x12_MeshPart0
+    3300030: Floor12x12_MeshPart1
+    3300032: Gate
+    3300034: Rock1
+    3300036: Rock2
+    3300038: Rock3
+    3300040: Rock4
+    3300042: Rock5
+    3300044: Rock6
+    3300046: Rock7
+    3300048: Torch
+    3300050: Trapdoor
+    3300052: Well
+    3300054: //RootNode
+    4300000: Well.001
+    4300002: Trapdoor
+    4300004: DescenderRockAndBrick1.001
+    4300006: Door
+    4300008: DescenderRockAndBrick1
+    4300010: WallRockAndBrick1
+    4300012: WallRockAndBrick2
+    4300014: WallRock1
+    4300016: WallBrick1
+    4300018: Torch
+    4300020: Floor12x12_MeshPart0
+    4300022: Floor12x12_MeshPart1
+    4300024: Gate
+    4300026: Well
+    4300028: Rock7
+    4300030: Rock5
+    4300032: Rock6
+    4300034: Rock4
+    4300036: Rock3
+    4300038: Rock1
+    4300040: Rock2
+    4300042: 2x2x2
+    4300044: 2x2x1_1
+    4300046: 2x2x.5_1
+    4300048: 2x2x2_1
+    4300050: Cube.010
+    4300052: 2x2x1
+    4300054: Cube.008
+    4300056: Cube.007
+    4300058: Cube.006
+    4300060: Cube.005
+    4300062: Cube.004
+    4300064: Cube.003
+    4300066: Cube.001
+    4300068: Cube
+    7400000: Well_Armature|Well_Close
+    7400002: Well_Armature|Well_Open
+    7400004: Well_Armature|Well_Opened
+    7400006: TrapDoor|Door_Open.001
+    7400008: TrapDoor|TrapDoor_Closed
+    7400010: TrapDoor|TrapDoor_Open
+    7400012: TrapDoor|TrapDoor_Open.001
+    7400014: TrapDoor|TrapDoor_Opened
+    7400016: Door_Armature|Door_Closed
+    7400018: Door_Armature|Door_Open
+    7400020: Door_Armature|Door_Opened
+    7400022: DescenderRockAndBrick1_Armature|Door_Open.001
+    7400024: DescenderRockAndBrick1_Armature|TrapDoor_Closed
+    7400026: DescenderRockAndBrick1_Armature|TrapDoor_Open
+    7400028: DescenderRockAndBrick1_Armature|TrapDoor_Open.001
+    7400030: DescenderRockAndBrick1_Armature|TrapDoor_Opened
+    7400032: Well_Armature|Well_Closed
+    9500000: //RootNode
+    13700000: DescenderRockAndBrick1
+    13700002: DescenderRockAndBrick1.001
+    13700004: Door
+    13700006: WallBrick1
+    13700008: WallRock1
+    13700010: WallRockAndBrick1
+    13700012: WallRockAndBrick2
+    13700014: Well.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
