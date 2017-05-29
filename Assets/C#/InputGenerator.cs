@@ -160,4 +160,16 @@ public class InputGenerator : MonoBehaviour {
 	}
 
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        isGamePausing = true;
+    }
+
+    public void ResumeGame()
+    {
+        isGamePausing = false;
+        Time.timeScale = 1;
+    }
+
 }
