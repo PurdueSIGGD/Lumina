@@ -39,7 +39,7 @@ public class SettingsController : MonoBehaviour {
 
         //save game      
         saveGamePanel.controller = this;
-
+        
     }
 
     public void ToggleSettingsCanvas()
