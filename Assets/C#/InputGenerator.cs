@@ -5,11 +5,12 @@ using UnityEngine;
 public class InputGenerator : MonoBehaviour {
 
     public bool isGamePausing;
+    public UIController uiController;
+    
 
-	public MovementController playerMovement;
+    public MovementController playerMovement;
     public InventoryController playerInventory;
-	public HUDController playerHUD;
-    public SettingsController settingsController;
+	      
 	public PauseMenu playerPause;
     public WeaponController leftPlayerWeaponController;
     public WeaponController rightPlayerWeaponController;
@@ -124,12 +125,19 @@ public class InputGenerator : MonoBehaviour {
         if (!playerPause.getPause() && !isGamePausing)
             playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 
-        //if press Escape
+        //if relate to UI
+        //roundabout way to doing it, optimize later.
         if (Input.GetKeyDown(KeyCode.Tab))
-        {            
-            settingsController.ToggleSettingsCanvas();
+        {
+            uiController.ToggleUI(KeyCode.Tab);
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            uiController.ToggleUI(KeyCode.I);
+        }
+
+        //jump
         if ((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}

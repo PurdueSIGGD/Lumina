@@ -9,7 +9,7 @@ public class UISettingsConfirmPanel : UIConfirmPanel {
 
     private Animator anim;
 
-    [HideInInspector] public SettingsController controller;
+    [HideInInspector] public SettingsCanvas controller;
 
 
 

@@ -32,14 +32,20 @@ public class StatsController : Hittable
 	bool outside;
     bool dead;
 
-	public InventoryController inventoryController;
-	public HUDController gui;
+	public InventoryController inventoryController;	
 	public PauseMenu pauseMenu;
 
-	// Use this for initialization
-	void Start ()
+    public HUDController gui { get; set; } 
+
+    // Use this for initialization
+    void Start ()
 	{
+        //set condition for health
 		outside = true;
+
+        //set GUI
+        gui = GetComponent<InputGenerator>().uiController.hudController;
+
         // We may want to change these to the prefab specifically
 		/*health = 0;
 		healthMax = DEFAULT_MAX_HEALTH;

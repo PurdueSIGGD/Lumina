@@ -7,7 +7,7 @@ public class UISettingsSidePanel : UIPanel {
 
     private Animator anim;
 
-    [HideInInspector] public SettingsController controller;
+    [HideInInspector] public SettingsCanvas controller;
 
     private void Awake()
     {

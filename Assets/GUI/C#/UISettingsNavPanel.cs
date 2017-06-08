@@ -8,9 +8,9 @@ public class UISettingsNavPanel : UIPanel
 {
    
     
-    [HideInInspector] public SettingsController controller; //don't need to assign in Editor
+    [HideInInspector] public SettingsCanvas controller; //don't need to assign in Editor
 
-    private InputGenerator inputGenerator;
+    [HideInInspector] public InputGenerator inputGenerator;
     private Animator anim;
     private CanvasGroup canvasGroup;
 
@@ -25,7 +25,7 @@ public class UISettingsNavPanel : UIPanel
         }
     }
 
-    public void SetController(SettingsController controller)
+    public void SetController(SettingsCanvas controller)
     {
         this.controller = controller;        
     }

@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class SettingsController : MonoBehaviour {
+public class SettingsCanvas : UICanvas {
   
     public EventSystem eventSystem;
-    public InputGenerator inputGenerator;
+    
 
     public UISettingsNavPanel navPanel;
     public UISettingsSidePanel settingsPanel;
@@ -20,10 +20,15 @@ public class SettingsController : MonoBehaviour {
     [HideInInspector] public UIPanel currentSidePanel; //side panel beside nav
     [HideInInspector] public UIPanel currentConfirmPanel;
 
+    public UIController uiController { get; set; }
+
+    public InputGenerator inputGenerator { get; set; }
+
     private void Start()
     {
         //nav
         navPanel.controller = this;
+        navPanel.inputGenerator = uiController.player.GetComponent<InputGenerator>();
 
         //main menu        
         mainMenuConfirmPanel.controller = this;
@@ -42,12 +47,12 @@ public class SettingsController : MonoBehaviour {
         
     }
 
-    public void ToggleSettingsCanvas()
+    public override void ToggleCanvas()
     {
         //if not open
         if (navPanel.gameObject.activeSelf == false)
         {
-            navPanel.Open();
+            navPanel.Open(); //navPanel contains the PauseGame and Resume Game
         }
         else
         {
