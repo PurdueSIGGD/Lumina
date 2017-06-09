@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c1972d83fc2ec408e3f262ec61238b, type: 3}
+  m_Name: SkeletonDance ReturnState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: d1249ca52d1f26745bc35490fa998604, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: f955298ac5000f245aaae8f193ed9322, type: 2}
+    trueState: {fileID: 11400000, guid: 2ecffbef37e279d4eae795e23b681440, type: 2}
+    falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+  - decision: {fileID: 11400000, guid: 29c9c311aaf66b54ab5173cd4b1eab9d, type: 2}
+    trueState: {fileID: 11400000, guid: c92f106a53ea9994ba2ebd10e9c4168b, type: 2}
+    falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+  exitAction: {fileID: 11400000, guid: fdb8d1a7cdce7bf47860dd1257a2fde2, type: 2}
+  sceneGizmoColor: {r: 0.19210117, g: 0.8235294, b: 0.1695502, a: 1}

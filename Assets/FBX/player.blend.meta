@@ -323,6 +323,7 @@ ModelImporter:
     100630: WGT-VIS-thigh_pole_ik_R
     100632: WGT-VIS-upper_arm_pole_ik_L
     100634: WGT-VIS-upper_arm_pole_ik_R
+    100636: Player
     400000: body_RoadKillOut
     400002: chest
     400004: DEF-chest
@@ -641,6 +642,7 @@ ModelImporter:
     400630: WGT-VIS-thigh_pole_ik_R
     400632: WGT-VIS-upper_arm_pole_ik_L
     400634: WGT-VIS-upper_arm_pole_ik_R
+    400636: Player
     2300000: WGT-chest
     2300002: WGT-elbow_hose_L
     2300004: WGT-elbow_hose_R
@@ -955,10 +957,12 @@ ModelImporter:
     7400002: Idle_Standing
     7400004: Wave_Standing
     7400006: Walking
+    7400008: Idle
+    7400010: TPose
     9500000: //RootNode
     13700000: body_RoadKillOut
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -971,24 +975,24 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 0
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 1
+    importBlendShapes: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
+    optimizeMeshForGPU: 0
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8

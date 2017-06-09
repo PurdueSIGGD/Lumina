@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c1972d83fc2ec408e3f262ec61238b, type: 3}
+  m_Name: DarklingWander ScanDestState
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 518e76452629f6d4fba79bb04ea2fc00, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 5199c87f5cc8ade45b6c0c9f48ac824f, type: 2}
+    trueState: {fileID: 11400000, guid: cbefe2982fb55f24ea98ef87df01645e, type: 2}
+    falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+  - decision: {fileID: 11400000, guid: 1a60c24a548cf584c890c334b3c6c77c, type: 2}
+    trueState: {fileID: 11400000, guid: be63f5e14d258d04fa22a6d1c4c636b4, type: 2}
+    falseState: {fileID: 11400000, guid: 795b2381cc016dc4dbf571bbd1d9e194, type: 2}
+  exitAction: {fileID: 0}
+  sceneGizmoColor: {r: 0.84169555, g: 0.037629742, b: 0.85294116, a: 1}
