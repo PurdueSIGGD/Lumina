@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputGenerator : MonoBehaviour {
 
-    public bool isGamePausing;
+    
     public UIController uiController;
     
 
@@ -19,11 +19,15 @@ public class InputGenerator : MonoBehaviour {
 
 	float jumpInput;
 
+    /// <summary>
+    /// Set the running status of game
+    /// </summary>
+    public bool isGamePausing { get; private set; }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-
+        isGamePausing = false;
     }
 	
 	// Update is called once per frame

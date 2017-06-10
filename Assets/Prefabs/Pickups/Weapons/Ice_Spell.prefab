@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 135522763868013500}
   - component: {fileID: 54337691760618378}
   - component: {fileID: 114658875192318454}
+  - component: {fileID: 114926999507861618}
   m_Layer: 0
   m_Name: Ice_Spell
   m_TagString: Item
@@ -233,17 +234,34 @@ MonoBehaviour:
   minCondition: 1
   maxCondition: 100
   damageType: 2
+  playerStats: {fileID: 0}
   timeToAttack: 1
   timeToCooldown: 1
   range: 20
   baseDamage: 10
   animationType: 1
+  bothHands: 0
+  storedAmmo: 10
   myAnim: {fileID: 0}
   idleParticles: {fileID: 198556945871469174}
   shootParticles: {fileID: 198911113911230320}
   mesh: {fileID: 4643761097077648}
   width: 1
-  statsController: {fileID: 0}
+--- !u!114 &114926999507861618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296853161654420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Normal Ice
+  description: "This spell will shoot a ray of ice \nand destroy everything in its
+    path\n"
+  icon: {fileID: 21300000, guid: af79fb57c1e3a05448c5e74f08feb83a, type: 3}
 --- !u!135 &135522763868013500
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -264,7 +282,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1779337648722878}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
@@ -2901,7 +2919,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1710682124773106}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
