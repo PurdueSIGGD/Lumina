@@ -600,6 +600,18 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4282893900821898, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.1824088
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282893900821898, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.1824088
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282893900821898, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
   m_IsPrefabParent: 0
@@ -759,6 +771,52 @@ Prefab:
       objectReference: {fileID: 498544810}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b6ade5f4bcef3648a1130e9852eaa46, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &680401093
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 297.815
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 32.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 200.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_RootOrder
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485037546341958, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+      propertyPath: m_Name
+      value: Upgrade Potion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 559960e4ef91f624abb6f77504768952, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &682201076
 GameObject:
@@ -2463,7 +2521,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4679009519762908, guid: d4ddf1fb1b0731d41b912015cadcc81d, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 32.286
+      value: 32.114
       objectReference: {fileID: 0}
     - target: {fileID: 4679009519762908, guid: d4ddf1fb1b0731d41b912015cadcc81d, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2741,57 +2799,6 @@ Transform:
   m_Father: {fileID: 955043143}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -99.162, z: 0}
---- !u!1001 &2042713101
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 297.815
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 32.286
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 200.094
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4404384482878308, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_RootOrder
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 1485037546341958, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-      propertyPath: m_Name
-      value: Upgrade Potion
-      objectReference: {fileID: 0}
-    - target: {fileID: 23714568384624278, guid: 559960e4ef91f624abb6f77504768952,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 559960e4ef91f624abb6f77504768952, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &2064627259
 Prefab:
   m_ObjectHideFlags: 0
