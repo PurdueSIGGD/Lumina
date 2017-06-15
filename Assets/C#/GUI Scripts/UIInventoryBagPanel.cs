@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Linked with InventoryController
+/// 
+/// control the list of bag item being displayed.
+/// </summary>
 public class UIInventoryBagPanel : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public RectTransform content;   //rect of content, to adjust the height according to number of item in bag
+
+   
 }

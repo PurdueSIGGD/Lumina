@@ -28,8 +28,7 @@ public class SettingsCanvas : UICanvas {
     {
         //nav
         navPanel.controller = this;
-        navPanel.inputGenerator = uiController.player.GetComponent<InputGenerator>();
-
+        
         //main menu        
         mainMenuConfirmPanel.controller = this;
 

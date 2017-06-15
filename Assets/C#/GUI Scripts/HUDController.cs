@@ -17,13 +17,20 @@ public class HUDController : MonoBehaviour {
 
     public PauseMenu pauseMenu;
 
+    //text to display instruction
+    public Text helpInteractText;
+
     public StatsController statsController { get; set; }
     public UIController uiController { get; set; }
+
+
+    private CanvasGroup canvasGroup;
 
     // Use this for initialization
     void Start () {
 
         SetupBar();
+        canvasGroup = GetComponent<CanvasGroup>();
 	}
 	
 	// Update is called once per frame
@@ -31,6 +38,19 @@ public class HUDController : MonoBehaviour {
 
 	}
 
+    /// <summary>
+    /// Set GUI.alpha of the stats panel
+    /// </summary>
+    public float alpha {
+        get
+        {
+            return canvasGroup.alpha;
+        }
+        set
+        {
+            canvasGroup.alpha = value;
+        }
+    }
 
     public void SetupBar()
     {

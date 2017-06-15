@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
     private static float GRAB_DISTANCE = 4;
@@ -22,8 +23,16 @@ public class InventoryController : MonoBehaviour {
 	Pickup pick;
     ItemStats get;
 
+    private Text helpInteractText;  //text display to help interact
 
-	void Start () {
+
+    private void Awake()
+    {
+        //get text
+        helpInteractText = gameObject.GetComponent<InputGenerator>().uiController.hudController.helpInteractText;
+    }
+
+    void Start () {
 		interactCooldown = .3f;
 
 	}
@@ -34,10 +43,27 @@ public class InventoryController : MonoBehaviour {
         //print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
 			string itemTag = hitObjs[i].collider.gameObject.tag;
-			if (itemTag == "Item") {
+
+            //if see Item
+            if (itemTag == "Item") {
 				get = hitObjs [i].collider.gameObject.GetComponent<ItemStats>();
-				//if (get) Debug.Log ("Seeing item "+ get.gameObject.name);
+                //if (get) Debug.Log ("Seeing item "+ get.gameObject.name);
+
+                //display help text
+                if (!helpInteractText.gameObject.activeSelf)
+                {
+                    helpInteractText.gameObject.SetActive(true);
+                }
+                    
 			}
+            else
+            {
+                //disable help text
+                if (helpInteractText.gameObject.activeSelf)
+                {
+                    helpInteractText.gameObject.SetActive(false);
+                }
+            }
 		}
 	}
 
@@ -52,6 +78,10 @@ public class InventoryController : MonoBehaviour {
 		}
 	}*/
 
+    /// <summary>
+    /// Get value from InputGenerator and Iteract with Item
+    /// </summary>
+    /// <param name="value">True if user press "f"</param>
 	public void Interact(bool value)
     {
         // If value is true, pick up
@@ -120,29 +150,29 @@ public class InventoryController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
-			pick = other.gameObject.GetComponentInParent<Pickup> ();
-			//Debug.Log ("Player picked up " + pick.itemType);
-            bool deletes = true;
-			switch(pick.itemType){
-			    case Pickup.pickUpType.upgradeKit:
-				    upgradekits += pick.amount;
-					statsController.pauseMenu.setUpgradeKAmount (upgradekits);
-				    break;
-				case Pickup.pickUpType.upgradePotion:
-					upgradePotions++;
-					statsController.pauseMenu.setUpgradePAmount (upgradePotions);
-                    break;
-                case Pickup.pickUpType.Magic:
-                    deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
-					statsController.pauseMenu.setMagicAmount (pick.amount);
-                    break;
-                case Pickup.pickUpType.Health:
-                    deletes = (statsController.UpdateHealth(pick.amount) != pick.amount);
-					statsController.pauseMenu.setHealthAmount (pick.amount);
-                    break;
-                case Pickup.pickUpType.Arrow:
-                    deletes = (statsController.UpdateArrows((int)(pick.amount)) != pick.amount);
-                    break;
+			    pick = other.gameObject.GetComponentInParent<Pickup> ();
+			    //Debug.Log ("Player picked up " + pick.itemType);
+                bool deletes = true;
+			    switch(pick.itemType){
+			        case Pickup.pickUpType.upgradeKit:
+				        upgradekits += pick.amount;
+					    statsController.pauseMenu.setUpgradeKAmount (upgradekits);
+				        break;
+				    case Pickup.pickUpType.upgradePotion:
+					    upgradePotions++;
+					    statsController.pauseMenu.setUpgradePAmount (upgradePotions);
+                        break;
+                    case Pickup.pickUpType.Magic:
+                        deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
+					    statsController.pauseMenu.setMagicAmount (pick.amount);
+                        break;
+                    case Pickup.pickUpType.Health:
+                        deletes = (statsController.UpdateHealth(pick.amount) != pick.amount);
+					    statsController.pauseMenu.setHealthAmount (pick.amount);
+                        break;
+                    case Pickup.pickUpType.Arrow:
+                        deletes = (statsController.UpdateArrows((int)(pick.amount)) != pick.amount);
+                        break;
 			}
 			if (deletes) Destroy (pick.gameObject);
 		}

@@ -9,8 +9,7 @@ public class UISettingsNavPanel : UIPanel
    
     
     public SettingsCanvas controller { get; set; }
-
-    [HideInInspector] public InputGenerator inputGenerator;
+   
     private Animator anim;
     
 

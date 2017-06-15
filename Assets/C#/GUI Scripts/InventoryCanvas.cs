@@ -11,6 +11,16 @@ public class InventoryCanvas : UICanvas {
 
     public UIController uiController { get; set; }
 
+    private List<UIPanel> listPanels;
+
+    private void Awake()
+    {
+        listPanels = new List<UIPanel>()
+        {
+            inventoryPanel, avatarPanel, descriptionPanel
+        };
+    }
+
     public override void ToggleCanvas()
     {
         if (inventoryPanel.gameObject.activeSelf == false)
@@ -29,14 +39,13 @@ public class InventoryCanvas : UICanvas {
         //gameObject.SetActive(true);
 
         //open stuff
-        inventoryPanel.Open();
-        avatarPanel.Open();
+        listPanels.ForEach(x => x.Open());
     }
 
     public void Close()
     {
-        inventoryPanel.Close();
-        avatarPanel.Close();
+        //close all panel
+        listPanels.ForEach(x => x.Close());
     }
     
 }

@@ -8,63 +8,61 @@ using UnityEngine.UI;
 /// </summary>
 public class UIBagItem : MonoBehaviour {
 
+    public Text displayNameText;    //place to display name
+    public Image image; //place to display icon
 
-    public Text displayNameText;
-    public Image image;
+    [HideInInspector] public RectTransform rect;
 
-    /// <summary>
-    /// information to show in help panel
-    /// </summary>
-    public string description { get; set; }
-    
-    /// <summary>
-    /// icon to display in bag
-    /// </summary>
-    public Sprite icon { get; set; }
+    public UIInventoryBagPanel bag {get; set; } //UI Inventory Bag that hold this
 
     /// <summary>
-    /// Display name to use in bag
+    /// bag item that this UI is attached to
     /// </summary>
-    public string displayName { get; set; }
+    public BagItem item { get; set; }
 
     /// <summary>
-    /// Position Y to help adjust the panel
+    /// item stats that this UI is attached to
     /// </summary>
-    public float posY {
-        get
-        {
-            return rect.position.y;
-        }
-        set
-        {
-            rect.position = new Vector3(0, value);
-        }
-    }  
-
-
-    private RectTransform rect;
-    public UIInventoryBagPanel bag {get; set; }
+    public ItemStats itemStats { get; set; }    
 
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
     }
 
-    public void SetIcon(Sprite sprite)
+    /// <summary>
+    /// Set up the item so that the UI element can use these information
+    /// </summary>
+    /// <param name="item"></param>
+    public void Setup(BagItem item)
     {
-        icon = sprite;
+        //set fields
+        this.item = item;
+        this.itemStats = item.GetComponent<ItemStats>();
+
+        //set information
+        displayNameText.text = item.displayName;
+        image.sprite = item.sprite;
     }
 
     /// <summary>
-    /// fast way to set up an element of UI Bag Item
+    /// Show more information on the description panel
     /// </summary>
-    /// <param name="displayName"> display to use in bag</param>
-    /// <param name="description"> description in the help Panel</param>
-    /// <param name="icon"> icon to display</param>
-    public void Setup(string displayName, string description, Sprite icon)
+    public void DisplayDescription()
     {
-        this.displayName = displayName;
-        this.description = description;
-        this.icon = icon;
+        //find game Object
+        GameObject gameObject  = GameObject.FindGameObjectWithTag("DescriptionPanel");
+
+        //get component
+        UIDescriptionPanel descriptionPanel = gameObject.GetComponent<UIDescriptionPanel>();
+
+        //display
+        if (descriptionPanel != null)
+        {
+            descriptionPanel.DisplayBagItemInfo(this);
+        }
+        
     }
+
+   
 }
