@@ -3,19 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-public abstract class UIPanel : MonoBehaviour
+public abstract class UIPanel : UIBase
 {
-    public bool interactable
-    {
-        get
-        {
-            return GetComponent<CanvasGroup>().interactable;
-        }
-        set
-        {
-            GetComponent<CanvasGroup>().interactable = value;
-        }
-    }
+    
 
     /// <summary>
     /// should simply open the panel

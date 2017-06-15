@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UICanvas : MonoBehaviour {
+public abstract class UICanvas : UIBase {
 
     public abstract void ToggleCanvas();
 }

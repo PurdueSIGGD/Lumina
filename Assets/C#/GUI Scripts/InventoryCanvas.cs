@@ -23,7 +23,7 @@ public class InventoryCanvas : UICanvas {
 
     public override void ToggleCanvas()
     {
-        if (inventoryPanel.gameObject.activeSelf == false)
+        if (!inventoryPanel.active)
         {
             Open();
         }
@@ -35,9 +35,7 @@ public class InventoryCanvas : UICanvas {
 
     public void Open()
     {
-        //just in case
-        //gameObject.SetActive(true);
-
+        
         //open stuff
         listPanels.ForEach(x => x.Open());
     }

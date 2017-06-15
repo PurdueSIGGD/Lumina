@@ -31,6 +31,7 @@ public class UINormalPanel : UIPanel
     public override void Open()
     {
         gameObject.SetActive(true);
+        SetActiveUI(true);
         anim.SetTrigger("Open");
     }
 

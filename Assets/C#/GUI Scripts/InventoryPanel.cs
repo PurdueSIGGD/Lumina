@@ -12,6 +12,7 @@ public class InventoryPanel : UIPanel
     public UIInventoryBagPanel magicPanel;
     public UIInventoryBagPanel armorPanel;
     public UIInventoryBagPanel kitPanel;
+    public UIBagItem genericBagItem;    //used as a guide line for normal bag item
 
     private List<UIInventoryBagPanel> listBags;
 
@@ -24,18 +25,24 @@ public class InventoryPanel : UIPanel
 
     private void Awake()
     {
+        //get component
         anim = GetComponent<Animator>();
+
+        //init and assign
         listBags = new List<UIInventoryBagPanel>()
         {
             weaponPanel, magicPanel, armorPanel, kitPanel
         };
+
+        listBags.ForEach(x => x.inventoryPanel = this);
     }
 
     private void Start()
     {
         //make all bag non-active
         currentBag = null;
-        listBags.ForEach(x => x.gameObject.SetActive(false));
+        //listBags.ForEach(x => x.gameObject.SetActive(false));
+        listBags.ForEach(x => x.GetComponent<UIPanel>().SetActiveUI(false));
     }
 
     public override void Close()
@@ -45,7 +52,7 @@ public class InventoryPanel : UIPanel
 
     public override void Open()
     {
-        gameObject.SetActive(true);
+        SetActiveUI(true);
         anim.SetTrigger("Open");
     }
 
@@ -54,7 +61,8 @@ public class InventoryPanel : UIPanel
         //if no current Open Bag
         if (currentBag == null)
         {
-            bag.gameObject.SetActive(true);
+            //bag.gameObject.SetActive(true);
+            bag.GetComponent<UIPanel>().SetActiveUI(true);
             currentBag = bag;
             return;
         }
@@ -62,8 +70,12 @@ public class InventoryPanel : UIPanel
         //if open Bag != bag
         if (currentBag != bag)
         {
-            currentBag.gameObject.SetActive(false);
-            bag.gameObject.SetActive(true);
+            //currentBag.gameObject.SetActive(false);
+            currentBag.GetComponent<UIPanel>().SetActiveUI(false);
+
+            //bag.gameObject.SetActive(true);
+            bag.GetComponent<UIPanel>().SetActiveUI(true);
+
             currentBag = bag;
             return;
         }

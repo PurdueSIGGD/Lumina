@@ -10,6 +10,7 @@ public class UIBagItem : MonoBehaviour {
 
     public Text displayNameText;    //place to display name
     public Image image; //place to display icon
+    public static float height = 100;    //height of UI Rect when displaying
 
     [HideInInspector] public RectTransform rect;
 

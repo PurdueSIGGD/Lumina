@@ -43,7 +43,8 @@ public class UIDescriptionPanel : MonoBehaviour {
 
         }
 
-        
+        //set stats description
+        statsText.text = stats;
     }
 
 }

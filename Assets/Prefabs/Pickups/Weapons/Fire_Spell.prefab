@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 135711625284397372}
   - component: {fileID: 54301103546836996}
   - component: {fileID: 114473689897220084}
+  - component: {fileID: 114923896785150568}
   m_Layer: 0
   m_Name: Fire_Spell
   m_TagString: Item
@@ -233,17 +234,34 @@ MonoBehaviour:
   minCondition: 1
   maxCondition: 100
   damageType: 1
+  playerStats: {fileID: 0}
   timeToAttack: 0.3
   timeToCooldown: 0.3
   range: 20
   baseDamage: 1
   animationType: 1
+  bothHands: 0
+  storedAmmo: 10
   myAnim: {fileID: 0}
   idleParticles: {fileID: 198235078090814050}
   shootParticles: {fileID: 198974714219414730}
   mesh: {fileID: 4569922837549708}
   width: 0.5
-  statsController: {fileID: 0}
+--- !u!114 &114923896785150568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1489681100830950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Force Fire
+  description: "This spell will shoot a ray of ice \nand destroy everything in its
+    path"
+  sprite: {fileID: 21300000, guid: 004f6e9abf2edd34bb29dbf05186b2f2, type: 3}
 --- !u!135 &135711625284397372
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -264,7 +282,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1897698298917214}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
@@ -2901,7 +2919,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1534782811612366}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0

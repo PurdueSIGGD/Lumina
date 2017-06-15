@@ -24,7 +24,7 @@ public class InventoryController : MonoBehaviour {
     ItemStats get;
 
     private Text helpInteractText;  //text display to help interact
-
+    private InventoryPanel inventoryPanel;
 
     private void Awake()
     {
@@ -35,7 +35,9 @@ public class InventoryController : MonoBehaviour {
     void Start () {
 		interactCooldown = .3f;
 
-	}
+        //get stuff
+        inventoryPanel = GetComponent<InputGenerator>().uiController.inventoryCanvas.inventoryPanel;
+    }
 
 	void Update () {
 		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
@@ -107,20 +109,24 @@ public class InventoryController : MonoBehaviour {
     }
 
 	public void pickUpItem(ItemStats item){
+
         Transform lastItem = null;
-        if (item is Armor) { 
+        if (item is Armor) {
+
             switch (((Armor)item).type){
-		    case Armor.ArmorPiece.helmet:
-                if (helmet) lastItem = helmet.transform;
-			    helmet = (Armor)item;
-				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,helmet);
-			    break;
-		    case Armor.ArmorPiece.chestplate:
-                if (chestPlate) lastItem = chestPlate.transform;
-			    chestPlate = (Armor)item;
-				statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,chestPlate);
-			    break;
+
+                case Armor.ArmorPiece.helmet:
+                    if (helmet) lastItem = helmet.transform;
+			        helmet = (Armor)item;
+				    statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,helmet);
+			        break;
+		        case Armor.ArmorPiece.chestplate:
+                    if (chestPlate) lastItem = chestPlate.transform;
+			        chestPlate = (Armor)item;
+				    statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,chestPlate);
+			        break;
 		    }
+
             if (lastItem) {
                 //Drop last item
                 lastItem.GetComponent<Rigidbody>().isKinematic = true;
@@ -133,16 +139,23 @@ public class InventoryController : MonoBehaviour {
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.GetComponent<Collider>().isTrigger = true;
         }
+
         if (item is Magic) {
             //print("Picked up magic");
             leftWeaponController.EquipWeapon((Weapon)item);
 			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL1,leftWeaponController.weapons[0]);
 			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL2,leftWeaponController.weapons[1]);
+
+            //add to inventory
+            inventoryPanel.magicPanel.Add(item.GetComponent<BagItem>());
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
 			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR1,rightWeaponController.weapons[0]);
 			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR2,rightWeaponController.weapons[1]);
+
+            //add to weapon
+            inventoryPanel.weaponPanel.Add(item.GetComponent<BagItem>());
         }
 
 	}
