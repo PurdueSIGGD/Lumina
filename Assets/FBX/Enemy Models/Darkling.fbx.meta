@@ -628,6 +628,7 @@ ModelImporter:
     101240: VIS-upper_arm_pole.ik.L_end
     101242: VIS-upper_arm_pole.ik.R
     101244: VIS-upper_arm_pole.ik.R_end
+    101246: bodytier1
     400000: chest
     400002: //RootNode
     400004: Darkling
@@ -1251,7 +1252,9 @@ ModelImporter:
     401240: VIS-upper_arm_pole.ik.L_end
     401242: VIS-upper_arm_pole.ik.R
     401244: VIS-upper_arm_pole.ik.R_end
+    401246: bodytier1
     4300000: darkling1:RoadKillOut
+    4300002: bodytier1
     7400000: Darkling|Attack
     7400002: Darkling|Idle
     7400004: Darkling|Teleport_End
@@ -1259,8 +1262,21 @@ ModelImporter:
     7400008: Darkling|Windup
     7400010: Darkling|Take_Damage
     7400012: Darkling|Death
+    7400014: Darkling|_Default
+    7400016: Darkling|body2Action
+    7400018: Darkling|bodytier3Action
+    7400020: Darkling|darkling_tier1Action
+    7400022: Darkling|darkling_tier2Action
+    7400024: Darkling|darkling_tier3Action
+    7400026: Darkling|groupAction
+    7400028: Darkling|groupAction.001
+    7400030: Darkling|L_eyeAction
+    7400032: Darkling|mouthAction
+    7400034: Darkling|pasted__mouthAction
+    7400036: Darkling|R_eyeAction
     9500000: //RootNode
     13700000: darkling1:RoadKillOut
+    13700002: bodytier1
   materials:
     importMaterials: 1
     materialName: 0
