@@ -81,4 +81,6 @@ public abstract class UIBase : MonoBehaviour {
         blocksRayCasts = active;
         alpha = active ? 1 : 0;
     }
+
+    
 }
