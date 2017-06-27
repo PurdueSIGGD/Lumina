@@ -43,7 +43,7 @@ public class SkeletonAttackAction : EnemyAction
             }
 
             //if target get outside zone, skeleton is allowed to attack
-            skeleton.isAllowedToAttack = true;
+            //skeleton.isAllowedToAttack = true;
         }
 
         //if close enough, 
