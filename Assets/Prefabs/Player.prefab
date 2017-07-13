@@ -17158,7 +17158,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1419025804602196}
   m_LocalRotation: {x: -0, y: 0.084449135, z: -0, w: 0.99642783}
-  m_LocalPosition: {x: 294.42422, y: 31.44, z: 201.05884}
+  m_LocalPosition: {x: 294.42422, y: 31.238, z: 201.05884}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4135536473089936}
@@ -19166,6 +19166,8 @@ MonoBehaviour:
   arrowMax: 100
   myAnim: {fileID: 95017676440113730}
   iC: {fileID: 114336645036764650}
+  gui: {fileID: 0}
+  pM: {fileID: 0}
 --- !u!114 &114097777998435798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19223,6 +19225,8 @@ MonoBehaviour:
   viewmodelAnimator: {fileID: 95017676440113730}
   sC: {fileID: 114036529346635350}
   cam: {fileID: 1897307957988384}
+  helmet: {fileID: 0}
+  chestPlate: {fileID: 0}
 --- !u!114 &114477616444819408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19236,6 +19240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 114097777998435798}
   playerInventory: {fileID: 114336645036764650}
+  playerHUD: {fileID: 0}
+  playerPause: {fileID: 0}
   leftPlayerWeaponController: {fileID: 114285480779047484}
   rightPlayerWeaponController: {fileID: 114550067772635302}
 --- !u!114 &114550067772635302
@@ -19312,7 +19318,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 4938615daf47b65478ac4b08613ff324, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.96
+  m_Radius: 0.57
   m_Height: 3.28
   m_Direction: 1
   m_Center: {x: 0, y: 1.18, z: 0}

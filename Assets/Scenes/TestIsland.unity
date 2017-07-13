@@ -3103,7 +3103,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4782497600895258, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 31.44
+      value: 31.238
       objectReference: {fileID: 0}
     - target: {fileID: 4782497600895258, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3129,22 +3129,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.06258644
-      objectReference: {fileID: 0}
-    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.56072706
-      objectReference: {fileID: 0}
-    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0.5845318
-      objectReference: {fileID: 0}
-    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.5830872
-      objectReference: {fileID: 0}
+    - target: {fileID: 114477616444819408, guid: 8cf9c86fd32011d47af1090db0d5138f,
+        type: 2}
+      propertyPath: playerHUD
+      value: 
+      objectReference: {fileID: 1080213419}
+    - target: {fileID: 114477616444819408, guid: 8cf9c86fd32011d47af1090db0d5138f,
+        type: 2}
+      propertyPath: playerPause
+      value: 
+      objectReference: {fileID: 1827702718}
     - target: {fileID: 4747959732681782, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0.147332
@@ -3161,16 +3155,22 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.7736376
       objectReference: {fileID: 0}
-    - target: {fileID: 114477616444819408, guid: 8cf9c86fd32011d47af1090db0d5138f,
-        type: 2}
-      propertyPath: playerHUD
-      value: 
-      objectReference: {fileID: 1080213419}
-    - target: {fileID: 114477616444819408, guid: 8cf9c86fd32011d47af1090db0d5138f,
-        type: 2}
-      propertyPath: playerPause
-      value: 
-      objectReference: {fileID: 1827702718}
+    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.06258644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.56072706
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.5845318
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004236952818082, guid: 8cf9c86fd32011d47af1090db0d5138f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.5830872
+      objectReference: {fileID: 0}
     - target: {fileID: 114036529346635350, guid: 8cf9c86fd32011d47af1090db0d5138f,
         type: 2}
       propertyPath: gui
