@@ -144,8 +144,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1165321928632036}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 17.5, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4385734432560964}
   m_RootOrder: 0
@@ -251,8 +251,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.5044387}
-  m_Center: {x: 0, y: 0, z: -0.2477763}
+  m_Size: {x: 0.5, y: 0.5, z: 0.10197078}
+  m_Center: {x: 0, y: 0, z: -0.04901311}
 --- !u!114 &114143266723364614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,8 +268,10 @@ MonoBehaviour:
   pastLevel: {fileID: 0}
   nextLevel: {fileID: 0}
   direction: 0
+  door: {fileID: 0}
   walls: []
   enemies: []
+  cleared: 0
 --- !u!198 &198368686546528818
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -325,7 +327,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1773581898
+  randomSeed: -748891047
   InitialModule:
     serializedVersion: 3
     enabled: 1

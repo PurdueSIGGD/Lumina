@@ -10,6 +10,7 @@ public class Door : Usable {
     public string displayText;
     public Animator myAnimator;
     private GameObject player;
+    public int seed, depth;
     public void Start() {
         if (displayText == "") {
             displayText = "Enter " + sceneToLoad;
@@ -33,6 +34,8 @@ public class Door : Usable {
     public IEnumerator LoadScene() {
         yield return new WaitForSeconds(2);
         player.SendMessage("EnterDungeon");
+        PlayerPrefs.SetInt("DungeonSeed", seed);
+        PlayerPrefs.SetInt("DungeonDepth", depth);
         SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
 
     }

@@ -58,7 +58,14 @@ MonoBehaviour:
   - {fileID: 1255651878241090, guid: 0c97e2d3903e3414cadb6054b4a9003f, type: 2}
   door: {fileID: 1612141894332360, guid: bdd3af366856a2445aebd1474399c58d, type: 2}
   rocks:
-  - {fileID: 1365658850573006, guid: 98b60f721b276c64480a11d344be145a, type: 2}
+  - {fileID: 1588781676339302, guid: c1f2c9a4909e8e149ab0192c67cf8c45, type: 2}
+  - {fileID: 1412461809342462, guid: a5bfd59b6e79905428a3b691778884d7, type: 2}
+  - {fileID: 1014834449186080, guid: a661a88f53b4cc74e85f54d26546b632, type: 2}
+  - {fileID: 1689133463788332, guid: e9d2d2d49dab5f949be42f40f50c80a5, type: 2}
+  - {fileID: 1355235834910250, guid: 295d043ea9e3fa340bc65a7daf1c7484, type: 2}
+  - {fileID: 1844777538716204, guid: 6f5989a415ecdb346b612dfd12985bdc, type: 2}
+  - {fileID: 1463761262518372, guid: f3e9732d627f1d84a8766b4fbd8dd73b, type: 2}
+  - {fileID: 1548226402191888, guid: cb8e04361d8356740afde4c678dbbb45, type: 2}
   floor: {fileID: 1661550819550872, guid: 3d6070d66893e5e4ca501aaa3042b306, type: 2}
   ceiling: {fileID: 1959916698101584, guid: 81511654192563c41b6fd5eb2c459042, type: 2}
   descender: {fileID: 1856713370985270, guid: ecbf1e0a199e2864f8718ad18be98f89, type: 2}
@@ -66,5 +73,6 @@ MonoBehaviour:
   dungeonLevel: {fileID: 1640547438644296, guid: b236c4c4cef4e9b4f978071bc3c952c5,
     type: 2}
   seed: 0
-  depth: 1
+  depth: 9
+  directionOverride: 
   dungeons: []
