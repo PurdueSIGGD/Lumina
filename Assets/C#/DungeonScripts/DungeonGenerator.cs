@@ -10,7 +10,9 @@ public class DungeonGenerator : MonoBehaviour {
     public GameObject door;         // A single door
                                     // Placed 52 away from center
     public GameObject[] rocks;         // A rock placed to  block up a door entrance
-                                    // Placed same place as doors
+                                       // Placed same place as doors
+    public GameObject chandelier;   // Something to light up hallways
+                                    // Placed 50 away from center
     public GameObject floor;        // The basic floor for each level
                                     // Placed at 0,0,0
     public GameObject ceiling;      // The particles that you see in the sky
@@ -170,14 +172,17 @@ public class DungeonGenerator : MonoBehaviour {
                 // Add a rock to all other door places
                 ArrayList rockDirectionList = new ArrayList(new int[] { 0, 1, 2, 3 });
                 rockDirectionList.Remove(directionNum);
-                                // Don't add a rock if we just went down
-
+                // Don't add a rock if we just went down
                 if (lastDungeon != null && lastDungeon.transform.position.y == dungeonPosition.y) rockDirectionList.Remove((lastDungeon.direction + 2) % 4);
               
                 foreach (int item in rockDirectionList) {
                     GameObject rockSpawn = GameObject.Instantiate(rocks[Random.Range(0, rocks.Length)], dungeonPosition + doorPositions[item], Quaternion.Euler(wallRotations[item]));
                     rockSpawn.transform.parent = newDungeon.transform;
                 }
+
+                // Add a chandelier for in-betweens, they are twice the length as walls and 4 units high
+                GameObject chandelierSpawn = GameObject.Instantiate(chandelier, dungeonPosition + wallPositions[directionNum] * 2 + (Vector3.up * 5), Quaternion.identity);
+                chandelierSpawn.transform.parent = newDungeon.transform;
 
                 // if the next position has nowhere to go, force to go down 
                 bool forceDownwards = true;
