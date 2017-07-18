@@ -20,6 +20,9 @@ public class MovementController : MonoBehaviour {
 	float sprintRecharge; //the amount of time left before player can sprint again
 	Vector3 rotationVector;//vector used to set and maintain the rotation of the player and the camera
 
+    private Vector3 outsideLocation; // The location that we will return to when exiting a dungeon
+    private bool disableMovement = false; // Used for scripted events like exiting the boat, or entering a dungeon
+
 	public bool isJumping;
 	public bool isSprinting;
     public bool canMove = true;
@@ -27,12 +30,15 @@ public class MovementController : MonoBehaviour {
 	public GameObject cameraObj;
     public Animator viewmodelAnimator;
 
+    private Camera playerCam;
+
 
     // Use this for initialization
     void Start () {
+        DontDestroyOnLoad(this.gameObject);
 		playerPhysics = GetComponentInParent<Rigidbody> ();
 		playerCollider = GetComponentInParent<CapsuleCollider> ();
-
+        playerCam = transform.GetComponentsInChildren<Camera>()[0];
 		distToGround = playerCollider.bounds.extents.y/2.5f;
         //print(distToGround);
 		lastJump = 0;
@@ -50,11 +56,8 @@ public class MovementController : MonoBehaviour {
 	*/
 	public void SetMovement(float lr, float fb, bool sprintPressed){
 
-
-        viewmodelAnimator.SetBool("Running", this.isSprinting && (lr != 0 || fb != 0) && IsGrounded() && !blocked);
-        viewmodelAnimator.SetBool("Walking", (lr != 0 || fb != 0) && IsGrounded() && !blocked);
 		UpdateCooldowns ();
-		ApplyHorizontalMovement (lr, fb, sprintPressed);
+		bool couldMove = ApplyHorizontalMovement (lr, fb, sprintPressed);
 		if (isJumping) {
             if (!canMove) return;
             if (IsGrounded()) {
@@ -64,7 +67,12 @@ public class MovementController : MonoBehaviour {
 				isJumping = false;
 			}
 		}
-	}
+
+
+        bool walking = (lr != 0 || fb != 0) && IsGrounded() && couldMove;
+        viewmodelAnimator.SetBool("Walking", walking);
+        viewmodelAnimator.SetBool("Running", this.isSprinting && walking);
+    }
 
 	/**
 	*Getting the mouse movements and move your camera
@@ -91,27 +99,34 @@ public class MovementController : MonoBehaviour {
 
 	/**
 	 * Separate function for movement in the horizontal direction.
+     * 
+     * Returns true if able to move, false if no movement
 	 */
-	private void ApplyHorizontalMovement(float x, float z, bool sprintPressed){
-        if (!canMove) return;
+	private bool ApplyHorizontalMovement(float x, float z, bool sprintPressed){
+        if (!canMove) return false;
 
 		ApplySprint (sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
         float airborneModifier = IsGrounded() ? 1 : .75f;
 
+        bool couldMove = false;
+
         if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
             Vector3 desiredPosition = transform.position + (transform.right * x * Time.deltaTime * sprintModifier * airborneModifier * 10);
             if (canMoveTo(desiredPosition)) {
+                if (Mathf.Abs(z) > 0) couldMove = true;
                 transform.position = desiredPosition;
             }
         }
 		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) {
             Vector3 desiredPosition = (transform.position + transform.forward * z * Time.deltaTime * sprintModifier * airborneModifier * 10);
             if (canMoveTo(desiredPosition)) {
+                if (Mathf.Abs(z) > 0) couldMove = true;
                 transform.position = desiredPosition;
             }
         }
+        return couldMove;
     }
 
 	/**
@@ -188,27 +203,62 @@ public class MovementController : MonoBehaviour {
         playerPhysics.isKinematic = false;
         canMove = true;
     }
+    void PrepareToEnterDungeon() {
+        disableMovement = true;
+    }
+    void EnterDungeon() {
+        // We expect the screen to be faded to black, so we can do crazy movements
+        outsideLocation = transform.position;
+        transform.position = new Vector3(0, 50, 0);
+        disableMovement = false;
+        // change skybox settings to be all black
+        playerCam.clearFlags = CameraClearFlags.Color;
+        playerCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f);
+
+
+    }
+    void ExitDungeon() {
+        transform.position = outsideLocation;
+        // Play whatever animations
+        playerCam.clearFlags = CameraClearFlags.Skybox;
+    }
 
     private bool canMoveTo(Vector3 pos) {
+        if (disableMovement) {
+            return false;
+        }
         //RenderVolume(pos + Vector3.up * (playerCollider.height / 2), pos - Vector3.up * (playerCollider.height / 2), playerCollider.radius, Vector3.forward, playerCollider.radius);
         //RaycastHit[] hits = Physics.CapsuleCastAll(pos + Vector3.up * (playerCollider.height / 2), pos - Vector3.up * (playerCollider.height / 2), playerCollider.radius/2, Vector3.forward);
 
         //RaycastHit[] hits = Physics.BoxCastAll(pos, Vector3.one, Vector3.forward/100000);
         Vector3 dir = pos - transform.position;
         float dist = Vector3.Distance(pos, transform.position);
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, dir, dist + 1.3f);
-        Debug.DrawLine(transform.position, dir);
-        foreach (RaycastHit hit in hits) {
-            if (!hit.collider.isTrigger && hit.collider.gameObject != this.gameObject) {
-                print(hit.transform);
-                blocked = true;
-                return false;
-            }
-            
+        //TODO make 4 raycasts from each corner of the body (left, up, right, down)
+        RaycastHit[] hitsForward = Physics.RaycastAll(transform.position + Vector3.forward * 0.5f, dir, dist + 0.5f);
+        RaycastHit[] hitsRight = Physics.RaycastAll(transform.position + Vector3.right * 0.5f, dir, dist + 0.5f);
+        RaycastHit[] hitsBack = Physics.RaycastAll(transform.position + Vector3.back * 0.5f, dir, dist + 0.5f);
+        RaycastHit[] hitsLeft = Physics.RaycastAll(transform.position + Vector3.left * 0.5f, dir, dist + 0.5f);
+
+        Debug.DrawLine(transform.position + Vector3.forward * 0.5f, transform.position + Vector3.forward * 0.5f + dir);
+        if (hitsIn(hitsForward) || hitsIn(hitsRight) || hitsIn(hitsBack) || hitsIn(hitsLeft)) {
+            blocked = true;
+            return false;
         }
        
         blocked = false;
         return true;
+    }
+
+    private bool hitsIn(RaycastHit[] hits) {
+        foreach (RaycastHit hit in hits) {
+            if (!hit.collider.isTrigger && hit.collider.gameObject != this.gameObject) {
+                //print(hit.transform);
+                //blocked = true;
+                return true;
+            }
+
+        }
+        return false;
     }
     
 }

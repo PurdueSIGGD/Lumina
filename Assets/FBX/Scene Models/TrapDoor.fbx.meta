@@ -10,11 +10,17 @@ ModelImporter:
     100004: Door_end
     100006: //RootNode
     100008: TrapDoor
+    100010: Body
+    100012: Body_end
     400000: DescenderRockAndBrick1.001
     400002: Door
     400004: Door_end
     400006: //RootNode
     400008: TrapDoor
+    400010: Body
+    400012: Body_end
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: DescenderRockAndBrick1.001
     7400000: TrapDoor|Door_Open.001
     7400002: TrapDoor|TrapDoor_Closed
@@ -47,7 +53,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.5
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

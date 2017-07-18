@@ -33,11 +33,20 @@ public class InventoryController : MonoBehaviour {
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward);
         //print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
-			string itemTag = hitObjs[i].collider.gameObject.tag;
-			if (itemTag == "Item") {
-				get = hitObjs [i].collider.gameObject.GetComponent<ItemStats>();
+            ItemStats its;
+            Usable usb;
+            if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
+                // Show GUI info here using its
+            } else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
+                // Show usetext using usb
+                Debug.Log(usb.getInfoText());
+            }
+
+			//string itemTag = hitObjs[i].collider.gameObject.tag;
+			//if (itemTag == "Item") {
+				//get = hitObjs [i].collider.gameObject.GetComponent<ItemStats>();
 				//if (get) Debug.Log ("Seeing item "+ get.gameObject.name);
-			}
+			//}
 		}
 	}
 
@@ -62,14 +71,26 @@ public class InventoryController : MonoBehaviour {
 			}
 			//Debug.Log ("Interacting");
 			for (int i = 0; i < hitObjs.Length; i++) {
-                get = hitObjs [i].collider.GetComponent<ItemStats> ();
-				if (get == null)
-					continue;
-				pickUpItem (get);
-                //Debug.Log ("player is Equipping Armor ");
-                //Destroy (get.gameObject);
-                // Reset timer
-                interactCooldown = Time.timeSinceLevelLoad;
+                if (hitObjs[i].collider.GetComponent<ItemStats>()) {
+                    get = hitObjs[i].collider.GetComponent<ItemStats>();
+                    if (get == null)
+                        continue;
+                    pickUpItem(get);
+                    //Debug.Log ("player is Equipping Armor ");
+                    //Destroy (get.gameObject);
+                    // Reset timer
+                    interactCooldown = Time.timeSinceLevelLoad;
+                } else if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
+                    Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
+                    itemToUse.Use();
+
+                    interactCooldown = Time.timeSinceLevelLoad;
+
+                } else {
+                    continue;
+                }
+
+
 
             }
         } 
