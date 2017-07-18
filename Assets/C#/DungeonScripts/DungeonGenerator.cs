@@ -181,7 +181,7 @@ public class DungeonGenerator : MonoBehaviour {
                 }
 
                 // Add a chandelier for in-betweens, they are twice the length as walls and 4 units high
-                GameObject chandelierSpawn = GameObject.Instantiate(chandelier, dungeonPosition + wallPositions[directionNum] * 2 + (Vector3.up * 5), Quaternion.identity);
+                GameObject chandelierSpawn = GameObject.Instantiate(chandelier, dungeonPosition + wallPositions[directionNum] * 2 + (Vector3.up * 4f), Quaternion.identity);
                 chandelierSpawn.transform.parent = newDungeon.transform;
 
                 // if the next position has nowhere to go, force to go down 
