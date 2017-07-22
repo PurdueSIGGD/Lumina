@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: 42bcbf60b0e9bd54cab102cfe72becac
+timeCreated: 1500415826
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cone
+    100002: Crab
+    100004: crab2:RoadKillOut
+    100006: //RootNode
+    100008: crab_body_center
+    100010: crab_L_1_IK
+    100012: crab_L_1_IK_end
+    100014: crab_L_2_IK
+    100016: crab_L_2_IK_end
+    100018: crab_L_3_IK
+    100020: crab_L_3_IK_end
+    100022: crab_L_claw_IK
+    100024: crab_L_claw_IK_end
+    100026: crab_R_1_IK
+    100028: crab_R_1_IK_end
+    100030: crab_R_2_IK
+    100032: crab_R_2_IK_end
+    100034: crab_R_3_IK
+    100036: crab_R_3_IK_end
+    100038: crab_R_claw_IK
+    100040: crab_R_claw_IK_end
+    100042: Cube
+    100044: L_crab_claw1
+    100046: L_crab_claw2
+    100048: L_crab_claw_pincer1_1
+    100050: L_crab_claw_pincer1_2
+    100052: L_crab_claw_pincer1_2_end
+    100054: L_crab_claw_pincer2_1
+    100056: L_crab_claw_pincer2_2
+    100058: L_crab_claw_pincer2_2_end
+    100060: L_crab_eye1
+    100062: L_crab_eye2
+    100064: L_crab_eye3
+    100066: L_crab_eye3_end
+    100068: L_crab_leg1_1
+    100070: L_crab_leg1_2
+    100072: L_crab_leg1_3
+    100074: L_crab_leg1_3_end
+    100076: L_crab_leg2_1
+    100078: L_crab_leg2_2
+    100080: L_crab_leg2_3
+    100082: L_crab_leg2_3_end
+    100084: L_crab_leg3_1
+    100086: L_crab_leg3_2
+    100088: L_crab_leg3_3
+    100090: L_crab_leg3_3_end
+    100092: R_crab_claw1
+    100094: R_crab_claw2
+    100096: R_crab_claw_pincer1_1
+    100098: R_crab_claw_pincer1_2
+    100100: R_crab_claw_pincer1_2_end
+    100102: R_crab_claw_pincer2_1
+    100104: R_crab_claw_pincer2_2
+    100106: R_crab_claw_pincer2_2_end
+    100108: R_crab_eye1
+    100110: R_crab_eye2
+    100112: R_crab_eye3
+    100114: R_crab_eye3_end
+    100116: R_crab_leg1_1
+    100118: R_crab_leg1_2
+    100120: R_crab_leg1_3
+    100122: R_crab_leg1_3_end
+    100124: R_crab_leg2_1
+    100126: R_crab_leg2_2
+    100128: R_crab_leg2_3
+    100130: R_crab_leg2_3_end
+    100132: R_crab_leg3_1
+    100134: R_crab_leg3_2
+    100136: R_crab_leg3_3
+    100138: R_crab_leg3_3_end
+    400000: Cone
+    400002: Crab
+    400004: crab2:RoadKillOut
+    400006: //RootNode
+    400008: crab_body_center
+    400010: crab_L_1_IK
+    400012: crab_L_1_IK_end
+    400014: crab_L_2_IK
+    400016: crab_L_2_IK_end
+    400018: crab_L_3_IK
+    400020: crab_L_3_IK_end
+    400022: crab_L_claw_IK
+    400024: crab_L_claw_IK_end
+    400026: crab_R_1_IK
+    400028: crab_R_1_IK_end
+    400030: crab_R_2_IK
+    400032: crab_R_2_IK_end
+    400034: crab_R_3_IK
+    400036: crab_R_3_IK_end
+    400038: crab_R_claw_IK
+    400040: crab_R_claw_IK_end
+    400042: Cube
+    400044: L_crab_claw1
+    400046: L_crab_claw2
+    400048: L_crab_claw_pincer1_1
+    400050: L_crab_claw_pincer1_2
+    400052: L_crab_claw_pincer1_2_end
+    400054: L_crab_claw_pincer2_1
+    400056: L_crab_claw_pincer2_2
+    400058: L_crab_claw_pincer2_2_end
+    400060: L_crab_eye1
+    400062: L_crab_eye2
+    400064: L_crab_eye3
+    400066: L_crab_eye3_end
+    400068: L_crab_leg1_1
+    400070: L_crab_leg1_2
+    400072: L_crab_leg1_3
+    400074: L_crab_leg1_3_end
+    400076: L_crab_leg2_1
+    400078: L_crab_leg2_2
+    400080: L_crab_leg2_3
+    400082: L_crab_leg2_3_end
+    400084: L_crab_leg3_1
+    400086: L_crab_leg3_2
+    400088: L_crab_leg3_3
+    400090: L_crab_leg3_3_end
+    400092: R_crab_claw1
+    400094: R_crab_claw2
+    400096: R_crab_claw_pincer1_1
+    400098: R_crab_claw_pincer1_2
+    400100: R_crab_claw_pincer1_2_end
+    400102: R_crab_claw_pincer2_1
+    400104: R_crab_claw_pincer2_2
+    400106: R_crab_claw_pincer2_2_end
+    400108: R_crab_eye1
+    400110: R_crab_eye2
+    400112: R_crab_eye3
+    400114: R_crab_eye3_end
+    400116: R_crab_leg1_1
+    400118: R_crab_leg1_2
+    400120: R_crab_leg1_3
+    400122: R_crab_leg1_3_end
+    400124: R_crab_leg2_1
+    400126: R_crab_leg2_2
+    400128: R_crab_leg2_3
+    400130: R_crab_leg2_3_end
+    400132: R_crab_leg3_1
+    400134: R_crab_leg3_2
+    400136: R_crab_leg3_3
+    400138: R_crab_leg3_3_end
+    2300000: Cone
+    2300002: Cube
+    3300000: Cone
+    3300002: Cube
+    4300000: Cube
+    4300002: Cone
+    4300004: crab2:RoadKillOut
+    7400000: Crab|Crab_Idle
+    9500000: //RootNode
+    13700000: crab2:RoadKillOut
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
