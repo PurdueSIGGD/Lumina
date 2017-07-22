@@ -93,7 +93,7 @@ public class WeaponController : MonoBehaviour {
             }
             if (pendingOldWeapon && pendingOldWeapon.bothHands) {
                 // Put arrow back
-                Transform arrow = weaponBone2.FindChild("Arrow");
+                Transform arrow = weaponBone2.Find("Arrow");
                 arrow.parent = pendingOldWeapon.transform;
                 arrow.localScale = Vector3.zero;
                 MoveToLayer(arrow, 1); //Regular layer for camera rendering
@@ -104,7 +104,7 @@ public class WeaponController : MonoBehaviour {
             } else if (pendingNewWeapon.bothHands) {
                 //print("Old weapon is not both hands");
                 //print(pendingNewWeapon);
-                Transform arrow = pendingNewWeapon.transform.FindChild("Arrow");
+                Transform arrow = pendingNewWeapon.transform.Find("Arrow");
                 arrow.parent = weaponBone2;
                 arrow.localScale = EQUIPPED_WEAPON_SCALE;
                 arrow.localPosition = Vector3.zero;
