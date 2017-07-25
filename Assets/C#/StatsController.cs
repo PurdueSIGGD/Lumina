@@ -53,7 +53,7 @@ public class StatsController : Hittable
         gui = GetComponent<InputGenerator>().uiController.hudController;
         healthLightStartIntensity = healthLight.intensity;
         DontDestroyOnLoad(gui.gameObject);
-        DontDestroyOnLoad(pM);
+        DontDestroyOnLoad(pauseMenu);
 
         // We may want to change these to the prefab specifically
         /*health = 0;
@@ -104,15 +104,11 @@ public class StatsController : Hittable
 
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
-<<<<<<< HEAD
 
-        float leftover = UpdateHealth(-1 * damage);
-=======
 		float leftover = UpdateHealth(-1 * damage);
         if (GetHealth() <= 0 && !dead) {
             Kill();
         }
->>>>>>> refs/remotes/origin/master
 
         gui.GUIsetHealth (health);
 		
