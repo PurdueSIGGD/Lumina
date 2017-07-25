@@ -64,10 +64,12 @@ public class WeaponController : MonoBehaviour {
                     // Set the mesh to be scale 0
                     ((Magic)pendingOldWeapon).mesh.localScale = Vector3.zero;
 
-                } 
-            } else if (pendingPackType == "Drop" && pendingOldWeapon) { 
+                }
+                pendingOldWeapon.gameObject.SetActive(false);
+            } else if (pendingPackType == "Drop" && pendingOldWeapon) {
                 // Throwing
                 // Drop last item
+                pendingOldWeapon.gameObject.SetActive(true);
                 pendingOldWeapon.transform.parent = null;
                 pendingOldWeapon.transform.position += cameraBone.transform.right * 2; //Throw to the right
                 pendingOldWeapon.transform.localScale = Vector3.one;
@@ -127,6 +129,7 @@ public class WeaponController : MonoBehaviour {
             //print("Adding new item " + pendingNewWeapon);
             // Set this weapon to be active
             pendingNewWeapon.transform.parent = weaponBone;
+            pendingNewWeapon.gameObject.SetActive(true);
 
             pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
             pendingNewWeapon.playerStats = myStats;
@@ -360,6 +363,7 @@ public class WeaponController : MonoBehaviour {
             w.transform.parent = null;
             //w.transform.position += cameraBone.transform.right * 2; //Throw to the right
             w.transform.localScale = Vector3.one;
+            w.gameObject.SetActive(true);
             if (w is Magic) {
                 // Set the mesh to be proper scale
                 ((Magic)w).mesh.localScale = Vector3.one;

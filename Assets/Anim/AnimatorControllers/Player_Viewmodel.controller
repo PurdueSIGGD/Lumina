@@ -3664,7 +3664,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: rig|Right_Bow_Drop_Empty
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101622263778033180}
@@ -4342,7 +4342,7 @@ AnimatorStateMachine:
     m_Position: {x: 540, y: 48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102365037186560670}
-    m_Position: {x: 744, y: 48, z: 0}
+    m_Position: {x: 828, y: 72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102656210903743960}
     m_Position: {x: 888, y: -324, z: 0}
@@ -4409,7 +4409,7 @@ AnimatorStateMachine:
     m_Position: {x: 264, y: 12, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102442435128049276}
-    m_Position: {x: 504, y: 144, z: 0}
+    m_Position: {x: 456, y: 144, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102916935262359640}
     m_Position: {x: 540, y: -84, z: 0}
