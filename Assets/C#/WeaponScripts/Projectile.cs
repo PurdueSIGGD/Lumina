@@ -72,7 +72,8 @@ public class Projectile : MonoBehaviour {
         if (sticky &&
             // We ignore anything equippable since setenabled for some components enables sub components, making our collider become enabled while being held by the player
             !col.transform.GetComponent<ItemStats>()) {
-            if (Vector3.Magnitude(velocity) > 10) {
+            if (Vector3.Magnitude(velocity) > 10 &&
+                col.transform.localScale == Vector3.one) { // We want the scale to be perfect, or else we get weird scaling issues when becoming a child
                 //myRigid.drag = 10;
                 //myRigid.velocity = myRigid.velocity / 10; //slow dooown
                 this.transform.parent = col.collider.transform;

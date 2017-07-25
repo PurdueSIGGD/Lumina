@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class StatsController : Hittable
 {
@@ -15,6 +16,8 @@ public class StatsController : Hittable
 	const float WEAKNESS_MODIFIER = 1.1F;
 	const float STRENGTH_MODIFIER = 0.9F;
 
+    const float LIGHT_LOSS_RATE = 1.0f;
+
 
 	public float health;
     public float healthMax;
@@ -28,6 +31,8 @@ public class StatsController : Hittable
 	Hittable.DamageType strongAgainst;
 
     public Animator myAnim;
+    public Light healthLight;
+    private float healthLightStartIntensity;
 
 	bool outside;
     bool dead;
@@ -43,19 +48,48 @@ public class StatsController : Hittable
         //set condition for health
 		outside = true;
 
+
         //set GUI
         gui = GetComponent<InputGenerator>().uiController.hudController;
+        healthLightStartIntensity = healthLight.intensity;
+        DontDestroyOnLoad(gui.gameObject);
+        DontDestroyOnLoad(pM);
 
         // We may want to change these to the prefab specifically
-		/*health = 0;
+        /*health = 0;
 		healthMax = DEFAULT_MAX_HEALTH;
 		magic = 0;
 		magicMax = DEFAULT_MAX_MAGIC;
 		lightt = 0;
 		lighttMax = DEFAULT_MAX_LIGHT;*/
-	}
+    }
 
-	public override void Hit(float damage, Vector3 Direction, DamageType type) {
+    void Update() {
+        // if in a dungeon
+        if (dead) {
+            // flicker the light till it goes out
+            UpdateLightt(LIGHT_LOSS_RATE * -20 * Time.deltaTime);
+        } else if (SceneManager.GetActiveScene().buildIndex == 1) {
+            // In a dungeon, slowly lower light
+            UpdateLightt(Time.deltaTime * -1 * LIGHT_LOSS_RATE);
+            if (!healthLight.enabled) {
+                healthLight.enabled = true;
+            }
+            if (GetLightt() <= 0) {
+                Kill();
+            }
+        } else {
+            // Outside or somewhere else, turn light off
+            UpdateLightt(Time.deltaTime * 5 * LIGHT_LOSS_RATE);
+            if (healthLight.enabled) {
+                healthLight.enabled = false;
+            }
+        }
+        healthLight.intensity = (lightt / lighttMax) * healthLightStartIntensity;
+
+    }
+
+    public override void Hit(float damage, Vector3 Direction, DamageType type) {
         // Setting the player's feedback for getting hit
         myAnim.SetLayerWeight(6, Random.Range(0f, 1f));
         float left = Random.Range(-.5f, .5f);
@@ -70,13 +104,18 @@ public class StatsController : Hittable
 
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
+<<<<<<< HEAD
 
         float leftover = UpdateHealth(-1 * damage);
+=======
+		float leftover = UpdateHealth(-1 * damage);
+        if (GetHealth() <= 0 && !dead) {
+            Kill();
+        }
+>>>>>>> refs/remotes/origin/master
 
-		gui.GUIsetHealth (health);
-		if (health <= 0 && !dead) {
-			Kill ();
-		}
+        gui.GUIsetHealth (health);
+		
 	}
 
 	public float GetHealth(){
@@ -126,7 +165,7 @@ public class StatsController : Hittable
 	public float UpdateHealth(float amount) {
 		if (health <= 0) {
 			health = 0;
-		}
+        }
 		if (amount > 0) {
 			if (health + amount > healthMax) {
 				float leftover = health + amount - healthMax;
