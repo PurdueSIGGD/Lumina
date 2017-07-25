@@ -132,12 +132,12 @@ public class InventoryController : MonoBehaviour {
                 case Armor.ArmorPiece.helmet:
                     if (helmet) lastItem = helmet.transform;
 			        helmet = (Armor)item;
-				    statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,helmet);
+				    //statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.helmet,helmet);
 			        break;
 		        case Armor.ArmorPiece.chestplate:
                     if (chestPlate) lastItem = chestPlate.transform;
 			        chestPlate = (Armor)item;
-				    statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,chestPlate);
+				    //statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.chestplate,chestPlate);
 			        break;
 		    }
 
@@ -157,16 +157,16 @@ public class InventoryController : MonoBehaviour {
         if (item is Magic) {
             //print("Picked up magic");
             leftWeaponController.EquipWeapon((Weapon)item);
-			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL1,leftWeaponController.weapons[0]);
-			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL2,leftWeaponController.weapons[1]);
+			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL1,leftWeaponController.weapons[0]);
+			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL2,leftWeaponController.weapons[1]);
 
             //add to inventory
             inventoryPanel.magicPanel.Add(item.GetComponent<BagItem>());
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
-			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR1,rightWeaponController.weapons[0]);
-			statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR2,rightWeaponController.weapons[1]);
+			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR1,rightWeaponController.weapons[0]);
+			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR2,rightWeaponController.weapons[1]);
 
             //add to weapon
             inventoryPanel.weaponPanel.Add(item.GetComponent<BagItem>());

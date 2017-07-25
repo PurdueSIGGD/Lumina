@@ -37,7 +37,7 @@ public class StatsController : Hittable
 	bool outside;
     bool dead;
 
-	public InventoryController inventoryController;	
+	[HideInInspector] public InventoryController inventoryController;	
 	public PauseMenu pauseMenu;
 
     public HUDController gui { get; set; } 
@@ -45,12 +45,17 @@ public class StatsController : Hittable
     // Use this for initialization
     void Start ()
 	{
+        //assign var
+        inventoryController = GetComponent<InventoryController>();
+
         //set condition for health
 		outside = true;
 
 
         //set GUI
         gui = GetComponent<InputGenerator>().uiController.hudController;
+        gui.statsController = this;
+
         healthLightStartIntensity = healthLight.intensity;
         DontDestroyOnLoad(gui.gameObject);
         DontDestroyOnLoad(pauseMenu);

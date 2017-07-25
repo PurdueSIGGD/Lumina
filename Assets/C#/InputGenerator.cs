@@ -126,7 +126,7 @@ public class InputGenerator : MonoBehaviour {
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
 
         //if game is pausing, stop moving the camera
-        if (!playerPause.getPause() && !isGamePausing)
+        if (!isGamePausing)
             playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 
         //if relate to UI

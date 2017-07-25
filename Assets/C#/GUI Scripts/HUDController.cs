@@ -54,6 +54,13 @@ public class HUDController : MonoBehaviour {
 
     public void SetupBar()
     {
+        //check
+        if (statsController == null)
+        {
+            Debug.Log("HUD: not set StatsController yet");
+            return;
+        }
+
         //health
         healthBar.maxValue = statsController.healthMax;
         healthBar.value = statsController.health;
