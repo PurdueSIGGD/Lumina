@@ -15,7 +15,7 @@ public class ItemStats : MonoBehaviour {
     
 
 	void Start() {
-		condition = Random.Range (minCondition, maxCondition);
+		//condition = Random.Range (minCondition, maxCondition);
 	}
 
 	/**
@@ -27,8 +27,12 @@ public class ItemStats : MonoBehaviour {
 	 * 
 	 **/
 	public void DamageCondition(float damage) {
-		factor += damage/maxCondition;
-		condition -= damage * factor;
+        if (condition > minCondition) {
+            factor += damage / maxCondition;
+            condition -= damage * factor;
+        } else {
+            condition = minCondition;
+        }
 	}
 
     /**
