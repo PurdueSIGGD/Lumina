@@ -14,5 +14,4 @@ public class BagItem : MonoBehaviour {
     [Multiline] public string description; //description in help panel
     public Sprite sprite;
 
-    
 }

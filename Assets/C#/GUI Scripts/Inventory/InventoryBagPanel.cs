@@ -5,16 +5,16 @@ using UnityEngine;
 /// <summary>
 /// Linked with InventoryController
 /// 
-/// control the list of bag item being displayed.
+/// control database and UI elements of bag items being displayed.
 /// </summary>
-public class UIInventoryBagPanel : MonoBehaviour {
+public class InventoryBagPanel : MonoBehaviour {
 
     public RectTransform content;   //rect of content, to adjust the height according to number of item in bag
 
     /// <summary>
     /// key: item, value: number of items
     /// </summary>
-    [HideInInspector] public Dictionary<BagItem, int> itemDict;
+    [HideInInspector] public Dictionary<ItemStats, int> itemDict;
 
     /// <summary>
     /// to control the UI element of bag item
@@ -26,7 +26,7 @@ public class UIInventoryBagPanel : MonoBehaviour {
     private void Awake()
     {
         //init
-        itemDict = new Dictionary<BagItem, int>();
+        itemDict = new Dictionary<ItemStats, int>();
         itemUIList = new List<UIBagItem>();
     }
 
@@ -36,6 +36,10 @@ public class UIInventoryBagPanel : MonoBehaviour {
         ClearAllItems();
     }
 
+
+    /// <summary>
+    /// Clear all children
+    /// </summary>
     private void ClearAllItems()
     {
         List<GameObject> childList = new List<GameObject>();
@@ -51,8 +55,9 @@ public class UIInventoryBagPanel : MonoBehaviour {
     /// Add bag_item to the bag
     /// </summary>
     /// <param name="item">item to be added</param>
-    public void Add(BagItem item)
+    public void Add(ItemStats item)
     {
+        //debug
         if (itemDict == null || itemUIList == null)
         {
             print("Item Dict is not init");
@@ -62,9 +67,16 @@ public class UIInventoryBagPanel : MonoBehaviour {
         if (item == null)
             return;
 
-        //if already contain, increase the number
+        //if already contain, increase the number     
         if (itemDict.ContainsKey(item)) {
+          
+            //increment
             itemDict[item] += 1;
+
+            //update the UI as well
+            UIBagItem i = itemUIList.Find(x => x.itemStats.compareTo(item));
+            i.displayNameText.text = i.itemStats.displayName + " (" + itemDict[item] + ")";
+
             return;
         }
 
@@ -73,14 +85,14 @@ public class UIInventoryBagPanel : MonoBehaviour {
         AddNewUIBagItem(item);
     }
 
-    private void AddNewUIBagItem(BagItem item)
+    private void AddNewUIBagItem(ItemStats item)
     {
         //make new bag item
         UIBagItem bagItem = Instantiate(inventoryPanel.genericBagItem, content);
 
         //set up information
         bagItem.Setup(item);
-        bagItem.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        //bagItem.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         
 
         //add to list

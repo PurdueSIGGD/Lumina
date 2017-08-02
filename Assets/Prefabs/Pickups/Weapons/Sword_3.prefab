@@ -107,7 +107,6 @@ GameObject:
   - component: {fileID: 54884350927622656}
   - component: {fileID: 65296522573841568}
   - component: {fileID: 114574376785883798}
-  - component: {fileID: 114194423501401430}
   m_Layer: 0
   m_Name: Sword_3
   m_TagString: Item
@@ -443,6 +442,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23192409315603106
 MeshRenderer:
@@ -474,6 +474,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23193300560827258
 MeshRenderer:
@@ -505,6 +506,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23586374973322606
 MeshRenderer:
@@ -537,6 +539,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23595498625627244
 MeshRenderer:
@@ -568,6 +571,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23632987822317500
 MeshRenderer:
@@ -599,6 +603,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23661165668678706
 MeshRenderer:
@@ -630,6 +635,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23666216658490492
 MeshRenderer:
@@ -661,6 +667,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23839679103723052
 MeshRenderer:
@@ -692,6 +699,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23841048513623696
 MeshRenderer:
@@ -723,6 +731,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23955013275096474
 MeshRenderer:
@@ -754,6 +763,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33292059488973144
 MeshFilter:
@@ -859,24 +869,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4193869, y: 1.5674149, z: 0.0907815}
   m_Center: {x: 0.0007324219, y: 0.6000367, z: 0.001983583}
---- !u!114 &114194423501401430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1243004886223624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Heroic Sword
-  description: 'Legends used to say that
-
-    the spirit Heroes in the Tamriel realm fight dragons with
-
-    this sword'
-  sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}
 --- !u!114 &114574376785883798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -892,6 +884,13 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Heroic Sword
+  description: 'Legends used to say that
+
+    the spirit Heroes in the Tamriel realm fight dragons with
+
+    this sword'
+  sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5

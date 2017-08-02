@@ -161,7 +161,7 @@ public class InventoryController : MonoBehaviour {
 			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapL2,leftWeaponController.weapons[1]);
 
             //add to inventory
-            inventoryPanel.magicPanel.Add(item.GetComponent<BagItem>());
+            inventoryPanel.magicPanel.Add(item);
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
@@ -169,7 +169,7 @@ public class InventoryController : MonoBehaviour {
 			//statsController.pauseMenu.setEquipDescription (statsController.pauseMenu.weapR2,rightWeaponController.weapons[1]);
 
             //add to weapon
-            inventoryPanel.weaponPanel.Add(item.GetComponent<BagItem>());
+            inventoryPanel.weaponPanel.Add(item);
         }
 
 	}

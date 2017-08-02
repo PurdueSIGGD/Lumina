@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CanvasGroup))]
+/// <summary>
+/// Basic functionality of most panel
+/// </summary>
 public abstract class UIPanel : UIBase
 {
     

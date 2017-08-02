@@ -71,7 +71,6 @@ GameObject:
   - component: {fileID: 54171515405031770}
   - component: {fileID: 65589936182404036}
   - component: {fileID: 114002304346690378}
-  - component: {fileID: 114022076929939052}
   m_Layer: 0
   m_Name: Axe_2
   m_TagString: Item
@@ -167,6 +166,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23668923482150720
 MeshRenderer:
@@ -199,6 +199,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33278674695800328
 MeshFilter:
@@ -256,6 +257,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Bronze Axe
+  description: "\"Bronze is the mirror of the form, wine of the mind.\"\n\t- Aeschylus-"
+  sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5
@@ -267,17 +271,3 @@ MonoBehaviour:
   storedAmmo: 10
   myAnim: {fileID: 0}
   width: 0.03
---- !u!114 &114022076929939052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1968424597766064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Bronze Axe
-  description: "\"Bronze is the mirror of the form, wine of the mind.\"\n\t- Aeschylus-"
-  sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// Used to control the stats panel to
 /// display stats and description
 /// </summary>
-public class UIDescriptionPanel : MonoBehaviour {
+public class DescriptionPanel : MonoBehaviour {
 
     public Text titleText;   //place to put name or title
     public Text statsText;  //place to put stats panel
@@ -22,11 +22,11 @@ public class UIDescriptionPanel : MonoBehaviour {
     public void DisplayBagItemInfo(UIBagItem i)
     {
         //title
-        titleText.text = i.item.displayName;
-        image.sprite = i.item.sprite;
+        titleText.text = i.itemStats.displayName;
+        image.sprite = i.itemStats.sprite;
 
         //description
-        descriptionText.text = i.item.description;
+        descriptionText.text = i.itemStats.description;
 
         //stats
         string stats = "";

@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 54559964569610028}
   - component: {fileID: 65478916267005150}
   - component: {fileID: 114611439314994110}
-  - component: {fileID: 114473640444637474}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Item
@@ -518,6 +517,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23300291378209390
 MeshRenderer:
@@ -549,6 +549,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23446873037539486
 MeshRenderer:
@@ -580,6 +581,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23523167583967064
 MeshRenderer:
@@ -612,6 +614,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33274314011696942
 MeshFilter:
@@ -685,21 +688,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114473640444637474
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1581141586542702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Simple Bow
-  description: "\u201CI shot an arrow into the air. \nIt fell to earth, I knew not
-    where.\u201D\r\n    \u2013 Henry Wadsworth Longfellow\r\n"
-  sprite: {fileID: 21300000, guid: 47deb4eca4c5a694ea12f033962db0e8, type: 3}
 --- !u!114 &114611439314994110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -715,6 +703,10 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: Simple Bow
+  description: "\u201CI shot an arrow into the air. \nIt fell to earth, I knew not
+    where.\u201D\r\n    \u2013 Henry Wadsworth Longfellow\r\n"
+  sprite: {fileID: 21300000, guid: 47deb4eca4c5a694ea12f033962db0e8, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 1
@@ -763,6 +755,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0

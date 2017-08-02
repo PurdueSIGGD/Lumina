@@ -14,12 +14,7 @@ public class UIBagItem : MonoBehaviour {
 
     [HideInInspector] public RectTransform rect;
 
-    public UIInventoryBagPanel bag {get; set; } //UI Inventory Bag that hold this
-
-    /// <summary>
-    /// bag item that this UI is attached to
-    /// </summary>
-    public BagItem item { get; set; }
+    public InventoryBagPanel bag {get; set; } //UI Inventory Bag that hold this
 
     /// <summary>
     /// item stats that this UI is attached to
@@ -28,24 +23,25 @@ public class UIBagItem : MonoBehaviour {
 
     private void Awake()
     {
+        //set basics, just in case
         rect = GetComponent<RectTransform>();
+        rect.localScale = new Vector3(1, 1, 1);
     }
 
     /// <summary>
     /// Set up the item so that the UI element can use these information
     /// </summary>
-    /// <param name="item"></param>
-    public void Setup(BagItem item)
-    {
-        //set fields
-        this.item = item;
-        this.itemStats = item.GetComponent<ItemStats>();
+    /// <param name="item">item Stats</param>
+    public void Setup(ItemStats itemStats)
+    {        
+        //set
+        this.itemStats = itemStats;
 
         //set information
-        displayNameText.text = item.displayName;
-        image.sprite = item.sprite;
+        displayNameText.text = itemStats.displayName;
+        image.sprite = itemStats.sprite;
     }
-
+   
     /// <summary>
     /// Show more information on the description panel
     /// </summary>
@@ -55,7 +51,7 @@ public class UIBagItem : MonoBehaviour {
         GameObject gameObject  = GameObject.FindGameObjectWithTag("DescriptionPanel");
 
         //get component
-        UIDescriptionPanel descriptionPanel = gameObject.GetComponent<UIDescriptionPanel>();
+        DescriptionPanel descriptionPanel = gameObject.GetComponent<DescriptionPanel>();
 
         //display
         if (descriptionPanel != null)

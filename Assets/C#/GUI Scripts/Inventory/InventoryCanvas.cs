@@ -6,7 +6,7 @@ using UnityEngine;
 public class InventoryCanvas : UICanvas {
 
     public InventoryPanel inventoryPanel;
-    public UINormalPanel avatarPanel;
+    public AvatarPanel avatarPanel;
     public UINormalPanel descriptionPanel;
 
     public UIController uiController { get; set; }
@@ -19,6 +19,8 @@ public class InventoryCanvas : UICanvas {
         {
             inventoryPanel, avatarPanel, descriptionPanel
         };
+
+        
     }
 
     public override void ToggleCanvas()
@@ -35,6 +37,8 @@ public class InventoryCanvas : UICanvas {
 
     public void Open()
     {
+        //open itself
+        this.SetActiveUI(true);
         
         //open stuff
         listPanels.ForEach(x => x.Open());

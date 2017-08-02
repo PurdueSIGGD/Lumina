@@ -37,6 +37,7 @@ public class UISettingsNavPanel : UIPanel
     {
         //set active
         gameObject.SetActive(true);
+        GetComponentInParent<SettingsCanvas>().SetActiveUI(true);
      
         //open panel        
         anim.SetTrigger("Open");

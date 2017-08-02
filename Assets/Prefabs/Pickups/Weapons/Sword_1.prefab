@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 54664890262008606}
   - component: {fileID: 65134557216361430}
   - component: {fileID: 114057180395927780}
-  - component: {fileID: 114934777075276832}
   m_Layer: 0
   m_Name: Sword_1
   m_TagString: Item
@@ -195,6 +194,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23299748321362354
 MeshRenderer:
@@ -228,6 +228,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23631999814632426
 MeshRenderer:
@@ -259,6 +260,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33073105837953398
 MeshFilter:
@@ -323,6 +325,10 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Steel Sword
+  description: "\"The Lord made us all out of iron. Then he turns up the\nheat to
+    forge some of us into steel.\"\n\n\t- Marie Osmond"
+  sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5
@@ -334,18 +340,3 @@ MonoBehaviour:
   storedAmmo: 10
   myAnim: {fileID: 0}
   width: 0.03
---- !u!114 &114934777075276832
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1357930139211266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Steel Sword
-  description: "\"The Lord made us all out of iron. Then he turns up the\nheat to
-    forge some of us into steel.\"\n\n\t- Marie Osmond"
-  sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}

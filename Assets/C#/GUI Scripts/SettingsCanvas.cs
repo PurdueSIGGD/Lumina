@@ -6,9 +6,7 @@ using UnityEngine.EventSystems;
 
 public class SettingsCanvas : UICanvas {
   
-    public EventSystem eventSystem;
-    
-
+ 
     public UISettingsNavPanel navPanel;
     public UISettingsSidePanel settingsPanel;
     public UISettingsSidePanel loadGamePanel;

@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 54038501608029468}
   - component: {fileID: 65806070878127782}
   - component: {fileID: 114065468816331202}
-  - component: {fileID: 114946618436641336}
   m_Layer: 0
   m_Name: Axe_3
   m_TagString: Item
@@ -350,6 +349,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23241116581484136
 MeshRenderer:
@@ -381,6 +381,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23269647647267986
 MeshRenderer:
@@ -412,6 +413,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23333894208831234
 MeshRenderer:
@@ -443,6 +445,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23629966573571178
 MeshRenderer:
@@ -474,6 +477,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23700679363446872
 MeshRenderer:
@@ -507,6 +511,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23845033722935678
 MeshRenderer:
@@ -540,6 +545,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23983263735643600
 MeshRenderer:
@@ -573,6 +579,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33074303678387996
 MeshFilter:
@@ -672,6 +679,10 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Celestial Axe
+  description: "\"Set your course by the stars, not by the lights of \nevery passing
+    ship\"\n\t- Omar Bradley-"
+  sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5
@@ -683,18 +694,3 @@ MonoBehaviour:
   storedAmmo: 10
   myAnim: {fileID: 0}
   width: 0.03
---- !u!114 &114946618436641336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1644487015378948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Celestial Axe
-  description: "\"Set your course by the stars, not by the lights of \nevery passing
-    ship\"\n\t- Omar Bradley-"
-  sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}

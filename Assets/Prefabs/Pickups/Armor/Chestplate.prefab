@@ -105,6 +105,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23947691838124806
 MeshRenderer:
@@ -136,6 +137,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33260773317374906
 MeshFilter:
@@ -209,6 +211,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: 
+  description: 
+  sprite: {fileID: 21300000, guid: ee7e9ed90c7bad542819da9e2ee35801, type: 3}
   type: 1
   strongAgainst: 0
   flatDamageBlock: 5

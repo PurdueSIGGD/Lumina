@@ -230,20 +230,42 @@ public class StatsController : Hittable
             if (arrowCount + amount > arrowMax) {
                 int leftover = arrowCount + amount - arrowMax;
                 arrowCount = arrowMax;
+
+                //UpdateArrowsUI();
                 return leftover;
             }
             arrowCount += amount;
+
+            //UpdateArrowsUI();
             return 0;
-        } else if (amount < 0) {
+        }
+
+        else if (amount < 0) {
             if (arrowCount + amount < 0) {
                 int leftover = arrowCount + amount;
                 arrowCount = 0;
+
+                //UpdateArrowsUI();
                 return leftover;
             }
+
             arrowCount += amount;
+            //UpdateArrowsUI();
             return 0;
         }
+
+        //UpdateArrowsUI();
         return 0;
+    }
+
+    /*
+     * Update the UI part of display arrows
+     */ 
+    public void UpdateArrowsUI()
+    {
+        UIController uiController = GetComponent<InputGenerator>().uiController;
+
+        uiController.inventoryCanvas.avatarPanel.UpdateArrowCount();
     }
 
 	//Returns leftovers (if any) ((can be negative))

@@ -3,23 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// control the GUI part of the Inventory Panel, part of the Inventory Canvas
+/// </summary>
 public class InventoryPanel : UIPanel
 {
 
     private Animator anim;
 
-    public UIInventoryBagPanel weaponPanel;
-    public UIInventoryBagPanel magicPanel;
-    public UIInventoryBagPanel armorPanel;
-    public UIInventoryBagPanel kitPanel;
+    public InventoryBagPanel weaponPanel;
+    public InventoryBagPanel magicPanel;
+    public InventoryBagPanel armorPanel;
+    public InventoryBagPanel kitPanel; //upgrade kit, arrows
     public UIBagItem genericBagItem;    //used as a guide line for normal bag item
 
-    private List<UIInventoryBagPanel> listBags;
+    private List<InventoryBagPanel> listBags;
 
     /// <summary>
     /// current UI Inventory Bag being open
     /// </summary>
-    public UIInventoryBagPanel currentBag { get; set; }
+    public InventoryBagPanel currentBag { get; set; }
 
   
 
@@ -29,7 +32,7 @@ public class InventoryPanel : UIPanel
         anim = GetComponent<Animator>();
 
         //init and assign
-        listBags = new List<UIInventoryBagPanel>()
+        listBags = new List<InventoryBagPanel>()
         {
             weaponPanel, magicPanel, armorPanel, kitPanel
         };
@@ -56,7 +59,7 @@ public class InventoryPanel : UIPanel
         anim.SetTrigger("Open");
     }
 
-    public void ToggleBag(UIInventoryBagPanel bag)
+    public void ToggleBag(InventoryBagPanel bag)
     {
         //if no current Open Bag
         if (currentBag == null)

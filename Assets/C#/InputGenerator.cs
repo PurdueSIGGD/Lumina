@@ -147,26 +147,26 @@ public class InputGenerator : MonoBehaviour {
 		}
 
 
-        if (!playerPause) return;
+        //if (!playerPause) return;
 
 
-		if (Input.GetAxis ("Pause") > 0) {
-			playerPause.changeState = true;
-		}
+		//if (Input.GetAxis ("Pause") > 0) {
+		//	playerPause.changeState = true;
+		//}
 
-        else {
-			if(playerPause.changeState){
-				if (playerPause.getPause()) {
-					playerPause.setPause (false);
-					playerPause.closePauseOpenHUD ();
-					playerPause.changeState = false;
-				} else {
-					playerPause.setPause (true);
-					playerPause.closeHUDOpenPause ();
-					playerPause.changeState = false;
-				}
-			}
-		}
+  //      else {
+		//	if(playerPause.changeState){
+		//		if (playerPause.getPause()) {
+		//			playerPause.setPause (false);
+		//			playerPause.closePauseOpenHUD ();
+		//			playerPause.changeState = false;
+		//		} else {
+		//			playerPause.setPause (true);
+		//			playerPause.closeHUDOpenPause ();
+		//			playerPause.changeState = false;
+		//		}
+		//	}
+		//}
 			
 
 	}
