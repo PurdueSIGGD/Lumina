@@ -38,7 +38,7 @@ public class StatsController : Hittable
     bool dead;
 
 	[HideInInspector] public InventoryController inventoryController;	
-	public PauseMenu pauseMenu;
+	//public PauseMenu pauseMenu;
 
     public HUDController gui { get; set; } 
 
@@ -58,7 +58,7 @@ public class StatsController : Hittable
 
         healthLightStartIntensity = healthLight.intensity;
         DontDestroyOnLoad(gui.gameObject);
-        DontDestroyOnLoad(pauseMenu);
+        //DontDestroyOnLoad(pauseMenu);
 
         // We may want to change these to the prefab specifically
         /*health = 0;
@@ -74,7 +74,7 @@ public class StatsController : Hittable
         if (dead) {
             // flicker the light till it goes out
             UpdateLightt(LIGHT_LOSS_RATE * -20 * Time.deltaTime);
-        } else if (SceneManager.GetActiveScene().buildIndex == 1) {
+        } else if (SceneManager.GetActiveScene().name == "Dungeon") {
             // In a dungeon, slowly lower light
             UpdateLightt(Time.deltaTime * -1 * LIGHT_LOSS_RATE);
             if (!healthLight.enabled) {

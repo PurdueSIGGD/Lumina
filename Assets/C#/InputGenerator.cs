@@ -10,8 +10,7 @@ public class InputGenerator : MonoBehaviour {
 
     public MovementController playerMovement;
     public InventoryController playerInventory;
-	      
-	public PauseMenu playerPause;
+	       
     public WeaponController leftPlayerWeaponController;
     public WeaponController rightPlayerWeaponController;
 
