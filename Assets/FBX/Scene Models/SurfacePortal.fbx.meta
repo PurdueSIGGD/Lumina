@@ -1,58 +1,47 @@
 fileFormatVersion: 2
-guid: 42e8b1746d0b6fd4186c9a7b271554bd
-timeCreated: 1501537449
+guid: d19165ee49935334bb3b4dabee9ab30c
+timeCreated: 1501815036
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Arm1
-    100002: Arm1_Tip
-    100004: Arm2
-    100006: Arm2_Tip
-    100008: Arm3
-    100010: Arm3_Tip
-    100012: Arm4
-    100014: Arm4_Tip
-    100016: Armature
-    100018: Root
-    100020: Sphere
-    100022: //RootNode
-    100024: SurfacePortal
-    100026: Cylinder
-    100028: East
-    100030: North
-    100032: Rotater
-    100034: West
-    100036: West_001
-    100038: South
-    400000: Arm1
-    400002: Arm1_Tip
-    400004: Arm2
-    400006: Arm2_Tip
-    400008: Arm3
-    400010: Arm3_Tip
-    400012: Arm4
-    400014: Arm4_Tip
-    400016: Armature
-    400018: Root
-    400020: Sphere
-    400022: //RootNode
-    400024: SurfacePortal
-    400026: Cylinder
-    400028: East
-    400030: North
-    400032: Rotater
-    400034: West
-    400036: West_001
-    400038: South
-    4300000: SurfacePortal
-    4300002: Cylinder
-    7400000: Default Take
-    7400002: Idle
-    7400004: Spawn
+    100000: Armature
+    100002: Cylinder
+    100004: East
+    100006: East_end
+    100008: North
+    100010: North_end
+    100012: Root
+    100014: Root_end
+    100016: Rotater
+    100018: //RootNode
+    100020: West
+    100022: West.001
+    100024: West.001_end
+    100026: West_end
+    100028: South
+    100030: South_end
+    400000: Armature
+    400002: Cylinder
+    400004: East
+    400006: East_end
+    400008: North
+    400010: North_end
+    400012: Root
+    400014: Root_end
+    400016: Rotater
+    400018: //RootNode
+    400020: West
+    400022: West.001
+    400024: West.001_end
+    400026: West_end
+    400028: South
+    400030: South_end
+    4300000: Cylinder
+    7400000: Armature|Idle
+    7400002: Armature|Spawn
     9500000: //RootNode
-    13700000: SurfacePortal
-    13700002: Cylinder
+    13700000: Cylinder
   materials:
     importMaterials: 1
     materialName: 0
@@ -80,7 +69,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.75
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
