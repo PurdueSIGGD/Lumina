@@ -160,7 +160,9 @@ public class InventoryController : MonoBehaviour {
             inventoryPanel.magicPanel.Add(item);
         } else  if (item is Weapon) {
             //print("Picked up weapon");
-          
+            rightWeaponController.EquipWeapon((Weapon)item);
+
+
             //add to weapon
             inventoryPanel.weaponPanel.Add(item);
         }
