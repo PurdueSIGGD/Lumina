@@ -320,7 +320,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -2000394126
+  randomSeed: -649027058
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -921,7 +921,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 25
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3531,7 +3531,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1710682124773106}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   looping: 1
   prewarm: 0
   playOnAwake: 0
