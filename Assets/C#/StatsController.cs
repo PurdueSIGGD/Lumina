@@ -231,12 +231,12 @@ public class StatsController : Hittable
                 int leftover = arrowCount + amount - arrowMax;
                 arrowCount = arrowMax;
 
-                //UpdateArrowsUI();
+                UpdateArrowsUI();
                 return leftover;
             }
             arrowCount += amount;
 
-            //UpdateArrowsUI();
+            UpdateArrowsUI();
             return 0;
         }
 
@@ -245,16 +245,16 @@ public class StatsController : Hittable
                 int leftover = arrowCount + amount;
                 arrowCount = 0;
 
-                //UpdateArrowsUI();
+                UpdateArrowsUI();
                 return leftover;
             }
 
             arrowCount += amount;
-            //UpdateArrowsUI();
+            UpdateArrowsUI();
             return 0;
         }
 
-        //UpdateArrowsUI();
+        UpdateArrowsUI();
         return 0;
     }
 
