@@ -30,6 +30,7 @@ public class MovementController : MonoBehaviour {
 	public GameObject cameraObj;
     public Animator viewmodelAnimator;
 
+    public int ingorePlayerCollisionLayer = 10;
     private Camera playerCam;
 
 
@@ -234,10 +235,11 @@ public class MovementController : MonoBehaviour {
         Vector3 dir = pos - transform.position;
         float dist = Vector3.Distance(pos, transform.position);
         //TODO make 4 raycasts from each corner of the body (left, up, right, down)
-        RaycastHit[] hitsForward = Physics.RaycastAll(transform.position + Vector3.forward * 0.5f, dir, dist + 0.5f);
-        RaycastHit[] hitsRight = Physics.RaycastAll(transform.position + Vector3.right * 0.5f, dir, dist + 0.5f);
-        RaycastHit[] hitsBack = Physics.RaycastAll(transform.position + Vector3.back * 0.5f, dir, dist + 0.5f);
-        RaycastHit[] hitsLeft = Physics.RaycastAll(transform.position + Vector3.left * 0.5f, dir, dist + 0.5f);
+        int layermask = ~(1 << ingorePlayerCollisionLayer); // Make sure we ignore anything that we won't run into
+        RaycastHit[] hitsForward = Physics.RaycastAll(new Ray(transform.position + Vector3.forward * 0.5f, dir), dist + 0.5f, layermask);
+        RaycastHit[] hitsRight = Physics.RaycastAll(new Ray(transform.position + Vector3.right * 0.5f, dir), dist + 0.5f, layermask);
+        RaycastHit[] hitsBack = Physics.RaycastAll(new Ray(transform.position + Vector3.back * 0.5f, dir), dist + 0.5f, layermask);
+        RaycastHit[] hitsLeft = Physics.RaycastAll(new Ray(transform.position + Vector3.left * 0.5f, dir), dist + 0.5f, layermask);
 
         Debug.DrawLine(transform.position + Vector3.forward * 0.5f, transform.position + Vector3.forward * 0.5f + dir);
         if (hitsIn(hitsForward) || hitsIn(hitsRight) || hitsIn(hitsBack) || hitsIn(hitsLeft)) {
