@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: CrabBody
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Crab
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_claw1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer1_1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer1_1/L_crab_claw_pincer1_2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer1_1/L_crab_claw_pincer1_2/L_crab_claw_pincer1_2_end
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer2_1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer2_1/L_crab_claw_pincer2_2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_claw1/L_crab_claw2/L_crab_claw_pincer2_1/L_crab_claw_pincer2_2/L_crab_claw_pincer2_2_end
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/L_crab_eye1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_eye1/L_crab_eye2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_eye1/L_crab_eye2/L_crab_eye3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_eye1/L_crab_eye2/L_crab_eye3/L_crab_eye3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg1_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg1_1/L_crab_leg1_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg1_1/L_crab_leg1_2/L_crab_leg1_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg1_1/L_crab_leg1_2/L_crab_leg1_3/L_crab_leg1_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg2_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg2_1/L_crab_leg2_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg2_1/L_crab_leg2_2/L_crab_leg2_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg2_1/L_crab_leg2_2/L_crab_leg2_3/L_crab_leg2_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg3_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg3_1/L_crab_leg3_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg3_1/L_crab_leg3_2/L_crab_leg3_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/L_crab_leg3_1/L_crab_leg3_2/L_crab_leg3_3/L_crab_leg3_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_claw1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer1_1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer1_1/R_crab_claw_pincer1_2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer1_1/R_crab_claw_pincer1_2/R_crab_claw_pincer1_2_end
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer2_1
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer2_1/R_crab_claw_pincer2_2
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_claw1/R_crab_claw2/R_crab_claw_pincer2_1/R_crab_claw_pincer2_2/R_crab_claw_pincer2_2_end
+    m_Weight: 0
+  - m_Path: Crab/crab_body_center/R_crab_eye1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_eye1/R_crab_eye2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_eye1/R_crab_eye2/R_crab_eye3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_eye1/R_crab_eye2/R_crab_eye3/R_crab_eye3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg1_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg1_1/R_crab_leg1_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg1_1/R_crab_leg1_2/R_crab_leg1_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg1_1/R_crab_leg1_2/R_crab_leg1_3/R_crab_leg1_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg2_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg2_1/R_crab_leg2_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg2_1/R_crab_leg2_2/R_crab_leg2_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg2_1/R_crab_leg2_2/R_crab_leg2_3/R_crab_leg2_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg3_1
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg3_1/R_crab_leg3_2
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg3_1/R_crab_leg3_2/R_crab_leg3_3
+    m_Weight: 1
+  - m_Path: Crab/crab_body_center/R_crab_leg3_1/R_crab_leg3_2/R_crab_leg3_3/R_crab_leg3_3_end
+    m_Weight: 1
+  - m_Path: Crab/crab_L_1_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_L_1_IK/crab_L_1_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_L_2_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_L_2_IK/crab_L_2_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_L_3_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_L_3_IK/crab_L_3_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_L_claw_IK
+    m_Weight: 0
+  - m_Path: Crab/crab_L_claw_IK/crab_L_claw_IK_end
+    m_Weight: 0
+  - m_Path: Crab/crab_R_1_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_R_1_IK/crab_R_1_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_R_2_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_R_2_IK/crab_R_2_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_R_3_IK
+    m_Weight: 1
+  - m_Path: Crab/crab_R_3_IK/crab_R_3_IK_end
+    m_Weight: 1
+  - m_Path: Crab/crab_R_claw_IK
+    m_Weight: 0
+  - m_Path: Crab/crab_R_claw_IK/crab_R_claw_IK_end
+    m_Weight: 0
+  - m_Path: crab2:RoadKillOut
+    m_Weight: 1

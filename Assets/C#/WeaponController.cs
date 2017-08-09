@@ -12,6 +12,8 @@ public class WeaponController : MonoBehaviour {
     public StatsController myStats;
     public WeaponController otherWeapon;
 
+    public GameObject firstWeaponToEquip; // Prefab reference that we can instantiate
+
     public Weapon[] weapons = new Weapon[2];
     public int weaponIndex;
     public int weaponCount;
@@ -40,6 +42,10 @@ public class WeaponController : MonoBehaviour {
         viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", 0);
         viewmodelAnimator.SetInteger(controllerSide + "AttackNum", 0);
 
+        if (firstWeaponToEquip) {
+            GameObject newWeapon = GameObject.Instantiate(firstWeaponToEquip);
+            EquipWeapon(newWeapon.GetComponent<Weapon>());
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +53,7 @@ public class WeaponController : MonoBehaviour {
         // If we are both hands, layerindex is 0
         // Otherwise, L = 2, R = 1
         int layerIndex = (bothHands) ? 0 : ( controllerSide == "R" ? 1 : 2 );
+        //print(pendingPackType);
         weaponBusy = !(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("Idle") && !viewmodelAnimator.IsInTransition(layerIndex));
 
         //if (controllerSide == "R") print(pendingPackType + " " + viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
@@ -64,10 +71,12 @@ public class WeaponController : MonoBehaviour {
                     // Set the mesh to be scale 0
                     ((Magic)pendingOldWeapon).mesh.localScale = Vector3.zero;
 
-                } 
-            } else if (pendingPackType == "Drop" && pendingOldWeapon) { 
+                }
+                pendingOldWeapon.gameObject.SetActive(false);
+            } else if (pendingPackType == "Drop" && pendingOldWeapon) {
                 // Throwing
                 // Drop last item
+                pendingOldWeapon.gameObject.SetActive(true);
                 pendingOldWeapon.transform.parent = null;
                 pendingOldWeapon.transform.position += cameraBone.transform.right * 2; //Throw to the right
                 pendingOldWeapon.transform.localScale = Vector3.one;
@@ -93,7 +102,7 @@ public class WeaponController : MonoBehaviour {
             }
             if (pendingOldWeapon && pendingOldWeapon.bothHands) {
                 // Put arrow back
-                Transform arrow = weaponBone2.FindChild("Arrow");
+                Transform arrow = weaponBone2.Find("Arrow");
                 arrow.parent = pendingOldWeapon.transform;
                 arrow.localScale = Vector3.zero;
                 MoveToLayer(arrow, 1); //Regular layer for camera rendering
@@ -104,7 +113,7 @@ public class WeaponController : MonoBehaviour {
             } else if (pendingNewWeapon.bothHands) {
                 //print("Old weapon is not both hands");
                 //print(pendingNewWeapon);
-                Transform arrow = pendingNewWeapon.transform.FindChild("Arrow");
+                Transform arrow = pendingNewWeapon.transform.Find("Arrow");
                 arrow.parent = weaponBone2;
                 arrow.localScale = EQUIPPED_WEAPON_SCALE;
                 arrow.localPosition = Vector3.zero;
@@ -127,6 +136,7 @@ public class WeaponController : MonoBehaviour {
             //print("Adding new item " + pendingNewWeapon);
             // Set this weapon to be active
             pendingNewWeapon.transform.parent = weaponBone;
+            pendingNewWeapon.gameObject.SetActive(true);
 
             pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
             pendingNewWeapon.playerStats = myStats;
@@ -189,10 +199,13 @@ public class WeaponController : MonoBehaviour {
         if (Time.timeSinceLevelLoad - switchCooldown < WEAPON_SWITCH_TIME 
             || weaponCount <= 1
             || pendingPackType != "") {
+            print("falling out 3");
             return;
         }
         switchCooldown = Time.timeSinceLevelLoad;
-
+        if (weapons[weaponIndex] is ProjectileWeapon) {
+            weapons[weaponIndex].Attack(false);
+        }
         if (weaponIndex == 1) {
             pendingOldWeapon = weapons[1];
             pendingNewWeapon = weapons[0];
@@ -213,6 +226,7 @@ public class WeaponController : MonoBehaviour {
         //print("pending pack:" + pendingPackType + " " + weaponCount);
         if (weaponCount == 0
             || pendingPackType != "") {
+            print("falling out 2");
             return;
         }
         //print("foo");
@@ -231,6 +245,7 @@ public class WeaponController : MonoBehaviour {
             viewmodelAnimator.SetTrigger("B" + packType);
         } else if (!pendingNewWeapon.bothHands) {
             // Glitch where it sets pack when new weapon is both hands
+            //print("foooo " + controllerSide + packType);
             viewmodelAnimator.SetTrigger(controllerSide + packType);
         }
        
@@ -248,6 +263,7 @@ public class WeaponController : MonoBehaviour {
         
     }
     public void SwitchWeaponFinished() {
+        //print("SwitchWeaponFinished");
         //pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
         // Each animation is 1/2 second long, so I set the speed based off of that so it syncs
         // i.e. if a weapon's AttackSpeed is 1, I set the AttackSpeed to .5f, so it lasts 1 sec instead of half a second
@@ -273,6 +289,7 @@ public class WeaponController : MonoBehaviour {
             weaponBusy || // Can't equip if reloading
             pendingPackType != ""
             ) { //Can't equip if currently moving weapons around
+            print("falling out 1");
             return;
         }
 
@@ -360,6 +377,7 @@ public class WeaponController : MonoBehaviour {
             w.transform.parent = null;
             //w.transform.position += cameraBone.transform.right * 2; //Throw to the right
             w.transform.localScale = Vector3.one;
+            w.gameObject.SetActive(true);
             if (w is Magic) {
                 // Set the mesh to be proper scale
                 ((Magic)w).mesh.localScale = Vector3.one;

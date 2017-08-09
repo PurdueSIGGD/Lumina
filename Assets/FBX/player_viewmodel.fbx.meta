@@ -3,7 +3,7 @@ guid: a89d22e0a3f90c549a3dabf775e7debf
 timeCreated: 1489718969
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: chest
     100002: DEF-chest
@@ -1253,6 +1253,8 @@ ModelImporter:
     102490: pCylinder2
     102492: pCylinder6
     102494: Player_Viewmodel
+    102496: MCH-f_index.03.L_end
+    102498: MCH-f_index.03.R_end
     400000: chest
     400002: DEF-chest
     400004: DEF-chest_end
@@ -2501,6 +2503,8 @@ ModelImporter:
     402490: pCylinder2
     402492: pCylinder6
     402494: Player_Viewmodel
+    402496: MCH-f_index.03.L_end
+    402498: MCH-f_index.03.R_end
     2300000: Cube
     2300002: Cube.001
     2300004: Plane
@@ -2991,6 +2995,8 @@ ModelImporter:
     7400302: Player_Viewmodel|Right_Sword_Strike3_Cooldown
     7400304: rig|Right_Bow_Drop_Empty
     7400306: rig|Right_Bow_Pack_Empty
+    7400308: rig|Fistcuffs_Strike1
+    7400310: rig|Fistcuffs_Strike1_Cooldown
     9500000: //RootNode
     13700000: body:RoadKillOut
     13700002: body:RoadKillOut.001
@@ -3005,6 +3011,8 @@ ModelImporter:
     resampleCurves: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -3015,6 +3023,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -3022,7 +3031,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -3038,6 +3050,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
