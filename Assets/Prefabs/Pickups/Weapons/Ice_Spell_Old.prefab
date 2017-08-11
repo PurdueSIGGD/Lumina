@@ -11,19 +11,19 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1296853161654420}
   m_IsPrefabParent: 1
---- !u!1 &1032316465098994
+--- !u!1 &1222014385097506
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4037130092509654}
-  - component: {fileID: 33762700407670686}
-  - component: {fileID: 23427496430667170}
+  - component: {fileID: 4278805617475734}
+  - component: {fileID: 33410625446766804}
+  - component: {fileID: 23889445622600946}
   m_Layer: 0
-  m_Name: Spellbook_1
-  m_TagString: Untagged
+  m_Name: Mesh
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,11 +36,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4190593600391318}
+  - component: {fileID: 135522763868013500}
   - component: {fileID: 54337691760618378}
   - component: {fileID: 114658875192318454}
-  - component: {fileID: 65927088526794156}
   m_Layer: 0
-  m_Name: Ice_Spell
+  m_Name: Ice_Spell_Old
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,19 +95,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4037130092509654
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1032316465098994}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 99.99997, z: 99.99997}
-  m_Children: []
-  m_Father: {fileID: 4643761097077648}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4190593600391318
 Transform:
   m_ObjectHideFlags: 1
@@ -122,6 +109,19 @@ Transform:
   - {fileID: 4322226690339210}
   - {fileID: 4337717343535062}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4278805617475734
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222014385097506}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 4643761097077648}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4322226690339210
@@ -160,16 +160,16 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4037130092509654}
+  - {fileID: 4278805617475734}
   m_Father: {fileID: 4190593600391318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23427496430667170
+--- !u!23 &23889445622600946
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1032316465098994}
+  m_GameObject: {fileID: 1222014385097506}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -177,9 +177,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 61260019711531d4aaab163e03a82d12, type: 2}
-  - {fileID: 2100000, guid: 8baf5f36a2a9c6c46a22e3b76b6a5bb8, type: 2}
-  - {fileID: 2100000, guid: 12bd88ba08881f446a660f7f157329e2, type: 2}
+  - {fileID: 2100000, guid: 5cbd9f0ae5419384e8255fe57eacc93c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -187,7 +185,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
+  m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_SelectedEditorRenderState: 3
@@ -198,13 +196,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33762700407670686
+--- !u!33 &33410625446766804
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1032316465098994}
-  m_Mesh: {fileID: 4300000, guid: 23f177b2ba21fd84299774934a3866f7, type: 3}
+  m_GameObject: {fileID: 1222014385097506}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54337691760618378
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -220,18 +218,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65927088526794156
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1296853161654420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.97158813, y: 0.2487793, z: 0.6218872}
-  m_Center: {x: -0.014205933, y: -0.00020217896, z: -0.004043579}
 --- !u!114 &114658875192318454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,12 +233,16 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: Force Ice
+  description: "This spell will shoot a ray of ice \nand destroy everything in its
+    path\n"
+  sprite: {fileID: 21300000, guid: af79fb57c1e3a05448c5e74f08feb83a, type: 3}
   damageType: 2
   playerStats: {fileID: 0}
   timeToAttack: 1
   timeToCooldown: 1
   range: 20
-  baseDamage: 1
+  baseDamage: 10
   animationType: 1
   bothHands: 0
   storedAmmo: 10
@@ -261,6 +251,18 @@ MonoBehaviour:
   shootParticles: {fileID: 198911113911230320}
   mesh: {fileID: 4643761097077648}
   width: 1
+--- !u!135 &135522763868013500
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296853161654420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.125
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198556945871469174
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -320,7 +322,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -649027058
+  randomSeed: -2000394126
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -921,7 +923,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3531,7 +3533,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1710682124773106}
   serializedVersion: 5
   lengthInSec: 5
-  simulationSpeed: 0.5
+  simulationSpeed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 0
