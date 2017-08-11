@@ -32,12 +32,13 @@ public class StatsController : Hittable
 
     public Animator myAnim;
     public Light healthLight;
+    public InventoryController inventoryController;
+
     private float healthLightStartIntensity;
 
 	bool outside;
     bool dead;
-
-	[HideInInspector] public InventoryController inventoryController;	
+    
 	//public PauseMenu pauseMenu;
 
     public HUDController gui { get; set; } 
@@ -45,8 +46,6 @@ public class StatsController : Hittable
     // Use this for initialization
     void Start ()
 	{
-        //assign var
-        inventoryController = GetComponent<InventoryController>();
 
         //set condition for health
 		outside = true;

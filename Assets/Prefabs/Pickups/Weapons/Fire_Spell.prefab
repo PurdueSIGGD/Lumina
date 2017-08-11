@@ -140,8 +140,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1489681100830950}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 291.833, y: 32.322, z: 205.645}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 291.833, y: 32.322, z: 205.484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4569922837549708}
@@ -247,6 +247,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: Fire Spell
+  description: It dispells fire
+  sprite: {fileID: 21300000, guid: 004f6e9abf2edd34bb29dbf05186b2f2, type: 3}
   damageType: 1
   playerStats: {fileID: 0}
   timeToAttack: 0.3
