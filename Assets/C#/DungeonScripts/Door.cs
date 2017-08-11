@@ -10,7 +10,7 @@ public class Door : Usable {
     public string displayText;
     public Animator myAnimator;
     private GameObject player;
-    public int seed, depth;
+    public int seed, depth = 1;
     public void Start() {
         if (displayText == "") {
             displayText = "Enter " + sceneToLoad;
