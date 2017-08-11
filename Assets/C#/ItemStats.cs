@@ -12,7 +12,7 @@ public class ItemStats : MonoBehaviour {
 	public float maxCondition = 100.0f; // In percent (%)
     private float factor = 1.0f;
     public float getCondition() { return condition; }
-
+    
     //meta information
     [Header("Bag Item")]
     public string displayName; //name to display in bag/inventory
@@ -23,7 +23,8 @@ public class ItemStats : MonoBehaviour {
 
 
     void Start() {
-		condition = Random.Range (minCondition, maxCondition);
+        // Condition should be set by the spawning class
+	    //condition = Random.Range (minCondition, maxCondition);
 	}
   
     /**
@@ -34,9 +35,13 @@ public class ItemStats : MonoBehaviour {
 	 * damage: the amount of damage to give (percentage of max condition)
 	 * 
 	 **/
-    public void DamageCondition(float damage) {
-		factor += damage/maxCondition;
-		condition -= damage * factor;
+	public void DamageCondition(float damage) {
+        if (condition > minCondition) {
+            factor += damage / maxCondition;
+            condition -= damage * factor;
+        } else {
+            condition = minCondition;
+        }
 	}
 
     /**

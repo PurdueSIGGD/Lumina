@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SwingingWeapon : Weapon {
@@ -16,6 +17,10 @@ public class SwingingWeapon : Weapon {
 		hasRaycasted = false;
 	}
 
+    RaycastHit[] getHitObjects() {
+        return Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);
+    }
+
     public override void Attack(bool mouseDown)
     {
 		if (isAttacking) {
@@ -24,29 +29,11 @@ public class SwingingWeapon : Weapon {
                 //print("Hitting now " + getLookObj());
                 // Apply ItemStats damage
                 this.DamageCondition(1);
-                RaycastHit[] hits = Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);
-                foreach (RaycastHit hit in hits) {
-                    if (hit.distance <= range &&
-                        !hit.collider.isTrigger &&
-                        hit.collider.gameObject.tag != "Player") {
-                        // Push physics, regardless of hittable
-                        Rigidbody r;
-                        if (r = hit.collider.GetComponent<Rigidbody>()) {
-                            //print("Adding force");
-                            // Play around with a good factor here
-                            
-                            r.AddForceAtPosition(baseDamage * getLookObj().forward * 10, getLookObj().position);
-                            r.AddForce(Vector3.up * r.mass * 350);
-                        }
-                        // Hit with hittable
-                        Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
-                        if (hittable != null) {
-                            //print("hit " + hit);
-                            hittable.Hit(baseDamage * (getCondition()/100), getLookObj().transform.forward, damageType);
-                        }
-                    }
-                    
-				}
+                RaycastHit[] hits = getHitObjects();
+                processHits(hits);
+                RaycastHit[] hitsAgain = getHitObjects(); //we do it again, in case some gibs/other stuff spawns that frame
+                IEnumerable<RaycastHit> diff = hitsAgain.Except(hits);
+                processHits(diff.ToArray<RaycastHit>());
 				hasRaycasted = true;
 			} else if (hasRaycasted && getTimeSincePress() > timeToAttack + timeToCooldown) {
 				isAttacking = false;
@@ -56,7 +43,37 @@ public class SwingingWeapon : Weapon {
 		} else if (mouseDown && !isAttacking) {
             isAttacking = true;
 			getPlayerAnim().SetTrigger(getControllerSide() + "Attack");
-            getPlayerAnim().SetInteger(getControllerSide() + "AttackNum", UnityEngine.Random.Range(0, 2));
+            int maxRange = 0;
+            if (animationType == 1) {
+                maxRange = 3;
+            } else if (animationType == 2) {
+                maxRange = 2;
+            }
+            getPlayerAnim().SetInteger(getControllerSide() + "AttackNum", UnityEngine.Random.Range(0, maxRange));
+        }
+    }
+
+    private void processHits(RaycastHit[] hits) {
+        foreach (RaycastHit hit in hits) {
+            if (hit.distance <= range &&
+                !hit.collider.isTrigger &&
+                hit.collider.gameObject.tag != "Player") {
+                // Push physics, regardless of hittable
+                Rigidbody r;
+                if (r = hit.collider.GetComponent<Rigidbody>()) {
+                    //print("Adding force");
+                    // Play around with a good factor here
+
+                    r.AddForceAtPosition(baseDamage * getLookObj().forward * 10, getLookObj().position);
+                    r.AddForce(Vector3.up * r.mass * 350);
+                }
+                // Hit with hittable
+                Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
+                if (hittable != null) {
+                    //print("hit " + hit);
+                    hittable.Hit(baseDamage * (getCondition() / 100), getLookObj().transform.forward, damageType);
+                }
+            }
         }
     }
 }
