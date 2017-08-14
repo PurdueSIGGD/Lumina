@@ -353,6 +353,7 @@ public class WeaponController : MonoBehaviour {
             disableAttacks = false;
 
             // Start the particle effect
+            ((Magic)weapons[weaponIndex]).pauseParticles();
             ((Magic)weapons[weaponIndex]).playParticles();
 
         }
