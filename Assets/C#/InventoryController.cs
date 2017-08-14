@@ -114,11 +114,14 @@ public class InventoryController : MonoBehaviour {
 		    }
             if (lastItem) {
                 //Drop last item
-                lastItem.GetComponent<Rigidbody>().isKinematic = true;
+                lastItem.position = transform.position + transform.forward * 3 + Vector3.up;
+                lastItem.GetComponent<Rigidbody>().isKinematic = false;
                 lastItem.parent = null;
                 lastItem.GetComponent<Collider>().isTrigger = false;
+                lastItem.gameObject.SetActive(true);
             }
             // Set our newest item as our currently equipped item
+            item.gameObject.SetActive(false);
             item.transform.parent = this.transform;
             item.transform.localPosition = Vector3.zero;
             item.GetComponent<Rigidbody>().isKinematic = true;
