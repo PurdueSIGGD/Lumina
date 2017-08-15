@@ -194,7 +194,10 @@ public class WeaponController : MonoBehaviour {
             weapons[weaponIndex].Attack(mouseDown);
         }
     }
-
+    public void clearSwitchCooldown() {
+        // Called when switching scenes
+        switchCooldown = 0;
+    }
     public void SwitchWeapon() {
         if (Time.timeSinceLevelLoad - switchCooldown < WEAPON_SWITCH_TIME 
             || weaponCount <= 1

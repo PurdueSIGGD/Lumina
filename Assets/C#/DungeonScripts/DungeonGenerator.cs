@@ -19,6 +19,8 @@ public class DungeonGenerator : MonoBehaviour {
                                     // Placed at 0,50,0
     public GameObject descender;    // The tunnel you enter before going into a cave
                                     // Placed 150 from center
+    public GameObject exit;         // The exit door used to leave the dungeon
+
     public GameObject[] enemyTypes;   // Every enemy you can possibly fight
 
     public GameObject dungeonLevel; // The prefab of the dungeon level, used to initiate any dungeon level
