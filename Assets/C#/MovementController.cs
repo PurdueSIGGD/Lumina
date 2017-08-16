@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEditor;
 
 public class MovementController : MonoBehaviour {
 	public static int SPRINT_MAX = 3;
@@ -206,22 +207,34 @@ public class MovementController : MonoBehaviour {
     }
     void PrepareToEnterDungeon() {
         disableMovement = true;
+        outsideLocation = transform.position;
+    }
+    void PrepareToExitDungeon() {
+        disableMovement = true;
     }
     void EnterDungeon() {
         // We expect the screen to be faded to black, so we can do crazy movements
-        outsideLocation = transform.position;
+
         transform.position = new Vector3(0, 50, 0);
         disableMovement = false;
         // change skybox settings to be all black
         playerCam.clearFlags = CameraClearFlags.Color;
         playerCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f);
 
-
+        foreach (WeaponController w in GetComponents<WeaponController>()) {
+            w.clearSwitchCooldown();
+        }
     }
     void ExitDungeon() {
+        print(outsideLocation);
         transform.position = outsideLocation;
         // Play whatever animations
         playerCam.clearFlags = CameraClearFlags.Skybox;
+        disableMovement = false;
+
+        foreach (WeaponController w in GetComponents<WeaponController>()) {
+            w.clearSwitchCooldown();
+        }
     }
 
     private bool canMoveTo(Vector3 pos) {

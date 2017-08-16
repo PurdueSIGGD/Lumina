@@ -30,8 +30,8 @@ public class InventoryController : MonoBehaviour {
 
 	void Update () {
 		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
-        //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward);
-        //print(hitObjs.Length);
+        //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
+        print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
             ItemStats its;
             Usable usb;
@@ -66,7 +66,7 @@ public class InventoryController : MonoBehaviour {
         // If value is true, pick up
         if (value)
         {
-			if (Time.timeSinceLevelLoad - interactCooldown <= 1) {
+			if (Time.time - interactCooldown <= 1) {
 				return;
 			}
 			//Debug.Log ("Interacting");
@@ -79,12 +79,12 @@ public class InventoryController : MonoBehaviour {
                     //Debug.Log ("player is Equipping Armor ");
                     //Destroy (get.gameObject);
                     // Reset timer
-                    interactCooldown = Time.timeSinceLevelLoad;
+                    interactCooldown = Time.time;
                 } else if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
                     Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
                     itemToUse.Use();
 
-                    interactCooldown = Time.timeSinceLevelLoad;
+                    interactCooldown = Time.time;
 
                 } else {
                     continue;
@@ -93,7 +93,9 @@ public class InventoryController : MonoBehaviour {
 
 
             }
-        } 
+        } else {
+            //print("Nothing to interact with");
+        }
 
     }
 

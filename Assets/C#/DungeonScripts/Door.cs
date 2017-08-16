@@ -5,20 +5,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class Door : Usable {
-    public string sceneToLoad = "Dungeon";
+public abstract class Door : Usable {
+    
     public string displayText;
     public Animator myAnimator;
     private GameObject player;
-    public int seed, depth;
-    public void Start() {
-        if (displayText == "") {
-            displayText = "Enter " + sceneToLoad;
-        }
-    }
+
     public override string getInfoText() {
         return displayText;
-    }
+    } 
 
     public override void Use() {
         player = GameObject.FindGameObjectsWithTag("Player")[0];
@@ -28,16 +23,23 @@ public class Door : Usable {
         }
         // Maybe add a custom player animation?
         // Disable player movement
-        player.SendMessage("PrepareToEnterDungeon");
+        sceneSwitchPrep(player);
         StartCoroutine(LoadScene());
     }
     public IEnumerator LoadScene() {
         yield return new WaitForSeconds(2);
-        player.SendMessage("EnterDungeon");
-        PlayerPrefs.SetInt("DungeonSeed", seed);
-        PlayerPrefs.SetInt("DungeonDepth", depth);
-        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
-
+        preSceneSwitch(player);
+        SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
     }
 
+    // Return the name of the scene to load, used by SceneManager
+    public abstract string getSceneToLoad();
+
+    // What needs to be done when the player is frozen, about to leave the dungeon
+    public abstract void sceneSwitchPrep(GameObject player);
+
+    // The scene is about to switch this frame. Do whatever you need to do.
+    public abstract void preSceneSwitch(GameObject player);
+
+ 
 }

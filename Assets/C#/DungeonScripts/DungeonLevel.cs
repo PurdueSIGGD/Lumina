@@ -7,6 +7,7 @@ public class DungeonLevel : MonoBehaviour {
     public DungeonLevel pastLevel, nextLevel;
     public int direction;   // 0 = right, 1 = forward, 2 = left, 3 = backwards
     public Animator door;
+    public GameObject exitPortal;
 
 
     public GameObject[] walls;
@@ -17,7 +18,7 @@ public class DungeonLevel : MonoBehaviour {
 
     void Update() {
         // Check to see if the player is done
-        if (door != null && !cleared) {
+        if (!cleared) {
             bool dead = true;
             if (enemies != null && enemies.Length > 0) {
                 // Check to see if they are all dead
@@ -31,9 +32,14 @@ public class DungeonLevel : MonoBehaviour {
                 }
             }
             if (dead) {
-                door.SetTrigger("Open");
-                nextLevel.gameObject.SetActive(true); // Stop hiding it from us
-                cleared = true;
+                if (nextLevel != null) {
+                    door.SetTrigger("Open");
+                    nextLevel.gameObject.SetActive(true); // Stop hiding it from us
+                    cleared = true;
+                } else {
+                    cleared = true;
+                    GameObject.Instantiate(exitPortal, transform.position, Quaternion.identity);
+                }
             }
         }
         
