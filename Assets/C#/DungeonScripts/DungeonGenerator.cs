@@ -25,6 +25,8 @@ public class DungeonGenerator : MonoBehaviour {
 
     public GameObject dungeonLevel; // The prefab of the dungeon level, used to initiate any dungeon level
 
+    public ProbabililtyItem[] junkToSpawn;// A set of items that we spawn randomly on each floor
+
     public int seed;                // Random seed used for generation of past tunnels (set by playerprefs)
 
     public int depth;               // The number of levels that we are going to go (set by playerprefs)
@@ -38,7 +40,12 @@ public class DungeonGenerator : MonoBehaviour {
     private readonly float distanceBetween = 100f;
     private readonly float spawnRadius = 20f;
 
-     
+    private readonly Vector2 junkCountRangeFirst = new Vector2(25, 40);
+    private readonly Vector2 junkCountRange = new Vector2(10, 20);
+
+    private ArrayList junkLottery;
+
+
     public static Vector3[] wallPositions = {
         new Vector3(25, 0, 0),
         new Vector3(0, 0, 25),
@@ -82,7 +89,17 @@ public class DungeonGenerator : MonoBehaviour {
             Random.InitState(seed);
         }
         depth = PlayerPrefs.GetInt("DungeonDepth");
+        // Since we want an extra room in the first level to include random items, we increment depth
+        depth++;
 
+        // Create a lottery for possible junk to be spawned 
+        // Each integer added is a reference to the junkToSpawn array
+        junkLottery = new ArrayList();
+        for (int i = 0; i < junkToSpawn.Length; i++) {
+            for (int k = 0; k < junkToSpawn[i].chance; k++) {
+                junkLottery.Add(i);
+            }
+        }
       
         dungeons = new DungeonLevel[depth];
         Vector3 dungeonPosition = Vector3.zero;
@@ -106,9 +123,21 @@ public class DungeonGenerator : MonoBehaviour {
                 wall.transform.parent = newDungeon.transform;
             }
 
+            // Toss in some random junk each stage, more if the first one
+            for (int junkCount = 0; junkCount < (currentDepth == 0 ? Random.Range(junkCountRangeFirst.x, junkCountRangeFirst.y) : Random.Range(junkCountRange.x, junkCountRange.y)); junkCount++) {
+                Vector2 v2Position = Random.insideUnitCircle * spawnRadius * 1f;
+                Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
+                int randomIndex = Random.Range(0, junkLottery.Count - 1);
+                bool keepDesiredRotation = Random.Range(0.0f, 1.0f) < 0.1f;
+                print(keepDesiredRotation);
+                GameObject newJunk = GameObject.Instantiate(junkToSpawn[(int)junkLottery[randomIndex]].prefab, v3Position, keepDesiredRotation ? Quaternion.identity : Quaternion.Euler(360 * Random.insideUnitSphere));
+                newJunk.transform.parent = newDungeon.transform;
+            }
+
             // toss in some enemies, tell the dungeon level that those are their required enemies
             ArrayList enemyList = new ArrayList();
-            int enemyCount = Random.Range(1, 5);
+            // Add none if the first room
+            int enemyCount = currentDepth == 0 ? 0 : Random.Range(1, 5);
             int enemyType = Random.Range(0, enemyTypes.Length);
             for (int enemies = 0; enemies < enemyCount; enemies++) {
                 Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
@@ -237,5 +266,7 @@ public class DungeonGenerator : MonoBehaviour {
         }
 
     }
+
+
 	
 }

@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class BurstMagic : Magic {
+    // Level restriction used for use on certain levels (like portal spawner only in dungeons)
+    public bool useLevelRestriction;
+    public string levelRestriction = "Dungeon";
 
     public float magicDraw = 1; //Magic this attack burst takes
 
@@ -20,7 +24,7 @@ public abstract class BurstMagic : Magic {
                     attacking = false;
                     bursted = true;
                 }
-            } else if (playerStats.GetMagic() >= magicDraw) {
+            } else if (playerStats.GetMagic() >= magicDraw && (!useLevelRestriction || SceneManager.GetActiveScene().name == levelRestriction)) {
                 attacking = true;
                 getPlayerAnim().SetBool(getControllerSide() + "MagicAttack", true);
             }
@@ -36,5 +40,6 @@ public abstract class BurstMagic : Magic {
     }
 
     public abstract void MagicBurstAttack();
+    
 
 }

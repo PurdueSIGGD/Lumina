@@ -28,7 +28,7 @@ public class SpawnerMagic : BurstMagic {
             }
         }
 
-        Debug.Log(targetPosition);
+        //Debug.Log(targetPosition);
         GameObject.Instantiate(itemToSpawn, targetPosition, Quaternion.identity);
         GameObject.Instantiate(spawnParticles, targetPosition, Quaternion.identity);
         //EditorApplication.isPaused = true;

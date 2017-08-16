@@ -400,11 +400,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4585567620764928, guid: fa55751d35404c3468a4c770ac362016, type: 2}
       propertyPath: m_LocalPosition.x
       value: -12.024091
@@ -437,52 +432,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1550531931226760, guid: fa55751d35404c3468a4c770ac362016, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.data[0]
-      value: 
-      objectReference: {fileID: 1430667555586948, guid: 8c13084d39bcb6e44975a5b4c025fc3b,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.data[1]
-      value: 
-      objectReference: {fileID: 1011267500737290, guid: ac9f3c0e7ea16a842a92dcefb742cf1d,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.data[2]
-      value: 
-      objectReference: {fileID: 1422754892740420, guid: 033bdb4a6908d5044ac7f35e37788657,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.data[3]
-      value: 
-      objectReference: {fileID: 1047052981932074, guid: 5db767bf6c33f47418049e9479eb826f,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: enemyTypes.Array.data[4]
-      value: 
-      objectReference: {fileID: 1607742736027730, guid: 6114b7dbfd582b94c959c27c103e5dd7,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: chandelier
-      value: 
-      objectReference: {fileID: 1910938027225786, guid: 9fefb154c5589ac4baf01c25f145a660,
-        type: 2}
-    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
-        type: 2}
-      propertyPath: exit
-      value: 
-      objectReference: {fileID: 1224409900933260, guid: b0206f31c01a26146803db268e5f7c35,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa55751d35404c3468a4c770ac362016, type: 2}
   m_IsPrefabParent: 0

@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 65218432228072284}
   m_Layer: 0
   m_Name: Floor12x12
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.10197078}
+  m_Size: {x: 0.5, y: 0.5, z: 0.103}
   m_Center: {x: 0, y: 0, z: -0.04901311}
 --- !u!114 &114143266723364614
 MonoBehaviour:
@@ -334,7 +334,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -748891047
+  randomSeed: 195782772
   InitialModule:
     serializedVersion: 3
     enabled: 1
