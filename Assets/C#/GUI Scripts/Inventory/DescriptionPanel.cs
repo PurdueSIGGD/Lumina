@@ -50,7 +50,13 @@ public class DescriptionPanel : MonoBehaviour {
         if (i.itemStats is Magic)
         {
             Magic magic = (Magic)i.itemStats;
-            stats += "Width: " + magic.width + "\n";
+            if (i.itemStats is BeamMagic) {
+                stats += "Cost per second: " + ((BeamMagic)magic).magicDraw + "\n";
+            }
+            if (i.itemStats is BurstMagic) {
+                stats += "Cost per burst: " + ((BurstMagic)magic).magicDraw + "\n";
+            }
+            
 
             //set title
             statsTitle.text = "Magic";
