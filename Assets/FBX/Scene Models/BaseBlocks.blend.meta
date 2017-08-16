@@ -3,7 +3,7 @@ guid: 1051ba8fb4c0d564caade74e72a84ac8
 timeCreated: 1495402774
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: 2x2x1
     100002: 2x2x1_1
@@ -98,6 +98,15 @@ ModelImporter:
     100180: DescenderRockAndBrick1_002
     100182: Cylinder_002
     100184: Chandelier
+    100186: Cube_018
+    100188: Cube_019
+    100190: Cube_020
+    100192: Cube_021
+    100194: Cube_022
+    100196: Cube_023
+    100198: Cube_024
+    100200: Cube_025
+    100202: Cube_026
     400000: 2x2x1
     400002: 2x2x1_1
     400004: 2x2x2
@@ -191,6 +200,15 @@ ModelImporter:
     400180: DescenderRockAndBrick1_002
     400182: Cylinder_002
     400184: Chandelier
+    400186: Cube_018
+    400188: Cube_019
+    400190: Cube_020
+    400192: Cube_021
+    400194: Cube_022
+    400196: Cube_023
+    400198: Cube_024
+    400200: Cube_025
+    400202: Cube_026
     2300000: 2x2x1
     2300002: 2x2x1_1
     2300004: 2x2x2
@@ -258,6 +276,15 @@ ModelImporter:
     2300128: DescenderRockAndBrick1_002
     2300130: Cylinder_002
     2300132: Chandelier
+    2300134: Cube_018
+    2300136: Cube_019
+    2300138: Cube_020
+    2300140: Cube_021
+    2300142: Cube_022
+    2300144: Cube_023
+    2300146: Cube_024
+    2300148: Cube_025
+    2300150: Cube_026
     3300000: 2x2x1
     3300002: 2x2x1_1
     3300004: 2x2x2
@@ -325,6 +352,15 @@ ModelImporter:
     3300128: DescenderRockAndBrick1_002
     3300130: Cylinder_002
     3300132: Chandelier
+    3300134: Cube_018
+    3300136: Cube_019
+    3300138: Cube_020
+    3300140: Cube_021
+    3300142: Cube_022
+    3300144: Cube_023
+    3300146: Cube_024
+    3300148: Cube_025
+    3300150: Cube_026
     4300000: DescenderRockAndBrick1
     4300002: WallRockAndBrick2
     4300004: WallBrick1
@@ -396,6 +432,15 @@ ModelImporter:
     4300136: DescenderRockAndBrick1_002
     4300138: Cylinder_002
     4300140: Chandelier
+    4300142: Cube_026
+    4300144: Cube_025
+    4300146: Cube_024
+    4300148: Cube_023
+    4300150: Cube_022
+    4300152: Cube_021
+    4300154: Cube_020
+    4300156: Cube_019
+    4300158: Cube_018
     7400000: Default Take
     7400002: Door_Open
     7400004: TrapDoor_Open
@@ -419,6 +464,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -429,6 +476,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 0
   meshes:
@@ -436,7 +484,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -452,6 +503,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 0
   copyAvatar: 0
   humanDescription:
