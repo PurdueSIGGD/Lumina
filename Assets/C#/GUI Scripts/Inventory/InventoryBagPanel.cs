@@ -92,6 +92,7 @@ public class InventoryBagPanel : MonoBehaviour {
 
         //set up information
         bagItem.Setup(item);
+        bagItem.bag = this;
         //bagItem.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         
 

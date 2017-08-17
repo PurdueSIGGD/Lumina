@@ -50,10 +50,10 @@ public class InventoryController : MonoBehaviour {
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
                 
 				// Show GUI info here using its
-				if (!helpInteractText.gameObject.activeSelf)
-                {
-                    helpInteractText.gameObject.SetActive(true);
-                }
+				//if (!helpInteractText.gameObject.activeSelf)
+                //{
+                //    helpInteractText.gameObject.SetActive(true);
+                //}
 				
             } 
 			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {

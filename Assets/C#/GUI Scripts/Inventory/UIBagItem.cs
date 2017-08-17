@@ -48,15 +48,23 @@ public class UIBagItem : MonoBehaviour {
     public void DisplayDescription()
     {
         //find game Object
-        GameObject gameObject  = GameObject.FindGameObjectWithTag("DescriptionPanel");
+        DescriptionPanel descriptionPanel
+            = bag.inventoryPanel.GetComponentInParent<InventoryCanvas>().
+            descriptionPanel.GetComponent<DescriptionPanel>();
 
-        //get component
-        DescriptionPanel descriptionPanel = gameObject.GetComponent<DescriptionPanel>();
+        //InventoryBagPanel bag2 = this.bag;
+        //InventoryPanel ip = bag2.inventoryPanel;
+        //InventoryCanvas iv = ip.GetComponentInParent<InventoryCanvas>();
+        //DescriptionPanel dp = iv.descriptionPanel.GetComponent<DescriptionPanel>();
 
         //display
         if (descriptionPanel != null)
         {
             descriptionPanel.DisplayBagItemInfo(this);
+        }
+        else
+        {
+            Debug.Log("UI Bag Item: cannot find Description Panel");
         }
         
     }
