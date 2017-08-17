@@ -379,6 +379,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Torch
+  description: Too bad it is off
+  sprite: {fileID: 0}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.25

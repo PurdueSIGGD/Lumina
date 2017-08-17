@@ -1437,8 +1437,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114893001528565876}
   m_HandleRect: {fileID: 224328850166537504}
   m_Direction: 0
-  m_Value: 0.5
-  m_Size: 0
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2240,9 +2240,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Requirements:\nGood computer, nice graphics card. \n\nDoes not matter if
-    this is Window, Mac or Linux. does not matter if this is imported from Earth or
-    Mars. As long as you love anime & games\n "
+  m_Text: 'Requirements:
+
+    Avaliable on all PC platforms
+
+    Graphic requirements TBD'
 --- !u!114 &114677970355060416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2737,8 +2739,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114174579020883138}
   m_HandleRect: {fileID: 224335941240194422}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.8113343
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3097,7 +3099,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1766929138350344}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -3106,6 +3108,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3181,7 +3184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 165.45972}
+  m_AnchoredPosition: {x: -117.00012, y: 250.99847}
   m_SizeDelta: {x: 0, y: 877}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224084835886346338
@@ -3349,8 +3352,8 @@ RectTransform:
   m_Father: {fileID: 224551037054189462}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3367,8 +3370,8 @@ RectTransform:
   m_Father: {fileID: 224305680667249082}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.8113343}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3592,8 +3595,8 @@ RectTransform:
   m_Father: {fileID: 224954430807923272}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.8113344}
+  m_AnchorMin: {x: 0, y: 0.09753571}
+  m_AnchorMax: {x: 1, y: 0.81133443}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}

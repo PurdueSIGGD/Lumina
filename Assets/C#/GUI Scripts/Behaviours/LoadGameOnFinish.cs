@@ -9,7 +9,7 @@ public class LoadGameOnFinish : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //load default game
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("TestIsland");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
