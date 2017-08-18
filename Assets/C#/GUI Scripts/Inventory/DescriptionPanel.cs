@@ -33,8 +33,8 @@ public class DescriptionPanel : MonoBehaviour {
         string stats = "";
 
         //general stats from ItemStats
-        stats += "Tier: " + i.itemStats.tier.ToString() + "\n";
-        stats += "Condition: " + i.itemStats.condition.ToString() + "/" + i.itemStats.maxCondition.ToString() + "\n";
+        stats += "Tier: " + i.itemStats.tier.ToString() + "\n";      
+        stats += "Condition: " + Mathf.FloorToInt(i.itemStats.condition).ToString() + "/" + i.itemStats.maxCondition.ToString() + "\n";
 
         //specific stats from Item
         if (i.itemStats is Weapon)
