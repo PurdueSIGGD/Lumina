@@ -276,20 +276,25 @@ public class StatsController : Hittable
 			if (lightt + amount > lighttMax) {
 				float leftover = lightt + amount - lighttMax;
 				lightt = lighttMax;
-				return leftover;
+                gui.GUIsetLight(lightt);
+                return leftover;
 			}
 			lightt += amount;
-			return 0;
+            gui.GUIsetLight(lightt);
+            return 0;
 		} else if (amount < 0) {
 			if (lightt + amount < 0) {
 				float leftover = lightt + amount;
 				lightt = 0;
-				return leftover;
+                gui.GUIsetLight(lightt);
+                return leftover;
 			}
 			lightt += amount;
-			return 0;
+            gui.GUIsetLight(lightt);
+            return 0;
 		}
-		return 0;
+        gui.GUIsetLight(lightt);
+        return 0;
 	}
 
 	/* Applies a change in damage from the vulnerability of the creature
