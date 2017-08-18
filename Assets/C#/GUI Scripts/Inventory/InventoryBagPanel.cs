@@ -101,6 +101,56 @@ public class InventoryBagPanel : MonoBehaviour {
         UpdateBagContent();
     }
 
+    /// <summary>
+    /// Drop the item the bag
+    /// This function deals most with the UI part
+    /// usually Called from WeaponController when too much stuff
+    /// </summary>
+    /// <param name="item">Item to be dropped</param>
+    public void Drop(ItemStats item)
+    {
+        //check null
+        if (item == null || itemDict == null)
+            return;
+
+        //check exist
+        int amount = -1;
+
+        if (!itemDict.TryGetValue(item, out amount))
+        {
+            return;
+        }
+
+       
+        //if there are 2 of same weapons
+        if (amount == 2)
+        {
+            //update dict
+            itemDict[item]--;
+                
+            //update the UI
+            UIBagItem i = itemUIList.Find(x => x.itemStats.compareTo(item));
+            i.displayNameText.text = i.itemStats.displayName;
+        }
+
+        //if there is 1 or unique weapon
+        if (amount == 1)
+        {
+            //udate dict               
+            itemDict.Remove(item);
+
+            //update ui element 
+            UIBagItem uiItem = itemUIList.Find(x => x.itemStats == item);
+            itemUIList.Remove(uiItem);
+            Destroy(uiItem.gameObject);
+            UpdateBagContent();
+        }
+
+        
+
+    }
+
+
     private void UpdateBagContent()
     {
         //content.rect.height = itemUIList.Count;

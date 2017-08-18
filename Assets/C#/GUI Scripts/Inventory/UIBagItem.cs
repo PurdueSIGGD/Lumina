@@ -52,11 +52,6 @@ public class UIBagItem : MonoBehaviour {
             = bag.inventoryPanel.GetComponentInParent<InventoryCanvas>().
             descriptionPanel.GetComponent<DescriptionPanel>();
 
-        //InventoryBagPanel bag2 = this.bag;
-        //InventoryPanel ip = bag2.inventoryPanel;
-        //InventoryCanvas iv = ip.GetComponentInParent<InventoryCanvas>();
-        //DescriptionPanel dp = iv.descriptionPanel.GetComponent<DescriptionPanel>();
-
         //display
         if (descriptionPanel != null)
         {
