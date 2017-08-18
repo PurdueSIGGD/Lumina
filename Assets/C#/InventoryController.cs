@@ -42,7 +42,6 @@ public class InventoryController : MonoBehaviour {
 	void Update () {
 		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
-        print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
 
             ItemStats its;

@@ -43,8 +43,6 @@ public class InputGenerator : MonoBehaviour {
     void CursorStates()
     {
         // If we are paused, mouse will appear
-		//if ( playerpause.isPausing()) {
-		//if((!playerPause || playerPause.getPause() == false || !isGamePausing)){
         if (!isGamePausing) { 
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
