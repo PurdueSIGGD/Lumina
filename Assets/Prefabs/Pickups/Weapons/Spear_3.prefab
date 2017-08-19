@@ -318,6 +318,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23283595960454180
 MeshRenderer:
@@ -349,6 +350,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23306994723379830
 MeshRenderer:
@@ -380,6 +382,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23351019045285660
 MeshRenderer:
@@ -412,6 +415,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23467144347185178
 MeshRenderer:
@@ -443,6 +447,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23468572590530702
 MeshRenderer:
@@ -474,6 +479,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23749977961591562
 MeshRenderer:
@@ -505,6 +511,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33013487668978846
 MeshFilter:
@@ -597,10 +604,18 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Knight Spear
+  description: "Tales used to say that guards in Asgard \nprotect the King Thor with
+    this Spear"
+  sprite: {fileID: 21300000, guid: 53dbf7aea4c23f346ab263961d0e9a22, type: 3}
   damageType: 0
+  playerStats: {fileID: 0}
   timeToAttack: 0.5
   timeToCooldown: 0.5
   range: 5
   baseDamage: 30
   animationType: 2
+  bothHands: 0
+  storedAmmo: 10
   myAnim: {fileID: 0}
+  width: 0.03

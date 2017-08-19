@@ -10,7 +10,7 @@ public abstract class Door : Usable {
     public string displayText;
     public Animator myAnimator;
     private GameObject player;
-
+   
     public override string getInfoText() {
         return displayText;
     } 

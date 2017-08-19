@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: GameInforPanelOverride
+  m_Controller: {fileID: 9100000, guid: 794944f59e10ba942bbec99f8de36204, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 988ea7855e47fba4b924d92405465691, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f3a8686c65065094490b2ee357befb6d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e19eb97afd481b7489580ee132a3b9cc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5ee352e248713384a9f7d34c6fa369ab, type: 2}

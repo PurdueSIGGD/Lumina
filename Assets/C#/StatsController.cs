@@ -32,22 +32,33 @@ public class StatsController : Hittable
 
     public Animator myAnim;
     public Light healthLight;
+    public InventoryController inventoryController;
+
     private float healthLightStartIntensity;
 
 	bool outside;
     bool dead;
+    
+	//public PauseMenu pauseMenu;
 
-	public InventoryController iC;
-	public HUDController gui;
-	public PauseMenu pM;
+    public HUDController gui { get; set; } 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
 	{
+
+        //set condition for health
 		outside = true;
+
+
+        //set GUI
+        gui = GetComponent<InputGenerator>().uiController.hudController;
+        gui.statsController = this;
+
         healthLightStartIntensity = healthLight.intensity;
         DontDestroyOnLoad(gui.gameObject);
-        DontDestroyOnLoad(pM);
+        //DontDestroyOnLoad(pauseMenu);
+
         // We may want to change these to the prefab specifically
         /*health = 0;
 		healthMax = DEFAULT_MAX_HEALTH;
@@ -62,7 +73,7 @@ public class StatsController : Hittable
         if (dead) {
             // flicker the light till it goes out
             UpdateLightt(LIGHT_LOSS_RATE * -20 * Time.deltaTime);
-        } else if (SceneManager.GetActiveScene().buildIndex == 1) {
+        } else if (SceneManager.GetActiveScene().name == "Dungeon") {
             // In a dungeon, slowly lower light
             UpdateLightt(Time.deltaTime * -1 * LIGHT_LOSS_RATE);
             if (!healthLight.enabled) {
@@ -97,6 +108,7 @@ public class StatsController : Hittable
 
 		damage = ApplyDamageTypeHitMod (damage, type);
 		damage = ApplyArmorHitMod (damage, type);
+
 		float leftover = UpdateHealth(-1 * damage);
         if (GetHealth() <= 0 && !dead) {
             Kill();
@@ -169,7 +181,7 @@ public class StatsController : Hittable
 				float leftover = health + amount;
 				health = 0;
 				gui.GUIsetHealth (health);
-				gui.GUIsetHealth (health);
+				
 				return leftover;
 			}
 			health += amount;
@@ -217,20 +229,42 @@ public class StatsController : Hittable
             if (arrowCount + amount > arrowMax) {
                 int leftover = arrowCount + amount - arrowMax;
                 arrowCount = arrowMax;
+
+                UpdateArrowsUI();
                 return leftover;
             }
             arrowCount += amount;
+
+            UpdateArrowsUI();
             return 0;
-        } else if (amount < 0) {
+        }
+
+        else if (amount < 0) {
             if (arrowCount + amount < 0) {
                 int leftover = arrowCount + amount;
                 arrowCount = 0;
+
+                UpdateArrowsUI();
                 return leftover;
             }
+
             arrowCount += amount;
+            UpdateArrowsUI();
             return 0;
         }
+
+        UpdateArrowsUI();
         return 0;
+    }
+
+    /*
+     * Update the UI part of display arrows
+     */ 
+    public void UpdateArrowsUI()
+    {
+        UIController uiController = GetComponent<InputGenerator>().uiController;
+
+        uiController.inventoryCanvas.avatarPanel.UpdateArrowCount();
     }
 
 	//Returns leftovers (if any) ((can be negative))
@@ -242,20 +276,25 @@ public class StatsController : Hittable
 			if (lightt + amount > lighttMax) {
 				float leftover = lightt + amount - lighttMax;
 				lightt = lighttMax;
-				return leftover;
+                gui.GUIsetLight(lightt);
+                return leftover;
 			}
 			lightt += amount;
-			return 0;
+            gui.GUIsetLight(lightt);
+            return 0;
 		} else if (amount < 0) {
 			if (lightt + amount < 0) {
 				float leftover = lightt + amount;
 				lightt = 0;
-				return leftover;
+                gui.GUIsetLight(lightt);
+                return leftover;
 			}
 			lightt += amount;
-			return 0;
+            gui.GUIsetLight(lightt);
+            return 0;
 		}
-		return 0;
+        gui.GUIsetLight(lightt);
+        return 0;
 	}
 
 	/* Applies a change in damage from the vulnerability of the creature
@@ -286,7 +325,12 @@ public class StatsController : Hittable
 	 * @return The damage to deal after modification
 	 */
 	private float ApplyArmorHitMod(float damage, DamageType type) {
-		List<Armor> armor = iC.GetEquippedArmor ();
+		List<Armor> armor = inventoryController.GetEquippedArmor ();
+
+        //fix null ref
+        if (armor == null || armor.Count == 0)
+            return damage;
+
         if (armor.Count > 0) {
             foreach (Armor amr in armor) {
                 if (type == amr.strongAgainst) {

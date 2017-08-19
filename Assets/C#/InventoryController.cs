@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
     private static float GRAB_DISTANCE = 4;
@@ -11,7 +12,7 @@ public class InventoryController : MonoBehaviour {
 
     public Animator viewmodelAnimator;
     private float interactCooldown;
-	public StatsController sC;
+	public StatsController statsController;
 	public GameObject cam;//camera
 	float upgradekits;
 	float upgradePotions;
@@ -22,23 +23,41 @@ public class InventoryController : MonoBehaviour {
 	Pickup pick;
     ItemStats get;
 
+    private Text helpInteractText;  //text display to help interact
+    private InventoryPanel inventoryPanel;
 
-	void Start () {
+    private void Awake()
+    {
+        //get text
+        helpInteractText = gameObject.GetComponent<InputGenerator>().uiController.hudController.helpInteractText;
+    }
+
+    void Start () {
 		interactCooldown = .3f;
 
-	}
+        //get stuff
+        inventoryPanel = GetComponent<InputGenerator>().uiController.inventoryCanvas.inventoryPanel;
+    }
 
 	void Update () {
 		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
-        print(hitObjs.Length);
 		for(int i = 0; i < hitObjs.Length ;i++){
+
             ItemStats its;
             Usable usb;
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
-                // Show GUI info here using its
-            } else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
-                // Show usetext using usb
+                
+				// Show GUI info here using its
+				//if (!helpInteractText.gameObject.activeSelf)
+                //{
+                //    helpInteractText.gameObject.SetActive(true);
+                //}
+				
+            } 
+			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
+                
+				// Show usetext using usb
                 Debug.Log(usb.getInfoText());
             }
 
@@ -47,6 +66,7 @@ public class InventoryController : MonoBehaviour {
 				//get = hitObjs [i].collider.gameObject.GetComponent<ItemStats>();
 				//if (get) Debug.Log ("Seeing item "+ get.gameObject.name);
 			//}
+
 		}
 	}
 
@@ -61,6 +81,10 @@ public class InventoryController : MonoBehaviour {
 		}
 	}*/
 
+    /// <summary>
+    /// Get value from InputGenerator and Iteract with Item
+    /// </summary>
+    /// <param name="value">True if user press "f"</param>
 	public void Interact(bool value)
     {
         // If value is true, pick up
@@ -100,45 +124,68 @@ public class InventoryController : MonoBehaviour {
     }
 
 	public void pickUpItem(ItemStats item){
+
         Transform lastItem = null;
-        if (item is Armor) { 
+        if (item is Armor) {
+
             switch (((Armor)item).type){
-		    case Armor.ArmorPiece.helmet:
-                if (helmet) lastItem = helmet.transform;
-			    helmet = (Armor)item;
-				sC.pM.setEquipDescription (sC.pM.helmet,helmet);
-			    break;
-		    case Armor.ArmorPiece.chestplate:
-                if (chestPlate) lastItem = chestPlate.transform;
-			    chestPlate = (Armor)item;
-				sC.pM.setEquipDescription (sC.pM.chestplate,chestPlate);
-			    break;
+
+                case Armor.ArmorPiece.helmet:
+
+                    //if there is already helment, throw the old one away
+                    if (helmet)
+                        lastItem = helmet.transform;
+
+                    helmet = (Armor)item;
+			        break;
+		        case Armor.ArmorPiece.chestplate:
+
+                    //if there is already chestplate, throw the old one away
+                    if (chestPlate)
+                        lastItem = chestPlate.transform;
+
+                    chestPlate = (Armor)item;
+			        break;
 		    }
+
+            //Drop last item/armor
             if (lastItem) {
-                //Drop last item
+
+                //update GUI
+                inventoryPanel.armorPanel.Drop(lastItem.GetComponent<ItemStats>());
+
+                //update object               
                 lastItem.position = transform.position + transform.forward * 3 + Vector3.up;
                 lastItem.GetComponent<Rigidbody>().isKinematic = false;
                 lastItem.parent = null;
                 lastItem.GetComponent<Collider>().isTrigger = false;
                 lastItem.gameObject.SetActive(true);
             }
+
             // Set our newest item as our currently equipped item
             item.gameObject.SetActive(false);
             item.transform.parent = this.transform;
             item.transform.localPosition = Vector3.zero;
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.GetComponent<Collider>().isTrigger = true;
+
+            //add to GUI inventory
+            inventoryPanel.armorPanel.Add(item);
         }
+
         if (item is Magic) {
             //print("Picked up magic");
             leftWeaponController.EquipWeapon((Weapon)item);
-			sC.pM.setEquipDescription (sC.pM.weapL1,leftWeaponController.weapons[0]);
-			sC.pM.setEquipDescription (sC.pM.weapL2,leftWeaponController.weapons[1]);
+		
+            //add to inventory
+            inventoryPanel.magicPanel.Add(item);
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
-			sC.pM.setEquipDescription (sC.pM.weapR1,rightWeaponController.weapons[0]);
-			sC.pM.setEquipDescription (sC.pM.weapR2,rightWeaponController.weapons[1]);
+
+
+            //add to weapon
+            inventoryPanel.weaponPanel.Add(item);
         }
 
 	}
@@ -146,29 +193,25 @@ public class InventoryController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
-			pick = other.gameObject.GetComponentInParent<Pickup> ();
-			//Debug.Log ("Player picked up " + pick.itemType);
-            bool deletes = true;
-			switch(pick.itemType){
-			    case Pickup.pickUpType.upgradeKit:
-				    upgradekits += pick.amount;
-					sC.pM.setUpgradeKAmount (upgradekits);
-				    break;
-				case Pickup.pickUpType.upgradePotion:
-					upgradePotions++;
-					sC.pM.setUpgradePAmount (upgradePotions);
-                    break;
-                case Pickup.pickUpType.Magic:
-                    deletes = (sC.UpdateMagic(pick.amount) != pick.amount);
-					sC.pM.setMagicAmount (pick.amount);
-                    break;
-                case Pickup.pickUpType.Health:
-                    deletes = (sC.UpdateHealth(pick.amount) != pick.amount);
-					sC.pM.setHealthAmount (pick.amount);
-                    break;
-                case Pickup.pickUpType.Arrow:
-                    deletes = (sC.UpdateArrows((int)(pick.amount)) != pick.amount);
-                    break;
+			    pick = other.gameObject.GetComponentInParent<Pickup> ();
+			    //Debug.Log ("Player picked up " + pick.itemType);
+                bool deletes = true;
+			    switch(pick.itemType){
+			        case Pickup.pickUpType.upgradeKit:
+				        upgradekits += pick.amount;
+				        break;
+				    case Pickup.pickUpType.upgradePotion:
+					    upgradePotions++;
+                        break;
+                    case Pickup.pickUpType.Magic:
+                        deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
+                        break;
+                    case Pickup.pickUpType.Health:
+                        deletes = (statsController.UpdateHealth(pick.amount) != pick.amount);
+                        break;
+                    case Pickup.pickUpType.Arrow:
+                        deletes = (statsController.UpdateArrows((int)(pick.amount)) != pick.amount);
+                        break;
 			}
 			if (deletes) Destroy (pick.gameObject);
 		}
@@ -183,11 +226,9 @@ public class InventoryController : MonoBehaviour {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
 			upgradekits-=10;
-			sC.pM.setUpgradeKAmount (upgradekits);
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
-				sC.pM.setEquipDescription (sC.pM.helmet,i);
 			}else{
-				sC.pM.setEquipDescription (sC.pM.chestplate,i);
+
 			}
 			return;
 		}
@@ -200,19 +241,16 @@ public class InventoryController : MonoBehaviour {
 	public void useUpgradePotion(StatsController.StatType p){
 		switch (p) {
 		case StatsController.StatType.Health:
-				sC.UpgradeMaxHealth ();
+				statsController.UpgradeMaxHealth ();
 				upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
 				break;
 		case StatsController.StatType.Magic:
-                sC.UpgradeMaxMagic();
+                statsController.UpgradeMaxMagic();
                 upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
                 break;
 		case StatsController.StatType.Light:
-                sC.UpgradeMaxLightt();
+                statsController.UpgradeMaxLightt();
                 upgradePotions--;
-				sC.pM.setUpgradePAmount (upgradePotions);
                 break;
 		}
 	}

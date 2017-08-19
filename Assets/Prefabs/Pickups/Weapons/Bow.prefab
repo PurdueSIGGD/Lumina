@@ -517,6 +517,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23300291378209390
 MeshRenderer:
@@ -548,6 +549,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23446873037539486
 MeshRenderer:
@@ -579,6 +581,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23523167583967064
 MeshRenderer:
@@ -611,6 +614,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33274314011696942
 MeshFilter:
@@ -699,6 +703,10 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: Simple Bow
+  description: "\u201CI shot an arrow into the air. \nIt fell to earth, I knew not
+    where.\u201D\r\n    \u2013 Henry Wadsworth Longfellow\r\n"
+  sprite: {fileID: 21300000, guid: 47deb4eca4c5a694ea12f033962db0e8, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 1
@@ -747,6 +755,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0

@@ -165,6 +165,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23985525108337726
 MeshRenderer:
@@ -197,6 +198,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33600193973721810
 MeshFilter:
@@ -254,10 +256,18 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Woodcutter Axe
+  description: "5 cuts a day, 5 days a week for 10 years. \nTell me, which tree can
+    not be chopped."
+  sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}
   damageType: 0
+  playerStats: {fileID: 0}
   timeToAttack: 0.25
   timeToCooldown: 0.5
   range: 3
   baseDamage: 10
   animationType: 1
+  bothHands: 0
+  storedAmmo: 10
   myAnim: {fileID: 0}
+  width: 0.03

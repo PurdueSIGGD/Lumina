@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 54969370969456408}
   - component: {fileID: 114235464419508022}
   - component: {fileID: 65034331746545860}
+  - component: {fileID: 114563531610409606}
   m_Layer: 10
   m_Name: Arrow
   m_TagString: Untagged
@@ -394,3 +395,18 @@ MonoBehaviour:
   pushesOnHit: 0
   doubleCheckStick: 0
   creator: {fileID: 0}
+--- !u!114 &114563531610409606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1071059717042498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3d17905fe510e40bf8207e4fbd80fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Bronze Arrow
+  description: "\"Strategy requires thought, tactics require observation.\"\n\n\t-
+    Max Euwe"
+  sprite: {fileID: 21300000, guid: 0c108a6a5ce9c384c9dffa96f9c45099, type: 3}

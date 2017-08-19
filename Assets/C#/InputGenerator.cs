@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class InputGenerator : MonoBehaviour {
 
-	public MovementController playerMovement;
+    
+    public UIController uiController;
+    
+
+    public MovementController playerMovement;
     public InventoryController playerInventory;
-	public HUDController playerHUD;
-	public PauseMenu playerPause;
+	       
     public WeaponController leftPlayerWeaponController;
     public WeaponController rightPlayerWeaponController;
 
@@ -15,11 +18,15 @@ public class InputGenerator : MonoBehaviour {
 
 	float jumpInput;
 
+    /// <summary>
+    /// Set the running status of game
+    /// </summary>
+    public bool isGamePausing { get; private set; }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
-
+        isGamePausing = false;
     }
 	
 	// Update is called once per frame
@@ -36,8 +43,7 @@ public class InputGenerator : MonoBehaviour {
     void CursorStates()
     {
         // If we are paused, mouse will appear
-		//if ( playerpause.isPausing()) {
-		if((!playerPause || playerPause.getPause() == false)){
+        if (!isGamePausing) { 
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -115,29 +121,64 @@ public class InputGenerator : MonoBehaviour {
 
 
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
-		playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
-		if((jumpInput = Input.GetAxis ("Jump")) > 0){
+
+        //if game is pausing, stop moving the camera
+        if (!isGamePausing)
+            playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
+
+        //if relate to UI
+        //roundabout way to doing it, optimize later.
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            uiController.ToggleUI(KeyCode.Tab);
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            uiController.ToggleUI(KeyCode.I);
+        }
+
+        //jump
+        if ((jumpInput = Input.GetAxis ("Jump")) > 0){
 			playerMovement.isJumping = true;
 		}
-        if (!playerPause) return;
-		if (Input.GetAxis ("Pause") > 0) {
-			playerPause.changeState = true;
-		} else {
-			if(playerPause.changeState){
-				if (playerPause.getPause()) {
-					playerPause.setPause (false);
-					playerPause.closePauseOpenHUD ();
-					playerPause.changeState = false;
-				} else {
-					playerPause.setPause (true);
-					playerPause.closeHUDOpenPause ();
-					playerPause.changeState = false;
-				}
-			}
-		}
+
+
+        //if (!playerPause) return;
+
+
+		//if (Input.GetAxis ("Pause") > 0) {
+		//	playerPause.changeState = true;
+		//}
+
+  //      else {
+		//	if(playerPause.changeState){
+		//		if (playerPause.getPause()) {
+		//			playerPause.setPause (false);
+		//			playerPause.closePauseOpenHUD ();
+		//			playerPause.changeState = false;
+		//		} else {
+		//			playerPause.setPause (true);
+		//			playerPause.closeHUDOpenPause ();
+		//			playerPause.changeState = false;
+		//		}
+		//	}
+		//}
 			
 
 	}
 
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        isGamePausing = true;
+    }
+
+    public void ResumeGame()
+    {
+        isGamePausing = false;
+        Time.timeScale = 1;
+    }
 
 }

@@ -3,7 +3,7 @@ guid: c5ca281c0958dd0488db458bbf5f07d4
 timeCreated: 1489718067
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: body_RoadKillOut
     100002: chest
@@ -962,6 +962,8 @@ ModelImporter:
     7400006: Walking
     7400008: Idle
     7400010: TPose
+    7400012: Head_Looking
+    7400014: Idle_Sitting
     9500000: //RootNode
     13700000: body_RoadKillOut
     13700002: playerBody1
@@ -975,6 +977,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -985,6 +989,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 0
   meshes:
@@ -992,7 +997,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -1008,6 +1016,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

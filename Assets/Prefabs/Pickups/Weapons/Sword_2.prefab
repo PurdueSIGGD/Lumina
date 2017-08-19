@@ -194,6 +194,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23224277457599108
 MeshRenderer:
@@ -227,6 +228,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23334873068979690
 MeshRenderer:
@@ -258,6 +260,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33371841128020280
 MeshFilter:
@@ -322,10 +325,18 @@ MonoBehaviour:
   condition: 100
   minCondition: 30
   maxCondition: 100
+  displayName: Math Sword
+  description: "\"If I were again beggining my studies, I would follow\nthe advice
+    of Plato and start with mathematics\"\n\n\t- Galileo Galilei"
+  sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}
   damageType: 0
+  playerStats: {fileID: 0}
   timeToAttack: 0.5
   timeToCooldown: 0.5
   range: 3
   baseDamage: 20
   animationType: 1
+  bothHands: 0
+  storedAmmo: 10
   myAnim: {fileID: 0}
+  width: 0.03

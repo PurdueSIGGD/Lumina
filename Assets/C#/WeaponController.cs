@@ -32,8 +32,12 @@ public class WeaponController : MonoBehaviour {
     private bool bothHands;
     private bool disableAttacks;
 
+    //GUI bag
+    private InventoryBagPanel guiBag;
+
 	// Use this for initialization
 	void Start () {
+
         pendingPackType = "";
         weaponIndex = 0;
         weaponCount = 0;
@@ -45,6 +49,21 @@ public class WeaponController : MonoBehaviour {
         if (firstWeaponToEquip) {
             GameObject newWeapon = GameObject.Instantiate(firstWeaponToEquip);
             EquipWeapon(newWeapon.GetComponent<Weapon>());
+        }
+
+        //get Inventory Bag connected to
+        UIController uiController = GetComponent<InputGenerator>().uiController;
+        InventoryPanel inventoryPanel = uiController.inventoryCanvas.inventoryPanel;
+
+        //right: weapon
+        //left: magic
+        if (controllerSide == "R")
+        {
+            guiBag = inventoryPanel.weaponPanel;
+        }
+        else
+        {
+            guiBag = inventoryPanel.magicPanel;
         }
     }
 
@@ -304,10 +323,15 @@ public class WeaponController : MonoBehaviour {
         if (weaponCount >= weapons.Length) {
             // If we already have plenty of weapons
             // We drop one and equip the other
-            
+
+            //update GUI
+            guiBag.Drop(weapons[weaponIndex]);
+
+            //update models, db
             pendingOldWeapon = weapons[weaponIndex];
-            weapons[weaponIndex] = newWeapon;
+            weapons[weaponIndex] = newWeapon;  
             SwitchWeapon(weaponIndex, "Drop");
+
         } else {
             // We can't get enough weapons! Adding a new one
             // And packing the other
@@ -315,6 +339,7 @@ public class WeaponController : MonoBehaviour {
             weapons[weaponCount] = newWeapon;
             weaponIndex = weaponCount;
             weaponCount++;
+            
             // Weapon doesn't look like a real word anymore
             SwitchWeapon(weaponIndex, "Pack");
         }
