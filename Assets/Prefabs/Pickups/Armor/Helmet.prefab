@@ -82,7 +82,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1004969492654364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 298.27118, y: 32.45, z: 204.35095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -135,6 +135,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23694604561570290
 MeshRenderer:
@@ -166,6 +167,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33324854782845840
 MeshFilter:
@@ -239,6 +241,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: Steel Helmet
+  description: Just a normal steel helmet
+  sprite: {fileID: 21300000, guid: ee7e9ed90c7bad542819da9e2ee35801, type: 3}
   type: 0
   strongAgainst: 0
   flatDamageBlock: 2

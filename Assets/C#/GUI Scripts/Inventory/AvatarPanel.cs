@@ -10,6 +10,10 @@ using UnityEngine.UI;
 public class AvatarPanel : UIPanel {
 
     public Text arrowText;  //where to display arrow
+    public Image chestImage;
+    public Image helmetImage;
+    public Image leftHandImage;
+    public Image rightHandImage;
 
     private UIController uiController;
     private Animator anim;

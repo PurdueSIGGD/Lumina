@@ -131,29 +131,46 @@ public class InventoryController : MonoBehaviour {
             switch (((Armor)item).type){
 
                 case Armor.ArmorPiece.helmet:
-                    if (helmet) lastItem = helmet.transform;
-			        helmet = (Armor)item;
+
+                    //if there is already helment, throw the old one away
+                    if (helmet)
+                        lastItem = helmet.transform;
+
+                    helmet = (Armor)item;
 			        break;
 		        case Armor.ArmorPiece.chestplate:
-                    if (chestPlate) lastItem = chestPlate.transform;
-			        chestPlate = (Armor)item;
+
+                    //if there is already chestplate, throw the old one away
+                    if (chestPlate)
+                        lastItem = chestPlate.transform;
+
+                    chestPlate = (Armor)item;
 			        break;
 		    }
 
+            //Drop last item/armor
             if (lastItem) {
-                //Drop last item
+
+                //update GUI
+                inventoryPanel.armorPanel.Drop(lastItem.GetComponent<ItemStats>());
+
+                //update object               
                 lastItem.position = transform.position + transform.forward * 3 + Vector3.up;
                 lastItem.GetComponent<Rigidbody>().isKinematic = false;
                 lastItem.parent = null;
                 lastItem.GetComponent<Collider>().isTrigger = false;
                 lastItem.gameObject.SetActive(true);
             }
+
             // Set our newest item as our currently equipped item
             item.gameObject.SetActive(false);
             item.transform.parent = this.transform;
             item.transform.localPosition = Vector3.zero;
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.GetComponent<Collider>().isTrigger = true;
+
+            //add to GUI inventory
+            inventoryPanel.armorPanel.Add(item);
         }
 
         if (item is Magic) {

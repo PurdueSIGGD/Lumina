@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -109,16 +110,17 @@ public class HUDController : MonoBehaviour {
 
     public void updateHealthText()
     {
-        healthText.text = healthBar.value.ToString() + "/" + healthBar.maxValue.ToString();
+        healthText.text = Math.Round(healthBar.value, 2).ToString() + "/" + healthBar.maxValue.ToString();
     }
 
     public void updateMagicText()
     {
-        magicText.text = magicBar.value.ToString() + "/" + magicBar.maxValue.ToString();
+        
+        magicText.text = Math.Round(magicBar.value, 2).ToString() + "/" + magicBar.maxValue.ToString();
     }
 
     public void updateLightText()
     {
-        lightText.text = lightForceBar.value.ToString() + "/" + lightForceBar.maxValue.ToString();
+        lightText.text = Math.Round(lightForceBar.value).ToString() + "/" + lightForceBar.maxValue.ToString();
     }
 }
