@@ -10,7 +10,9 @@ abstract public class BaseEnemy : Hittable {
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
 
-    
+    private int deathLayer = 14;
+
+
 
     /*
 	 * Method called when enemy dies
@@ -22,6 +24,8 @@ abstract public class BaseEnemy : Hittable {
 
         OnDeath();
 
+        // Move to layer where we won't collide with weapons or the player
+        MoveToLayer(transform, deathLayer);
         // Prevent from moving
         //TODO ragdoll
         this.GetComponent<Rigidbody>().freezeRotation = true;
@@ -37,14 +41,22 @@ abstract public class BaseEnemy : Hittable {
         print("dropping " + numberOfDrops + " drops");
 		for (int i = 0; i < numberOfDrops; i++) {
 			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Count));
-            GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.identity);
+            GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.Euler(360 * Random.insideUnitSphere));
         }
 	}
 
-	/*
+    public void MoveToLayer(Transform root, int layer) {
+        // Recursively move all children and self to layer
+        root.gameObject.layer = layer;
+        foreach (Transform child in root) {
+            MoveToLayer(child, layer);
+        }
+    }
+
+    /*
 	 * The damage done to the enemies health based on the parameter defined damage
 	 */
-	public override void Hit(float damage, Vector3 direction, DamageType type) {
+    public override void Hit(float damage, Vector3 direction, DamageType type) {
         //print("enemy hit");
         // TODO add enemy vulnerabilities for damage types
         float originalHealth = health;

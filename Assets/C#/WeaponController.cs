@@ -107,7 +107,7 @@ public class WeaponController : MonoBehaviour {
                 pendingOldWeapon.GetComponent<Rigidbody>().isKinematic = false;
                 pendingOldWeapon.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
                 pendingOldWeapon.GetComponent<Collider>().enabled = true;
-                MoveToLayer(pendingOldWeapon.transform, 0); //Default layer
+                MoveToLayer(pendingOldWeapon.transform, 10); // Ignore Mobs layer (so we don't collide again)
                 pendingOldWeapon.setLookObj(null);
                 pendingOldWeapon.setPlayerAnim(null);
                 pendingOldWeapon.setControllerSide("");
@@ -415,7 +415,7 @@ public class WeaponController : MonoBehaviour {
             w.GetComponent<Rigidbody>().isKinematic = false;
             //w.GetComponent<Rigidbody>().AddForce(cameraBone.transform.right * 10);
             w.GetComponent<Collider>().enabled = true;
-            MoveToLayer(w.transform, 0); //Default layer
+            MoveToLayer(w.transform, 10); // Ignore Mobs layer (so we don't collide again)
             w.setLookObj(null);
             w.setPlayerAnim(null);
             w.setControllerSide("");

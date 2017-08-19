@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4730768508058434}
   - component: {fileID: 33047218137467880}
   - component: {fileID: 23436399356921542}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4761874211038902}
   - component: {fileID: 33827186190504872}
   - component: {fileID: 23795535387342078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4649168941618538}
   - component: {fileID: 33314740897769812}
   - component: {fileID: 23099250082801928}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,24 @@ GameObject:
   - component: {fileID: 4123459687844866}
   - component: {fileID: 33080993101256952}
   - component: {fileID: 23264393150742592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1197173555077716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4287531343678270}
+  - component: {fileID: 64846129641469996}
+  m_Layer: 13
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +103,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4131136413299948}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: potion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +120,7 @@ GameObject:
   - component: {fileID: 4634846901323580}
   - component: {fileID: 33905621281256104}
   - component: {fileID: 23790416349783488}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +135,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4680494253895594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: potion1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +155,7 @@ GameObject:
   - component: {fileID: 114894986632543250}
   - component: {fileID: 54718603451963348}
   - component: {fileID: 64706642530526306}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthPotion_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +172,7 @@ GameObject:
   - component: {fileID: 4826832809332308}
   - component: {fileID: 33736128254448450}
   - component: {fileID: 23524970032193674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,6 +208,19 @@ Transform:
   m_Father: {fileID: 4823008072314036}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 36.231003, z: 0}
+--- !u!4 &4287531343678270
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197173555077716}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4823008072314036}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4634846901323580
 Transform:
   m_ObjectHideFlags: 1
@@ -267,11 +296,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1784943031785622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 297.861, y: 32.286, z: 200.939}
+  m_LocalPosition: {x: 252.66583, y: 31.907, z: 192.65372}
   m_LocalScale: {x: 0.2741098, y: 0.2741098, z: 0.2741098}
   m_Children:
   - {fileID: 4680494253895594}
   - {fileID: 4131136413299948}
+  - {fileID: 4287531343678270}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -574,7 +604,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!64 &64706642530526306
 MeshCollider:
@@ -584,6 +614,20 @@ MeshCollider:
   m_GameObject: {fileID: 1784943031785622}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &64846129641469996
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197173555077716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 1

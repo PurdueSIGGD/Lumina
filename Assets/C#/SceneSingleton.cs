@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 using UnityEngine.SceneManagement;
 
-public class Singleton : MonoBehaviour {
+public class SceneSingleton : MonoBehaviour {
     /**
      * This is a class designed to only have one item spawn where this script is attached, regardless of when the scene is opened or not
      * Good for scenes you return to, to preserve information or items that may have been used/expired
      * Uses PlayerPrefs: if already spawned, set the pref to 1
+     * 
+     * A scene singleton is specifically for items in a scene, that will be there when you come back.
      */
 
     public GameObject itemToSpawn;
@@ -19,11 +23,11 @@ public class Singleton : MonoBehaviour {
     public String guidString;
     private int sceneIndex; // When this item was spawned (to bring it back later);
     private GameObject spawnedObject;
-
-    [CustomEditor(typeof(Singleton))]
+#if UNITY_EDITOR
+    [CustomEditor(typeof(SceneSingleton))]
     public class ColliderCreatorEditor : Editor {
         override public void OnInspectorGUI() {
-            Singleton sg = (Singleton)target;
+            SceneSingleton sg = (SceneSingleton)target;
             if (GUILayout.Button("New Guid")) {
                 sg.guid = Guid.NewGuid();
                 sg.guidString = sg.guid.ToString();
@@ -39,6 +43,7 @@ public class Singleton : MonoBehaviour {
             DrawDefaultInspector();
         }
     }
+#endif
 
 
     void Start () {

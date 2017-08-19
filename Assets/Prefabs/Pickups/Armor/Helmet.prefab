@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65514764565978508}
   - component: {fileID: 114574247156526208}
   - component: {fileID: 54617167683268790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Helmet
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4958221170354386}
   - component: {fileID: 33324854782845840}
   - component: {fileID: 23322530198339502}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &65514764565978508
 BoxCollider:

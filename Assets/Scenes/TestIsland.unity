@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 672916082}
   - component: {fileID: 672916081}
   m_Layer: 0
-  m_Name: SwordSpawn
+  m_Name: BarrelSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,14 +426,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 672916080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31fa46ab970d53d46921649cea509b70, type: 3}
+  m_Script: {fileID: 11500000, guid: ad351d5acc454f344beeb718f78ebdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToSpawn: {fileID: 1357930139211266, guid: 6b4e9cf42d1a6be4cbefbaec3bb685c6,
+  itemToSpawn: {fileID: 1124715547892150, guid: 1c294ac79b2b2994ea24a987d95d4105,
     type: 2}
-  itemName: Sword
+  itemName: Barrel
   setParent: 1
-  guidString: 127f67d6-e3b2-4175-b083-73367fab7802
+  guidString: a4ad5965-9f94-4e6f-acf1-0b09441ecb76
 --- !u!4 &672916082
 Transform:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 672916080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 298.16, y: 33.26, z: 209.87}
+  m_LocalPosition: {x: 300.11, y: 33.26, z: 209.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -556,8 +556,9 @@ MonoBehaviour:
   itemToSpawn: {fileID: 1419025804602196, guid: 58605e59951e6a348a16e069a966327c,
     type: 2}
   itemName: Player
-  setParent: 0
-  guidString: 6d702573-8851-4d0a-9ee7-295719384810
+  onlyThisScene: 0
+  restrictedScenes: 00000000
+  sceneIndex: 0
 --- !u!4 &1030657341
 Transform:
   m_ObjectHideFlags: 0

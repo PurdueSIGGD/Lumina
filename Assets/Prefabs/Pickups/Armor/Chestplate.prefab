@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4754705169049668}
   - component: {fileID: 33593841739285962}
   - component: {fileID: 23901546359272896}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_chestplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4385071439884932}
   - component: {fileID: 33895666712514386}
   - component: {fileID: 23615054100132240}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_rightwrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4046359796163430}
   - component: {fileID: 33916235865297852}
   - component: {fileID: 23737009556607590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_leftleg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4459806054599362}
   - component: {fileID: 33042416316971726}
   - component: {fileID: 23780177625569390}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_rightleg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 65984074704466022}
   - component: {fileID: 114907089564610122}
   - component: {fileID: 54145216340400710}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chestplate
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4677679547755344}
   - component: {fileID: 33029910490524670}
   - component: {fileID: 23297636650859026}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: armor_leftwrist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &65984074704466022
 BoxCollider:

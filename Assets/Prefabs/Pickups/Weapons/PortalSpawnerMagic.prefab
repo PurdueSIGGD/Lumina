@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4451179144893494}
   - component: {fileID: 198491723629910512}
   - component: {fileID: 199365583132590018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shoot Particles
   m_TagString: NeverViewmodel
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 54370604193844000}
   - component: {fileID: 65296654093351994}
   - component: {fileID: 114812843141507312}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PortalSpawnerMagic
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4767490237430446}
   - component: {fileID: 199564204188886868}
   - component: {fileID: 198239586138735674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Idle Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4980646832702106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4387863653274696}
   - component: {fileID: 33559743484085248}
   - component: {fileID: 23781784085183342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spellbook_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +247,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: 
+  description: 
+  sprite: {fileID: 0}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 2

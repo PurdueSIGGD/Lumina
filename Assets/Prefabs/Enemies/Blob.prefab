@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 135015694053029518}
   - component: {fileID: 54740436436048114}
   - component: {fileID: 114191824418104360}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   - prefab: {fileID: 1489681100830950, guid: 30ee53701ee27cd48b47c412d45a905c, type: 2}
     chance: 1
   - prefab: {fileID: 1841830948198258, guid: 3be7068f111bb2541a1ff7ce7ab8ad72, type: 2}
-    chance: 4
+    chance: 8
   - prefab: {fileID: 1357930139211266, guid: 6b4e9cf42d1a6be4cbefbaec3bb685c6, type: 2}
     chance: 2
   - prefab: {fileID: 1283771130784048, guid: d0f872eecb6ad464e94d56560eeea99e, type: 2}
