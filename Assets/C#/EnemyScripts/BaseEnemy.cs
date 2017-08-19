@@ -3,9 +3,9 @@ using System.Collections;
 
 abstract public class BaseEnemy : Hittable {
 
-	public GameObject [] drops; 	//Array of possible drops for this enemy
+	public ProbabililtyItem [] probabilityDrops;    //Array of possible drops for this enemy
 
-	public int minDrops;			//Mininum number of possible drops
+    public int minDrops;			//Mininum number of possible drops
 	public int maxDrops;			//Maximum number of possible drops
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
@@ -26,13 +26,19 @@ abstract public class BaseEnemy : Hittable {
         //TODO ragdoll
         this.GetComponent<Rigidbody>().freezeRotation = true;
 
+        ArrayList drops = new ArrayList();
+        for (int i = 0; i < probabilityDrops.Length; i++) {
+            for (int k = 0; k < probabilityDrops[i].chance; k++) {
+                drops.Add(i);
+            }
+        }
 
         int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
-
+        print("dropping " + numberOfDrops + " drops");
 		for (int i = 0; i < numberOfDrops; i++) {
-			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Length));
-			Instantiate (drops [dropIndex], transform.position, Quaternion.identity);
-		}
+			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Count));
+            GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.identity);
+        }
 	}
 
 	/*
@@ -66,6 +72,7 @@ abstract public class BaseEnemy : Hittable {
 
         }
 	}
+
 
    
 

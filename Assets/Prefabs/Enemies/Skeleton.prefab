@@ -12038,7 +12038,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206175388254996}
-  m_LocalRotation: {x: 0.6413778, y: -0.6413762, z: 0.2977149, w: 0.29771954}
+  m_LocalRotation: {x: 0.64137787, y: -0.64137626, z: 0.29771492, w: 0.29771957}
   m_LocalPosition: {x: 0.0003800049, y: 0.00054619217, z: 0.0006736655}
   m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
   m_Children:
@@ -19051,11 +19051,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896f59fdb2a98f340ae60e05c25de558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops:
-  - {fileID: 1784943031785622, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
-  - {fileID: 1530235444850510, guid: 9336deeba1db4784c954dc2d60fcb89f, type: 2}
+  probabilityDrops:
+  - prefab: {fileID: 1473176872852480, guid: b8497e2f6890c3b4caf886a855ec7de6, type: 2}
+    chance: 3
+  - prefab: {fileID: 1435159407434336, guid: e2212727494ea1b46bd013caa8e70341, type: 2}
+    chance: 3
+  - prefab: {fileID: 1296853161654420, guid: 460adf2eb4260b947b6a6c2349f2254b, type: 2}
+    chance: 3
+  - prefab: {fileID: 1581141586542702, guid: dc61799e0cfc7ff4a8a5a975929bab2e, type: 2}
+    chance: 1
+  - prefab: {fileID: 1968424597766064, guid: 85137dc6c12c01145828e08101b16d81, type: 2}
+    chance: 3
+  - prefab: {fileID: 1316667486863618, guid: 3701b18cb9b2abf47b9df6610d3f7b72, type: 2}
+    chance: 4
+  - prefab: {fileID: 1784943031785622, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+    chance: 4
+  - prefab: {fileID: 1530235444850510, guid: 9336deeba1db4784c954dc2d60fcb89f, type: 2}
+    chance: 3
   minDrops: 0
-  maxDrops: 0
+  maxDrops: 4
   health: 100
   movementSpeed: 10
   patrolPositions: []
@@ -19127,6 +19141,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0

@@ -264,6 +264,7 @@ MonoBehaviour:
   shootParticles: {fileID: 198974714219414730}
   mesh: {fileID: 4569922837549708}
   width: 0.5
+  magicDraw: 15
 --- !u!198 &198235078090814050
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -275,7 +276,7 @@ ParticleSystem:
   simulationSpeed: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -323,7 +324,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 731550537
+  randomSeed: 334157733
   InitialModule:
     serializedVersion: 3
     enabled: 1

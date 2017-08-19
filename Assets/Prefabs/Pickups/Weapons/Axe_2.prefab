@@ -125,7 +125,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1968424597766064}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 292.872, y: 31.968588, z: 204.91348}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -263,9 +263,9 @@ MonoBehaviour:
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5
-  timeToCooldown: 0.5
+  timeToCooldown: 0.6
   range: 3
-  baseDamage: 20
+  baseDamage: 30
   animationType: 1
   bothHands: 0
   storedAmmo: 10

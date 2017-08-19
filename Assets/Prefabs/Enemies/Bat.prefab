@@ -75,6 +75,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33323817956886438
 MeshFilter:
@@ -109,13 +110,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49116ac8fc74e3408bc930f5972915d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
+  probabilityDrops:
+  - prefab: {fileID: 1784943031785622, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+    chance: 5
+  - prefab: {fileID: 1316667486863618, guid: 3701b18cb9b2abf47b9df6610d3f7b72, type: 2}
+    chance: 5
+  - prefab: {fileID: 1530235444850510, guid: 9336deeba1db4784c954dc2d60fcb89f, type: 2}
+    chance: 4
+  - prefab: {fileID: 1841830948198258, guid: 3be7068f111bb2541a1ff7ce7ab8ad72, type: 2}
+    chance: 3
+  - prefab: {fileID: 1473286092028416, guid: d4ddf1fb1b0731d41b912015cadcc81d, type: 2}
+    chance: 1
+  - prefab: {fileID: 1485037546341958, guid: 559960e4ef91f624abb6f77504768952, type: 2}
+    chance: 1
+  - prefab: {fileID: 1357930139211266, guid: 6b4e9cf42d1a6be4cbefbaec3bb685c6, type: 2}
+    chance: 2
+  - prefab: {fileID: 1283771130784048, guid: d0f872eecb6ad464e94d56560eeea99e, type: 2}
+    chance: 2
+  - prefab: {fileID: 1379140635731634, guid: decee7c380018c1418737f6f81b0322f, type: 2}
+    chance: 2
   minDrops: 0
-  maxDrops: 0
+  maxDrops: 3
   health: 20
   movementSpeed: 0.25
   target: {fileID: 0}
-  thrust: 1200
+  thrust: 400
   isAttacking: 0
   attackRange: 15
   timeBetweenAttacks: 1
