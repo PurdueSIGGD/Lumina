@@ -34,7 +34,7 @@ public class DescriptionPanel : MonoBehaviour {
 
         //general stats from ItemStats
         stats += "Tier: " + i.itemStats.tier.ToString() + "\n";      
-        stats += "Condition: " + Mathf.FloorToInt(i.itemStats.condition).ToString() + "/" + i.itemStats.maxCondition.ToString() + "\n";
+        stats += "Condition: " + i.itemStats.condition.ToString() + "/" + i.itemStats.maxCondition.ToString() + "\n";
 
         //specific stats from Item
         if (i.itemStats is Weapon)
@@ -49,6 +49,10 @@ public class DescriptionPanel : MonoBehaviour {
         //magic inherits weapon
         if (i.itemStats is Magic)
         {
+            //set title
+            statsTitle.text = "Magic";
+
+            //add to stats description
             Magic magic = (Magic)i.itemStats;
             if (i.itemStats is BeamMagic) {
                 stats += "Cost per second: " + ((BeamMagic)magic).magicDraw + "\n";
@@ -58,29 +62,49 @@ public class DescriptionPanel : MonoBehaviour {
             }
             
 
-            //set title
-            statsTitle.text = "Magic";
+            
         }
 
         //projectile weapon inherit weapon
         if (i.itemStats is ProjectileWeapon)
         {
-            ProjectileWeapon pw = (ProjectileWeapon)i.itemStats;
-            stats += "LaunchSpeed: " + pw.launchSpeed;
-
             //set title
             statsTitle.text = "Projectile Weapon";
+
+            //add to stats description
+            ProjectileWeapon pw = (ProjectileWeapon)i.itemStats;
+            stats += "LaunchSpeed: " + pw.launchSpeed + "\n";
+
+            
         }
 
         //swingingWeapon inherit weapon
         if (i.itemStats is SwingingWeapon)
         {
+            //set title
+            statsTitle.text = "Swinging Weapon";
+
+            //add to stats description
             SwingingWeapon sw = (SwingingWeapon)i.itemStats;
             stats += "Width: " + sw.width.ToString() + "\n";
 
-            //set title
-            statsTitle.text = "Swinging Weapon";
+            
         }
+
+        //Armor
+        if (i.itemStats is Armor)
+        {
+            //set title
+            statsTitle.text = "Armor";
+
+            //add to stats description
+            Armor armor = (Armor)i.itemStats;
+            stats += "Type: " + armor.type.ToString() + "\n";
+            stats += "Strong against: " + armor.strongAgainst.ToString() + "\n";
+            stats += "Flat Damage Block: " + armor.flatDamageBlock.ToString() + "\n";
+            stats += "Percent Damage Block: " + armor.percentDamageBlock.ToString() + "\n";
+        }
+
 
         //set stats description
         statsText.text = stats;
