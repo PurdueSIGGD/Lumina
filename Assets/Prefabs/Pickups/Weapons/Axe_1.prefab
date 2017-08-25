@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 54664413255815986}
   - component: {fileID: 65682025458792006}
   - component: {fileID: 114183593849675728}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Axe_1
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4707312544028318}
   - component: {fileID: 33600193973721810}
   - component: {fileID: 23985525108337726}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4929295320095364}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4355159468440498}
   - component: {fileID: 33869806007342628}
   - component: {fileID: 23076960931017090}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379140635731634}
   m_LocalRotation: {x: 0.7010578, y: 0.0000000026023146, z: -0.0000000026470317, w: 0.7131045}
-  m_LocalPosition: {x: 292.356, y: 32.047, z: 204.854}
+  m_LocalPosition: {x: 292.445, y: 32.047, z: 204.854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4929295320095364}
@@ -262,10 +262,10 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
-  timeToAttack: 0.25
+  timeToAttack: 0.4
   timeToCooldown: 0.5
   range: 3
-  baseDamage: 10
+  baseDamage: 20
   animationType: 1
   bothHands: 0
   storedAmmo: 10

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4549789202743580}
   - component: {fileID: 33457494513601294}
   - component: {fileID: 23178582988815626}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4460446875947732}
   - component: {fileID: 33730887176564504}
   - component: {fileID: 23224277457599108}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 54129080134025532}
   - component: {fileID: 65148344239402538}
   - component: {fileID: 114861259149343264}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sword_2
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4386133167233560}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4896436047368984}
   - component: {fileID: 33371841128020280}
   - component: {fileID: 23334873068979690}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: polySurface4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473176872852480}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 295.757, y: 31.968588, z: 204.95844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -331,8 +331,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 6535a849a0e89804eaf3fea5f1909232, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
-  timeToAttack: 0.5
-  timeToCooldown: 0.5
+  timeToAttack: 0.4
+  timeToCooldown: 0.3
   range: 3
   baseDamage: 20
   animationType: 1

@@ -3,14 +3,16 @@ using System.Collections;
 
 abstract public class BaseEnemy : Hittable {
 
-	public GameObject [] drops; 	//Array of possible drops for this enemy
+	public ProbabililtyItem [] probabilityDrops;    //Array of possible drops for this enemy
 
-	public int minDrops;			//Mininum number of possible drops
+    public int minDrops;			//Mininum number of possible drops
 	public int maxDrops;			//Maximum number of possible drops
 	public float health;			//Enemy health
 	public float movementSpeed;		//Enemy movement speed
 
-    
+    private int deathLayer = 14;
+
+
 
     /*
 	 * Method called when enemy dies
@@ -22,23 +24,39 @@ abstract public class BaseEnemy : Hittable {
 
         OnDeath();
 
+        // Move to layer where we won't collide with weapons or the player
+        MoveToLayer(transform, deathLayer);
         // Prevent from moving
         //TODO ragdoll
         this.GetComponent<Rigidbody>().freezeRotation = true;
 
+        ArrayList drops = new ArrayList();
+        for (int i = 0; i < probabilityDrops.Length; i++) {
+            for (int k = 0; k < probabilityDrops[i].chance; k++) {
+                drops.Add(i);
+            }
+        }
 
         int numberOfDrops = Mathf.RoundToInt (Random.Range (minDrops, maxDrops));
-
+        print("dropping " + numberOfDrops + " drops");
 		for (int i = 0; i < numberOfDrops; i++) {
-			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Length));
-			Instantiate (drops [dropIndex], transform.position, Quaternion.identity);
-		}
+			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Count));
+            GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.Euler(360 * Random.insideUnitSphere));
+        }
 	}
 
-	/*
+    public void MoveToLayer(Transform root, int layer) {
+        // Recursively move all children and self to layer
+        root.gameObject.layer = layer;
+        foreach (Transform child in root) {
+            MoveToLayer(child, layer);
+        }
+    }
+
+    /*
 	 * The damage done to the enemies health based on the parameter defined damage
 	 */
-	public override void Hit(float damage, Vector3 direction, DamageType type) {
+    public override void Hit(float damage, Vector3 direction, DamageType type) {
         //print("enemy hit");
         // TODO add enemy vulnerabilities for damage types
         float originalHealth = health;
@@ -66,6 +84,7 @@ abstract public class BaseEnemy : Hittable {
 
         }
 	}
+
 
    
 

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4215428852021814}
   - component: {fileID: 33908509301404292}
   - component: {fileID: 23268948414000502}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 54152300645947958}
   - component: {fileID: 65236957378999342}
   - component: {fileID: 114824415044376922}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spear_2
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4101361451076020}
   - component: {fileID: 33741324135854524}
   - component: {fileID: 23681878655710282}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4610430921271668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1435159407434336}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 294.476, y: 31.968588, z: 205.2638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -259,8 +259,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 53dbf7aea4c23f346ab263961d0e9a22, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
-  timeToAttack: 0.5
-  timeToCooldown: 0.5
+  timeToAttack: 0.6
+  timeToCooldown: 0.4
   range: 5
   baseDamage: 20
   animationType: 2

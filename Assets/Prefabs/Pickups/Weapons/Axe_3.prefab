@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4964184077771972}
   - component: {fileID: 33074303678387996}
   - component: {fileID: 23700679363446872}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pSphere7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4948880158050344}
   - component: {fileID: 33250874181102684}
   - component: {fileID: 23024682090419168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pTorus2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4663617900027646}
   - component: {fileID: 33207072221743880}
   - component: {fileID: 23269647647267986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pSphere6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4348150929236294}
   - component: {fileID: 33695244847286758}
   - component: {fileID: 23333894208831234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube33
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4889031405486556}
   - component: {fileID: 33866207749517786}
   - component: {fileID: 23629966573571178}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pTorus1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4627528206479848}
   - component: {fileID: 33311617877606260}
   - component: {fileID: 23845033722935678}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCylinder11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4546743061310108}
   - component: {fileID: 33775579464056606}
   - component: {fileID: 23983263735643600}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pSphere8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 54038501608029468}
   - component: {fileID: 65806070878127782}
   - component: {fileID: 114065468816331202}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Axe_3
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 4128703432076394}
   - component: {fileID: 33568308069397196}
   - component: {fileID: 23241116581484136}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pCube34
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4860865036112106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: group10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1644487015378948}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 293.534, y: 31.968588, z: 204.90253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -685,10 +685,10 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 1f3fbb2e9163f034390dca0c75ae2fd3, type: 3}
   damageType: 0
   playerStats: {fileID: 0}
-  timeToAttack: 0.5
-  timeToCooldown: 0.5
+  timeToAttack: 0.6
+  timeToCooldown: 0.6
   range: 3
-  baseDamage: 30
+  baseDamage: 40
   animationType: 1
   bothHands: 0
   storedAmmo: 10

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 /* To add an attack effect, simply find the Hittable 
  * class, and if it exists, call the desired hit method.
  * Example: 
@@ -12,6 +14,7 @@ using UnityEditor;
  */
 
 abstract public class Hittable : MonoBehaviour {
+#if UNITY_EDITOR
     [CustomEditor(typeof(DestructibleItem))]
     public class ColliderCreatorEditor : Editor
     {
@@ -25,8 +28,9 @@ abstract public class Hittable : MonoBehaviour {
             DrawDefaultInspector();
         }
     }
+#endif
 
-	public enum DamageType { Neutral, Fire, Ice, Electric, Denim, Umbra };
+    public enum DamageType { Neutral, Fire, Ice, Electric, Denim, Umbra };
 
     /* You only have to implement this one function */
 

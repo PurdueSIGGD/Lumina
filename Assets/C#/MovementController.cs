@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEditor;
 
 public class MovementController : MonoBehaviour {
 	public static int SPRINT_MAX = 3;
@@ -31,7 +30,7 @@ public class MovementController : MonoBehaviour {
 	public GameObject cameraObj;
     public Animator viewmodelAnimator;
 
-    public int ingorePlayerCollisionLayer = 10;
+    public int[] ignorePlayerCollisionLayers;
     private Camera playerCam;
 
 
@@ -247,8 +246,12 @@ public class MovementController : MonoBehaviour {
         //RaycastHit[] hits = Physics.BoxCastAll(pos, Vector3.one, Vector3.forward/100000);
         Vector3 dir = pos - transform.position;
         float dist = Vector3.Distance(pos, transform.position);
-        //TODO make 4 raycasts from each corner of the body (left, up, right, down)
-        int layermask = ~(1 << ingorePlayerCollisionLayer); // Make sure we ignore anything that we won't run into
+        int layermask = 0;
+        // Make sure we ignore anything that we won't run into
+        foreach (int layer in this.ignorePlayerCollisionLayers) {
+            layermask += 1 << layer;
+        }
+        layermask = ~layermask;
         RaycastHit[] hitsForward = Physics.RaycastAll(new Ray(transform.position + Vector3.forward * 0.5f, dir), dist + 0.5f, layermask);
         RaycastHit[] hitsRight = Physics.RaycastAll(new Ray(transform.position + Vector3.right * 0.5f, dir), dist + 0.5f, layermask);
         RaycastHit[] hitsBack = Physics.RaycastAll(new Ray(transform.position + Vector3.back * 0.5f, dir), dist + 0.5f, layermask);

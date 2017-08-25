@@ -402,6 +402,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
         type: 2}
+      propertyPath: enemyTypes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
+        type: 2}
       propertyPath: junkToSpawn.Array.size
       value: 21
       objectReference: {fileID: 0}
@@ -566,6 +571,24 @@ Prefab:
       propertyPath: junkToSpawn.Array.data[5].chance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
+        type: 2}
+      propertyPath: enemyTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 1402160623705290, guid: 13e846ae46bda724483017b67e8842bf,
+        type: 2}
+    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
+        type: 2}
+      propertyPath: enemyTypes.Array.data[5]
+      value: 
+      objectReference: {fileID: 1220396385806456, guid: 9aeab7d105a5e7e4c8438c934086a32c,
+        type: 2}
+    - target: {fileID: 114556425813407760, guid: fa55751d35404c3468a4c770ac362016,
+        type: 2}
+      propertyPath: enemyTypes.Array.data[2]
+      value: 
+      objectReference: {fileID: 1249233086428698, guid: b5216db74a61b0a4b8df48f9517f5c83,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa55751d35404c3468a4c770ac362016, type: 2}
   m_IsPrefabParent: 0
