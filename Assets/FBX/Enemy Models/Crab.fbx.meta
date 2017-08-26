@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: fcdb5d785996de247865c77fae6b0167
-timeCreated: 1500859275
+timeCreated: 1503725977
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -141,17 +141,22 @@ ModelImporter:
     400130: R_crab_leg3_2
     400132: R_crab_leg3_3
     400134: R_crab_leg3_3_end
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: crab2:RoadKillOut
     7400000: Crab|Crab_Body_Damage
     7400002: Crab|Crab_Body_Death
     7400004: Crab|Crab_Body_Idle
-    7400006: Crab|Crab_Body_Walk_Forward
-    7400008: Crab|Crab_Body_Walk_Forward_LocRot
-    7400010: Crab|Crab_Body_Walk_Left
-    7400012: Crab|Crab_Body_Walk_Left_LocRot
-    7400014: Crab|Crab_Claws_Attack1
-    7400016: Crab|Crab_Claws_Attack2
-    7400018: Crab|Crab_Claws_Idle
+    7400006: Crab|Crab_Body_Walk_Backward
+    7400008: Crab|Crab_Body_Walk_Forward
+    7400010: Crab|Crab_Body_Walk_Forward_LocRot
+    7400012: Crab|Crab_Body_Walk_Left
+    7400014: Crab|Crab_Body_Walk_Left_LocRot
+    7400016: Crab|Crab_Body_Walk_Right
+    7400018: Crab|Crab_Claws_Attack1
+    7400020: Crab|Crab_Claws_Attack2
+    7400022: Crab|Crab_Claws_Idle
+    7400024: Crab|Crab_TPose
     9500000: //RootNode
     13700000: crab2:RoadKillOut
   materials:
@@ -161,7 +166,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
@@ -170,7 +175,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 0
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -239,6 +244,34 @@ ModelImporter:
       takeName: Crab|Crab_Body_Idle
       firstFrame: 0
       lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crab|Crab_Body_Walk_Backward
+      takeName: Crab|Crab_Body_Walk_Backward
+      firstFrame: 0
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -356,7 +389,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      hasAdditiveReferencePose: 1
+      hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
@@ -368,26 +401,35 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves:
-      - name: Curve
-        curve:
-          serializedVersion: 2
-          curve:
-          - serializedVersion: 2
-            time: 0
-            value: 0
-            inSlope: 1
-            outSlope: 1
-            tangentMode: 0
-          - serializedVersion: 2
-            time: 1
-            value: 1
-            inSlope: 1
-            outSlope: 1
-            tangentMode: 0
-          preInfinity: 2
-          postInfinity: 2
-          rotationOrder: 0
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crab|Crab_Body_Walk_Right
+      takeName: Crab|Crab_Body_Walk_Right
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
       events: []
       transformMask: []
       maskType: 3
@@ -453,7 +495,35 @@ ModelImporter:
       name: Crab|Crab_Claws_Idle
       takeName: Crab|Crab_Claws_Idle
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 54
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crab|Crab_TPose
+      takeName: Crab|Crab_TPose
+      firstFrame: 0
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
