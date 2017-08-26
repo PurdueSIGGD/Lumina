@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DungeonEntranceDoor : Door {
     private const string dungeonName = "Dungeon";
@@ -21,6 +22,10 @@ public class DungeonEntranceDoor : Door {
 
     public override void preSceneSwitch(GameObject player) {
         // Set player camera values, enable movement, etc
+
+        // So we know where to return
+        PlayerPrefs.SetString(Door.surfaceIdentifier, SceneManager.GetActiveScene().name);
+
         player.SendMessage("EnterDungeon");
 
         PlayerPrefs.SetInt("DungeonSeed", seed);

@@ -56,19 +56,22 @@ public class SceneSingleton : MonoBehaviour {
         }
 
         DontDestroyOnLoad(this);
-        print(PlayerPrefs.GetInt(guid.ToString()) + " can it spawn?");
+        //print(PlayerPrefs.GetInt(guid.ToString()) + " can it spawn?");
         if (PlayerPrefs.GetInt(guid.ToString()) == 0) {
-            print("Spawning singleton: " + itemName + " " + guid.ToString());
+            //print("Spawning singleton: " + itemName + " " + guid.ToString());
             sceneIndex = SceneManager.GetActiveScene().buildIndex;
             spawnedObject = GameObject.Instantiate(itemToSpawn, transform.position, Quaternion.identity);
             if (setParent) spawnedObject.transform.parent = transform;
+            else {
+                DontDestroyOnLoad(spawnedObject); // So we can delete it manually ourselves
+                // Otherwise, this will be the parent of this gameobject, which is already not destroyed on load
+            }
             spawnedObject.name = itemName;
-            DontDestroyOnLoad(spawnedObject); // So we can delete it manually ourselves
-            print("setting int for " + itemName + " " + guid.ToString());
+            //print("setting int for " + itemName + " " + guid.ToString());
             PlayerPrefs.SetInt(guid.ToString(), 1);
         } else {
             // If you are wondering why your item isn't spawning when you open up your game, click "Reset PlayerPrefs"
-            print("Not spawning singleton: " + itemName + " " + guid.ToString());
+            //print("Not spawning singleton: " + itemName + " " + guid.ToString());
             if (spawnedObject != null) {
                 // If we still own it, take care of replacement. Otherwise, who gives a fuck
                 if (spawnedObject.transform.parent == transform) {
@@ -85,7 +88,7 @@ public class SceneSingleton : MonoBehaviour {
        
     }
     void OnDestroy() {
-        print("We ded now");
+        //print("We ded now");
         PlayerPrefs.SetInt(guid.ToString(), 0);
     }
 

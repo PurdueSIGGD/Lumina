@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DungeonExitDoor : Door {
-    private const string surfaceName = "TestIsland";
 
     public DungeonLevel dungeonLevel;
 
     public override string getSceneToLoad() {
-        return surfaceName;
+        return PlayerPrefs.GetString(surfaceIdentifier);
     }
 
     public override void preSceneSwitch(GameObject player) {

@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void TestIsland() {
-		SceneManager.LoadScene ("Scenes/TestIsland");
+        // Load the first scene
+		SceneManager.LoadScene ("Island1");
 	}
 }

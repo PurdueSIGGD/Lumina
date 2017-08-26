@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 
 public abstract class Door : Usable {
-    
+
+    public static string surfaceIdentifier = "surfaceName";
+
     public string displayText;
     public Animator myAnimator;
     private GameObject player;

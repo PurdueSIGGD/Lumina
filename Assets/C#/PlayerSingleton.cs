@@ -43,6 +43,8 @@ public class PlayerSingleton : MonoBehaviour {
                 staticSpawnedItem = GameObject.Instantiate(itemToSpawn, transform.position, Quaternion.identity);
                 staticSpawnedItem.name = itemName;
                 DontDestroyOnLoad(staticSpawnedItem); // So we can delete it manually ourselves
+
+                SceneManager.sceneLoaded += OnSceneLoaded;
             }
         } else {
             print("nope");
@@ -53,22 +55,24 @@ public class PlayerSingleton : MonoBehaviour {
 
     }
 
-    void OnLevelWasLoaded() {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
        
         if (onlyThisScene) {
-            if (SceneManager.GetActiveScene().buildIndex == sceneIndex) {
+            if (scene.buildIndex == sceneIndex) {
                 staticSpawnedItem.SetActive(true);
             } else {
                 staticSpawnedItem.SetActive(false);
             }
         }
-        bool inRestrictedScene = Array.FindAll(restrictedScenes, s => s == SceneManager.GetActiveScene().buildIndex).Length > 0;
+        bool inRestrictedScene = Array.FindAll(restrictedScenes, s => s == scene.buildIndex).Length > 0;
         if (inRestrictedScene) {
             // Delete player, and this        
             // We can't simply disable, as event systems have hissy fits with that
             GameObject.Destroy(staticSpawnedItem);
             staticSelf = null;
-            GameObject.Destroy(this.gameObject);
+            // unsubscribe
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+
 
         }
 
