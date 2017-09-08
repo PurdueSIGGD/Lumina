@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class WeaponController : MonoBehaviour {
     private static Vector3 EQUIPPED_WEAPON_SCALE = new Vector3(0.008f, 0.008f, 0.008f);
     private static float WEAPON_SWITCH_TIME = .3f;
+    private static float TIME_UNTIL_MAGIC_DROP = 0.46f;
+    private static float TIME_UNTIL_MAGIC_EQUIP = 0.55f;
 
     public Transform weaponBone, weaponBone2;
     public Transform cameraBone;
@@ -76,6 +81,23 @@ public class WeaponController : MonoBehaviour {
         weaponBusy = !(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("Idle") && !viewmodelAnimator.IsInTransition(layerIndex));
 
         //if (controllerSide == "R") print(pendingPackType + " " + viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
+        if (pendingNewWeapon is Magic) {
+            //print("Pending new weapon: " + ((Magic)pendingNewWeapon).idleParticles.isPlaying + " " + viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime);
+            if (viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone") && viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime > TIME_UNTIL_MAGIC_EQUIP) {
+                // Show new weapon particles
+
+                ((Magic)pendingNewWeapon).playParticles();
+                
+            }
+        }
+        if (pendingOldWeapon is Magic) {
+            //print("Pending old weapon: " + ((Magic)pendingOldWeapon).idleParticles.isPlaying);
+            if (viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("MagicDrop") && viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).normalizedTime > TIME_UNTIL_MAGIC_DROP) {
+                // Hide particles
+                ((Magic)pendingOldWeapon).pauseParticles();
+                ((Magic)pendingNewWeapon).pauseParticles();
+            }
+        }
         if (pendingPackType != "" && (!pendingNewWeapon.bothHands && viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone") || (pendingNewWeapon.bothHands && this.ReadyForBoth() && otherWeapon.ReadyForBoth()))) {
             //print(viewmodelAnimator.GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"));
             //print(this.ReadyForBoth() && otherWeapon.ReadyForBoth());
@@ -89,6 +111,7 @@ public class WeaponController : MonoBehaviour {
                 if (pendingOldWeapon is Magic) {
                     // Set the mesh to be scale 0
                     ((Magic)pendingOldWeapon).mesh.localScale = Vector3.zero;
+                    ((Magic)pendingOldWeapon).pauseParticles(); // Pause particles before packing
 
                 }
                 pendingOldWeapon.gameObject.SetActive(false);
@@ -160,9 +183,10 @@ public class WeaponController : MonoBehaviour {
             pendingNewWeapon.transform.localScale = EQUIPPED_WEAPON_SCALE;
             pendingNewWeapon.playerStats = myStats;
             if (pendingNewWeapon is Magic) {
+
                 // Set the mesh to be scale 0
                 ((Magic)pendingNewWeapon).mesh.localScale = Vector3.zero;
-                //((Magic)pendingNewWeapon).playerStats = myStats;
+                ((Magic)pendingNewWeapon).pauseParticles(); // pause particles before equipping
             } 
             if (pendingNewWeapon.storedAmmo > 0) {
                 if (pendingNewWeapon is Magic) {
@@ -221,7 +245,7 @@ public class WeaponController : MonoBehaviour {
         if (Time.timeSinceLevelLoad - switchCooldown < WEAPON_SWITCH_TIME 
             || weaponCount <= 1
             || pendingPackType != "") {
-            print("falling out 3");
+            //print("falling out 3");
             return;
         }
         switchCooldown = Time.timeSinceLevelLoad;
@@ -262,8 +286,12 @@ public class WeaponController : MonoBehaviour {
 
         pendingPackType = packType;
 
-        // If we were already both hands
-        if (bothHands) {
+        if (pendingNewWeapon is Magic) {
+            ((Magic)pendingNewWeapon).pauseParticles();
+        }
+
+            // If we were already both hands
+            if (bothHands) {
             viewmodelAnimator.SetTrigger("B" + packType);
         } else if (!pendingNewWeapon.bothHands) {
             // Glitch where it sets pack when new weapon is both hands
@@ -379,10 +407,7 @@ public class WeaponController : MonoBehaviour {
         viewmodelAnimator.SetBool("DoneWithBoth", true);
         if (weapons[weaponIndex] is Magic) {
             disableAttacks = false;
-
-            // Start the particle effect
-            ((Magic)weapons[weaponIndex]).pauseParticles();
-            ((Magic)weapons[weaponIndex]).playParticles();
+            
 
         }
     }
