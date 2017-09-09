@@ -9,9 +9,13 @@ public abstract class Door : Usable {
 
     public static string surfaceIdentifier = "surfaceName";
 
+    public enum FadeType { Dark, Light };
+
     public string displayText;
     public Animator myAnimator;
-    private GameObject player;
+    protected GameObject player;
+
+    public FadeType fadeType;
    
     public override string getInfoText() {
         return displayText;
@@ -24,6 +28,11 @@ public abstract class Door : Usable {
             myAnimator.SetTrigger("Open");
         }
         // Maybe add a custom player animation?
+        if (fadeType == FadeType.Dark) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToBlack");
+        } else if (fadeType == FadeType.Light) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToWhite");
+        }
         // Disable player movement
         sceneSwitchPrep(player);
         StartCoroutine(LoadScene());
@@ -31,7 +40,9 @@ public abstract class Door : Usable {
     public IEnumerator LoadScene() {
         yield return new WaitForSeconds(2);
         preSceneSwitch(player);
+        player.SendMessage("PrepSceneSwitchFade", fadeType);
         SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
+       
     }
 
     // Return the name of the scene to load, used by SceneManager

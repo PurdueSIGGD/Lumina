@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour {
 	public static int SPRINT_MAX = 3;
@@ -33,6 +34,7 @@ public class MovementController : MonoBehaviour {
     public int[] ignorePlayerCollisionLayers;
     private Camera playerCam;
 
+    private Door.FadeType fadeType; //The fade type that we are expected to do next
 
     // Use this for initialization
     void Start () {
@@ -205,12 +207,13 @@ public class MovementController : MonoBehaviour {
         canMove = true;
     }
     void PrepareToEnterDungeon() {
-        disableMovement = true;
         outsideLocation = transform.position;
+        StopMoving();
     }
-    void PrepareToExitDungeon() {
+    void StopMoving() {
         disableMovement = true;
     }
+    
     void EnterDungeon() {
         // We expect the screen to be faded to black, so we can do crazy movements
 
@@ -233,6 +236,29 @@ public class MovementController : MonoBehaviour {
 
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
+        }
+    }
+    void SwitchMap(BoatDoor.SceneChoice sceneChoice) {
+        playerCam.clearFlags = CameraClearFlags.Skybox;
+        disableMovement = false;
+        transform.position = sceneChoice.spawnPosition;
+        foreach (WeaponController w in GetComponents<WeaponController>()) {
+            w.clearSwitchCooldown();
+        }
+    }
+    /**
+     * When we have to prepare to fade back in or out after a scene is loaded
+     */
+    void PrepSceneSwitchFade(Door.FadeType typeToFade) {
+        this.fadeType = typeToFade;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        if (fadeType == Door.FadeType.Dark) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeFromBlack");
+        } else if (fadeType == Door.FadeType.Light) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeFromWhite");
         }
     }
 

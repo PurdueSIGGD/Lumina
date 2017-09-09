@@ -25,6 +25,7 @@ public class PlayerSingleton : MonoBehaviour {
 
     private int sceneIndex; // When this item was spawned (to bring it back later);
 
+
     
 
     void Start() {
@@ -47,7 +48,7 @@ public class PlayerSingleton : MonoBehaviour {
                 SceneManager.sceneLoaded += OnSceneLoaded;
             }
         } else {
-            print("nope");
+            //print("nope");
             GameObject.Destroy(this.gameObject);
         }
 

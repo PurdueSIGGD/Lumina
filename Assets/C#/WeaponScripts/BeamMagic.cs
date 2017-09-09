@@ -39,7 +39,7 @@ public class BeamMagic : Magic {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-		} else if ((!mouseDown || playerStats.GetMagic() <= 0) && !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone")) { // Transfer done layer, because we don't want it playing when transitioning
+		} else if ((!mouseDown || !playerStats || playerStats.GetMagic() <= 0) && (!getPlayerAnim() || !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"))) { // Transfer done layer, because we don't want it playing when transitioning
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }
