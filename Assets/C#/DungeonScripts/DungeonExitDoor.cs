@@ -20,7 +20,7 @@ public class DungeonExitDoor : Door {
     }
 
     public override void sceneSwitchPrep(GameObject player) {
-        player.SendMessage("PrepareToExitDungeon");
+        player.SendMessage("StopMoving");
 
     }
 }

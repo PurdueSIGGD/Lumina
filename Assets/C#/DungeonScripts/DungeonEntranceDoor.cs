@@ -30,6 +30,7 @@ public class DungeonEntranceDoor : Door {
 
         PlayerPrefs.SetInt("DungeonSeed", seed);
         PlayerPrefs.SetInt("DungeonDepth", depth);
+
     }
 
     public override void sceneSwitchPrep(GameObject player) {

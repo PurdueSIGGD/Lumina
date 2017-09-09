@@ -14660,7 +14660,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220396385806456}
   m_LocalRotation: {x: -0, y: 0.99591947, z: -0, w: 0.090246715}
-  m_LocalPosition: {x: 260.08, y: 30.886349, z: 207.81}
+  m_LocalPosition: {x: 314, y: 31.585573, z: 206.7}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4001198416614098}
@@ -18398,8 +18398,8 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2c64e48d61d1c9c4da0f4b704bf0ab7e, type: 2}
-  - {fileID: 2100000, guid: fd6def682e8e80e43b105c03eeec485d, type: 2}
+  - {fileID: 2100000, guid: aa779d0d31f7c5e4fa67214d0500011e, type: 2}
+  - {fileID: 2100000, guid: 40738ecfd2c0fe44c90ce116bbbf379a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18902,14 +18902,14 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1411564175
+  randomSeed: -578010286
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -18992,7 +18992,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.050980393, g: 0.050980393, b: 0.050980393, a: 0.77254903}
+      maxColor: {r: 0.25608504, g: 0, b: 0.36764705, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19054,7 +19054,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 7
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19805,7 +19805,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.050980393, g: 0.050980393, b: 0.050980393, a: 0}
-        key1: {r: 0.050980393, g: 0.050980393, b: 0.050980393, a: 1}
+        key1: {r: 0.15152134, g: 0, b: 0.2647059, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -22083,8 +22083,8 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 809ba7f1089b1004f85cc87e89767bec, type: 2}
+  - {fileID: 2100000, guid: 809ba7f1089b1004f85cc87e89767bec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
