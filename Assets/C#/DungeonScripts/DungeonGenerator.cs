@@ -129,7 +129,7 @@ public class DungeonGenerator : MonoBehaviour {
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
                 int randomIndex = Random.Range(0, junkLottery.Count - 1);
                 bool keepDesiredRotation = Random.Range(0.0f, 1.0f) < 0.1f;
-                print(keepDesiredRotation);
+                //print(keepDesiredRotation);
                 GameObject newJunk = GameObject.Instantiate(junkToSpawn[(int)junkLottery[randomIndex]].prefab, v3Position, keepDesiredRotation ? Quaternion.identity : Quaternion.Euler(360 * Random.insideUnitSphere));
                 newJunk.transform.parent = newDungeon.transform;
             }

@@ -228,7 +228,7 @@ public class MovementController : MonoBehaviour {
         }
     }
     void ExitDungeon() {
-        print(outsideLocation);
+        //print(outsideLocation);
         transform.position = outsideLocation;
         // Play whatever animations
         playerCam.clearFlags = CameraClearFlags.Skybox;
