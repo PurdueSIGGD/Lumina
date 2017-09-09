@@ -16,11 +16,6 @@ public class BeamMagic : Magic {
     public float magicDraw = 1; //Magic per second this attack takes
 
 	public void Start() {
-        //idleParticles = this.GetComponent<ParticleSystem>();
-        //shootParticles = this.GetComponentInChildren<ParticleSystem>();
-        //print(shootParticles.isPlaying);
-        //print(idleParticles.isPlaying);
-        //shootParticles.Play();
         
 
         holdTime = 0F;
@@ -28,9 +23,17 @@ public class BeamMagic : Magic {
 		attacking = false;
 		//magicUsage = 1F; //The amount of mana used per frame of attacking
 		onCooldown = false;
-	}
+        idleParticles.Play();
 
-	public override void MagicAttack(bool mouseDown) {
+    }
+    public void Update() {
+        if (!getPlayerAnim() && !idleParticles.isPlaying) {
+            // If not being used, make sure to play when idle
+            idleParticles.Play();
+        }
+    }
+
+    public override void MagicAttack(bool mouseDown) {
         // Particle controls
         if (attacking && mouseDown && holdTime > timeToAttack) {
             if (!shootParticles.isPlaying) {
@@ -39,7 +42,7 @@ public class BeamMagic : Magic {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-		} else if ((!mouseDown || playerStats.GetMagic() <= 0) && !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone")) { // Transfer done layer, because we don't want it playing when transitioning
+        } else if ((!mouseDown || !playerStats || playerStats.GetMagic() <= 0) && (!getPlayerAnim() || !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"))) { // Transfer done layer, because we don't want it playing when transitioning
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }
