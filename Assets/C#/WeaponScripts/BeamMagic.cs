@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BeamMagic : Magic {
-    
+    private static int layerIndex = 2;
     public float width = 1; // Width of the beam
 	float holdTime;
 	float releaseTime; //Time since mouse was released.
@@ -39,7 +39,7 @@ public class BeamMagic : Magic {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-		} else if (!mouseDown || playerStats.GetMagic() <= 0) {
+		} else if ((!mouseDown || playerStats.GetMagic() <= 0) && !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone")) { // Transfer done layer, because we don't want it playing when transitioning
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }

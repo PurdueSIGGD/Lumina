@@ -56,8 +56,6 @@ public class StatsController : Hittable
         gui.statsController = this;
 
         healthLightStartIntensity = healthLight.intensity;
-        DontDestroyOnLoad(gui.gameObject);
-        //DontDestroyOnLoad(pauseMenu);
 
         // We may want to change these to the prefab specifically
         /*health = 0;

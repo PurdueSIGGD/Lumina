@@ -28,8 +28,10 @@ public class SwingingWeapon : Weapon {
 			if (!hasRaycasted && getTimeSincePress() >= timeToAttack) {
                 //print("Hitting now " + getLookObj());
                 // Apply ItemStats damage
-                this.DamageCondition(1);
                 RaycastHit[] hits = getHitObjects();
+                if (hits.Length > 0) {
+                    this.DamageCondition(1);
+                }
                 processHits(hits);
                 RaycastHit[] hitsAgain = getHitObjects(); //we do it again, in case some gibs/other stuff spawns that frame
                 IEnumerable<RaycastHit> diff = hitsAgain.Except(hits);

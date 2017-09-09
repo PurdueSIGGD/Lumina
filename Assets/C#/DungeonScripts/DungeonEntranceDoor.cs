@@ -9,6 +9,11 @@ public class DungeonEntranceDoor : Door {
     // Seed: the unique value that determines the dungeon layout. 
     // Depth: how many levels the dungeon will have
     public int seed, depth;
+    public ParticleSystem difficultySmoke;
+
+    public void Start() {
+        
+    }
 
     public override string getSceneToLoad() {
         return dungeonName;

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 135015694053029518}
   - component: {fileID: 54740436436048114}
   - component: {fileID: 114191824418104360}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +75,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33142769863138276
 MeshFilter:
@@ -121,11 +122,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eab705adeb130643be17208fe79473b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
-  minDrops: 0
-  maxDrops: 0
-  health: 50
-  movementSpeed: 1
+  probabilityDrops:
+  - prefab: {fileID: 1784943031785622, guid: 15e3c9cdd4c1a9840b4a085d2c1649b6, type: 2}
+    chance: 4
+  - prefab: {fileID: 1316667486863618, guid: 3701b18cb9b2abf47b9df6610d3f7b72, type: 2}
+    chance: 4
+  - prefab: {fileID: 1296853161654420, guid: 460adf2eb4260b947b6a6c2349f2254b, type: 2}
+    chance: 1
+  - prefab: {fileID: 1489681100830950, guid: 30ee53701ee27cd48b47c412d45a905c, type: 2}
+    chance: 1
+  - prefab: {fileID: 1841830948198258, guid: 3be7068f111bb2541a1ff7ce7ab8ad72, type: 2}
+    chance: 8
+  - prefab: {fileID: 1357930139211266, guid: 6b4e9cf42d1a6be4cbefbaec3bb685c6, type: 2}
+    chance: 2
+  - prefab: {fileID: 1283771130784048, guid: d0f872eecb6ad464e94d56560eeea99e, type: 2}
+    chance: 2
+  - prefab: {fileID: 1379140635731634, guid: decee7c380018c1418737f6f81b0322f, type: 2}
+    chance: 2
+  minDrops: 1
+  maxDrops: 3
+  health: 25
+  movementSpeed: 2
   target: {fileID: 0}
   thrust: 1
   isAttacking: 0

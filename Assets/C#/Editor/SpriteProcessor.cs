@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 /// <summary>
 /// Tool helps to convert normal Texture2D to Sprite automatically
 /// </summary>
+#if UNITY_EDITOR
 public class SpriteProcessor : AssetPostprocessor {
 
 	void OnPostprocessTexture(Texture2D texture)
@@ -29,3 +32,4 @@ public class SpriteProcessor : AssetPostprocessor {
 
     }
 }
+#endif

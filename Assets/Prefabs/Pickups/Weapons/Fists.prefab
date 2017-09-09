@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 54850707394603134}
   - component: {fileID: 65690978396178050}
   - component: {fileID: 114109197327974402}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fists
   m_TagString: Item
   m_Icon: {fileID: -6431860639581277017, guid: 0000000000000000d000000000000000, type: 0}
@@ -84,6 +84,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 99
   maxCondition: 100
+  displayName: 
+  description: 
+  sprite: {fileID: 0}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.2

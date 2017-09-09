@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4037130092509654}
   - component: {fileID: 33762700407670686}
   - component: {fileID: 23427496430667170}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spellbook_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 54337691760618378}
   - component: {fileID: 114658875192318454}
   - component: {fileID: 65927088526794156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ice_Spell
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4337717343535062}
   - component: {fileID: 198911113911230320}
   - component: {fileID: 199831329557557938}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shoot Particles
   m_TagString: NeverViewmodel
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4322226690339210}
   - component: {fileID: 199796834947506240}
   - component: {fileID: 198556945871469174}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Idle Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4643761097077648}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,6 +264,7 @@ MonoBehaviour:
   shootParticles: {fileID: 198911113911230320}
   mesh: {fileID: 4643761097077648}
   width: 1
+  magicDraw: 35
 --- !u!198 &198556945871469174
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -275,7 +276,7 @@ ParticleSystem:
   simulationSpeed: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -323,7 +324,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -649027058
+  randomSeed: -131790146
   InitialModule:
     serializedVersion: 3
     enabled: 1

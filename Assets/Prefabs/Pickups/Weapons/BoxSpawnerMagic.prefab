@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4099287300880262}
   - component: {fileID: 199862223882100518}
   - component: {fileID: 198703546014137236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Idle Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4510408396847954}
   - component: {fileID: 198884188446786370}
   - component: {fileID: 199869088324338046}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shoot Particles
   m_TagString: NeverViewmodel
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4646565805686986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 54872635772255874}
   - component: {fileID: 65920170451306304}
   - component: {fileID: 114437501078855516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoxSpawnerMagic
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 4086679533802244}
   - component: {fileID: 33767218890440876}
   - component: {fileID: 23137197318164200}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spellbook_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,6 +247,9 @@ MonoBehaviour:
   condition: 100
   minCondition: 1
   maxCondition: 100
+  displayName: 
+  description: 
+  sprite: {fileID: 0}
   damageType: 0
   playerStats: {fileID: 0}
   timeToAttack: 0.5
@@ -260,6 +263,8 @@ MonoBehaviour:
   idleParticles: {fileID: 198703546014137236}
   shootParticles: {fileID: 198884188446786370}
   mesh: {fileID: 4646565805686986}
+  useLevelRestriction: 0
+  levelRestriction: Dungeon
   magicDraw: 20
   itemToSpawn: {fileID: 1124715547892150, guid: 1c294ac79b2b2994ea24a987d95d4105,
     type: 2}
