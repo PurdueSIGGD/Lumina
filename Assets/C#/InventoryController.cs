@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
     private static float GRAB_DISTANCE = 4;
+    private static float GRAB_WIDTH = 1f;
 
 
     public WeaponController rightWeaponController;
@@ -40,7 +41,7 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void Update () {
-		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
+		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE, GRAB_WIDTH, cam.transform.forward);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
 		for(int i = 0; i < hitObjs.Length ;i++){
 
@@ -48,7 +49,7 @@ public class InventoryController : MonoBehaviour {
             Usable usb;
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
                 
-				// Show GUI info here using its
+				// Show GUI info here using its information
 				//if (!helpInteractText.gameObject.activeSelf)
                 //{
                 //    helpInteractText.gameObject.SetActive(true);
