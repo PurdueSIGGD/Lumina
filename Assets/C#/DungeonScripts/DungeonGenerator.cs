@@ -21,7 +21,26 @@ public class DungeonGenerator : MonoBehaviour {
                                     // Placed 150 from center
     public GameObject exit;         // The exit door used to leave the dungeon
 
-    public GameObject[] enemyTypes;   // Every enemy you can possibly fight
+    [System.Serializable]
+    public class DifficultyArrays {
+        public ProbabililtyItem[] difficulty1;
+        public ProbabililtyItem[] difficulty2;
+        public ProbabililtyItem[] difficulty3;
+
+        public ProbabililtyItem[] get(int i) {
+            if (i == 1) {
+                return difficulty1;
+            } else if (i == 2) {
+                return difficulty2;
+            } else if (i == 3) {
+                return difficulty3;
+            }
+            return null;
+        }
+    }
+    public DifficultyArrays difficultyArrays;
+
+    public int difficulty;                      // Which array of the above should you use
 
     public GameObject dungeonLevel; // The prefab of the dungeon level, used to initiate any dungeon level
 
@@ -44,6 +63,7 @@ public class DungeonGenerator : MonoBehaviour {
     private readonly Vector2 junkCountRange = new Vector2(10, 20);
 
     private ArrayList junkLottery;
+    private ArrayList enemyLottery;
 
 
     public static Vector3[] wallPositions = {
@@ -88,6 +108,7 @@ public class DungeonGenerator : MonoBehaviour {
             seed = PlayerPrefs.GetInt("DungeonSeed");
             Random.InitState(seed);
         }
+        difficulty = PlayerPrefs.GetInt("DungeonDifficulty");
         depth = PlayerPrefs.GetInt("DungeonDepth");
         // Since we want an extra room in the first level to include random items, we increment depth
         depth++;
@@ -100,7 +121,14 @@ public class DungeonGenerator : MonoBehaviour {
                 junkLottery.Add(i);
             }
         }
-      
+
+        enemyLottery = new ArrayList();
+        for (int i = 0; i < difficultyArrays.get(difficulty).Length; i++) {
+            for (int k = 0; k < difficultyArrays.get(difficulty)[i].chance; k++) {
+                enemyLottery.Add(i);
+            }
+        }
+
         dungeons = new DungeonLevel[depth];
         Vector3 dungeonPosition = Vector3.zero;
         DungeonLevel lastDungeon = null;
@@ -138,11 +166,11 @@ public class DungeonGenerator : MonoBehaviour {
             ArrayList enemyList = new ArrayList();
             // Add none if the first room
             int enemyCount = currentDepth == 0 ? 0 : Random.Range(1, 5);
-            int enemyType = Random.Range(0, enemyTypes.Length);
+            int enemyType = Random.Range(0, enemyLottery.Count);
             for (int enemies = 0; enemies < enemyCount; enemies++) {
                 Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
-                GameObject newEnemy = GameObject.Instantiate(enemyTypes[enemyType], v3Position, Quaternion.identity);
+                GameObject newEnemy = GameObject.Instantiate(difficultyArrays.get(difficulty)[(int)enemyLottery[enemyType]].prefab, v3Position, Quaternion.identity);
                 newEnemy.transform.parent = newDungeon.transform;
                 enemyList.Add(newEnemy);
             }

@@ -36,7 +36,7 @@ public class StatsController : Hittable
     public GameOverCanvas gameOverCanvas;
 
     private float healthLightStartIntensity;
-
+    private float lightDamageCooldown;
 	bool outside;
     bool dead;
     
@@ -49,8 +49,8 @@ public class StatsController : Hittable
 	{
 
         //set condition for health
-		outside = true;
-
+        outside = true;
+        lightDamageCooldown = Time.time;
 
         //set GUI
         gui = GetComponent<InputGenerator>().uiController.hudController;
@@ -71,7 +71,7 @@ public class StatsController : Hittable
         // if in a dungeon
         if (dead) {
             // flicker the light till it goes out
-            UpdateLightt(LIGHT_LOSS_RATE * -20 * Time.deltaTime);
+            UpdateLightt(LIGHT_LOSS_RATE * -40 * Time.deltaTime);
         } else if (SceneManager.GetActiveScene().name == "Dungeon") {
             // In a dungeon, slowly lower light
             UpdateLightt(Time.deltaTime * -1 * LIGHT_LOSS_RATE);
@@ -79,7 +79,12 @@ public class StatsController : Hittable
                 healthLight.enabled = true;
             }
             if (GetLightt() <= 0) {
-                Kill();
+                if (Time.time - lightDamageCooldown > .5f) {
+                    lightDamageCooldown = Time.time;
+                    Hit(5, DamageType.Umbra);
+                } else {
+                    //lightDamageCooldown += Time.deltaTime;
+                }
             }
         } else {
             // Outside or somewhere else, turn light off

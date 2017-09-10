@@ -30,6 +30,7 @@ public class DungeonEntranceDoor : Door {
 
         PlayerPrefs.SetInt("DungeonSeed", seed);
         PlayerPrefs.SetInt("DungeonDepth", depth);
+        PlayerPrefs.SetInt("DungeonDifficulty", SceneManager.GetActiveScene().buildIndex);
 
     }
 
