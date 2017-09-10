@@ -18,10 +18,13 @@ public class InputGenerator : MonoBehaviour {
 
 	float jumpInput;
 
+
     /// <summary>
     /// Set the running status of game
     /// </summary>
     public bool isGamePausing { get; private set; }
+
+    private bool cursorsEnabled;
 
     // Use this for initialization
     void Start () {
@@ -43,7 +46,7 @@ public class InputGenerator : MonoBehaviour {
     void CursorStates()
     {
         // If we are paused, mouse will appear
-        if (!isGamePausing) { 
+        if (!cursorsEnabled) { 
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -123,7 +126,7 @@ public class InputGenerator : MonoBehaviour {
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
 
         //if game is pausing, stop moving the camera
-        if (!isGamePausing)
+        if (!cursorsEnabled)
             playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 
         //if relate to UI
@@ -167,18 +170,25 @@ public class InputGenerator : MonoBehaviour {
 			
 
 	}
-
+    public void EnableCursors() {
+        cursorsEnabled = true;
+    }
+    public void DisableCursors() {
+        cursorsEnabled = false;
+    }
 
     public void PauseGame()
     {
         Time.timeScale = 0;
         isGamePausing = true;
+        EnableCursors();
     }
 
     public void ResumeGame()
     {
         isGamePausing = false;
         Time.timeScale = 1;
+        DisableCursors();
     }
 
 }

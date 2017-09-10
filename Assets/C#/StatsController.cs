@@ -33,6 +33,7 @@ public class StatsController : Hittable
     public Animator myAnim;
     public Light healthLight;
     public InventoryController inventoryController;
+    public GameOverCanvas gameOverCanvas;
 
     private float healthLightStartIntensity;
 
@@ -356,10 +357,12 @@ public class StatsController : Hittable
 	 */
 	public void Kill () {
         dead = true;
+        gameOverCanvas.SendMessage("GameOver");
         this.BroadcastMessage("Death");
 	}
     public void UnKill() {
         dead = false;
+        gameOverCanvas.SendMessage("NotGameOver");
         this.BroadcastMessage("NotDeath");
     }
 }
