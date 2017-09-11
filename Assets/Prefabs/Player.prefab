@@ -16052,7 +16052,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1759934414841302}
-  m_LocalRotation: {x: 0.34212792, y: 0.56967944, z: -0.50865173, w: 0.54743695}
+  m_LocalRotation: {x: 0.34212795, y: 0.5696795, z: -0.5086518, w: 0.547437}
   m_LocalPosition: {x: 0.0010098591, y: 0.0002650157, z: -0.00021861806}
   m_LocalScale: {x: 0.99999934, y: 0.9999996, z: 0.9999995}
   m_Children:
@@ -18391,7 +18391,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 0.96805274, b: 0.74264705, a: 1}
-  m_Intensity: 2.66
+  m_Intensity: 4.57
   m_Range: 16.27
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -18660,8 +18660,8 @@ MonoBehaviour:
   healthMax: 100
   magic: 100
   magicMax: 100
-  lightt: 200
-  lighttMax: 200
+  lightt: 500
+  lighttMax: 500
   arrowCount: 0
   arrowMax: 100
   myAnim: {fileID: 95743908141266576}
