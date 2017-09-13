@@ -9,7 +9,8 @@ public class GameOverCanvas : MonoBehaviour {
     void GameOver() {
         gameOverElement.SetTrigger("Show");
         sceneSelectionCanvas.fadeToBlackAnimator.SetFloat("FadeSpeed", 0.2f);
-        sceneSelectionCanvas.SendMessage("FadeToBlack");
+        // Disabling fade to black because a glitch, making black show up in front of our game over text
+        //sceneSelectionCanvas.SendMessage("FadeToBlack");
         GameObject.FindObjectOfType<InputGenerator>().EnableCursors();
     }
     void NotGameOver() { 

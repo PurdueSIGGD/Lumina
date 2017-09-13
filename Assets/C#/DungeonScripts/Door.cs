@@ -35,12 +35,14 @@ public abstract class Door : Usable {
         }
         // Disable player movement
         sceneSwitchPrep(player);
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadDoorScene());
     }
-    public IEnumerator LoadScene() {
+    public IEnumerator LoadDoorScene() {
         yield return new WaitForSeconds(2);
         preSceneSwitch(player);
         player.SendMessage("PrepSceneSwitchFade", fadeType);
+        Debug.Log("LOADING: " + getSceneToLoad());
+        Debug.Log(this.gameObject);
         SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
        
     }

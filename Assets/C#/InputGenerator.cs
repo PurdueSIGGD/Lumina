@@ -34,7 +34,10 @@ public class InputGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ButtonStates ();
+        // Don't let in any input during a transition
+        if (playerMovement.disableMovement) return;
+
+        ButtonStates ();
         CursorStates();
 		
         
@@ -62,7 +65,6 @@ public class InputGenerator : MonoBehaviour {
         if (Input.GetAxis("RightCycleWeapon") > 0) rightPlayerWeaponController.SwitchWeapon();
         leftPlayerWeaponController.Attack(Input.GetAxis("Fire2") > 0);
         if (Input.GetAxis("LeftCycleWeapon") > 0) leftPlayerWeaponController.SwitchWeapon();
-
 
         // Might need to explain myself here. This is crap for animation
         // For animation, we have 4 layers at the moment. Each with their corresponding bone masks
@@ -179,9 +181,13 @@ public class InputGenerator : MonoBehaviour {
 
     public void PauseGame()
     {
-        Time.timeScale = 0;
-        isGamePausing = true;
-        EnableCursors();
+        if (!playerMovement.disableMovement) {
+            // Sometimes a glitch happens when pausing during a transition
+            Time.timeScale = 0;
+            isGamePausing = true;
+            EnableCursors();
+        }
+       
     }
 
     public void ResumeGame()

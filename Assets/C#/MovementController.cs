@@ -22,7 +22,7 @@ public class MovementController : MonoBehaviour {
 	Vector3 rotationVector;//vector used to set and maintain the rotation of the player and the camera
 
     private Vector3 outsideLocation; // The location that we will return to when exiting a dungeon
-    private bool disableMovement = false; // Used for scripted events like exiting the boat, or entering a dungeon
+    public bool disableMovement = false; // Used for scripted events like exiting the boat, or entering a dungeon
 
 	public bool isJumping;
 	public bool isSprinting;

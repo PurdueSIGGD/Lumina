@@ -202,21 +202,23 @@ public class DungeonGenerator : MonoBehaviour {
                 Random.State currentState = Random.state;
                 Random.state = oldState;
                 float result = Random.Range(0.0f, 1.0f);
-                oldState = Random.state;
-                Random.state = currentState;
+                print("no enemy result: " + result);
                 if (cleared && enemySpawnRate_Cleared < result) {
                     // If we are cleared, use the change and continue if we want some enemies not to be spawned
+                    oldState = Random.state;
+                    Random.state = currentState;
                     continue;
                 }
                 Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
-                Random.State preEnemyState = Random.state;
-                Random.state = oldState;
+              
                 GameObject newEnemy = GameObject.Instantiate(difficultyArrays.get(difficulty)[(int)enemyLottery[enemyType]].prefab, v3Position, Quaternion.identity);
-                oldState = Random.state;
-                Random.state = preEnemyState;
+
                 newEnemy.transform.parent = newDungeon.transform;
                 enemyList.Add(newEnemy);
+
+                oldState = Random.state;
+                Random.state = currentState;
             }
             newDungeon.enemies = enemyList.ToArray(typeof(GameObject)) as GameObject[];
 

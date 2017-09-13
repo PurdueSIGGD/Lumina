@@ -75,7 +75,7 @@ public class BoatDoor : Door {
 
         // Disable player movement
         sceneSwitchPrep(player);
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadDoorScene());
 
     }
     
