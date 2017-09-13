@@ -62,6 +62,10 @@ public class DungeonGenerator : MonoBehaviour {
     private readonly Vector2 junkCountRangeFirst = new Vector2(25, 40);
     private readonly Vector2 junkCountRange = new Vector2(10, 20);
 
+    private bool cleared = false; // If the dungeon is cleared, only occasionally spawn enemies. Not too often.
+
+    private readonly float enemySpawnRate_Cleared = 0.2f; // What % of the time should enemies spawn when the dungeon is cleared
+
     private ArrayList junkLottery;
     private ArrayList enemyLottery;
 
@@ -101,12 +105,38 @@ public class DungeonGenerator : MonoBehaviour {
         Vector3.back
     };
     // Door rotations are same as wall rotations
-  
+
+    /**
+     * Returns a value based off of the old random state, and then resets the current state
+     This won't work since oldState is just an instance, and is not reset
+    private static float trueRandomRange(Random.State oldState, float start, float end) {
+        Random.State currentState = Random.state;
+        Random.state = oldState;
+        float result = Random.Range(start, end);
+        oldState = Random.state;
+        Random.state = currentState;
+        return result;
+    }
+    private static int trueRandomRange(Random.State oldState, int start, int end) {
+        Random.State currentState = Random.state;
+        Random.state = oldState;
+        int result = Random.Range(start, end);
+        oldState = Random.state;
+        Random.state = currentState;
+        return result;
+    }
+         */
 
     void Start () {
+
+        Random.State oldState = Random.state;
         if (seed == 0) {
             seed = PlayerPrefs.GetInt("DungeonSeed");
             Random.InitState(seed);
+        }
+        cleared = 1 == PlayerPrefs.GetInt(seed.ToString());
+        if (cleared) {
+            //Debug.Log("Dungeon is cleared, not doing much for the things");
         }
         difficulty = PlayerPrefs.GetInt("DungeonDifficulty");
         depth = PlayerPrefs.GetInt("DungeonDepth");
@@ -167,10 +197,24 @@ public class DungeonGenerator : MonoBehaviour {
             // Add none if the first room
             int enemyCount = currentDepth == 0 ? 0 : Random.Range(1, 5);
             int enemyType = Random.Range(0, enemyLottery.Count);
+            // We preserve enemy type for each room when coming back from being cleared. 
             for (int enemies = 0; enemies < enemyCount; enemies++) {
+                Random.State currentState = Random.state;
+                Random.state = oldState;
+                float result = Random.Range(0.0f, 1.0f);
+                oldState = Random.state;
+                Random.state = currentState;
+                if (cleared && enemySpawnRate_Cleared < result) {
+                    // If we are cleared, use the change and continue if we want some enemies not to be spawned
+                    continue;
+                }
                 Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
+                Random.State preEnemyState = Random.state;
+                Random.state = oldState;
                 GameObject newEnemy = GameObject.Instantiate(difficultyArrays.get(difficulty)[(int)enemyLottery[enemyType]].prefab, v3Position, Quaternion.identity);
+                oldState = Random.state;
+                Random.state = preEnemyState;
                 newEnemy.transform.parent = newDungeon.transform;
                 enemyList.Add(newEnemy);
             }

@@ -47,8 +47,9 @@ public class MovementController : MonoBehaviour {
 		lastJump = 0;
 		sprintTime = 0;
 		sprintRecharge = 0;
+        fadeType = 0;
 
-		isJumping = false;
+        isJumping = false;
 		isSprinting = false;
 	}
 
@@ -255,11 +256,15 @@ public class MovementController : MonoBehaviour {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        if (fadeType == Door.FadeType.Dark) {
-            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeFromBlack");
-        } else if (fadeType == Door.FadeType.Light) {
-            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeFromWhite");
+        SceneSelectionCanvas canvas = GameObject.FindObjectOfType<SceneSelectionCanvas>();
+        if (canvas) {
+            if (fadeType == Door.FadeType.Dark) {
+                canvas.SendMessage("FadeFromBlack");
+            } else if (fadeType == Door.FadeType.Light) {
+                canvas.SendMessage("FadeFromWhite");
+            }
         }
+        fadeType = 0;
     }
 
     private bool canMoveTo(Vector3 pos) {

@@ -145,8 +145,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189629399022894}
-  m_LocalRotation: {x: -0.066482045, y: -0, z: -0, w: 0.99778765}
-  m_LocalPosition: {x: 210.32114, y: 25.82, z: 63.17}
+  m_LocalRotation: {x: -0.15575653, y: -0, z: -0, w: 0.98779553}
+  m_LocalPosition: {x: 312.1182, y: 28.37, z: 144.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4756475751955578}
@@ -401,12 +401,14 @@ MonoBehaviour:
   fadeType: 1
   sceneChoices:
   - sceneName: Island1
-    unlocked: 1
+    dungeonsBeforeUnlock: 0
     spawnPosition: {x: 317.05, y: 29.38, z: 144.62}
   - sceneName: Island2
-    unlocked: 1
+    dungeonsBeforeUnlock: 5
     spawnPosition: {x: 214.74, y: 27.84, z: 67.82}
   - sceneName: Island3
-    unlocked: 0
+    dungeonsBeforeUnlock: 10
     spawnPosition: {x: 0, y: 0, z: 0}
   sceneChoice: 0
+  errorText: {fileID: 0}
+  errorAnimator: {fileID: 0}

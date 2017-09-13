@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BoatDoor : Door {
     [System.Serializable]
     public class SceneChoice {
         public string sceneName;
-        public bool unlocked;
+        public int dungeonsBeforeUnlock;
         public Vector3 spawnPosition;
     }
     private SceneSelectionCanvas canvas;
@@ -30,9 +31,15 @@ public class BoatDoor : Door {
         int index = 0;
         bool atLeastOne = false;
         foreach (SceneChoice isceneChoice in sceneChoices) {
-            if (isceneChoice.unlocked && !(SceneManager.GetActiveScene().name == isceneChoice.sceneName)) {
+            if (!(SceneManager.GetActiveScene().name == isceneChoice.sceneName)) {
                 canvas.menuOptions[index].SetActive(true);
                 atLeastOne = true;
+                if (sceneChoices[index].dungeonsBeforeUnlock > GameSaveManager.GetClearedDungeonCount()) {
+                    // Disable button
+                    canvas.SendMessage("DisableButton", index);
+                } else {
+                    canvas.SendMessage("EnableButton", index);
+                }
             } else {
                 canvas.menuOptions[index].SetActive(false);
             }
@@ -44,14 +51,26 @@ public class BoatDoor : Door {
         canvas.SendMessage("Show");
     }
     public void selectScene(int choice) {
+        SceneSelectionCanvas canvas = GameObject.FindObjectOfType<SceneSelectionCanvas>();
+
+
+        // Error checking
+        if (sceneChoices[choice].dungeonsBeforeUnlock > GameSaveManager.GetClearedDungeonCount()) {
+            canvas.SendMessage("DungeonsLeftError", sceneChoices[choice].dungeonsBeforeUnlock - GameSaveManager.GetClearedDungeonCount());
+            return;
+        }
+
+
+        canvas.SendMessage("Hide");
+
         sceneChoice = choice;
 
         player = GameObject.FindGameObjectsWithTag("Player")[0];
 
         if (fadeType == FadeType.Dark) {
-            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToBlack");
+            canvas.SendMessage("FadeToBlack");
         } else if (fadeType == FadeType.Light) {
-            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToWhite");
+            canvas.SendMessage("FadeToWhite");
         }
 
         // Disable player movement

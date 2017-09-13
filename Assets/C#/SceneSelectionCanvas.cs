@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneSelectionCanvas : MonoBehaviour {
     public Animator fadeToWhiteAnimator, fadeToBlackAnimator, myAnimator;
@@ -9,9 +10,16 @@ public class SceneSelectionCanvas : MonoBehaviour {
     public GameObject[] menuOptions;
     public GameObject notFoundMenuOption;
 
+    private string clearedDungeonText = "You need to clear {0} more dungeons!";
 
-	// Use this for initialization
-	void Start () {
+    public Text errorText;
+    public Animator errorAnimator;
+
+    public Color lockedTextColor;
+    public Color unlockedTextColor;
+
+    // Use this for initialization
+    void Start () {
         fadeToWhiteAnimator.SetTrigger("Reset");
     }
 	
@@ -49,15 +57,25 @@ public class SceneSelectionCanvas : MonoBehaviour {
 
     void Option1() {
         myBoatDoor.selectScene(0);
-        Hide();
     }
     void Option2() {
         myBoatDoor.selectScene(1);
-        Hide();
     }
     void Option3() {
         myBoatDoor.selectScene(2);
-        Hide();
     }
 
+    void DungeonsLeftError(int dungeonsLeft) {
+        errorText.text = string.Format(clearedDungeonText, dungeonsLeft);
+        errorAnimator.SetTrigger("Error");
+    }
+    void DisableButton(int index) {
+        //menuOptions[index].GetComponent<Button>().interactable = false;
+        menuOptions[index].transform.GetChild(0).GetComponent<Text>().color = lockedTextColor;
+    }
+    void EnableButton(int index) {
+        //menuOptions[index].GetComponent<Button>().interactable = true;
+        menuOptions[index].transform.GetChild(0).GetComponent<Text>().color = unlockedTextColor;
+
+    }
 }

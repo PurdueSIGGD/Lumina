@@ -59,7 +59,7 @@ public class InventoryController : MonoBehaviour {
 			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
                 
 				// Show usetext using usb
-                Debug.Log(usb.getInfoText());
+                //Debug.Log(usb.getInfoText());
             }
 
 			//string itemTag = hitObjs[i].collider.gameObject.tag;
