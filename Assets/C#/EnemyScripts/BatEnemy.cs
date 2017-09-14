@@ -34,7 +34,7 @@ public class BatEnemy : BaseEnemy
 	 */
     public override IEnumerator Attack()
     {
-        print("attack");
+        //print("attack");
         isAttacking = true;
 
         while (isAttacking)

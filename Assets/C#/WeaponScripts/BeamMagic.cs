@@ -77,6 +77,7 @@ public class BeamMagic : Magic {
                         if (hit.distance <= range && 
                             hit.collider.gameObject.tag != "Player" &&
                             !hit.collider.isTrigger ) {
+                            Debug.Log(hit.transform.gameObject);
                             // Push physics, regardless of hittable
                             Rigidbody r;
                             if (r = hit.collider.GetComponent<Rigidbody>()) {
@@ -85,7 +86,7 @@ public class BeamMagic : Magic {
                             }
                             // Hit with hittable
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
-                            if (hittable != null && hit.collider.gameObject.tag != "Item") { //Sometimes may hit our item that we are holding
+                            if (hittable != null && hittable.gameObject.tag != "Item" && hittable.gameObject.tag != "Player") { //Sometimes may hit our item that we are holding
                                 //print(hit.collider);
                                 hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
                             }
