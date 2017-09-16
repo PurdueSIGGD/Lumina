@@ -36,12 +36,24 @@ public class MovementController : MonoBehaviour {
 
     private Door.FadeType fadeType; //The fade type that we are expected to do next
 
+    private StatsController myStats;
+    private InventoryController myInventory;
+
     // Use this for initialization
     void Start () {
         DontDestroyOnLoad(this.gameObject);
 		playerPhysics = GetComponentInParent<Rigidbody> ();
 		playerCollider = GetComponentInParent<CapsuleCollider> ();
         playerCam = transform.GetComponentsInChildren<Camera>()[0];
+        myStats = this.GetComponent<StatsController>();
+        myInventory = this.GetComponent<InventoryController>();
+
+        if (PlayerPrefs.GetInt("LoadGame") == 1)
+        {
+            GameSaveManager.LoadGame(myStats, myInventory);
+            PlayerPrefs.SetInt("LoadGame", 0);
+        }
+
 		distToGround = playerCollider.bounds.extents.y/2.5f;
         //print(distToGround);
 		lastJump = 0;
@@ -228,7 +240,13 @@ public class MovementController : MonoBehaviour {
             w.clearSwitchCooldown();
         }
     }
+    void SaveGame()
+    {
+        GameSaveManager.SaveGame(myStats, myInventory);
+    }
     void ExitDungeon() {
+        SaveGame();
+
         //print(outsideLocation);
         transform.position = outsideLocation;
         // Play whatever animations

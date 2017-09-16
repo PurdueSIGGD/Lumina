@@ -11,8 +11,11 @@ public class GameSaveManager : MonoBehaviour {
     public static string PLAYER_MAX_HEALTH_KEY = "PlayerMaxHealth";
     public static string PLAYER_MAGIC_KEY = "PlayerMagic";
     public static string PLAYER_MAX_MAGIC_KEY = "PlayerMaxMagic";
+    public static string ARROW_COUNT_KEY = "ArrowCount";
+    public static string UPGRADE_POTION_KEY = "UpgradePotion";
+    public static string UPGRADE_KIT_KEY = "UpgradeKit";
 
-    public static string[] ALL_GAMESAVE_PLAYERPREF_KEYS = { CLEARED_DUNGEON_COUNT_KEY, PLAYER_HEALTH_KEY, PLAYER_MAX_HEALTH_KEY, PLAYER_MAGIC_KEY, PLAYER_MAX_MAGIC_KEY };
+    public static string[] ALL_GAMESAVE_PLAYERPREF_KEYS = { CLEARED_DUNGEON_COUNT_KEY, PLAYER_HEALTH_KEY, PLAYER_MAX_HEALTH_KEY, PLAYER_MAGIC_KEY, PLAYER_MAX_MAGIC_KEY, ARROW_COUNT_KEY, UPGRADE_POTION_KEY, UPGRADE_KIT_KEY };
     public static void NewGame() {
         string keyCombination = PlayerPrefs.GetString(CLEARED_DUNGEON_KEY_COMBINATION_KEY);
         print("Dungeons that we are clearing: " + keyCombination);
@@ -29,6 +32,38 @@ public class GameSaveManager : MonoBehaviour {
         SetPlayerMagic(100f);
         SetPlayerMaxMagic(100f);
 
+    }
+
+    public static void SaveGame(StatsController stats, InventoryController inventory)
+    {
+        // Save health + max, magic + max, arrows, upgrade kits, upgrade potions
+        SetPlayerHealth(stats.GetHealth());
+        SetPlayerMaxHealth(stats.GetHealthMax());
+
+        SetPlayerMagic(stats.GetMagic());
+        SetPlayerMaxMagic(stats.GetMagicMax());
+
+        SetArrowCount(stats.arrowCount);
+
+        SetUpgradeKitCount(inventory.getUpgradeKits());
+        SetUpgradePotionCount(inventory.getUpgradePotions());
+    }
+    public static void LoadGame(StatsController stats, InventoryController inventory)
+    {
+        float maxHealth = GetPlayerMaxHealth();
+        float maxMagic = GetPlayerMaxMagic();
+
+        stats.SetMaxHealth(maxHealth);
+        stats.SetHealth(maxHealth);
+
+        stats.SetMaxMagic(maxMagic);
+        stats.SetMagic(maxMagic);
+
+        stats.arrowCount = GetArrowCount();
+
+        inventory.SetUpgradeKits(GetUpgradeKitCount());
+        inventory.SetUpgradePotions(GetUpgradePotionCount());
+        
     }
 
     public static int GetClearedDungeonCount() {
@@ -64,6 +99,31 @@ public class GameSaveManager : MonoBehaviour {
     }
     public static void SetPlayerMaxMagic(float num) {
         Set(PLAYER_MAX_MAGIC_KEY, num);
+    }
+
+    public static int GetArrowCount()
+    {
+        return GetInt(ARROW_COUNT_KEY);
+    }
+    public static void SetArrowCount(int num)
+    {
+        Set(ARROW_COUNT_KEY, num);
+    }
+    public static int GetUpgradeKitCount()
+    {
+        return GetInt(UPGRADE_KIT_KEY);
+    }
+    public static void SetUpgradeKitCount(int num)
+    {
+        Set(UPGRADE_KIT_KEY, num);
+    }
+    public static int GetUpgradePotionCount()
+    {
+        return GetInt(UPGRADE_POTION_KEY);
+    }
+    public static void SetUpgradePotionCount(int num)
+    {
+        Set(UPGRADE_POTION_KEY, num);
     }
 
     /**

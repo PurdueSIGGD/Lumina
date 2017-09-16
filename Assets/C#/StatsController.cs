@@ -154,6 +154,14 @@ public class StatsController : Hittable
 		this.healthMax += HEALTH_INCREASE_AMOUNT;
 		gui.GUIsetUpgradeHealth (healthMax);
 	}
+    public void SetMaxHealth(float f)
+    {
+        this.healthMax = f;
+    }
+    public void SetMaxMagic(float f)
+    {
+        this.magicMax = f;
+    }
 
 	public void UpgradeMaxMagic(){
 		this.magicMax += MAGIC_INCREASE_AMOUNT;
@@ -164,6 +172,16 @@ public class StatsController : Hittable
 		this.lighttMax += LIGHT_INCREASE_AMOUNT;
 		gui.GUIsetUpgradeLight (lighttMax);
 	}
+
+    public void SetHealth(float amount)
+    {
+        health = amount;
+    }
+
+    public void SetMagic(float amount)
+    {
+        magic = amount;
+    }
 
 	//Returns leftover (if any) ((can be negative))
 	public float UpdateHealth(float amount) {

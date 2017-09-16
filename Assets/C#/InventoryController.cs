@@ -15,8 +15,8 @@ public class InventoryController : MonoBehaviour {
     private float interactCooldown;
 	public StatsController statsController;
 	public GameObject cam;//camera
-	float upgradekits;
-	float upgradePotions;
+	int upgradekits;
+	int upgradePotions;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	public Armor helmet;
@@ -199,10 +199,10 @@ public class InventoryController : MonoBehaviour {
                 bool deletes = true;
 			    switch(pick.itemType){
 			        case Pickup.pickUpType.upgradeKit:
-				        upgradekits += pick.amount;
+				        upgradekits += (int)pick.amount;
 				        break;
 				    case Pickup.pickUpType.upgradePotion:
-					    upgradePotions++;
+					    upgradePotions+= (int)pick.amount;
                         break;
                     case Pickup.pickUpType.Magic:
                         deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
@@ -226,7 +226,7 @@ public class InventoryController : MonoBehaviour {
 		if (i is Armor) {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
-			upgradekits-=10;
+			upgradekits-=1;
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
 			}else{
 
@@ -263,11 +263,20 @@ public class InventoryController : MonoBehaviour {
 		return armor;
 	}
 
-	public float getUpgradePotions(){
+	public int getUpgradePotions(){
 		return upgradePotions;
 	}
 
-	public float getUpgradeKits(){
+	public int getUpgradeKits(){
 		return upgradekits;
 	}
+
+    public void SetUpgradePotions(int i)
+    {
+        upgradePotions = i;
+    }
+    public void SetUpgradeKits(int i)
+    {
+        upgradekits = i;
+    }
 }

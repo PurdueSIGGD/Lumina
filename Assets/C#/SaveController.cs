@@ -9,12 +9,13 @@ public class SaveController : MonoBehaviour {
 
         //PlayerPrefs.SetInt("MyKey", 1);
         //PlayerPrefs.Save();
-
-        Debug.Log(PlayerPrefs.GetInt("MyKey").ToString());
+        //Debug.Log(PlayerPrefs.GetInt("MyKey").ToString());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+
 }

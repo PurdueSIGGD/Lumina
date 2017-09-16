@@ -8,6 +8,8 @@ public class LoadGameOnFinish : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // For the player when they are created
+        PlayerPrefs.SetInt("LoadGame", 1);
         //load scene 1
         SceneManager.LoadScene("Island1");
     }
