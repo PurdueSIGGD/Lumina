@@ -62,6 +62,8 @@ public class WeaponController : MonoBehaviour {
         UIController uiController = GetComponent<InputGenerator>().uiController;
         InventoryPanel inventoryPanel = uiController.inventoryCanvas.inventoryPanel;
 
+        //viewmodelAnimator.SetInteger("ArrowAmmo", myStats.arrowCount);
+
         //right: weapon
         //left: magic
         if (controllerSide == "R")
@@ -470,6 +472,7 @@ public class WeaponController : MonoBehaviour {
             w.setLookObj(null);
             w.setPlayerAnim(null);
             w.setControllerSide("");
+            if (!w.GetComponent<DestroyOnLevelLoad>()) w.gameObject.AddComponent<DestroyOnLevelLoad>();
         }
         this.weaponCount = 0;
         this.weaponIndex = 0;

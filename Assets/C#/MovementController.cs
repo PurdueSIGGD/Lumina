@@ -51,13 +51,16 @@ public class MovementController : MonoBehaviour {
         myInventory = this.GetComponent<InventoryController>();
         rightWeaponController = myInventory.rightWeaponController;
         leftWeaponController = myInventory.leftWeaponController;
-
-        //if (PlayerPrefs.GetInt("LoadGame") == 1)
-        //{
+        
         // We load even if we just reset
-            GameSaveManager.LoadGame(myStats, myInventory, rightWeaponController, leftWeaponController);
-        //    PlayerPrefs.SetInt("LoadGame", 0);
-        //}
+        GameSaveManager.LoadGameStats(myStats, myInventory, rightWeaponController, leftWeaponController);
+        // Do we have a position to go to? If so, go there
+        Vector3 location;
+        if ((location = GameSaveManager.GetPlayerLocation()) != Vector3.zero) {
+            // Location location location
+            transform.position = location;
+            transform.localEulerAngles = GameSaveManager.GetPlayerRotation();
+        }
 
 		distToGround = playerCollider.bounds.extents.y/2.5f;
         //print(distToGround);
@@ -225,6 +228,7 @@ public class MovementController : MonoBehaviour {
         canMove = true;
     }
     void PrepareToEnterDungeon() {
+        SaveGame();
         outsideLocation = transform.position;
         StopMoving();
     }
@@ -235,7 +239,7 @@ public class MovementController : MonoBehaviour {
     void EnterDungeon() {
         // We expect the screen to be faded to black, so we can do crazy movements
 
-        transform.position = new Vector3(0, 50, 0);
+        transform.position = new Vector3(0, 30, 0);
         disableMovement = false;
         // change skybox settings to be all black
         playerCam.clearFlags = CameraClearFlags.Color;
@@ -250,10 +254,10 @@ public class MovementController : MonoBehaviour {
         GameSaveManager.SaveGame(myStats, myInventory, rightWeaponController, leftWeaponController);
     }
     void ExitDungeon() {
-        SaveGame();
 
         //print(outsideLocation);
         transform.position = outsideLocation;
+        transform.localEulerAngles = GameSaveManager.GetPlayerRotation();
         // Play whatever animations
         playerCam.clearFlags = CameraClearFlags.Skybox;
         disableMovement = false;
@@ -285,6 +289,7 @@ public class MovementController : MonoBehaviour {
                 canvas.SendMessage("FadeFromBlack");
             } else if (fadeType == Door.FadeType.Light) {
                 canvas.SendMessage("FadeFromWhite");
+                SaveGame(); //I am assuming we are either outside or on a new map, so that's happening
             }
         }
         fadeType = 0;

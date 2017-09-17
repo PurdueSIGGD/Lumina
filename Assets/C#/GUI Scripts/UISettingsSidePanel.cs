@@ -43,8 +43,6 @@ public class UISettingsSidePanel : UIPanel {
 
     public override void Open()
     {
-        // don't open, save
-        GameObject.FindGameObjectWithTag("Player").SendMessage("SaveGame");
         /*
         //open
         gameObject.SetActive(true);

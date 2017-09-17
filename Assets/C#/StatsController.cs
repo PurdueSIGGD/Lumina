@@ -111,7 +111,8 @@ public class StatsController : Hittable
         myAnim.SetTrigger("Damage");
 
 		damage = ApplyDamageTypeHitMod (damage, type);
-		damage = ApplyArmorHitMod (damage, type);
+        // Umbra (shadow) does not have any armor hit modification
+		if (type != DamageType.Umbra) damage = ApplyArmorHitMod (damage, type);
 
 		float leftover = UpdateHealth(-1 * damage);
         if (GetHealth() <= 0 && !dead) {

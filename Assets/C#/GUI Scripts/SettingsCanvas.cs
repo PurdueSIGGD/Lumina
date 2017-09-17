@@ -35,12 +35,7 @@ public class SettingsCanvas : UICanvas {
 
         //settings        
         settingsPanel.controller = this;
-
-        //load game       
-        loadGamePanel.controller = this;
-
-        //save game      
-        saveGamePanel.controller = this;
+        
         
     }
 

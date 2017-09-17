@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class InventoryController : MonoBehaviour {
     private static float GRAB_DISTANCE = 4;
-    private static float GRAB_WIDTH = 1f;
+    private static float GRAB_WIDTH = .4f;
 
     public GameObject[] helmetTypes;
     public GameObject[] chestplateTypes;
@@ -21,8 +21,8 @@ public class InventoryController : MonoBehaviour {
     private float interactCooldown;
 	public StatsController statsController;
 	public GameObject cam;//camera
-	int upgradekits;
-	int upgradePotions;
+	public int upgradekits;
+	public int upgradePotions;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	public Armor helmet;

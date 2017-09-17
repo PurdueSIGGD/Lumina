@@ -15,6 +15,8 @@ public abstract class Door : Usable {
     public Animator myAnimator;
     protected GameObject player;
 
+    private bool isUsing = false;
+
     public FadeType fadeType;
    
     public override string getInfoText() {
@@ -22,6 +24,11 @@ public abstract class Door : Usable {
     } 
 
     public override void Use() {
+        if (!isUsing) {
+            isUsing = true;
+        } else {
+            return; //We are already in use
+        }
         player = GameObject.FindGameObjectsWithTag("Player")[0];
 
         if (myAnimator != null) {
@@ -39,10 +46,11 @@ public abstract class Door : Usable {
     }
     public IEnumerator LoadDoorScene() {
         yield return new WaitForSeconds(2);
+        isUsing = false;
         preSceneSwitch(player);
         player.SendMessage("PrepSceneSwitchFade", fadeType);
-        Debug.Log("LOADING: " + getSceneToLoad());
-        Debug.Log(this.gameObject);
+        //Debug.Log("LOADING: " + getSceneToLoad());
+        //Debug.Log(this.gameObject);
         SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
        
     }
