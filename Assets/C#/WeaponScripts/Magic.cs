@@ -20,6 +20,7 @@ public abstract class Magic : Weapon {
     // Use this for initialization
     void Start () {
         playParticles();
+        print(idleParticles.isPlaying);
     }
     public void pauseParticles() {
         if (shootParticles.isPlaying) {
