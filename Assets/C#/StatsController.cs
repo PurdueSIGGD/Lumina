@@ -176,11 +176,17 @@ public class StatsController : Hittable
     public void SetHealth(float amount)
     {
         health = amount;
+        gui.GUIsetHealth(health);
     }
 
     public void SetMagic(float amount)
     {
         magic = amount;
+        gui.GUIsetMagic(magic);
+    }
+    public void SetArrows(int amount) {
+        arrowCount = amount;
+        UpdateArrowsUI();
     }
 
 	//Returns leftover (if any) ((can be negative))

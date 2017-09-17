@@ -11,13 +11,15 @@ public class WeaponController : MonoBehaviour {
     private static float TIME_UNTIL_MAGIC_DROP = 0.46f;
     private static float TIME_UNTIL_MAGIC_EQUIP = 0.55f;
 
+    public GameObject[] weaponTypes;
+
     public Transform weaponBone, weaponBone2;
     public Transform cameraBone;
     public Animator viewmodelAnimator;
     public StatsController myStats;
     public WeaponController otherWeapon;
 
-    public GameObject firstWeaponToEquip; // Prefab reference that we can instantiate
+    //public GameObject firstWeaponToEquip; // Prefab reference that we can instantiate
 
     public Weapon[] weapons = new Weapon[2];
     public int weaponIndex;
@@ -51,10 +53,10 @@ public class WeaponController : MonoBehaviour {
         viewmodelAnimator.SetInteger(controllerSide + "EquippedWeapon", 0);
         viewmodelAnimator.SetInteger(controllerSide + "AttackNum", 0);
 
-        if (firstWeaponToEquip) {
+        /*if (firstWeaponToEquip) {
             GameObject newWeapon = GameObject.Instantiate(firstWeaponToEquip);
             EquipWeapon(newWeapon.GetComponent<Weapon>());
-        }
+        }*/
 
         //get Inventory Bag connected to
         UIController uiController = GetComponent<InputGenerator>().uiController;
@@ -134,9 +136,11 @@ public class WeaponController : MonoBehaviour {
                 pendingOldWeapon.setLookObj(null);
                 pendingOldWeapon.setPlayerAnim(null);
                 pendingOldWeapon.setControllerSide("");
+                if (!pendingOldWeapon.GetComponent<DestroyOnLevelLoad>()) pendingOldWeapon.gameObject.AddComponent<DestroyOnLevelLoad>();
+
 
                 //print(pendingOldWeapon.bothHands);
-                
+
 
 
 
@@ -150,9 +154,12 @@ public class WeaponController : MonoBehaviour {
                 MoveToLayer(arrow, 1); //Regular layer for camera rendering
 
                 //print("Old weapon is both hands");
-                this.otherWeapon.BothHandsDone();
-                BothHandsDone();
-            } else if (pendingNewWeapon.bothHands) {
+                if (!pendingNewWeapon.bothHands) {
+                    this.otherWeapon.BothHandsDone();
+                    BothHandsDone();
+                }
+            }
+            if (pendingNewWeapon.bothHands) {
                 //print("Old weapon is not both hands");
                 //print(pendingNewWeapon);
                 Transform arrow = pendingNewWeapon.transform.Find("Arrow");
@@ -206,6 +213,8 @@ public class WeaponController : MonoBehaviour {
             pendingNewWeapon.setPlayerAnim(viewmodelAnimator);
             pendingNewWeapon.setLookObj(cameraBone);
             pendingNewWeapon.setControllerSide(controllerSide);
+            if (pendingNewWeapon.GetComponent<DestroyOnLevelLoad>()) Destroy(pendingNewWeapon.gameObject.GetComponent<DestroyOnLevelLoad>());
+
 
             // Tell it to set animator information
             SwitchWeaponFinished();
@@ -375,6 +384,21 @@ public class WeaponController : MonoBehaviour {
         
         
     }
+    /**
+     * Equipping a weapon without the fancy aniamtions and such, assumed to be not the currently shown weapon
+     */
+    public void EquipWeaponInstantly(Weapon weaponToEquip, int index) {
+        weaponCount++;
+        weapons[index] = weaponToEquip;
+        weaponToEquip.transform.localScale = Vector3.zero;
+        if (weaponToEquip is Magic) {
+            // Set the mesh to be scale 0
+            ((Magic)weaponToEquip).mesh.localScale = Vector3.zero;
+            ((Magic)weaponToEquip).pauseParticles(); // Pause particles before packing
+
+        }
+        weaponToEquip.gameObject.SetActive(false);
+    }
     void BothHandsRequestStop() {
         foreach (Weapon w in weapons) {
             if (!w) continue;
@@ -407,7 +431,7 @@ public class WeaponController : MonoBehaviour {
         viewmodelAnimator.SetBool("DoneWithBoth", true);
         if (weapons[weaponIndex] is Magic) {
             disableAttacks = false;
-            
+            this.viewmodelAnimator.ResetTrigger("LPack"); // So if we are just spawning and have a two handed weapon, it won't cause a ruckus
 
         }
     }
@@ -421,6 +445,8 @@ public class WeaponController : MonoBehaviour {
            MoveToLayer(child, layer);
         }
     }
+
+    
 
     void Death() {
         bothHands = true;

@@ -77,7 +77,7 @@ public class BeamMagic : Magic {
                         if (hit.distance <= range && 
                             hit.collider.gameObject.tag != "Player" &&
                             !hit.collider.isTrigger ) {
-                            Debug.Log(hit.transform.gameObject);
+                            //Debug.Log(hit.transform.gameObject);
                             // Push physics, regardless of hittable
                             Rigidbody r;
                             if (r = hit.collider.GetComponent<Rigidbody>()) {

@@ -38,6 +38,8 @@ public class MovementController : MonoBehaviour {
 
     private StatsController myStats;
     private InventoryController myInventory;
+    private WeaponController rightWeaponController;
+    private WeaponController leftWeaponController;
 
     // Use this for initialization
     void Start () {
@@ -47,12 +49,15 @@ public class MovementController : MonoBehaviour {
         playerCam = transform.GetComponentsInChildren<Camera>()[0];
         myStats = this.GetComponent<StatsController>();
         myInventory = this.GetComponent<InventoryController>();
+        rightWeaponController = myInventory.rightWeaponController;
+        leftWeaponController = myInventory.leftWeaponController;
 
-        if (PlayerPrefs.GetInt("LoadGame") == 1)
-        {
-            GameSaveManager.LoadGame(myStats, myInventory);
-            PlayerPrefs.SetInt("LoadGame", 0);
-        }
+        //if (PlayerPrefs.GetInt("LoadGame") == 1)
+        //{
+        // We load even if we just reset
+            GameSaveManager.LoadGame(myStats, myInventory, rightWeaponController, leftWeaponController);
+        //    PlayerPrefs.SetInt("LoadGame", 0);
+        //}
 
 		distToGround = playerCollider.bounds.extents.y/2.5f;
         //print(distToGround);
@@ -242,7 +247,7 @@ public class MovementController : MonoBehaviour {
     }
     void SaveGame()
     {
-        GameSaveManager.SaveGame(myStats, myInventory);
+        GameSaveManager.SaveGame(myStats, myInventory, rightWeaponController, leftWeaponController);
     }
     void ExitDungeon() {
         SaveGame();
