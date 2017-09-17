@@ -88,7 +88,7 @@ public class StatsController : Hittable
             }
         } else {
             // Outside or somewhere else, turn light off
-            UpdateLightt(Time.deltaTime * 5 * LIGHT_LOSS_RATE);
+            UpdateLightt(Time.deltaTime * 10 * LIGHT_LOSS_RATE);
             if (healthLight.enabled) {
                 healthLight.enabled = false;
             }
