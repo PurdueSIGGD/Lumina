@@ -1,8 +1,8 @@
 # Lumina
 
-[![Build status](https://img.shields.io/badge/Build-TBD-red.svg)](#)
+[![Build status](https://img.shields.io/badge/Build-Pass-brightgreen.svg)](#)
+[![Downloads](https://img.shields.io/badge/Download-Pass-brightgreen.svg)](#)
 [![Release](https://img.shields.io/badge/Release-TBD-red.svg)](#)
-[![Downloads](https://img.shields.io/badge/Downloads-Upcoming-brightgreen.svg)](#)
 [![Developing](https://img.shields.io/badge/Developing-On%20Progress-brightgreen.svg)](#)
 
 Welcome!
@@ -13,17 +13,18 @@ The [creators and maintainers](/docs/GameCredits.md) are a diverse mix of softwa
 
 We encourage contributions from anybody and try to keep a warm and friendly community. 
 
-![Lumina](/docs/images/Lumina_BF_demo.png)
+![Lumina](/docs/images/Lumina_demo_2.png)
 
 ## Playing
 
-Lumina requires Unity 5.5 or higher. [download it here](https://unity3d.com/)
+We have a build that is working right now. [download build](https://drive.google.com/drive/folders/0B0hZRv8pG5b3R21sVFI5bWF3d1E)
+The game has basic mechanics and GUI (graphical user interface) down.
 
-We don't have official release yet, so now you can download project, open it and play around in Unity Editor
+Note: to go into dungeon, go to one of the wells, press 'f'
 
 ## Developing
 
-We mostly use Unity 5.5 as the main game framework. We also use various graphics tools like Blender and audio tools.
+We mostly use Unity 2017.1 as the main game framework, [download it here](https://unity3d.com/). We also use various graphics tools like Blender, Maya and audio tools.
 
 For more information on developing
 
@@ -31,7 +32,7 @@ For more information on developing
 * [Coding style](https://docs.google.com/document/d/1lrUctQYQ6IzjEq7XxkKkJU5hLu5B7-ToxoxFPRSfydQ/edit?usp=sharing)
 
 * See [our website](http://purduesiggd.github.io/) for meeting and event information
-* Reach out to us at Purdue University, ACM SIGGD, (just email our [president](siggd.purdue@gmail.com) basically)
+* Reach out to us at Purdue University, ACM SIGGD, (just email our president <siggd.purdue@gmail.com> basically
 
 ## Links
 * [Game Credits](/docs/GameCredits.md)
