@@ -31,7 +31,7 @@ For more information on developing
 * [Coding style](https://docs.google.com/document/d/1lrUctQYQ6IzjEq7XxkKkJU5hLu5B7-ToxoxFPRSfydQ/edit?usp=sharing)
 
 * See [our website](http://purduesiggd.github.io/) for meeting and event information
-* Reach out to us at Purdue University, ACM SIGGD, (just email our president <siggd.purdue@gmail.com> basically
+* Reach out to us at Purdue University, ACM SIGGD, just email our president <siggd.purdue@gmail.com> basically
 
 ## Links
 * [Game Credits](/docs/GameCredits.md)

@@ -1,7 +1,7 @@
 # Lumina Credits
 
 This is an incomplete list and the team is constantly growing.
-Apologies in advance for any omissions, contact [Our president](siggd.purdue@gmail.com) if you believe you've been missed :angel:
+Apologies in advance for any omissions, contact our president <siggd.purdue@gmail.com> if you believe you've been missed :angel:
 
 ## Special thanks
 Special thanks for Purdue University and Purdue ACM have provided us a lot of opportunities and facilities to meet and develop
