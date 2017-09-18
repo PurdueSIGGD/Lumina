@@ -17,8 +17,7 @@ We encourage contributions from anybody and try to keep a warm and friendly comm
 
 ## Playing
 
-We have a build that is working right now. [download build](https://drive.google.com/drive/folders/0B0hZRv8pG5b3R21sVFI5bWF3d1E)
-The game has basic mechanics and GUI (graphical user interface) down.
+We have a build that is working right now. [Download build](https://drive.google.com/drive/folders/0B0hZRv8pG5b3R21sVFI5bWF3d1E).
 
 Note: to go into dungeon, go to one of the wells, press 'f'
 
