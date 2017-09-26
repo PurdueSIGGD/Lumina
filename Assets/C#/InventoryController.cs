@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class InventoryController : MonoBehaviour {
     private static float GRAB_DISTANCE = 4;
+    private static float GRAB_WIDTH = .4f;
 
+    public GameObject[] helmetTypes;
+    public GameObject[] chestplateTypes;
 
     public WeaponController rightWeaponController;
     public WeaponController leftWeaponController;
@@ -14,8 +21,8 @@ public class InventoryController : MonoBehaviour {
     private float interactCooldown;
 	public StatsController statsController;
 	public GameObject cam;//camera
-	float upgradekits;
-	float upgradePotions;
+	public int upgradekits;
+	public int upgradePotions;
 	bool canpickup;
 	RaycastHit[] hitObjs;//the hopefully raycast of an item that it find
 	public Armor helmet;
@@ -40,7 +47,7 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void Update () {
-		hitObjs = Physics.RaycastAll (cam.transform.position,cam.transform.forward, GRAB_DISTANCE);
+		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE, GRAB_WIDTH, cam.transform.forward);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
 		for(int i = 0; i < hitObjs.Length ;i++){
 
@@ -48,7 +55,7 @@ public class InventoryController : MonoBehaviour {
             Usable usb;
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
                 
-				// Show GUI info here using its
+				// Show GUI info here using its information
 				//if (!helpInteractText.gameObject.activeSelf)
                 //{
                 //    helpInteractText.gameObject.SetActive(true);
@@ -58,7 +65,7 @@ public class InventoryController : MonoBehaviour {
 			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
                 
 				// Show usetext using usb
-                Debug.Log(usb.getInfoText());
+                //Debug.Log(usb.getInfoText());
             }
 
 			//string itemTag = hitObjs[i].collider.gameObject.tag;
@@ -127,50 +134,8 @@ public class InventoryController : MonoBehaviour {
 
         Transform lastItem = null;
         if (item is Armor) {
-
-            switch (((Armor)item).type){
-
-                case Armor.ArmorPiece.helmet:
-
-                    //if there is already helment, throw the old one away
-                    if (helmet)
-                        lastItem = helmet.transform;
-
-                    helmet = (Armor)item;
-			        break;
-		        case Armor.ArmorPiece.chestplate:
-
-                    //if there is already chestplate, throw the old one away
-                    if (chestPlate)
-                        lastItem = chestPlate.transform;
-
-                    chestPlate = (Armor)item;
-			        break;
-		    }
-
-            //Drop last item/armor
-            if (lastItem) {
-
-                //update GUI
-                inventoryPanel.armorPanel.Drop(lastItem.GetComponent<ItemStats>());
-
-                //update object               
-                lastItem.position = transform.position + transform.forward * 3 + Vector3.up;
-                lastItem.GetComponent<Rigidbody>().isKinematic = false;
-                lastItem.parent = null;
-                lastItem.GetComponent<Collider>().isTrigger = false;
-                lastItem.gameObject.SetActive(true);
-            }
-
-            // Set our newest item as our currently equipped item
-            item.gameObject.SetActive(false);
-            item.transform.parent = this.transform;
-            item.transform.localPosition = Vector3.zero;
-            item.GetComponent<Rigidbody>().isKinematic = true;
-            item.GetComponent<Collider>().isTrigger = true;
-
-            //add to GUI inventory
-            inventoryPanel.armorPanel.Add(item);
+            EquipArmor(item);
+           
         }
 
         if (item is Magic) {
@@ -189,6 +154,64 @@ public class InventoryController : MonoBehaviour {
         }
 
 	}
+    private void EquipArmor(ItemStats item) {
+        Transform lastItem = null;
+        switch (((Armor)item).type) {
+
+            case Armor.ArmorPiece.helmet:
+
+                //if there is already helment, throw the old one away
+                if (helmet)
+                    lastItem = helmet.transform;
+
+                helmet = (Armor)item;
+                break;
+            case Armor.ArmorPiece.chestplate:
+
+                //if there is already chestplate, throw the old one away
+                if (chestPlate)
+                    lastItem = chestPlate.transform;
+
+                chestPlate = (Armor)item;
+                break;
+        }
+
+        //Drop last item/armor
+        if (lastItem) {
+
+            //update GUI
+            inventoryPanel.armorPanel.Drop(lastItem.GetComponent<ItemStats>());
+
+            //update object               
+            lastItem.position = transform.position + transform.forward * 3 + Vector3.up;
+            lastItem.GetComponent<Rigidbody>().isKinematic = false;
+            lastItem.parent = null;
+            lastItem.GetComponent<Collider>().isTrigger = false;
+            lastItem.gameObject.SetActive(true);
+
+            if (!lastItem.GetComponent<DestroyOnLevelLoad>()) lastItem.gameObject.AddComponent<DestroyOnLevelLoad>();
+        }
+
+        // Set our newest item as our currently equipped item
+        item.gameObject.SetActive(false);
+        item.transform.parent = this.transform;
+        item.transform.localPosition = Vector3.zero;
+        item.GetComponent<Rigidbody>().isKinematic = true;
+        item.GetComponent<Collider>().isTrigger = true;
+        if (item.GetComponent<DestroyOnLevelLoad>()) Destroy(item.gameObject.GetComponent<DestroyOnLevelLoad>());
+
+
+        //add to GUI inventory
+        inventoryPanel.armorPanel.Add(item);
+    }
+
+    // Which armor: 0 for helmet, 1 for chestplate
+    public void SetArmor(int whichArmor, int armorType, float armorCondition) {
+        GameObject[] itemsToConsider = (whichArmor == 0 ? helmetTypes : chestplateTypes);
+        GameObject spawnedArmor = GameObject.Instantiate(itemsToConsider[armorType], transform.position, Quaternion.identity);
+        spawnedArmor.GetComponent<Armor>().condition = armorCondition;
+        EquipArmor(spawnedArmor.GetComponent<ItemStats>());
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -198,10 +221,10 @@ public class InventoryController : MonoBehaviour {
                 bool deletes = true;
 			    switch(pick.itemType){
 			        case Pickup.pickUpType.upgradeKit:
-				        upgradekits += pick.amount;
+				        upgradekits += (int)pick.amount;
 				        break;
 				    case Pickup.pickUpType.upgradePotion:
-					    upgradePotions++;
+					    upgradePotions+= (int)pick.amount;
                         break;
                     case Pickup.pickUpType.Magic:
                         deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
@@ -225,7 +248,7 @@ public class InventoryController : MonoBehaviour {
 		if (i is Armor) {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
-			upgradekits-=10;
+			upgradekits-=1;
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
 			}else{
 
@@ -262,11 +285,20 @@ public class InventoryController : MonoBehaviour {
 		return armor;
 	}
 
-	public float getUpgradePotions(){
+	public int getUpgradePotions(){
 		return upgradePotions;
 	}
 
-	public float getUpgradeKits(){
+	public int getUpgradeKits(){
 		return upgradekits;
 	}
+
+    public void SetUpgradePotions(int i)
+    {
+        upgradePotions = i;
+    }
+    public void SetUpgradeKits(int i)
+    {
+        upgradekits = i;
+    }
 }

@@ -14,7 +14,11 @@ public class DungeonLevel : MonoBehaviour {
     public GameObject[] enemies;
 
     public bool cleared;
+    public bool prevCleared; //Previously cleared, from playerprefs
 
+    void Start() {
+        prevCleared = 1 == PlayerPrefs.GetInt(PlayerPrefs.GetString("DungeonSeed").ToString());
+    }
 
     void Update() {
         // Check to see if the player is done
@@ -31,7 +35,7 @@ public class DungeonLevel : MonoBehaviour {
                     }
                 }
             }
-            if (dead) {
+            if (dead || prevCleared) {
                 if (nextLevel != null) {
                     door.SetTrigger("Open");
                     nextLevel.gameObject.SetActive(true); // Stop hiding it from us
@@ -39,6 +43,11 @@ public class DungeonLevel : MonoBehaviour {
                 } else {
                     cleared = true;
                     GameObject.Instantiate(exitPortal, transform.position, Quaternion.identity);
+                    // Set that this dungeon is cleared
+                    string dungeonSeed = PlayerPrefs.GetInt("DungeonSeed").ToString();
+                    PlayerPrefs.SetInt(dungeonSeed, 1);
+                    GameSaveManager.SetClearedDungeonCount(GameSaveManager.GetClearedDungeonCount() + 1);
+                    GameSaveManager.AddComlpetedDungeon(dungeonSeed);
                 }
             }
         }

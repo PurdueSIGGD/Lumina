@@ -8,8 +8,7 @@ public class LoadGameOnFinish : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //load default game
-        SceneManager.LoadScene("TestIsland");
+        GameSaveManager.LoadGameScene();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

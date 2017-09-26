@@ -33,9 +33,10 @@ public class StatsController : Hittable
     public Animator myAnim;
     public Light healthLight;
     public InventoryController inventoryController;
+    public GameOverCanvas gameOverCanvas;
 
     private float healthLightStartIntensity;
-
+    private float lightDamageCooldown;
 	bool outside;
     bool dead;
     
@@ -48,8 +49,8 @@ public class StatsController : Hittable
 	{
 
         //set condition for health
-		outside = true;
-
+        outside = true;
+        lightDamageCooldown = Time.time;
 
         //set GUI
         gui = GetComponent<InputGenerator>().uiController.hudController;
@@ -70,7 +71,7 @@ public class StatsController : Hittable
         // if in a dungeon
         if (dead) {
             // flicker the light till it goes out
-            UpdateLightt(LIGHT_LOSS_RATE * -20 * Time.deltaTime);
+            UpdateLightt(LIGHT_LOSS_RATE * -40 * Time.deltaTime);
         } else if (SceneManager.GetActiveScene().name == "Dungeon") {
             // In a dungeon, slowly lower light
             UpdateLightt(Time.deltaTime * -1 * LIGHT_LOSS_RATE);
@@ -78,11 +79,16 @@ public class StatsController : Hittable
                 healthLight.enabled = true;
             }
             if (GetLightt() <= 0) {
-                Kill();
+                if (Time.time - lightDamageCooldown > .5f) {
+                    lightDamageCooldown = Time.time;
+                    Hit(5, DamageType.Umbra);
+                } else {
+                    //lightDamageCooldown += Time.deltaTime;
+                }
             }
         } else {
             // Outside or somewhere else, turn light off
-            UpdateLightt(Time.deltaTime * 5 * LIGHT_LOSS_RATE);
+            UpdateLightt(Time.deltaTime * 10 * LIGHT_LOSS_RATE);
             if (healthLight.enabled) {
                 healthLight.enabled = false;
             }
@@ -105,7 +111,8 @@ public class StatsController : Hittable
         myAnim.SetTrigger("Damage");
 
 		damage = ApplyDamageTypeHitMod (damage, type);
-		damage = ApplyArmorHitMod (damage, type);
+        // Umbra (shadow) does not have any armor hit modification
+		if (type != DamageType.Umbra) damage = ApplyArmorHitMod (damage, type);
 
 		float leftover = UpdateHealth(-1 * damage);
         if (GetHealth() <= 0 && !dead) {
@@ -148,6 +155,14 @@ public class StatsController : Hittable
 		this.healthMax += HEALTH_INCREASE_AMOUNT;
 		gui.GUIsetUpgradeHealth (healthMax);
 	}
+    public void SetMaxHealth(float f)
+    {
+        this.healthMax = f;
+    }
+    public void SetMaxMagic(float f)
+    {
+        this.magicMax = f;
+    }
 
 	public void UpgradeMaxMagic(){
 		this.magicMax += MAGIC_INCREASE_AMOUNT;
@@ -158,6 +173,22 @@ public class StatsController : Hittable
 		this.lighttMax += LIGHT_INCREASE_AMOUNT;
 		gui.GUIsetUpgradeLight (lighttMax);
 	}
+
+    public void SetHealth(float amount)
+    {
+        health = amount;
+        gui.GUIsetHealth(health);
+    }
+
+    public void SetMagic(float amount)
+    {
+        magic = amount;
+        gui.GUIsetMagic(magic);
+    }
+    public void SetArrows(int amount) {
+        arrowCount = amount;
+        UpdateArrowsUI();
+    }
 
 	//Returns leftover (if any) ((can be negative))
 	public float UpdateHealth(float amount) {
@@ -356,10 +387,12 @@ public class StatsController : Hittable
 	 */
 	public void Kill () {
         dead = true;
+        gameOverCanvas.SendMessage("GameOver");
         this.BroadcastMessage("Death");
 	}
     public void UnKill() {
         dead = false;
+        gameOverCanvas.SendMessage("NotGameOver");
         this.BroadcastMessage("NotDeath");
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour {
 	public static int SPRINT_MAX = 3;
@@ -21,7 +22,7 @@ public class MovementController : MonoBehaviour {
 	Vector3 rotationVector;//vector used to set and maintain the rotation of the player and the camera
 
     private Vector3 outsideLocation; // The location that we will return to when exiting a dungeon
-    private bool disableMovement = false; // Used for scripted events like exiting the boat, or entering a dungeon
+    public bool disableMovement = false; // Used for scripted events like exiting the boat, or entering a dungeon
 
 	public bool isJumping;
 	public bool isSprinting;
@@ -33,6 +34,12 @@ public class MovementController : MonoBehaviour {
     public int[] ignorePlayerCollisionLayers;
     private Camera playerCam;
 
+    private Door.FadeType fadeType; //The fade type that we are expected to do next
+
+    private StatsController myStats;
+    private InventoryController myInventory;
+    private WeaponController rightWeaponController;
+    private WeaponController leftWeaponController;
 
     // Use this for initialization
     void Start () {
@@ -40,13 +47,29 @@ public class MovementController : MonoBehaviour {
 		playerPhysics = GetComponentInParent<Rigidbody> ();
 		playerCollider = GetComponentInParent<CapsuleCollider> ();
         playerCam = transform.GetComponentsInChildren<Camera>()[0];
+        myStats = this.GetComponent<StatsController>();
+        myInventory = this.GetComponent<InventoryController>();
+        rightWeaponController = myInventory.rightWeaponController;
+        leftWeaponController = myInventory.leftWeaponController;
+        
+        // We load even if we just reset
+        GameSaveManager.LoadGameStats(myStats, myInventory, rightWeaponController, leftWeaponController);
+        // Do we have a position to go to? If so, go there
+        Vector3 location;
+        if ((location = GameSaveManager.GetPlayerLocation()) != Vector3.zero) {
+            // Location location location
+            transform.position = location;
+            transform.localEulerAngles = GameSaveManager.GetPlayerRotation();
+        }
+
 		distToGround = playerCollider.bounds.extents.y/2.5f;
         //print(distToGround);
 		lastJump = 0;
 		sprintTime = 0;
 		sprintRecharge = 0;
+        fadeType = 0;
 
-		isJumping = false;
+        isJumping = false;
 		isSprinting = false;
 	}
 
@@ -205,16 +228,18 @@ public class MovementController : MonoBehaviour {
         canMove = true;
     }
     void PrepareToEnterDungeon() {
-        disableMovement = true;
+        SaveGame();
         outsideLocation = transform.position;
+        StopMoving();
     }
-    void PrepareToExitDungeon() {
+    void StopMoving() {
         disableMovement = true;
     }
+    
     void EnterDungeon() {
         // We expect the screen to be faded to black, so we can do crazy movements
 
-        transform.position = new Vector3(0, 50, 0);
+        transform.position = new Vector3(0, 30, 0);
         disableMovement = false;
         // change skybox settings to be all black
         playerCam.clearFlags = CameraClearFlags.Color;
@@ -224,9 +249,15 @@ public class MovementController : MonoBehaviour {
             w.clearSwitchCooldown();
         }
     }
+    void SaveGame()
+    {
+        GameSaveManager.SaveGame(myStats, myInventory, rightWeaponController, leftWeaponController);
+    }
     void ExitDungeon() {
-        print(outsideLocation);
+
+        //print(outsideLocation);
         transform.position = outsideLocation;
+        transform.localEulerAngles = GameSaveManager.GetPlayerRotation();
         // Play whatever animations
         playerCam.clearFlags = CameraClearFlags.Skybox;
         disableMovement = false;
@@ -234,6 +265,34 @@ public class MovementController : MonoBehaviour {
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
         }
+    }
+    void SwitchMap(BoatDoor.SceneChoice sceneChoice) {
+        playerCam.clearFlags = CameraClearFlags.Skybox;
+        disableMovement = false;
+        transform.position = sceneChoice.spawnPosition;
+        foreach (WeaponController w in GetComponents<WeaponController>()) {
+            w.clearSwitchCooldown();
+        }
+    }
+    /**
+     * When we have to prepare to fade back in or out after a scene is loaded
+     */
+    void PrepSceneSwitchFade(Door.FadeType typeToFade) {
+        this.fadeType = typeToFade;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        SceneSelectionCanvas canvas = GameObject.FindObjectOfType<SceneSelectionCanvas>();
+        if (canvas) {
+            if (fadeType == Door.FadeType.Dark) {
+                canvas.SendMessage("FadeFromBlack");
+            } else if (fadeType == Door.FadeType.Light) {
+                canvas.SendMessage("FadeFromWhite");
+                SaveGame(); //I am assuming we are either outside or on a new map, so that's happening
+            }
+        }
+        fadeType = 0;
     }
 
     private bool canMoveTo(Vector3 pos) {

@@ -42,7 +42,7 @@ public class BeamMagic : Magic {
             if (idleParticles.isPlaying) {
                 idleParticles.Stop();
             }
-        } else if ((!mouseDown || !playerStats || playerStats.GetMagic() <= 0) && (!getPlayerAnim() || !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"))) { // Transfer done layer, because we don't want it playing when transitioning
+		} else if ((!mouseDown || !playerStats || playerStats.GetMagic() <= 0) && (!getPlayerAnim() || !getPlayerAnim().GetCurrentAnimatorStateInfo(layerIndex).IsTag("TransferDone"))) { // Transfer done layer, because we don't want it playing when transitioning
             if (shootParticles.isPlaying) {
                 shootParticles.Stop();
             }
@@ -80,6 +80,7 @@ public class BeamMagic : Magic {
                         if (hit.distance <= range && 
                             hit.collider.gameObject.tag != "Player" &&
                             !hit.collider.isTrigger ) {
+                            //Debug.Log(hit.transform.gameObject);
                             // Push physics, regardless of hittable
                             Rigidbody r;
                             if (r = hit.collider.GetComponent<Rigidbody>()) {
@@ -88,7 +89,7 @@ public class BeamMagic : Magic {
                             }
                             // Hit with hittable
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
-                            if (hittable != null && hit.collider.gameObject.tag != "Item") { //Sometimes may hit our item that we are holding
+                            if (hittable != null && hittable.gameObject.tag != "Item" && hittable.gameObject.tag != "Player") { //Sometimes may hit our item that we are holding
                                 //print(hit.collider);
                                 hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
                             }

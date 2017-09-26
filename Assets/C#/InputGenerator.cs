@@ -18,10 +18,13 @@ public class InputGenerator : MonoBehaviour {
 
 	float jumpInput;
 
+
     /// <summary>
     /// Set the running status of game
     /// </summary>
     public bool isGamePausing { get; private set; }
+
+    private bool cursorsEnabled;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +34,10 @@ public class InputGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ButtonStates ();
+        // Don't let in any input during a transition
+        if (playerMovement.disableMovement) return;
+
+        ButtonStates ();
         CursorStates();
 		
         
@@ -43,7 +49,7 @@ public class InputGenerator : MonoBehaviour {
     void CursorStates()
     {
         // If we are paused, mouse will appear
-        if (!isGamePausing) { 
+        if (!cursorsEnabled) { 
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
@@ -59,7 +65,6 @@ public class InputGenerator : MonoBehaviour {
         if (Input.GetAxis("RightCycleWeapon") > 0) rightPlayerWeaponController.SwitchWeapon();
         leftPlayerWeaponController.Attack(Input.GetAxis("Fire2") > 0);
         if (Input.GetAxis("LeftCycleWeapon") > 0) leftPlayerWeaponController.SwitchWeapon();
-
 
         // Might need to explain myself here. This is crap for animation
         // For animation, we have 4 layers at the moment. Each with their corresponding bone masks
@@ -123,7 +128,7 @@ public class InputGenerator : MonoBehaviour {
         playerMovement.SetMovement(Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"), Input.GetAxis ("Sprint") > 0);
 
         //if game is pausing, stop moving the camera
-        if (!isGamePausing)
+        if (!cursorsEnabled)
             playerMovement.MoveCamera (Input.GetAxis ("Mouse X"),Input.GetAxis ("Mouse Y"));
 
         //if relate to UI
@@ -167,18 +172,29 @@ public class InputGenerator : MonoBehaviour {
 			
 
 	}
-
+    public void EnableCursors() {
+        cursorsEnabled = true;
+    }
+    public void DisableCursors() {
+        cursorsEnabled = false;
+    }
 
     public void PauseGame()
     {
-        Time.timeScale = 0;
-        isGamePausing = true;
+        if (!playerMovement.disableMovement) {
+            // Sometimes a glitch happens when pausing during a transition
+            Time.timeScale = 0;
+            isGamePausing = true;
+            EnableCursors();
+        }
+       
     }
 
     public void ResumeGame()
     {
         isGamePausing = false;
         Time.timeScale = 1;
+        DisableCursors();
     }
 
 }

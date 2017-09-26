@@ -21,7 +21,26 @@ public class DungeonGenerator : MonoBehaviour {
                                     // Placed 150 from center
     public GameObject exit;         // The exit door used to leave the dungeon
 
-    public GameObject[] enemyTypes;   // Every enemy you can possibly fight
+    [System.Serializable]
+    public class DifficultyArrays {
+        public ProbabililtyItem[] difficulty1;
+        public ProbabililtyItem[] difficulty2;
+        public ProbabililtyItem[] difficulty3;
+
+        public ProbabililtyItem[] get(int i) {
+            if (i == 1) {
+                return difficulty1;
+            } else if (i == 2) {
+                return difficulty2;
+            } else if (i == 3) {
+                return difficulty3;
+            }
+            return null;
+        }
+    }
+    public DifficultyArrays difficultyArrays;
+
+    public int difficulty;                      // Which array of the above should you use
 
     public GameObject dungeonLevel; // The prefab of the dungeon level, used to initiate any dungeon level
 
@@ -43,7 +62,12 @@ public class DungeonGenerator : MonoBehaviour {
     private readonly Vector2 junkCountRangeFirst = new Vector2(25, 40);
     private readonly Vector2 junkCountRange = new Vector2(10, 20);
 
+    private bool cleared = false; // If the dungeon is cleared, only occasionally spawn enemies. Not too often.
+
+    private readonly float enemySpawnRate_Cleared = 0.2f; // What % of the time should enemies spawn when the dungeon is cleared
+
     private ArrayList junkLottery;
+    private ArrayList enemyLottery;
 
 
     public static Vector3[] wallPositions = {
@@ -81,13 +105,40 @@ public class DungeonGenerator : MonoBehaviour {
         Vector3.back
     };
     // Door rotations are same as wall rotations
-  
+
+    /**
+     * Returns a value based off of the old random state, and then resets the current state
+     This won't work since oldState is just an instance, and is not reset
+    private static float trueRandomRange(Random.State oldState, float start, float end) {
+        Random.State currentState = Random.state;
+        Random.state = oldState;
+        float result = Random.Range(start, end);
+        oldState = Random.state;
+        Random.state = currentState;
+        return result;
+    }
+    private static int trueRandomRange(Random.State oldState, int start, int end) {
+        Random.State currentState = Random.state;
+        Random.state = oldState;
+        int result = Random.Range(start, end);
+        oldState = Random.state;
+        Random.state = currentState;
+        return result;
+    }
+         */
 
     void Start () {
+
+        Random.State oldState = Random.state;
         if (seed == 0) {
             seed = PlayerPrefs.GetInt("DungeonSeed");
             Random.InitState(seed);
         }
+        cleared = 1 == PlayerPrefs.GetInt(seed.ToString());
+        if (cleared) {
+            //Debug.Log("Dungeon is cleared, not doing much for the things");
+        }
+        difficulty = PlayerPrefs.GetInt("DungeonDifficulty");
         depth = PlayerPrefs.GetInt("DungeonDepth");
         // Since we want an extra room in the first level to include random items, we increment depth
         depth++;
@@ -100,7 +151,14 @@ public class DungeonGenerator : MonoBehaviour {
                 junkLottery.Add(i);
             }
         }
-      
+
+        enemyLottery = new ArrayList();
+        for (int i = 0; i < difficultyArrays.get(difficulty).Length; i++) {
+            for (int k = 0; k < difficultyArrays.get(difficulty)[i].chance; k++) {
+                enemyLottery.Add(i);
+            }
+        }
+
         dungeons = new DungeonLevel[depth];
         Vector3 dungeonPosition = Vector3.zero;
         DungeonLevel lastDungeon = null;
@@ -129,7 +187,7 @@ public class DungeonGenerator : MonoBehaviour {
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
                 int randomIndex = Random.Range(0, junkLottery.Count - 1);
                 bool keepDesiredRotation = Random.Range(0.0f, 1.0f) < 0.1f;
-                print(keepDesiredRotation);
+                //print(keepDesiredRotation);
                 GameObject newJunk = GameObject.Instantiate(junkToSpawn[(int)junkLottery[randomIndex]].prefab, v3Position, keepDesiredRotation ? Quaternion.identity : Quaternion.Euler(360 * Random.insideUnitSphere));
                 newJunk.transform.parent = newDungeon.transform;
             }
@@ -138,13 +196,29 @@ public class DungeonGenerator : MonoBehaviour {
             ArrayList enemyList = new ArrayList();
             // Add none if the first room
             int enemyCount = currentDepth == 0 ? 0 : Random.Range(1, 5);
-            int enemyType = Random.Range(0, enemyTypes.Length);
+            int enemyType = Random.Range(0, enemyLottery.Count);
+            // We preserve enemy type for each room when coming back from being cleared. 
             for (int enemies = 0; enemies < enemyCount; enemies++) {
+                Random.State currentState = Random.state;
+                Random.state = oldState;
+                float result = Random.Range(0.0f, 1.0f);
+                print("no enemy result: " + result);
+                if (cleared && enemySpawnRate_Cleared < result) {
+                    // If we are cleared, use the change and continue if we want some enemies not to be spawned
+                    oldState = Random.state;
+                    Random.state = currentState;
+                    continue;
+                }
                 Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
-                GameObject newEnemy = GameObject.Instantiate(enemyTypes[enemyType], v3Position, Quaternion.identity);
+              
+                GameObject newEnemy = GameObject.Instantiate(difficultyArrays.get(difficulty)[(int)enemyLottery[enemyType]].prefab, v3Position, Quaternion.identity);
+
                 newEnemy.transform.parent = newDungeon.transform;
                 enemyList.Add(newEnemy);
+
+                oldState = Random.state;
+                Random.state = currentState;
             }
             newDungeon.enemies = enemyList.ToArray(typeof(GameObject)) as GameObject[];
 

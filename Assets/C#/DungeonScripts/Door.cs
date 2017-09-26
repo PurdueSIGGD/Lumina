@@ -6,30 +6,53 @@ using UnityEngine.SceneManagement;
 
 
 public abstract class Door : Usable {
-    
+
+    public static string surfaceIdentifier = "surfaceName";
+
+    public enum FadeType { Dark, Light };
+
     public string displayText;
     public Animator myAnimator;
-    private GameObject player;
+    protected GameObject player;
+
+    private bool isUsing = false;
+
+    public FadeType fadeType;
    
     public override string getInfoText() {
         return displayText;
     } 
 
     public override void Use() {
+        if (!isUsing) {
+            isUsing = true;
+        } else {
+            return; //We are already in use
+        }
         player = GameObject.FindGameObjectsWithTag("Player")[0];
 
         if (myAnimator != null) {
             myAnimator.SetTrigger("Open");
         }
         // Maybe add a custom player animation?
+        if (fadeType == FadeType.Dark) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToBlack");
+        } else if (fadeType == FadeType.Light) {
+            GameObject.FindObjectOfType<SceneSelectionCanvas>().SendMessage("FadeToWhite");
+        }
         // Disable player movement
         sceneSwitchPrep(player);
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadDoorScene());
     }
-    public IEnumerator LoadScene() {
+    public IEnumerator LoadDoorScene() {
         yield return new WaitForSeconds(2);
+        isUsing = false;
         preSceneSwitch(player);
+        player.SendMessage("PrepSceneSwitchFade", fadeType);
+        //Debug.Log("LOADING: " + getSceneToLoad());
+        //Debug.Log(this.gameObject);
         SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
+       
     }
 
     // Return the name of the scene to load, used by SceneManager

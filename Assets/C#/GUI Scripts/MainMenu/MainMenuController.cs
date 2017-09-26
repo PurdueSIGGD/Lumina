@@ -16,11 +16,12 @@ public class MainMenuController : MonoBehaviour {
 
     public void LoadScene(string sceneName)
     {
+        Debug.Log("LOAIDING " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 
-    public void LoadScene(int index)
-    {
+    public void LoadScene(int index) {
+        Debug.Log("LOAIDING " + index);
         SceneManager.LoadScene(index);
     }
 
