@@ -34,6 +34,10 @@ public class GameSaveManager : MonoBehaviour {
     public static string SCENE_ROTATION_Z = "SceneRotationZ";
 
     public static string[] ALL_GAMESAVE_PLAYERPREF_KEYS = { SCENE_ROTATION_Z, SCENE_ROTATION_Y, SCENE_ROTATION_X, SCENE_LOCATION_Z, SCENE_LOCATION_Y, SCENE_LOCATION_X, SCENE_NAME_KEY, ARMOR_CHESTPLATE_CONDITION_KEY, ARMOR_CHESTPLATE_KEY, ARMOR_HELMET_CONDITION_KEY, ARMOR_HELMET_KEY, MAGIC_LIST_KEY, WEAPON_CONDITION_LIST_KEY, WEAPON_LIST_KEY, CLEARED_DUNGEON_COUNT_KEY, PLAYER_HEALTH_KEY, PLAYER_MAX_HEALTH_KEY, PLAYER_MAGIC_KEY, PLAYER_MAX_MAGIC_KEY, ARROW_COUNT_KEY, UPGRADE_POTION_KEY, UPGRADE_KIT_KEY };
+
+    public static bool HasSave() {
+        return PlayerPrefs.HasKey(ALL_GAMESAVE_PLAYERPREF_KEYS[0]);
+    }
     public static void NewGame() {
         string keyCombination = PlayerPrefs.GetString(CLEARED_DUNGEON_KEY_COMBINATION_KEY);
         print("Dungeons that we are clearing: " + keyCombination);
@@ -145,6 +149,8 @@ public class GameSaveManager : MonoBehaviour {
 
     }
     public static void LoadGameScene() {
+
+
         // Load the game based off of the last save, and load the level
         print(GetPlayerScene());
         SceneManager.LoadScene(GetPlayerScene());

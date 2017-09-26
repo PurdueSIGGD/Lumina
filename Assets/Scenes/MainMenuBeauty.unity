@@ -680,6 +680,22 @@ AudioSource:
 Transform:
   m_PrefabParentObject: {fileID: 401140, guid: ad25138fd89b66843b76484d4e250ea7, type: 3}
   m_PrefabInternal: {fileID: 469868850}
+--- !u!1 &302984229 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1074282193950692, guid: c41ccfa21ec6a44429dd48e3b13005fb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1874479247}
+--- !u!114 &302984231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302984229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c5735d8b9a09641bf9dd81ab05f58a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &333208756
 Prefab:
   m_ObjectHideFlags: 0
