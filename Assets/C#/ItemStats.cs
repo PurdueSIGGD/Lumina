@@ -36,13 +36,15 @@ public abstract class ItemStats : MonoBehaviour {
 	 * 
 	 **/
 	public void DamageCondition(float damage) {
-        if (condition > minCondition) {
-            factor += damage / maxCondition;
-            condition -= damage * factor;
-        } else {
-            NotificationStackController.PostNotification("Your " + displayName + " has been crippled!", sprite);
-            condition = minCondition;
-        }
+		if (condition > minCondition) {
+			factor += damage / maxCondition;
+			condition -= damage * factor;
+		} else if (condition != minCondition) {
+			if (displayName != "") NotificationStackController.PostNotification ("Your " + displayName + " has been crippled!", sprite);
+			condition = minCondition;
+		} else {
+
+		}
 	}
 
     /**
