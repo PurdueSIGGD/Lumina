@@ -66,6 +66,10 @@ public class DungeonEntranceDoor : Door {
         return dungeonName;
     }
 
+    public override string getInfoText() {
+        return displayText + (isCleared?" (Cleared)" : "");
+    }
+
     public override void preSceneSwitch(GameObject player) {
         // Set player camera values, enable movement, etc
 

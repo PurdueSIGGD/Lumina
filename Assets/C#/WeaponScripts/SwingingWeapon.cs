@@ -16,7 +16,9 @@ public class SwingingWeapon : Weapon {
 		isAttacking = false;
 		hasRaycasted = false;
 	}
-
+    public override string getBlurb() {
+        return "Damage: " + baseDamage + ", Speed: " + (timeToAttack + timeToCooldown) + ", Range: " + range;
+    }
     RaycastHit[] getHitObjects() {
         return Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);
     }
@@ -29,9 +31,7 @@ public class SwingingWeapon : Weapon {
                 //print("Hitting now " + getLookObj());
                 // Apply ItemStats damage
                 RaycastHit[] hits = getHitObjects();
-                if (hits.Length > 0) {
-                    this.DamageCondition(1);
-                }
+                
                 processHits(hits);
                 RaycastHit[] hitsAgain = getHitObjects(); //we do it again, in case some gibs/other stuff spawns that frame
                 IEnumerable<RaycastHit> diff = hitsAgain.Except(hits);
@@ -56,6 +56,7 @@ public class SwingingWeapon : Weapon {
     }
 
     private void processHits(RaycastHit[] hits) {
+        bool damageCondition = false;
         foreach (RaycastHit hit in hits) {
             if (hit.distance <= range &&
                 !hit.collider.isTrigger &&
@@ -73,9 +74,13 @@ public class SwingingWeapon : Weapon {
                 Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                 if (hittable != null) {
                     //print("hit " + hit);
+                    damageCondition = true;
                     hittable.Hit(baseDamage * (getCondition() / 100), getLookObj().transform.forward, damageType);
                 }
             }
+        }
+        if (damageCondition) {
+            this.DamageCondition(1);
         }
     }
 }

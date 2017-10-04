@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemStats : MonoBehaviour {
+public abstract class ItemStats : MonoBehaviour {
 
     //basic information
 	public enum Tier {Simple,Moderate,Epic};
@@ -21,7 +21,7 @@ public class ItemStats : MonoBehaviour {
 
     public Sprite sprite;   //sprite to use in bag
 
-
+    public abstract string getBlurb(); // To be implemented by children
     void Start() {
         // Condition should be set by the spawning class
 	    //condition = Random.Range (minCondition, maxCondition);

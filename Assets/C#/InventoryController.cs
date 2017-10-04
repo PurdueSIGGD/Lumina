@@ -8,7 +8,7 @@ using UnityEditor;
 #endif
 
 public class InventoryController : MonoBehaviour {
-    private static float GRAB_DISTANCE = 4;
+    private static float GRAB_DISTANCE = 7f;
     private static float GRAB_WIDTH = .4f;
 
     public GameObject[] helmetTypes;
@@ -16,6 +16,11 @@ public class InventoryController : MonoBehaviour {
 
     public WeaponController rightWeaponController;
     public WeaponController leftWeaponController;
+
+    public Animator itemPreview;
+    public Text guiVerb;
+    public Text guiNameCondition;
+    public Text guiBlurb;
 
     public Animator viewmodelAnimator;
     private float interactCooldown;
@@ -47,26 +52,41 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void Update () {
-		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE, GRAB_WIDTH, cam.transform.forward);
+        //print(Vector3.Distance(cam.transform.position, cam.transform.position + (cam.transform.forward * GRAB_DISTANCE)));
+		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + (cam.transform.forward * GRAB_DISTANCE), GRAB_WIDTH, cam.transform.forward);
+        //Debug.Log(hitObjs.Length);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
+       
+        bool showing = false;
 		for(int i = 0; i < hitObjs.Length ;i++){
-
+            //print(Vector3.Distance(hitObjs[i].transform.position, transform.position));
+            if (Vector3.Distance(hitObjs[i].transform.position, transform.position) > GRAB_DISTANCE) continue; // Because capsule cast is acting odd
             ItemStats its;
             Usable usb;
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
-                
-				// Show GUI info here using its information
-				//if (!helpInteractText.gameObject.activeSelf)
+                showing = true;
+                guiVerb.gameObject.SetActive(false);
+                guiNameCondition.gameObject.SetActive(true);
+                guiBlurb.gameObject.SetActive(true);
+                guiNameCondition.text = its.displayName + " (" + its.condition + "/" + its.maxCondition + ")";
+                guiBlurb.text = its.getBlurb();
+                // Show GUI info here using its information
+                //if (!helpInteractText.gameObject.activeSelf)
                 //{
                 //    helpInteractText.gameObject.SetActive(true);
                 //}
-				
+                break;
             } 
 			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
-                
-				// Show usetext using usb
+                showing = true;
+                guiVerb.gameObject.SetActive(true);
+                guiVerb.text = usb.getInfoText();
+                guiNameCondition.gameObject.SetActive(false);
+                guiBlurb.gameObject.SetActive(false);
+                // Show usetext using usb
                 //Debug.Log(usb.getInfoText());
-            }
+                break;
+            } 
 
 			//string itemTag = hitObjs[i].collider.gameObject.tag;
 			//if (itemTag == "Item") {
@@ -75,9 +95,16 @@ public class InventoryController : MonoBehaviour {
 			//}
 
 		}
-	}
+        if (Time.timeScale == 0) { // Don't want it showing with other menus
+            itemPreview.gameObject.SetActive(false);
+        } else {
+            itemPreview.gameObject.SetActive(true);
+            itemPreview.SetBool("Showing", showing);
+        }
 
-	/*public void itemScan(){
+    }
+
+    /*public void itemScan(){
 		hitObjs = Physics.RaycastAll (this.transform.position,transform.forward,30f);
 		for(int i = 0; i < hitObjs.Length ;i++){
 			string itemTag = hitObjs[i].collider.gameObject.tag;
@@ -92,7 +119,7 @@ public class InventoryController : MonoBehaviour {
     /// Get value from InputGenerator and Iteract with Item
     /// </summary>
     /// <param name="value">True if user press "f"</param>
-	public void Interact(bool value)
+    public void Interact(bool value)
     {
         // If value is true, pick up
         if (value)
@@ -114,6 +141,7 @@ public class InventoryController : MonoBehaviour {
                 } else if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
                     Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
                     itemToUse.Use();
+                    itemPreview.SetBool("Showing", false);
 
                     interactCooldown = Time.time;
 

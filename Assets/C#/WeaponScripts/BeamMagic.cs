@@ -15,6 +15,10 @@ public class BeamMagic : Magic {
 
     public float magicDraw = 1; //Magic per second this attack takes
 
+    public override string getBlurb() {
+        return "Damage: " + baseDamage + "/s, Magic Draw: " + magicDraw + "/s";
+    }
+
 	public void Start() {
         
 
