@@ -43,6 +43,7 @@ public class DungeonLevel : MonoBehaviour {
                 } else {
                     cleared = true;
                     GameObject.Instantiate(exitPortal, transform.position, Quaternion.identity);
+                    NotificationStackController.PostNotification("Dungeon Cleared!");
                     // Set that this dungeon is cleared
                     string dungeonSeed = PlayerPrefs.GetInt("DungeonSeed").ToString();
                     PlayerPrefs.SetInt(dungeonSeed, 1);

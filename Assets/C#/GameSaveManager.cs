@@ -131,7 +131,7 @@ public class GameSaveManager : MonoBehaviour {
             int chestplateType = GetMatchingNameIndex(inventory.chestPlate.gameObject, inventory.chestplateTypes);
             SetChestplate(chestplateType, inventory.chestPlate.condition);
         }
-
+        NotificationStackController.PostNotification("Game saved!");
 
     }
     // For when we want to find the index of an object in the possible options, like weapons or magic or armor
