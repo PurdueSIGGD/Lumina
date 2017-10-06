@@ -13,7 +13,9 @@ public class ChargedProjectileWeapon : ProjectileWeapon {
         isAttacking = false;
         hasShot = false;
     }
-
+    public override string getBlurb() {
+        return "Damage: " + baseDamage + ", Speed: " + launchSpeed;
+    }
     public override void Attack(bool mouseDown) {
         //print("attac");
         //print(mouseDown + " " + isAttacking);

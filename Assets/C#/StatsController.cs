@@ -192,98 +192,46 @@ public class StatsController : Hittable
 
 	//Returns leftover (if any) ((can be negative))
 	public float UpdateHealth(float amount) {
-		if (health <= 0) {
-			health = 0;
+        float returnVal = 0;
+        health += amount;
+        if (health > healthMax) {
+            returnVal = health - healthMax;
+            health = healthMax;
+        } else if (health < 0) {
+            returnVal = health;
+            health = 0;
         }
-		if (amount > 0) {
-			if (health + amount > healthMax) {
-				float leftover = health + amount - healthMax;
-				health = healthMax;
-				gui.GUIsetHealth (health);
-				return leftover;
-			}
-			health += amount;
-			gui.GUIsetHealth (health);
-			return 0;
-		} else if (amount < 0) {
-			if (health + amount < 0) {
-				float leftover = health + amount;
-				health = 0;
-				gui.GUIsetHealth (health);
-				
-				return leftover;
-			}
-			health += amount;
-			gui.GUIsetHealth (health);
-			return 0;
-		}
-		gui.GUIsetHealth (health);
-		return 0;
+        gui.GUIsetHealth(health);
+        return returnVal;
 	}
 
 	//Returns leftovers (if any) ((can be negative))
 	public float UpdateMagic(float amount) {
-		if (magic < 0) {
-			magic = 0;
-		}
-		if (amount > 0) {
-			if (magic + amount > magicMax) {
-				float leftover = magic + amount - magicMax;
-				magic = magicMax;
-				gui.GUIsetMagic (magic);
-				return leftover;
-			}
-			magic += amount;
-			gui.GUIsetMagic (magic);
-			return 0;
-		} else if (amount < 0) {
-			if (magic + amount < 0) {
-				float leftover = magic + amount;
-				magic = 0;
-				gui.GUIsetMagic (magic);
-				return leftover;
-			}
-			magic += amount;
-			gui.GUIsetMagic (magic);
-			return 0;
-		}
-		gui.GUIsetMagic (magic);
-		return 0;
-	}
+        float returnVal = 0;
+        magic += amount;
+        if (magic > magicMax) {
+            returnVal = magic - magicMax;
+            magic = magicMax;
+        } else if (magic < 0) {
+            returnVal = magic;
+            magic = 0;
+        }
+        gui.GUIsetMagic(magic);
+        return returnVal;
+    }
     public int UpdateArrows(int amount) {
-        if (arrowCount < 0) {
+
+        int returnVal = 0;
+        arrowCount += amount;
+        if (arrowCount > magicMax) {
+            returnVal = arrowCount - arrowMax;
+            arrowCount = arrowMax;
+        } else if (arrowCount < 0) {
+            returnVal = arrowCount;
             arrowCount = 0;
         }
-        if (amount > 0) {
-            if (arrowCount + amount > arrowMax) {
-                int leftover = arrowCount + amount - arrowMax;
-                arrowCount = arrowMax;
-
-                UpdateArrowsUI();
-                return leftover;
-            }
-            arrowCount += amount;
-
-            UpdateArrowsUI();
-            return 0;
-        }
-
-        else if (amount < 0) {
-            if (arrowCount + amount < 0) {
-                int leftover = arrowCount + amount;
-                arrowCount = 0;
-
-                UpdateArrowsUI();
-                return leftover;
-            }
-
-            arrowCount += amount;
-            UpdateArrowsUI();
-            return 0;
-        }
-
         UpdateArrowsUI();
-        return 0;
+        return returnVal;
     }
 
     /*
@@ -372,6 +320,7 @@ public class StatsController : Hittable
 		float flatDamageReduction = 0;
 		float percentDamageReduction = 0;
 		foreach (Armor amr in armor) {
+            amr.DamageCondition(damage * .1f);
 			flatDamageReduction += amr.flatDamageBlock;
 			percentDamageReduction += amr.percentDamageBlock;
 		}
@@ -380,6 +329,7 @@ public class StatsController : Hittable
 		damage -= dmgRedFromPercent;
 		if (damage < 0)
 			damage = 0;
+        
 		return damage;
 	}
 

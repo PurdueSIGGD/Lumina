@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 682201077}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5479027, g: 0.62756413, b: 0.6829274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6343e123b6b671b43bb6b3a7edab3cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 5
   damage: 5
   rate: 0.4
 --- !u!1001 &1327139667
@@ -821,7 +821,7 @@ Prefab:
     - target: {fileID: 114787639015057548, guid: 327c1d1e1fd57b74a88b58667be6cfc9,
         type: 2}
       propertyPath: seed
-      value: 88
+      value: -2041130772
       objectReference: {fileID: 0}
     - target: {fileID: 4071914183351488, guid: 327c1d1e1fd57b74a88b58667be6cfc9, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x

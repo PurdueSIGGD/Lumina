@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemStats : MonoBehaviour {
+public abstract class ItemStats : MonoBehaviour {
 
     //basic information
 	public enum Tier {Simple,Moderate,Epic};
@@ -21,7 +21,7 @@ public class ItemStats : MonoBehaviour {
 
     public Sprite sprite;   //sprite to use in bag
 
-
+    public abstract string getBlurb(); // To be implemented by children
     void Start() {
         // Condition should be set by the spawning class
 	    //condition = Random.Range (minCondition, maxCondition);
@@ -36,12 +36,15 @@ public class ItemStats : MonoBehaviour {
 	 * 
 	 **/
 	public void DamageCondition(float damage) {
-        if (condition > minCondition) {
-            factor += damage / maxCondition;
-            condition -= damage * factor;
-        } else {
-            condition = minCondition;
-        }
+		if (condition > minCondition) {
+			factor += damage / maxCondition;
+			condition -= damage * factor;
+		} else if (condition != minCondition) {
+			if (displayName != "") NotificationStackController.PostNotification ("Your " + displayName + " has been crippled!", sprite);
+			condition = minCondition;
+		} else {
+
+		}
 	}
 
     /**

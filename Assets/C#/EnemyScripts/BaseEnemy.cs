@@ -41,7 +41,12 @@ abstract public class BaseEnemy : Hittable {
         print("dropping " + numberOfDrops + " drops");
 		for (int i = 0; i < numberOfDrops; i++) {
 			int dropIndex = Mathf.RoundToInt (Random.Range (0, drops.Count));
-            GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.Euler(360 * Random.insideUnitSphere));
+            GameObject spawn = GameObject.Instantiate(probabilityDrops[(int)drops[dropIndex]].prefab, transform.position, Quaternion.Euler(360 * Random.insideUnitSphere));
+            ItemStats it;
+            if (it = spawn.GetComponent<ItemStats>()) {
+                // Somewhere a bit above min condition to max condition
+                it.condition = Random.Range((0.3f * (it.maxCondition - it.minCondition)) + it.minCondition, it.maxCondition);
+            }
         }
 	}
 

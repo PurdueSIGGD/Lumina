@@ -8,6 +8,9 @@ public class SpawnerMagic : BurstMagic {
     public GameObject spawnParticles;
     public float spawnHeight = 1; // The height of the object to start at (distance from floor to center of mass)
 
+    public override string getBlurb() {
+        return "Magic Draw: " + magicDraw;
+    }
     public override void MagicBurstAttack() {
         float minDistance = range;
         Vector3 targetPosition = getLookObj().position + getLookObj().forward * range;

@@ -6,9 +6,12 @@ public class Armor : ItemStats {
 
 	public const float STRENGTH_MODIFIER = 0.05F;
 
-	/* I (Andrew G) changed this from "armorType" to "ArmorPiece" because it
+    /* I (Andrew G) changed this from "armorType" to "ArmorPiece" because it
 	 * better describes what it was meant to show.
 	 */
+    public override string getBlurb() {
+        return "Type: " + strongAgainst + ", Damage Blocked: " + flatDamageBlock + percentDamageBlock;
+    }
     public enum ArmorPiece {helmet, chestplate};
 	public ArmorPiece type;
 	public Hittable.DamageType strongAgainst; //TODO: Default to Hittable.DamageType.Neutral

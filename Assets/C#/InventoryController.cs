@@ -8,7 +8,7 @@ using UnityEditor;
 #endif
 
 public class InventoryController : MonoBehaviour {
-    private static float GRAB_DISTANCE = 4;
+    private static float GRAB_DISTANCE = 7f;
     private static float GRAB_WIDTH = .4f;
 
     public GameObject[] helmetTypes;
@@ -16,6 +16,11 @@ public class InventoryController : MonoBehaviour {
 
     public WeaponController rightWeaponController;
     public WeaponController leftWeaponController;
+
+    public Animator itemPreview;
+    public Text guiVerb;
+    public Text guiNameCondition;
+    public Text guiBlurb;
 
     public Animator viewmodelAnimator;
     private float interactCooldown;
@@ -29,6 +34,13 @@ public class InventoryController : MonoBehaviour {
 	public Armor chestPlate;
 	Pickup pick;
     ItemStats get;
+    
+    public Sprite upgradePotionSprite;
+    public Sprite upgradeKitSprite;
+    public Sprite healthPotionSprite;
+    public Sprite magicPotionSprite;
+    public Sprite arrowPickupSprite;
+
 
     private Text helpInteractText;  //text display to help interact
     private InventoryPanel inventoryPanel;
@@ -47,26 +59,41 @@ public class InventoryController : MonoBehaviour {
     }
 
 	void Update () {
-		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE, GRAB_WIDTH, cam.transform.forward);
+        //print(Vector3.Distance(cam.transform.position, cam.transform.position + (cam.transform.forward * GRAB_DISTANCE)));
+		hitObjs = Physics.CapsuleCastAll(cam.transform.position, cam.transform.position + (cam.transform.forward * GRAB_DISTANCE), GRAB_WIDTH, cam.transform.forward);
+        //Debug.Log(hitObjs.Length);
         //Debug.DrawLine(cam.transform.position, cam.transform.position + cam.transform.forward * GRAB_DISTANCE);
+       
+        bool showing = false;
 		for(int i = 0; i < hitObjs.Length ;i++){
-
+            //print(Vector3.Distance(hitObjs[i].transform.position, transform.position));
+            if (Vector3.Distance(hitObjs[i].transform.position, transform.position) > GRAB_DISTANCE) continue; // Because capsule cast is acting odd
             ItemStats its;
             Usable usb;
             if (its = hitObjs[i].collider.GetComponent<ItemStats>()) {
-                
-				// Show GUI info here using its information
-				//if (!helpInteractText.gameObject.activeSelf)
+                showing = true;
+                guiVerb.gameObject.SetActive(false);
+                guiNameCondition.gameObject.SetActive(true);
+                guiBlurb.gameObject.SetActive(true);
+                guiNameCondition.text = its.displayName + " (" + System.Math.Round(its.condition, 2) + "/" + its.maxCondition + ")";
+                guiBlurb.text = its.getBlurb();
+                // Show GUI info here using its information
+                //if (!helpInteractText.gameObject.activeSelf)
                 //{
                 //    helpInteractText.gameObject.SetActive(true);
                 //}
-				
+                break;
             } 
 			else if (usb = hitObjs[i].collider.GetComponentInParent<Usable>()) {
-                
-				// Show usetext using usb
+                showing = true;
+                guiVerb.gameObject.SetActive(true);
+                guiVerb.text = usb.getInfoText();
+                guiNameCondition.gameObject.SetActive(false);
+                guiBlurb.gameObject.SetActive(false);
+                // Show usetext using usb
                 //Debug.Log(usb.getInfoText());
-            }
+                break;
+            } 
 
 			//string itemTag = hitObjs[i].collider.gameObject.tag;
 			//if (itemTag == "Item") {
@@ -75,9 +102,16 @@ public class InventoryController : MonoBehaviour {
 			//}
 
 		}
-	}
+        if (Time.timeScale == 0) { // Don't want it showing with other menus
+            itemPreview.gameObject.SetActive(false);
+        } else {
+            itemPreview.gameObject.SetActive(true);
+            itemPreview.SetBool("Showing", showing);
+        }
 
-	/*public void itemScan(){
+    }
+
+    /*public void itemScan(){
 		hitObjs = Physics.RaycastAll (this.transform.position,transform.forward,30f);
 		for(int i = 0; i < hitObjs.Length ;i++){
 			string itemTag = hitObjs[i].collider.gameObject.tag;
@@ -92,7 +126,7 @@ public class InventoryController : MonoBehaviour {
     /// Get value from InputGenerator and Iteract with Item
     /// </summary>
     /// <param name="value">True if user press "f"</param>
-	public void Interact(bool value)
+    public void Interact(bool value)
     {
         // If value is true, pick up
         if (value)
@@ -102,7 +136,16 @@ public class InventoryController : MonoBehaviour {
 			}
 			//Debug.Log ("Interacting");
 			for (int i = 0; i < hitObjs.Length; i++) {
-                if (hitObjs[i].collider.GetComponent<ItemStats>()) {
+                if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
+                    Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
+                    itemToUse.Use();
+                    itemPreview.SetBool("Showing", false);
+
+                    interactCooldown = Time.time;
+
+                    break;
+
+                } else if (hitObjs[i].collider.GetComponent<ItemStats>()) {
                     get = hitObjs[i].collider.GetComponent<ItemStats>();
                     if (get == null)
                         continue;
@@ -111,13 +154,8 @@ public class InventoryController : MonoBehaviour {
                     //Destroy (get.gameObject);
                     // Reset timer
                     interactCooldown = Time.time;
-                } else if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
-                    Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
-                    itemToUse.Use();
-
-                    interactCooldown = Time.time;
-
-                } else {
+                    break;
+                } else  {
                     continue;
                 }
 
@@ -218,23 +256,45 @@ public class InventoryController : MonoBehaviour {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
 			    pick = other.gameObject.GetComponentInParent<Pickup> ();
 			    //Debug.Log ("Player picked up " + pick.itemType);
-                bool deletes = true;
+                bool deletes = false;
 			    switch(pick.itemType){
 			        case Pickup.pickUpType.upgradeKit:
+                    NotificationStackController.PostNotification("+" + (int)pick.amount + " Upgrade Kit", upgradeKitSprite);
 				        upgradekits += (int)pick.amount;
-				        break;
+                    deletes = true;
+                    break;
 				    case Pickup.pickUpType.upgradePotion:
-					    upgradePotions+= (int)pick.amount;
+                    NotificationStackController.PostNotification("+" + (int)pick.amount + " Upgrade Potion", upgradePotionSprite);
+                    upgradePotions += (int)pick.amount;
+                    deletes = true;
                         break;
                     case Pickup.pickUpType.Magic:
-                        deletes = (statsController.UpdateMagic(pick.amount) != pick.amount);
-                        break;
+                    float leftOver1 = statsController.UpdateMagic(pick.amount);
+                    if ((pick.amount - leftOver1) != 0) NotificationStackController.PostNotification("+" + System.Math.Round(pick.amount - leftOver1, 2) + " Magic", magicPotionSprite);
+                    if (leftOver1 > 0) {
+                        pick.amount = leftOver1;
+                    } else {
+                        deletes = true;
+                    }
+                    break;
                     case Pickup.pickUpType.Health:
-                        deletes = (statsController.UpdateHealth(pick.amount) != pick.amount);
-                        break;
+                    float leftOver2 = statsController.UpdateHealth(pick.amount);
+                    if ((pick.amount - leftOver2) != 0) NotificationStackController.PostNotification("+" + System.Math.Round(pick.amount - leftOver2, 2) + " Health", healthPotionSprite);
+                    if (leftOver2 > 0) {
+                        pick.amount = leftOver2;
+                    } else {
+                        deletes = true;
+                    }
+                    break;
                     case Pickup.pickUpType.Arrow:
-                        deletes = (statsController.UpdateArrows((int)(pick.amount)) != pick.amount);
-                        break;
+                    int leftOver3 = statsController.UpdateArrows((int)pick.amount);
+                    if (((int)pick.amount - leftOver3) != 0) NotificationStackController.PostNotification("+" + ((int)pick.amount - leftOver3) + " Arrows", arrowPickupSprite);
+                    if (leftOver3 > 0) {
+                        pick.amount = leftOver3;
+                    } else {
+                        deletes = true;
+                    }
+                    break;
 			}
 			if (deletes) Destroy (pick.gameObject);
 		}

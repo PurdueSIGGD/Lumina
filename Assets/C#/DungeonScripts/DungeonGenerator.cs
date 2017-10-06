@@ -190,6 +190,15 @@ public class DungeonGenerator : MonoBehaviour {
                 //print(keepDesiredRotation);
                 GameObject newJunk = GameObject.Instantiate(junkToSpawn[(int)junkLottery[randomIndex]].prefab, v3Position, keepDesiredRotation ? Quaternion.identity : Quaternion.Euler(360 * Random.insideUnitSphere));
                 newJunk.transform.parent = newDungeon.transform;
+                ItemStats it;
+                if (it = newJunk.GetComponent<ItemStats>()) {
+                    // Somewhere a bit below max condition to min condition
+                    Random.State currentState = Random.state;
+                    Random.state = oldState;
+                    it.condition = Random.Range( it.minCondition, it.maxCondition - (0.5f * (it.maxCondition - it.minCondition)));
+                    oldState = Random.state;
+                    Random.state = currentState;
+                }
             }
 
             // toss in some enemies, tell the dungeon level that those are their required enemies
