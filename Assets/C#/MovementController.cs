@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour {
-	public static int SPRINT_MAX = 3;
-	public static int SPRINT_COOLDOWN = 3;
+	public static int SPRINT_MAX = 7;
+	public static int SPRINT_COOLDOWN = 2;
 	public static float MAX_X_SPEED = 4;
 	public static float MAX_Z_SPEED = 6;
     public static float JUMP_POWER = 400;
