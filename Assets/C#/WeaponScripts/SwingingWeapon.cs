@@ -11,6 +11,8 @@ public class SwingingWeapon : Weapon {
     bool isAttacking;
 	bool hasRaycasted;
 
+    public GameObject hitParticles; // Prefab reference for particles to spawn
+
 	// Use this for initialization
 	void Start () {
 		isAttacking = false;
@@ -57,10 +59,15 @@ public class SwingingWeapon : Weapon {
 
     private void processHits(RaycastHit[] hits) {
         bool damageCondition = false;
+        Vector3 firstHit = Vector3.zero;
         foreach (RaycastHit hit in hits) {
             if (hit.distance <= range &&
                 !hit.collider.isTrigger &&
                 hit.collider.gameObject.tag != "Player") {
+                if (firstHit == Vector3.zero) {
+                    firstHit = hit.point;
+                    //print(hit.point);
+                }
                 // Push physics, regardless of hittable
                 Rigidbody r;
                 if (r = hit.collider.GetComponent<Rigidbody>()) {
@@ -78,6 +85,11 @@ public class SwingingWeapon : Weapon {
                     hittable.Hit(baseDamage * (getCondition() / 100), getLookObj().transform.forward, damageType);
                 }
             }
+        }
+        if (firstHit != Vector3.zero) {
+            // Spawn particles
+            print(firstHit);
+            GameObject.Instantiate(hitParticles, firstHit + (getLookObj().transform.position - firstHit) * 0.3f, Quaternion.identity);
         }
         if (damageCondition) {
             this.DamageCondition(1);
