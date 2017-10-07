@@ -19,7 +19,7 @@ public class SwingingWeapon : Weapon {
 		hasRaycasted = false;
 	}
     public override string getBlurb() {
-        return "Damage: " + baseDamage + ", Speed: " + (timeToAttack + timeToCooldown) + ", Range: " + range;
+        return "Damage: " + System.Math.Round(baseDamage * (getCondition() / 100), 1) + ", Speed: " + (timeToAttack + timeToCooldown) + ", Range: " + range;
     }
     RaycastHit[] getHitObjects() {
         return Physics.CapsuleCastAll(getLookObj().transform.position, getLookObj().transform.position + getLookObj().transform.forward * range, width, getLookObj().transform.forward);

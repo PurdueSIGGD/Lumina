@@ -75,7 +75,7 @@ public class InventoryController : MonoBehaviour {
                 guiVerb.gameObject.SetActive(false);
                 guiNameCondition.gameObject.SetActive(true);
                 guiBlurb.gameObject.SetActive(true);
-                guiNameCondition.text = its.displayName + " (" + System.Math.Round(its.condition, 2) + "/" + its.maxCondition + ")";
+                guiNameCondition.text = its.displayName + ((its is Magic)?"":( " (" + System.Math.Round(its.condition, 1) + "/" + its.maxCondition + ")"));
                 guiBlurb.text = its.getBlurb();
                 // Show GUI info here using its information
                 //if (!helpInteractText.gameObject.activeSelf)
@@ -259,18 +259,18 @@ public class InventoryController : MonoBehaviour {
                 bool deletes = false;
 			    switch(pick.itemType){
 			        case Pickup.pickUpType.upgradeKit:
-                    NotificationStackController.PostNotification("+" + (int)pick.amount + " Upgrade Kit", upgradeKitSprite);
+                    NotificationStackController.PostNotification("+{0} Upgrade Kits", upgradeKitSprite, pick.amount);
 				        upgradekits += (int)pick.amount;
                     deletes = true;
                     break;
 				    case Pickup.pickUpType.upgradePotion:
-                    NotificationStackController.PostNotification("+" + (int)pick.amount + " Upgrade Potion", upgradePotionSprite);
+                    NotificationStackController.PostNotification("+{0} Upgrade Potions", upgradePotionSprite, pick.amount);
                     upgradePotions += (int)pick.amount;
                     deletes = true;
                         break;
                     case Pickup.pickUpType.Magic:
                     float leftOver1 = statsController.UpdateMagic(pick.amount);
-                    if ((pick.amount - leftOver1) != 0) NotificationStackController.PostNotification("+" + System.Math.Round(pick.amount - leftOver1, 2) + " Magic", magicPotionSprite);
+                    if ((pick.amount - leftOver1) != 0) NotificationStackController.PostNotification("+{0} Magic", magicPotionSprite, pick.amount - leftOver1);
                     if (leftOver1 > 0) {
                         pick.amount = leftOver1;
                     } else {
@@ -279,7 +279,7 @@ public class InventoryController : MonoBehaviour {
                     break;
                     case Pickup.pickUpType.Health:
                     float leftOver2 = statsController.UpdateHealth(pick.amount);
-                    if ((pick.amount - leftOver2) != 0) NotificationStackController.PostNotification("+" + System.Math.Round(pick.amount - leftOver2, 2) + " Health", healthPotionSprite);
+                    if ((pick.amount - leftOver2) != 0) NotificationStackController.PostNotification("+{0} Health", healthPotionSprite, pick.amount - leftOver2);
                     if (leftOver2 > 0) {
                         pick.amount = leftOver2;
                     } else {
@@ -288,7 +288,7 @@ public class InventoryController : MonoBehaviour {
                     break;
                     case Pickup.pickUpType.Arrow:
                     int leftOver3 = statsController.UpdateArrows((int)pick.amount);
-                    if (((int)pick.amount - leftOver3) != 0) NotificationStackController.PostNotification("+" + ((int)pick.amount - leftOver3) + " Arrows", arrowPickupSprite);
+                    if (((int)pick.amount - leftOver3) != 0) NotificationStackController.PostNotification("+{0} Arrows", arrowPickupSprite, (pick.amount - leftOver3));
                     if (leftOver3 > 0) {
                         pick.amount = leftOver3;
                     } else {

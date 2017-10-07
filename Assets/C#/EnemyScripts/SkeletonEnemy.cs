@@ -218,7 +218,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
 
         //set trigger
         string triggerDeath = TRIGGER_DEATH + randomDeathAnimation.ToString();
-        animator.SetTrigger(triggerDeath);
+        animator.SetBool(triggerDeath, true);
     }
     public override void OnDamage(float damage, DamageType type) {
         // Animation for taking damage

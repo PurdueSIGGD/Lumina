@@ -5,6 +5,9 @@ abstract public class BaseEnemy : Hittable {
 
 	public ProbabililtyItem [] probabilityDrops;    //Array of possible drops for this enemy
     public GameObject[] attachedDrops;              // Things an enemy may be carrying that we want to detach, and let loose when death
+    public Transform healthBar;                    // An object that we scale based off of health
+    public ParticleSystem deathParticles;           // Particles when we ded, optional
+
 
 
     public int minDrops;			//Mininum number of possible drops
@@ -25,6 +28,12 @@ abstract public class BaseEnemy : Hittable {
     void GenericDeath(){
 
         OnDeath();
+
+        healthBar.gameObject.SetActive(false);
+
+        if (deathParticles != null) {
+            deathParticles.Play();
+        }
 
         // Move to layer where we won't collide with weapons or the player
         MoveToLayer(transform, deathLayer);
@@ -87,7 +96,8 @@ abstract public class BaseEnemy : Hittable {
         } else {
             health = 0;
         }
-        
+        healthBar.localScale = new Vector3(health, 1, 1);
+        //healthBar.GetComponent<MeshRenderer>().materials[0].mainTextureScale = new Vector2(health / 5, 1); 
         if (health <= 0 && originalHealth > 0) {
             GenericDeath();
         } else {

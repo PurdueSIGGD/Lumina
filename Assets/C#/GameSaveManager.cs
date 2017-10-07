@@ -41,13 +41,14 @@ public class GameSaveManager : MonoBehaviour {
     public static void NewGame() {
         string keyCombination = PlayerPrefs.GetString(CLEARED_DUNGEON_KEY_COMBINATION_KEY);
         print("Dungeons that we are clearing: " + keyCombination);
-        foreach (string key in keyCombination.Split(' ')) {
-            PlayerPrefs.DeleteKey(key);
-        }
-
+        PlayerPrefs.DeleteKey(CLEARED_DUNGEON_KEY_COMBINATION_KEY);
+       
+        // Necessary for when we don't want to delete every key, but righ tnow we won't worry about it
         foreach (string s in ALL_GAMESAVE_PLAYERPREF_KEYS) {
             PlayerPrefs.DeleteKey(s);
         }
+
+        PlayerPrefs.DeleteAll();
         SetPlayerHealth(100f);
         SetPlayerMaxHealth(100f);
 

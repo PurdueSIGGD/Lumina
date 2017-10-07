@@ -55,7 +55,7 @@ public class SceneSingleton : MonoBehaviour {
             }
         }
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
         //print(PlayerPrefs.GetInt(guid.ToString()) + " can it spawn?");
         if (PlayerPrefs.GetInt(guid.ToString()) == 0) {
             //print("Spawning singleton: " + itemName + " " + guid.ToString());
@@ -88,8 +88,9 @@ public class SceneSingleton : MonoBehaviour {
        
     }
     void OnDestroy() {
-        //print("We ded now");
-        PlayerPrefs.SetInt(guid.ToString(), 0);
+        // IF still the child and not found, we're gonna be fine
+        if (spawnedObject && spawnedObject.transform.parent == transform) {
+            PlayerPrefs.SetInt(guid.ToString(), 0);
+        }
     }
-
 }
