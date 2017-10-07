@@ -327,7 +327,7 @@ public class StatsController : Hittable
 		float percentDamageReduction = 0;
 		foreach (Armor amr in armor) {
             amr.DamageCondition(damage * .1f);
-			flatDamageReduction += amr.flatDamageBlock;
+			//flatDamageReduction += amr.flatDamageBlock;
 			percentDamageReduction += amr.percentDamageBlock;
 		}
 		float dmgRedFromPercent = damage * (0.01F * percentDamageReduction);
