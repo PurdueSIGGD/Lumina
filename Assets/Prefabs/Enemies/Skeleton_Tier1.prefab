@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 114229987945092804}
   - component: {fileID: 114087854347760690}
   m_Layer: 12
-  m_Name: Skeleton
+  m_Name: Skeleton_Tier1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14965,7 +14965,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011267500737290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 257.67633, y: 31.092014, z: 190.93187}
+  m_LocalPosition: {x: 154.34424, y: 24.994358, z: 167.049}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4109946900846836}
@@ -19051,6 +19051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896f59fdb2a98f340ae60e05c25de558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitEffects: {fileID: 0}
   probabilityDrops:
   - prefab: {fileID: 1473176872852480, guid: b8497e2f6890c3b4caf886a855ec7de6, type: 2}
     chance: 3
@@ -19070,10 +19071,11 @@ MonoBehaviour:
     chance: 3
   - prefab: {fileID: 1841830948198258, guid: 3be7068f111bb2541a1ff7ce7ab8ad72, type: 2}
     chance: 20
+  attachedDrops: []
   minDrops: 1
   maxDrops: 4
-  health: 60
-  movementSpeed: 10
+  health: 30
+  movementSpeed: 6
   patrolPositions: []
   isPatrolling: 0
   isResting: 0

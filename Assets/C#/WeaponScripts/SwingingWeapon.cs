@@ -64,23 +64,36 @@ public class SwingingWeapon : Weapon {
             if (hit.distance <= range &&
                 !hit.collider.isTrigger &&
                 hit.collider.gameObject.tag != "Player") {
+                RaycastHit modifiableHit = hit;
+                
+                if (hit.point == Vector3.zero) {
+                    // The capsule cast sets it at zero for the initial hit. So we're gonna spherecast and find the correct point
+                    RaycastHit[] hitsAgain = Physics.RaycastAll(new Ray(getLookObj().position, getLookObj().forward * range));
+                    foreach (RaycastHit hitAgain in hitsAgain) {
+                        if (hitAgain.transform.GetComponent<Collider>() == hit.transform.GetComponent<Collider>()) {
+                            // We found our hit
+                            modifiableHit = hitAgain;
+                            break;
+                        }
+                    }
+                }
                 if (firstHit == Vector3.zero) {
-                    firstHit = hit.point;
-                    //print(hit.point);
+                    firstHit = modifiableHit.point;
                 }
                 // Push physics, regardless of hittable
                 Rigidbody r;
-                if (r = hit.collider.GetComponent<Rigidbody>()) {
-                    //print("Adding force");
+                if (r = modifiableHit.collider.GetComponent<Rigidbody>()) {
                     // Play around with a good factor here
 
+                    firstHit = modifiableHit.point;
                     r.AddForceAtPosition(baseDamage * getLookObj().forward * 10, getLookObj().position);
                     r.AddForce(Vector3.up * r.mass * 350);
                 }
                 // Hit with hittable
-                Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
+                Hittable hittable = modifiableHit.collider.GetComponentInParent<Hittable>();
                 if (hittable != null) {
                     //print("hit " + hit);
+                    firstHit = modifiableHit.point;
                     damageCondition = true;
                     hittable.Hit(baseDamage * (getCondition() / 100), getLookObj().transform.forward, damageType);
                 }
@@ -88,8 +101,9 @@ public class SwingingWeapon : Weapon {
         }
         if (firstHit != Vector3.zero) {
             // Spawn particles
-            print(firstHit);
-            GameObject.Instantiate(hitParticles, firstHit + (getLookObj().transform.position - firstHit) * 0.3f, Quaternion.identity);
+            Debug.DrawLine(getLookObj().position, firstHit, Color.green, 10);
+            GameObject particles = GameObject.Instantiate(hitParticles, firstHit + (getLookObj().transform.position - firstHit) * 0.3f, Quaternion.Euler(1 * (getLookObj().transform.position - firstHit)));
+            particles.transform.LookAt(getLookObj());
         }
         if (damageCondition) {
             this.DamageCondition(1);

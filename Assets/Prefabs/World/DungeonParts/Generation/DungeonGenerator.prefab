@@ -78,12 +78,14 @@ MonoBehaviour:
     - prefab: {fileID: 1430667555586948, guid: 8c13084d39bcb6e44975a5b4c025fc3b, type: 2}
       chance: 3
     - prefab: {fileID: 1011267500737290, guid: ac9f3c0e7ea16a842a92dcefb742cf1d, type: 2}
-      chance: 2
+      chance: 1
     difficulty2:
     - prefab: {fileID: 1430667555586948, guid: 8c13084d39bcb6e44975a5b4c025fc3b, type: 2}
       chance: 5
     - prefab: {fileID: 1011267500737290, guid: ac9f3c0e7ea16a842a92dcefb742cf1d, type: 2}
       chance: 4
+    - prefab: {fileID: 1313274466850930, guid: 823efdeed878c6f47886a4b5ff65569f, type: 2}
+      chance: 1
     - prefab: {fileID: 1402160623705290, guid: 13e846ae46bda724483017b67e8842bf, type: 2}
       chance: 1
     - prefab: {fileID: 1047052981932074, guid: 5db767bf6c33f47418049e9479eb826f, type: 2}
@@ -91,6 +93,10 @@ MonoBehaviour:
     difficulty3:
     - prefab: {fileID: 1011267500737290, guid: ac9f3c0e7ea16a842a92dcefb742cf1d, type: 2}
       chance: 4
+    - prefab: {fileID: 1313274466850930, guid: 823efdeed878c6f47886a4b5ff65569f, type: 2}
+      chance: 3
+    - prefab: {fileID: 1402583006529218, guid: dc3e2105535660b418468abcd756043c, type: 2}
+      chance: 2
     - prefab: {fileID: 1047052981932074, guid: 5db767bf6c33f47418049e9479eb826f, type: 2}
       chance: 4
     - prefab: {fileID: 1402160623705290, guid: 13e846ae46bda724483017b67e8842bf, type: 2}
@@ -120,7 +126,7 @@ MonoBehaviour:
   - prefab: {fileID: 1691300191179896, guid: c1100ac9523bfb141aaf458cf1dc1d98, type: 2}
     chance: 1
   - prefab: {fileID: 1128300872901138, guid: 73bee09c535b7cf498675029f09aab66, type: 2}
-    chance: 1
+    chance: 10
   - prefab: {fileID: 1466559046255490, guid: 81045737cc0019140b1810b2563a83e6, type: 2}
     chance: 1
   - prefab: {fileID: 1841830948198258, guid: 3be7068f111bb2541a1ff7ce7ab8ad72, type: 2}
