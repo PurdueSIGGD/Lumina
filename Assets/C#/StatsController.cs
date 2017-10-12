@@ -160,24 +160,33 @@ public class StatsController : Hittable
 	public void UpgradeMaxHealth(){
 		this.healthMax += HEALTH_INCREASE_AMOUNT;
 		gui.GUIsetUpgradeHealth (healthMax);
+        UpdateHealth(HEALTH_INCREASE_AMOUNT);
 	}
     public void SetMaxHealth(float f)
     {
         this.healthMax = f;
+        gui.GUIsetUpgradeHealth(healthMax);
     }
     public void SetMaxMagic(float f)
     {
         this.magicMax = f;
+        gui.GUIsetUpgradeMagic(magicMax);
+    }
+    public void SetMaxLight(float f) {
+        this.lighttMax = f;
+        gui.GUIsetUpgradeLight(lighttMax);
     }
 
-	public void UpgradeMaxMagic(){
-		this.magicMax += MAGIC_INCREASE_AMOUNT;
-		gui.GUIsetUpgradeMagic (magicMax);
-	}
+	public void UpgradeMaxMagic() {
+        this.magicMax += MAGIC_INCREASE_AMOUNT;
+        gui.GUIsetUpgradeMagic (magicMax);
+        UpdateMagic(MAGIC_INCREASE_AMOUNT);
+    }
 
-	public void UpgradeMaxLightt(){
-		this.lighttMax += LIGHT_INCREASE_AMOUNT;
-		gui.GUIsetUpgradeLight (lighttMax);
+	public void UpgradeMaxLightt() {
+        this.lighttMax += LIGHT_INCREASE_AMOUNT;
+        gui.GUIsetUpgradeLight (lighttMax);
+        UpdateLightt(LIGHT_INCREASE_AMOUNT);
 	}
 
     public void SetHealth(float amount)
@@ -190,6 +199,10 @@ public class StatsController : Hittable
     {
         magic = amount;
         gui.GUIsetMagic(magic);
+    }
+    public void SetLight(float amount) {
+        lightt = amount;
+        gui.GUIsetLight(lightt);
     }
     public void SetArrows(int amount) {
         arrowCount = amount;

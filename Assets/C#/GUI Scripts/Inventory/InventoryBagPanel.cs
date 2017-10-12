@@ -10,7 +10,7 @@ using UnityEngine;
 public class InventoryBagPanel : MonoBehaviour {
 
     public RectTransform content;   //rect of content, to adjust the height according to number of item in bag
-
+    public bool clearsAll = true;
     /// <summary>
     /// key: item, value: number of items
     /// </summary>
@@ -33,7 +33,7 @@ public class InventoryBagPanel : MonoBehaviour {
     private void Start()
     {
         //clear all children in case of debugging
-        ClearAllItems();
+        if (clearsAll) ClearAllItems();
     }
 
 
@@ -66,7 +66,10 @@ public class InventoryBagPanel : MonoBehaviour {
         //check if item is init for bag
         if (item == null)
             return;
-
+        if (item.name.Contains("Fists")) {
+            // No fists
+            return;
+        }
         //if already contain, increase the number     
         if (itemDict.ContainsKey(item)) {
           

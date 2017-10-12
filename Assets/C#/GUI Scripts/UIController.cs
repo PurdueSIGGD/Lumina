@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour {
     public InventoryCanvas inventoryCanvas;
     public SettingsCanvas settingsCanvas;
     public HUDController hudController;
+    public InventoryController inventoryController;
 
     [HideInInspector] public Dictionary<KeyCode, UICanvas> keyBindings;
 
@@ -40,6 +41,7 @@ public class UIController : MonoBehaviour {
 
         //set SettingsCanvas
         settingsCanvas.inputGenerator = player.GetComponent<InputGenerator>();
+        
     }
 
    
@@ -80,7 +82,9 @@ public class UIController : MonoBehaviour {
             UpdateUIStatus();
         }
     }
-
+    public void OnGui() {
+        //UpdateUIStatus();
+    }
     /// <summary>
     /// Used to update the running status of game
     /// </summary>
