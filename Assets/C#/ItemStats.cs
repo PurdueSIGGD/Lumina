@@ -40,7 +40,7 @@ public abstract class ItemStats : MonoBehaviour {
 			factor += damage / maxCondition;
 			condition -= damage * factor;
 		} else if (condition != minCondition) {
-			if (displayName != "") NotificationStackController.PostNotification ("Your " + displayName + " has been crippled!", sprite);
+			if (displayName != "") NotificationStackController.PostNotification ("Your " + displayName + " is badly damaged!", sprite);
 			condition = minCondition;
 		} else {
 

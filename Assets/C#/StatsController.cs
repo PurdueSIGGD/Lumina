@@ -86,7 +86,13 @@ public class StatsController : Hittable
                     //lightDamageCooldown += Time.deltaTime;
                 }
             }
-        } else {
+        } else if (SceneManager.GetActiveScene().name == "Island3") {
+            // Regenerate slower, show light
+            UpdateLightt(Time.deltaTime * 7 * LIGHT_LOSS_RATE);
+            if (!healthLight.enabled) {
+                healthLight.enabled = true;
+            }
+        } else { 
             // Outside or somewhere else, turn light off
             UpdateLightt(Time.deltaTime * 10 * LIGHT_LOSS_RATE);
             if (healthLight.enabled) {
@@ -321,7 +327,7 @@ public class StatsController : Hittable
 		float percentDamageReduction = 0;
 		foreach (Armor amr in armor) {
             amr.DamageCondition(damage * .1f);
-			flatDamageReduction += amr.flatDamageBlock;
+			//flatDamageReduction += amr.flatDamageBlock;
 			percentDamageReduction += amr.percentDamageBlock;
 		}
 		float dmgRedFromPercent = damage * (0.01F * percentDamageReduction);
@@ -337,7 +343,8 @@ public class StatsController : Hittable
 	 */
 	public void Kill () {
         dead = true;
-        gameOverCanvas.SendMessage("GameOver");
+        gameOverCanvas.gameObject.SetActive(true);
+        gameOverCanvas.GameOver();
         this.BroadcastMessage("Death");
 	}
     public void UnKill() {

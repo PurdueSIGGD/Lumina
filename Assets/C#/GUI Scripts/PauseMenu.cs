@@ -78,7 +78,7 @@ public class PauseMenu : MonoBehaviour {
 			return;
 		}
 		if(iS is Weapon){
-			t.text = "Tier: "+iS.tier+"\nBase Damage: " + ((Weapon)iS).baseDamage + "\nDamageType: "+ ((Weapon)iS).damageType+"\nCooldown: "+((Weapon)iS).timeToCooldown+"\nCondition: "+iS.condition;
+			t.text = "Tier: "+iS.tier+"\nDamage: " + (((Weapon)iS).baseDamage * (iS.condition/iS.maxCondition)) + "\nDamageType: "+ ((Weapon)iS).damageType+"\nCooldown: "+((Weapon)iS).timeToCooldown+"\nCondition: "+iS.condition;
 		}
 		if(iS is Armor){
 			t.text = "Tier: "+iS.tier+"\nDamageBlock: " + ((Armor)iS).flatDamageBlock+"\nPercentBlock: "+((Armor)iS).percentDamageBlock+"\nStrongAgainst: "+((Armor)iS).strongAgainst+"\nCondition: "+iS.condition;

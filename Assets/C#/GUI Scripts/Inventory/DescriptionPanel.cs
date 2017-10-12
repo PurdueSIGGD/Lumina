@@ -40,10 +40,10 @@ public class DescriptionPanel : MonoBehaviour {
         if (i.itemStats is Weapon)
         {
             Weapon weapon = (Weapon)i.itemStats;
+            stats += "Damage: " + (weapon.baseDamage * weapon.condition / weapon.maxCondition).ToString() + "\n";
             stats += "Damage Type: " + weapon.damageType.ToString() + "\n";
             stats += "Cool down: "   + weapon.timeToCooldown.ToString() + "s" + "\n";
             stats += "Range: "       + weapon.range.ToString() + "\n";
-            stats += "Base Damage: " + weapon.baseDamage.ToString() + "\n";
         }
 
         //magic inherits weapon

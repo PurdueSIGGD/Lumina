@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameOverCanvas : MonoBehaviour {
     public Animator gameOverElement;
     public SceneSelectionCanvas sceneSelectionCanvas;
-    void GameOver() {
+
+    public void GameOver() {
         gameOverElement.SetTrigger("Show");
         sceneSelectionCanvas.fadeToBlackAnimator.SetFloat("FadeSpeed", 0.2f);
         // Disabling fade to black because a glitch, making black show up in front of our game over text

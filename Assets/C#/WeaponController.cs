@@ -129,6 +129,12 @@ public class WeaponController : MonoBehaviour {
                 if (pendingOldWeapon is Magic) {
                     // Set the mesh to be proper scale
                     ((Magic)pendingOldWeapon).mesh.localScale = Vector3.one;
+
+                    ParticleSystem.MainModule shootMain = ((Magic)pendingOldWeapon).shootParticles.main;
+                    shootMain.simulationSpace = ParticleSystemSimulationSpace.World;
+
+                    ParticleSystem.MainModule idleMain = ((Magic)pendingOldWeapon).idleParticles.main;
+                    idleMain.simulationSpace = ParticleSystemSimulationSpace.World;
                 }
                 pendingOldWeapon.transform.localEulerAngles += new Vector3(0, 180, 0);
                 pendingOldWeapon.GetComponent<Rigidbody>().isKinematic = false;
@@ -299,6 +305,15 @@ public class WeaponController : MonoBehaviour {
 
         if (pendingNewWeapon is Magic) {
             ((Magic)pendingNewWeapon).pauseParticles();
+            // Set local simulation space
+            ParticleSystem.MainModule shootMain = ((Magic)pendingNewWeapon).shootParticles.main;
+            shootMain.simulationSpace = ParticleSystemSimulationSpace.Custom;
+            shootMain.customSimulationSpace = transform.Find("viewmodelHolder/player_viewmodel");
+
+            ParticleSystem.MainModule idleMain = ((Magic)pendingNewWeapon).idleParticles.main;
+            idleMain.simulationSpace = ParticleSystemSimulationSpace.Custom;
+            idleMain.customSimulationSpace = transform.Find("viewmodelHolder/player_viewmodel");
+
         }
 
             // If we were already both hands

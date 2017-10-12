@@ -10,7 +10,7 @@ public class Armor : ItemStats {
 	 * better describes what it was meant to show.
 	 */
     public override string getBlurb() {
-        return "Type: " + strongAgainst + ", Damage Blocked: " + flatDamageBlock + percentDamageBlock;
+        return "Type: " + strongAgainst + ", Blocks: " + flatDamageBlock + " + " + percentDamageBlock + "%";
     }
     public enum ArmorPiece {helmet, chestplate};
 	public ArmorPiece type;
