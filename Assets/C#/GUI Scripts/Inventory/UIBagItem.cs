@@ -56,6 +56,7 @@ public class UIBagItem : MonoBehaviour {
         if (descriptionPanel != null)
         {
             descriptionPanel.DisplayBagItemInfo(this);
+            this.GetComponentInParent<InventoryPanel>().displayedItem = this;
         }
         else
         {
