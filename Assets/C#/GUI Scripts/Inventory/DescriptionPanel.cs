@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +15,14 @@ public class DescriptionPanel : MonoBehaviour {
     public Text statsText;          //place to put stats panel
     public Text descriptionText;    //place to put the description
     public Image image;             //place to put icon
+    public Button upgradeButton; // Upgrade button
+    
 
-
+ public void Start() {
+        foreach (Scrollbar s in this.GetComponentsInChildren<Scrollbar>()) {
+            s.value = 0;
+        }
+    }
     /// <summary>
     /// Displace information associated with item
     /// </summary>
@@ -34,21 +41,20 @@ public class DescriptionPanel : MonoBehaviour {
 
         //general stats from ItemStats
         stats += "Tier: " + i.itemStats.tier.ToString() + "\n";      
-        stats += "Condition: " + i.itemStats.condition.ToString() + "/" + i.itemStats.maxCondition.ToString() + "\n";
+        stats += "Condition: " + System.Math.Round(i.itemStats.condition, 2) + "/" + i.itemStats.maxCondition.ToString() + "\n";
 
         //specific stats from Item
         if (i.itemStats is Weapon)
         {
             Weapon weapon = (Weapon)i.itemStats;
-            stats += "Damage: " + (weapon.baseDamage * weapon.condition / weapon.maxCondition).ToString() + "\n";
+            stats += "Damage: " + System.Math.Round(weapon.baseDamage * weapon.condition / weapon.maxCondition, 2) + "\n";
             stats += "Damage Type: " + weapon.damageType.ToString() + "\n";
             stats += "Cool down: "   + weapon.timeToCooldown.ToString() + "s" + "\n";
             stats += "Range: "       + weapon.range.ToString() + "\n";
         }
 
         //magic inherits weapon
-        if (i.itemStats is Magic)
-        {
+        if (i.itemStats is Magic) {
             //set title
             statsTitle.text = "Magic";
 
@@ -60,10 +66,20 @@ public class DescriptionPanel : MonoBehaviour {
             if (i.itemStats is BurstMagic) {
                 stats += "Cost per burst: " + ((BurstMagic)magic).magicDraw + "\n";
             }
-            
 
-            
+
+            upgradeButton.gameObject.SetActive(false);
+        } else {
+            upgradeButton.gameObject.SetActive(true);
+            if (this.GetComponentInParent<InventoryController>().getUpgradeKits() > 0 &&
+                i.itemStats.condition < i.itemStats.maxCondition) {
+                upgradeButton.interactable = true;
+            } else {
+                upgradeButton.interactable = false;
+            }
+
         }
+
 
         //projectile weapon inherit weapon
         if (i.itemStats is ProjectileWeapon)
@@ -101,8 +117,8 @@ public class DescriptionPanel : MonoBehaviour {
             Armor armor = (Armor)i.itemStats;
             stats += "Type: " + armor.type.ToString() + "\n";
             stats += "Strong against: " + armor.strongAgainst.ToString() + "\n";
-            stats += "Flat Damage Block: " + armor.flatDamageBlock.ToString() + "\n";
-            stats += "Percent Damage Block: " + armor.percentDamageBlock.ToString() + "\n";
+            stats += "Flat Damage Block: " + Math.Round(armor.flatDamageBlock, 2)  + "\n";
+            stats += "Percent Damage Block: " + Math.Round(armor.percentDamageBlock, 2) + "\n";
         }
 
 

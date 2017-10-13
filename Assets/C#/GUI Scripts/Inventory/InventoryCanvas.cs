@@ -49,5 +49,7 @@ public class InventoryCanvas : UICanvas {
         //close all panel
         listPanels.ForEach(x => x.Close());
     }
+
+
     
 }

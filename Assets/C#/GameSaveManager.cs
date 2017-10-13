@@ -15,6 +15,7 @@ public class GameSaveManager : MonoBehaviour {
     public static string PLAYER_MAX_HEALTH_KEY = "PlayerMaxHealth";
     public static string PLAYER_MAGIC_KEY = "PlayerMagic";
     public static string PLAYER_MAX_MAGIC_KEY = "PlayerMaxMagic";
+    public static string PLAYER_MAX_LIGHT_KEY = "PlayerMaxLight";
     public static string ARROW_COUNT_KEY = "ArrowCount";
     public static string UPGRADE_POTION_KEY = "UpgradePotion";
     public static string UPGRADE_KIT_KEY = "UpgradeKit";
@@ -33,7 +34,7 @@ public class GameSaveManager : MonoBehaviour {
     public static string SCENE_ROTATION_Y = "SceneRotationY";
     public static string SCENE_ROTATION_Z = "SceneRotationZ";
 
-    public static string[] ALL_GAMESAVE_PLAYERPREF_KEYS = { SCENE_ROTATION_Z, SCENE_ROTATION_Y, SCENE_ROTATION_X, SCENE_LOCATION_Z, SCENE_LOCATION_Y, SCENE_LOCATION_X, SCENE_NAME_KEY, ARMOR_CHESTPLATE_CONDITION_KEY, ARMOR_CHESTPLATE_KEY, ARMOR_HELMET_CONDITION_KEY, ARMOR_HELMET_KEY, MAGIC_LIST_KEY, WEAPON_CONDITION_LIST_KEY, WEAPON_LIST_KEY, CLEARED_DUNGEON_COUNT_KEY, PLAYER_HEALTH_KEY, PLAYER_MAX_HEALTH_KEY, PLAYER_MAGIC_KEY, PLAYER_MAX_MAGIC_KEY, ARROW_COUNT_KEY, UPGRADE_POTION_KEY, UPGRADE_KIT_KEY };
+    public static string[] ALL_GAMESAVE_PLAYERPREF_KEYS = { PLAYER_MAX_LIGHT_KEY, SCENE_ROTATION_Z, SCENE_ROTATION_Y, SCENE_ROTATION_X, SCENE_LOCATION_Z, SCENE_LOCATION_Y, SCENE_LOCATION_X, SCENE_NAME_KEY, ARMOR_CHESTPLATE_CONDITION_KEY, ARMOR_CHESTPLATE_KEY, ARMOR_HELMET_CONDITION_KEY, ARMOR_HELMET_KEY, MAGIC_LIST_KEY, WEAPON_CONDITION_LIST_KEY, WEAPON_LIST_KEY, CLEARED_DUNGEON_COUNT_KEY, PLAYER_HEALTH_KEY, PLAYER_MAX_HEALTH_KEY, PLAYER_MAGIC_KEY, PLAYER_MAX_MAGIC_KEY, ARROW_COUNT_KEY, UPGRADE_POTION_KEY, UPGRADE_KIT_KEY };
 
     public static bool HasSave() {
         return PlayerPrefs.HasKey(ALL_GAMESAVE_PLAYERPREF_KEYS[0]);
@@ -54,6 +55,9 @@ public class GameSaveManager : MonoBehaviour {
 
         SetPlayerMagic(100f);
         SetPlayerMaxMagic(100f);
+
+        SetPlayerMaxLight(200f);
+        
 
         // Clear inventory
         // for armor, -1 means no armor at all
@@ -88,6 +92,8 @@ public class GameSaveManager : MonoBehaviour {
 
         SetPlayerMagic(stats.GetMagic());
         SetPlayerMaxMagic(stats.GetMagicMax());
+
+        SetPlayerMaxLight(stats.GetLighttMax());
 
         SetArrowCount(stats.arrowCount);
 
@@ -162,12 +168,16 @@ public class GameSaveManager : MonoBehaviour {
     {
         float maxHealth = GetPlayerMaxHealth();
         float maxMagic = GetPlayerMaxMagic();
+        float maxLight = GetPlayerMaxLight();
+        //print("max health: " + maxHealth + " max magic: " + maxMagic);
 
         stats.SetMaxHealth(maxHealth);
         stats.SetHealth(GetPlayerHealth());
 
         stats.SetMaxMagic(maxMagic);
         stats.SetMagic(GetPlayerMagic());
+
+        stats.SetMaxLight(maxLight);
 
         stats.SetArrows(GetArrowCount());
 
@@ -182,13 +192,15 @@ public class GameSaveManager : MonoBehaviour {
 
         int[] weaponTypes = GetWeaponList();
         float[] weaponConditions = GetWeaponConditionList();
-        EquipWeapons(rightHand, weaponTypes, weaponConditions);
+        EquipWeapons(rightHand, inventory, weaponTypes, weaponConditions, 0);
 
         int[] magicTypes = GetMagicList();
-        EquipWeapons(leftHand, magicTypes, null);
+        EquipWeapons(leftHand, inventory, magicTypes, null, 1);
+
+
 
     }
-    private static void EquipWeapons(WeaponController weaponController, int[] weaponTypes, float[] weaponConditions) {
+    private static void EquipWeapons(WeaponController weaponController, InventoryController inventoryController, int[] weaponTypes, float[] weaponConditions, int weaponType) {
         for (int i = 0; i < weaponTypes.Length; i++) {
             //print(i + " " + weaponController.weaponTypes.Length + " " +  weaponTypes.Length + " " + weaponTypes[i]);
             if (weaponTypes[i] != -1) {
@@ -204,6 +216,12 @@ public class GameSaveManager : MonoBehaviour {
                     weaponController.EquipWeapon(newWeapon);
                 } else {
                     weaponController.EquipWeaponInstantly(newWeapon, i);
+                }
+
+                if (weaponType == 0) {
+                    inventoryController.inventoryPanel.weaponPanel.Add(newWeapon);
+                } else if (weaponType == 1) {
+                    inventoryController.inventoryPanel.magicPanel.Add(newWeapon);
                 }
             }
             
@@ -242,6 +260,12 @@ public class GameSaveManager : MonoBehaviour {
     }
     public static void SetPlayerMaxMagic(float num) {
         Set(PLAYER_MAX_MAGIC_KEY, num);
+    }
+    public static float GetPlayerMaxLight() {
+        return GetFloat(PLAYER_MAX_LIGHT_KEY);
+    }
+    public static void SetPlayerMaxLight(float num) {
+        Set(PLAYER_MAX_LIGHT_KEY, num);
     }
 
     public static int GetArrowCount()
@@ -338,9 +362,7 @@ public class GameSaveManager : MonoBehaviour {
         Debug.Log("Adding a completed dungeon: " + dungeonSeed);
 
         string dungeonString = PlayerPrefs.GetString(CLEARED_DUNGEON_KEY_COMBINATION_KEY);
-        print(dungeonString);
         if (!dungeonString.Contains(dungeonSeed)) {
-            print("foo:");
             dungeonString += (dungeonSeed + " ");
         }
         PlayerPrefs.SetString(CLEARED_DUNGEON_KEY_COMBINATION_KEY, dungeonString);

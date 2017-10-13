@@ -57,6 +57,7 @@ public abstract class ItemStats : MonoBehaviour {
 	 **/
     public void Upgrade(float upgradeFactor) {
 		condition += upgradeFactor;
+        if (condition > maxCondition) condition = maxCondition;
 	}
 
     /**

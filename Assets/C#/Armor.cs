@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class Armor : ItemStats {
 	 * better describes what it was meant to show.
 	 */
     public override string getBlurb() {
-        return "Type: " + strongAgainst + ", Blocks: " + flatDamageBlock + " + " + percentDamageBlock + "%";
+        return "Type: " + strongAgainst + ", Blocks: " + Math.Round(flatDamageBlock, 2) + " + " + Math.Round(percentDamageBlock, 2) + "%";
     }
     public enum ArmorPiece {helmet, chestplate};
 	public ArmorPiece type;

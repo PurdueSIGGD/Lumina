@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 /// <summary>
 /// control the GUI part of the Inventory Panel, part of the Inventory Canvas
@@ -19,10 +21,21 @@ public class InventoryPanel : UIPanel
 
     private List<InventoryBagPanel> listBags;
 
+    public CanvasGroup upgrades;
+    public Text upgradePotion;
+    public Text upgradeKit;
+    public Text buttonMagic, buttonLight, buttonHealth;
+
+
+    StatsController myStats;
+    InventoryController myInventory;
+
     /// <summary>
     /// current UI Inventory Bag being open
     /// </summary>
     public InventoryBagPanel currentBag { get; set; }
+
+    public UIBagItem displayedItem;
 
   
 
@@ -46,6 +59,12 @@ public class InventoryPanel : UIPanel
         currentBag = null;
         //listBags.ForEach(x => x.gameObject.SetActive(false));
         listBags.ForEach(x => x.GetComponent<UIPanel>().SetActiveUI(false));
+
+
+        myStats = this.GetComponentInParent<StatsController>();
+        myInventory = this.GetComponentInParent<InventoryController>();
+
+        myInventory.SetUpgradePotions(myInventory.getUpgradePotions() - 1);
     }
 
     public override void Close()
@@ -86,6 +105,55 @@ public class InventoryPanel : UIPanel
         //if open Bag == bag
         //do nothing
     }
-   
+    public void Update() {
+        if (displayedItem != null) {
+            // Update on time
+            displayedItem.DisplayDescription();
+        }
+        upgradePotion.text = String.Format("{0} Upgrade Potions", myInventory.getUpgradePotions());
+        upgradeKit.text = String.Format("{0} Upgrade Kits", myInventory.getUpgradeKits());
+
+        buttonLight.text = "Upgrade Light (" + myStats.GetLighttMax() + ")";
+        buttonMagic.text = "Upgrade Magic (" + myStats.GetMagicMax() + ")";
+        buttonHealth.text = "Upgrade Health (" + myStats.GetHealthMax() + ")";
+    
+        if (myInventory.getUpgradePotions() == 0) {
+            upgrades.interactable = false;
+            upgrades.alpha = 0.8f;
+        } else {
+            upgrades.interactable = true;
+            upgrades.alpha = 1f;
+        }
+
+    }
+    public void UseUpgradeKit() {
+        if (displayedItem == null) { Debug.LogWarning("No currently displayed item found");  }
+        else {
+            
+            if (myInventory.getUpgradeKits() > 0) {
+                myInventory.useUpgradeKit(displayedItem.itemStats);
+            }
+
+
+        }
+
+    }
+    public void UpgradeLight() {
+        myStats.UpgradeMaxLightt();
+        myInventory.SetUpgradePotions(myInventory.getUpgradePotions() - 1);
+        buttonLight.text = "Upgrade Light (" + myStats.GetLighttMax() + ")";
+    }
+    public void UpgradeMagic() {
+        myStats.UpgradeMaxMagic();
+        myInventory.SetUpgradePotions(myInventory.getUpgradePotions() - 1);
+        buttonMagic.text = "Upgrade Magic (" + myStats.GetMagicMax() + ")";
+
+    }
+    public void UpgradeHealth() {
+        myStats.UpgradeMaxHealth();
+        myInventory.SetUpgradePotions(myInventory.getUpgradePotions() - 1);
+        buttonHealth.text = "Upgrade Health (" + myStats.GetHealthMax() + ")";
+    }
+
 
 }

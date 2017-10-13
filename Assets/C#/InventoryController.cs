@@ -43,7 +43,7 @@ public class InventoryController : MonoBehaviour {
 
 
     private Text helpInteractText;  //text display to help interact
-    private InventoryPanel inventoryPanel;
+    public InventoryPanel inventoryPanel;
 
     private void Awake()
     {
@@ -302,21 +302,21 @@ public class InventoryController : MonoBehaviour {
 
 	public void useUpgradeKit(ItemStats i){
         i.Upgrade(10);
-		
 
-		//The upgrades of your armor are more effective depending on the condition of your armor
-		if (i is Armor) {
+        upgradekits -= 1;
+
+        //The upgrades of your armor are more effective depending on the condition of your armor
+        if (i is Armor) {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
-			upgradekits-=1;
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
 			}else{
 
 			}
 			return;
-		}
+        }
 
-		
+
     }
 
 
