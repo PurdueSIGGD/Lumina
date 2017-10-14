@@ -15,6 +15,7 @@ public class SlimeEnemy : BaseEnemy {
     float forceMultiplier = 1;
     float lastHit;
     public float hitCooldown = 1;
+    public Animator myAnim;
 
     public RandomAudioSource death;
     //Variable initialization 
@@ -31,9 +32,10 @@ public class SlimeEnemy : BaseEnemy {
 	 */
 	public override IEnumerator Attack(){
         isAttacking = true;
-
         yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-        if (health >= 0) {
+        if (health >= 0)
+        {
+            myAnim.SetTrigger("StartAttack");
             rb.AddForce(transform.forward * thrust * 1.5f + Vector3.up * 2 *  thrust);
             yield return new WaitForSeconds(.9f);
             // Jump back
@@ -80,7 +82,10 @@ public class SlimeEnemy : BaseEnemy {
         }
 
         else if (target == null) {
-			changeDirectionCount += Time.deltaTime;
+
+            StopAllCoroutines();
+            myAnim.SetBool("Attacking", false);
+            changeDirectionCount += Time.deltaTime;
 			transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
 			if (changeDirectionCount > 4f) {
 				transform.rotation = Quaternion.Euler(0, Random.Range (-360, 360), 0);
@@ -99,6 +104,8 @@ public class SlimeEnemy : BaseEnemy {
         {
             target = col.transform;
             isAttacking = true;
+            myAnim.SetTrigger("StartAttacking");
+            myAnim.SetBool("Attacking", true);
             StartCoroutine(Attack());
             //Debug.Log("PLAYER FOUND");
         }
@@ -108,6 +115,9 @@ public class SlimeEnemy : BaseEnemy {
     {
         if (!col.isTrigger && col.transform == target)
         {
+
+            StopAllCoroutines();
+            myAnim.SetBool("Attacking", false);
             target = null;
             isAttacking = false;
         }
@@ -123,6 +133,9 @@ public class SlimeEnemy : BaseEnemy {
         // IDK do whatever
         StopAllCoroutines();
         rb.constraints = RigidbodyConstraints.None;
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        myAnim.SetBool("Attacking", false);
+        myAnim.SetBool("Death", true);
     }
     public override void OnDamage(float damage, DamageType type) {
 

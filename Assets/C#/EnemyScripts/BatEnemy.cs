@@ -35,6 +35,9 @@ public class BatEnemy : BaseEnemy
             if (0.1f > Random.Range(0.0f, 1f)) {
                 exploding = true;
             }
+        } else
+        {
+            damage *= 3;
         }
         dynamite.SetActive(exploding);
     }
