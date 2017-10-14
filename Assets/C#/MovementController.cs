@@ -244,6 +244,7 @@ public class MovementController : MonoBehaviour {
         // change skybox settings to be all black
         playerCam.clearFlags = CameraClearFlags.Color;
         playerCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f);
+        this.SendMessage("DungeonFeet"); // For footsteps
 
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
@@ -262,6 +263,7 @@ public class MovementController : MonoBehaviour {
         playerCam.clearFlags = CameraClearFlags.Skybox;
         disableMovement = false;
 
+        this.SendMessage("WorldFeet"); // For footsteps
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
         }

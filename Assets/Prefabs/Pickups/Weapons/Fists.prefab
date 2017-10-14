@@ -97,6 +97,14 @@ MonoBehaviour:
   bothHands: 0
   storedAmmo: 0
   myAnim: {fileID: 0}
+  drawSounds:
+  - {fileID: 8300000, guid: f9d6540cf4754bc41a9b1e9024dbf3a0, type: 3}
   width: 0.06
+  swingSounds:
+  - {fileID: 8300000, guid: 156b1dfac6c128e4e803b61eb607d85b, type: 3}
+  - {fileID: 8300000, guid: b1c0848ee0805cf489c7fd5c098c8c64, type: 3}
+  - {fileID: 8300000, guid: 7b0afc5d3ec1a954e875252960a525fe, type: 3}
   hitParticles: {fileID: 1402605011371372, guid: a6753d183e1014046a8f8a18b0c6ec72,
+    type: 2}
+  enemyHitParticles: {fileID: 1402605011371372, guid: a6753d183e1014046a8f8a18b0c6ec72,
     type: 2}

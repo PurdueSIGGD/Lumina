@@ -78,6 +78,7 @@ public class DarklingAirEnemy : AirEnemy {
     public const string TAG_TELE_START = "Teleport_Start";
     public const string TAG_TELE_END = "Teleport_End";
 
+    public RandomAudioSource deathSound;
 
     private void Start()
     {
@@ -214,6 +215,7 @@ public class DarklingAirEnemy : AirEnemy {
         foreach (Collider c in colliders) {
             c.isTrigger = true; // disable collision
         }
+        deathSound.PlayOnce();
         animator.SetBool("Death", true);
         
     }

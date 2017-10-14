@@ -18,8 +18,11 @@ public class WeaponController : MonoBehaviour {
     public Animator viewmodelAnimator;
     public StatsController myStats;
     public WeaponController otherWeapon;
+    public RandomAudioSource weaponSounds;
+    public RandomAudioSource pullSounds;
+    public RandomAudioSource drawSounds;
 
-    //public GameObject firstWeaponToEquip; // Prefab reference that we can instantiate
+
 
     public Weapon[] weapons = new Weapon[2];
     public int weaponIndex;
@@ -302,6 +305,22 @@ public class WeaponController : MonoBehaviour {
         //print(bothHands);
 
         pendingPackType = packType;
+        if (weaponSounds != null) {
+            drawSounds.clips = pendingNewWeapon.drawSounds;
+            if(pendingNewWeapon is SwingingWeapon) {
+                weaponSounds.clips = ((SwingingWeapon)pendingNewWeapon).swingSounds;
+            }
+            if (pendingNewWeapon is Magic) {
+                weaponSounds.clips = ((Magic)pendingNewWeapon).shootSounds;
+            }
+            if (pendingNewWeapon is ChargedProjectileWeapon) {
+                weaponSounds.clips = ((ChargedProjectileWeapon)pendingNewWeapon).shootSound;
+                weaponSounds.clips = ((ChargedProjectileWeapon)pendingNewWeapon).shootSound;
+                pullSounds.clips = ((ChargedProjectileWeapon)pendingNewWeapon).chargeSound;
+            }
+        }
+        
+
 
         if (pendingNewWeapon is Magic) {
             ((Magic)pendingNewWeapon).pauseParticles();

@@ -30,7 +30,7 @@ public class StatsController : Hittable
     Hittable.DamageType weakAgainst;
 	Hittable.DamageType strongAgainst;
 
-    public Animator myAnim;
+    public Animator myAnim, hurtAnim;
     public Light healthLight;
     public InventoryController inventoryController;
     public GameOverCanvas gameOverCanvas;
@@ -38,8 +38,10 @@ public class StatsController : Hittable
     private float healthLightStartIntensity;
     private float lightDamageCooldown;
 	bool outside;
-    bool dead;
-    
+    public bool dead;
+    public AudioClip[] dungeonFootsteps;
+    public AudioClip[] outdoorFootsteps;
+    public RandomAudioSource footstepSource;
 	//public PauseMenu pauseMenu;
 
     public HUDController gui { get; set; } 
@@ -65,6 +67,15 @@ public class StatsController : Hittable
 		magicMax = DEFAULT_MAX_MAGIC;
 		lightt = 0;
 		lighttMax = DEFAULT_MAX_LIGHT;*/
+    }
+    void DungeonFeet() {
+        footstepSource.clips = dungeonFootsteps;
+        print("dungeon feet");
+    }
+    void WorldFeet() {
+        footstepSource.clips = outdoorFootsteps;
+        print("world feet");
+
     }
 
     void Update() {
@@ -115,7 +126,9 @@ public class StatsController : Hittable
             myAnim.SetLayerWeight(8, Mathf.Abs(left));
         }
         myAnim.SetTrigger("Damage");
-
+        if (!dead) {
+            hurtAnim.SetTrigger("Hurt");
+        }
 		damage = ApplyDamageTypeHitMod (damage, type);
         // Umbra (shadow) does not have any armor hit modification
 		if (type != DamageType.Umbra) damage = ApplyArmorHitMod (damage, type);

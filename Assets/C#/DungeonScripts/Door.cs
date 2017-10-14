@@ -52,7 +52,6 @@ public abstract class Door : Usable {
         //Debug.Log("LOADING: " + getSceneToLoad());
         //Debug.Log(this.gameObject);
         SceneManager.LoadScene(getSceneToLoad(), LoadSceneMode.Single);
-       
     }
 
     // Return the name of the scene to load, used by SceneManager

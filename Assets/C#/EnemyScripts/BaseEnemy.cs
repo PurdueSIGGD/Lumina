@@ -69,8 +69,12 @@ abstract public class BaseEnemy : Hittable {
             foreach (Collider col in attached.GetComponentsInChildren<Collider>())
                 col.enabled = true;
             ItemStats it;
-            if (it = attached.GetComponent<ItemStats>()) {
-                it.condition = Random.Range((0.3f * (it.maxCondition - it.minCondition)) + it.minCondition, it.maxCondition);
+            if ((it = attached.GetComponent<ItemStats>())) {
+                if (it.condition == 100) {
+                    it.condition = Random.Range((0.3f * (it.maxCondition - it.minCondition)) + it.minCondition, it.maxCondition);
+                } else {
+                    it.condition =  Random.Range(it.minCondition, it.condition);
+                }
             }
         }
 	}

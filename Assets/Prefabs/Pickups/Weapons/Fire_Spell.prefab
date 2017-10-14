@@ -260,9 +260,13 @@ MonoBehaviour:
   bothHands: 0
   storedAmmo: 0
   myAnim: {fileID: 0}
+  drawSounds:
+  - {fileID: 8300000, guid: f9d6540cf4754bc41a9b1e9024dbf3a0, type: 3}
   idleParticles: {fileID: 198235078090814050}
   shootParticles: {fileID: 198974714219414730}
   mesh: {fileID: 4569922837549708}
+  shootSounds:
+  - {fileID: 8300000, guid: bb32e61d97fbad04ea715d954a45f586, type: 3}
   width: 0.5
   magicDraw: 15
 --- !u!198 &198235078090814050

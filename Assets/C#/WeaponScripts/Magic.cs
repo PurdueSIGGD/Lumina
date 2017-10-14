@@ -7,6 +7,7 @@ public abstract class Magic : Weapon {
     public ParticleSystem idleParticles;
     public ParticleSystem shootParticles;
     public Transform mesh;
+    public AudioClip[] shootSounds;
 
     public override void Attack(bool mouseDown) {
         MagicAttack(mouseDown);

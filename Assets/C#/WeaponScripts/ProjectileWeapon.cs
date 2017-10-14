@@ -13,6 +13,7 @@ public abstract class ProjectileWeapon : Weapon {
     public Projectile projectilePrefab;
     public Transform shootPoint; //Transform where you want the arrow to spawn and shoot from
     public float launchSpeed = 1;
+    public AudioClip[] shootSound;
 
    void Update() {
         // We have to update arrows constantly because it may change
@@ -34,6 +35,7 @@ public abstract class ProjectileWeapon : Weapon {
         //projectile.transform.LookAt(((getLookObj().transform.position = getLookObj().transform.forward) - getLookObj().transform.position));
         projectile.creator = playerStats.transform;
         projectile.damage = (baseDamage * (getCondition() / 100));
+        DamageCondition(1);
         projectile.damageType = damageType;
         projectile.GetComponent<Rigidbody>().velocity = getLookObj().transform.forward * launchSpeed * getTimeSincePress();
         playerStats.UpdateArrows(-1);

@@ -18,6 +18,11 @@ public class BatEnemy : BaseEnemy
     private float changeDirectionCount = 0; //The time counter for the slime to change direction while the player isn't around
     Coroutine attackMethod;
     float forceMultiplier = 1;
+    public RandomAudioSource flap;
+    public RandomAudioSource attack;
+    public bool exploding;
+    public GameObject explodeParticles;
+    public GameObject dynamite;
 
     //Variable initialization 
     void Start()
@@ -26,6 +31,12 @@ public class BatEnemy : BaseEnemy
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         StartCoroutine(MovementPattern());
+        if (!exploding) {
+            if (0.1f > Random.Range(0.0f, 1f)) {
+                exploding = true;
+            }
+        }
+        dynamite.SetActive(exploding);
     }
 
     /* The attack method is an IEnumarator to allow the slime to wait before executing the attack
@@ -44,6 +55,7 @@ public class BatEnemy : BaseEnemy
             if (health <= 0) {
                 break;
             }
+            attack.PlayOnce();
             rb.AddForce(rb.mass * transform.forward * thrust * 2 * forceMultiplier);
             yield return new WaitForSeconds(timeBetweenAttacks / 2); //Wait a single second before attack
             if (health <= 0) {
@@ -78,6 +90,7 @@ public class BatEnemy : BaseEnemy
                     if (transform.position.y - hit.point.y < flightHeight)
                     {
                         float thrust = Random.Range(3 * flightThrust / 4, flightThrust);
+                        flap.PlayOnce();
                         rb.AddForce(rb.mass * Vector3.up * thrust);
                         //Debug.Log(thrust);
                     }
@@ -194,6 +207,10 @@ public class BatEnemy : BaseEnemy
         Hittable h;
         if (col.transform == target && health > 0 && (h = target.GetComponent<Hittable>())) {
             h.Hit(damage);
+            if (exploding) {
+                GameObject.Instantiate(explodeParticles, transform.position, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
         }
     }
     

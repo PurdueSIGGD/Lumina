@@ -23,8 +23,8 @@ public abstract class ItemStats : MonoBehaviour {
 
     public abstract string getBlurb(); // To be implemented by children
     void Start() {
-        // Condition should be set by the spawning class
-	    //condition = Random.Range (minCondition, maxCondition);
+        // Condition should be set by the spawning class, but if it is still 100 we change it
+	    if (condition == 100) condition = Random.Range (minCondition, maxCondition);
 	}
   
     /**

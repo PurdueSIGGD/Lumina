@@ -62,7 +62,7 @@ public class BeamMagic : Magic {
             attacking = false;
         }
         if (attacking) {
-			if (!mouseDown || playerStats.GetMagic() <= 0) {
+            if (!mouseDown || playerStats.GetMagic() <= 0) {
                 attacking = false;
                 releaseTime = 0;
                 onCooldown = true;

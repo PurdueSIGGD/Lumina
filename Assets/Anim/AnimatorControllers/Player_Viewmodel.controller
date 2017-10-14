@@ -307,6 +307,21 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
+    m_Name: Camera Damage Right
+    m_StateMachine: {fileID: 1107713029265795310}
+    m_Mask: {fileID: 101100000, guid: f0c59d737aed6db49910b14f9d89df62, type: 2}
+    m_Motions:
+    - serializedVersion: 2
+      m_State: {fileID: 1102816155190481174}
+      m_Motion: {fileID: 7400158, guid: a89d22e0a3f90c549a3dabf775e7debf, type: 3}
+    m_Behaviours: []
+    m_BlendingMode: 1
+    m_SyncedLayerIndex: 7
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
     m_Name: Left Hand Camera
     m_StateMachine: {fileID: 1107116887571628984}
     m_Mask: {fileID: 101100000, guid: f0c59d737aed6db49910b14f9d89df62, type: 2}
@@ -358,26 +373,371 @@ AnimatorController:
       m_Motion: {fileID: 7400156, guid: a89d22e0a3f90c549a3dabf775e7debf, type: 3}
     m_Behaviours: []
     m_BlendingMode: 1
-    m_SyncedLayerIndex: 6
+    m_SyncedLayerIndex: 7
     m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Camera Damage Right
-    m_StateMachine: {fileID: 1107713029265795310}
-    m_Mask: {fileID: 101100000, guid: f0c59d737aed6db49910b14f9d89df62, type: 2}
-    m_Motions:
-    - serializedVersion: 2
-      m_State: {fileID: 1102816155190481174}
-      m_Motion: {fileID: 7400158, guid: a89d22e0a3f90c549a3dabf775e7debf, type: 3}
-    m_Behaviours: []
-    m_BlendingMode: 1
-    m_SyncedLayerIndex: 6
+    m_Name: Right Hand Sounds
+    m_StateMachine: {fileID: 1107627925313877708}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours:
+    - m_State: {fileID: 1102916935262359640}
+      m_StateMachineBehaviours:
+      - {fileID: 114159780707122556}
+    - m_State: {fileID: 1102551412882659084}
+      m_StateMachineBehaviours:
+      - {fileID: 114570458295447512}
+    - m_State: {fileID: 1102395794218696110}
+      m_StateMachineBehaviours:
+      - {fileID: 114595638957489980}
+    - m_State: {fileID: 1102869685065522922}
+      m_StateMachineBehaviours:
+      - {fileID: 114570416400175272}
+    - m_State: {fileID: 1102938804800401062}
+      m_StateMachineBehaviours:
+      - {fileID: 114187899753499454}
+    - m_State: {fileID: 1102464548848771648}
+      m_StateMachineBehaviours:
+      - {fileID: 114590550277256806}
+    - m_State: {fileID: 1102159367416882890}
+      m_StateMachineBehaviours:
+      - {fileID: 114343934513544204}
+    - m_State: {fileID: 1102574836125662850}
+      m_StateMachineBehaviours:
+      - {fileID: 114202289509860662}
+    - m_State: {fileID: 1102708135008495282}
+      m_StateMachineBehaviours:
+      - {fileID: 114113412009520528}
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 1
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Movement_Sounds
+    m_StateMachine: {fileID: 1107156941442734794}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours:
+    - m_State: {fileID: 1102155735435508574}
+      m_StateMachineBehaviours:
+      - {fileID: 114655891016371364}
+    - m_State: {fileID: 1102065014475601934}
+      m_StateMachineBehaviours:
+      - {fileID: 114607225649149100}
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 3
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Left Hand Sounds
+    m_StateMachine: {fileID: 1107077064090218052}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours:
+    - m_State: {fileID: 1102055029293632882}
+      m_StateMachineBehaviours:
+      - {fileID: 114149152164889814}
+    - m_State: {fileID: 1102459621141039038}
+      m_StateMachineBehaviours:
+      - {fileID: 114514899572191672}
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 2
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Both Hand Sounds
+    m_StateMachine: {fileID: 1107798187508991574}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours:
+    - m_State: {fileID: 1102381727740248404}
+      m_StateMachineBehaviours:
+      - {fileID: 114190397396688766}
+    - m_State: {fileID: 1102055488768539786}
+      m_StateMachineBehaviours:
+      - {fileID: 114563862203759400}
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 0
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Camera Damage Sound
+    m_StateMachine: {fileID: 1107650825442655608}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours:
+    - m_State: {fileID: 1102816155190481174}
+      m_StateMachineBehaviours:
+      - {fileID: 114972358350198370}
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 7
     m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &114113412009520528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponDrawSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114149152164889814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponMagicSounds
+  playsInMiddle: 0
+  looping: 1
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114159780707122556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponDrawSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114187899753499454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114190397396688766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: BowPullSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114202289509860662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114343934513544204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114514899572191672
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e405844ae91234a8c1efecfa0cde84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponMagicSounds
+--- !u!114 &114563862203759400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114570416400175272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114570458295447512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponDrawSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114590550277256806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114595638957489980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: WeaponSwingSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114607225649149100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: RunningSounds
+  playsInMiddle: 1
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114655891016371364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: RunningSounds
+  playsInMiddle: 1
+  looping: 0
+  muteOnDeath: 0
+  delay: 0
+--- !u!114 &114972358350198370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815d396c6c0b01e4fa90872465626a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceName: DamageSounds
+  playsInMiddle: 0
+  looping: 0
+  muteOnDeath: 1
+  delay: 0
 --- !u!1101 &1101000614474063464
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4072,6 +4432,29 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1102 &1102805186739557768
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: NoDamage
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
 --- !u!1102 &1102811756784389484
 AnimatorState:
   serializedVersion: 5
@@ -4484,6 +4867,24 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
+--- !u!1107 &1107077064090218052
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Left Hand Sounds
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!1107 &1107116887571628984
 AnimatorStateMachine:
   serializedVersion: 5
@@ -4491,6 +4892,24 @@ AnimatorStateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Left Hand Camera
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
+--- !u!1107 &1107156941442734794
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Movement_Sounds
   m_ChildStates: []
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
@@ -4672,7 +5091,7 @@ AnimatorStateMachine:
     m_Position: {x: 36, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102574836125662850}
-    m_Position: {x: 216, y: -72, z: 0}
+    m_Position: {x: 228, y: -84, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102708135008495282}
     m_Position: {x: 432, y: 12, z: 0}
@@ -4738,6 +5157,42 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102833779628349740}
+--- !u!1107 &1107627925313877708
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Right Hand Sounds
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
+--- !u!1107 &1107650825442655608
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Camera Damage Sound
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!1107 &1107662097569616474
 AnimatorStateMachine:
   serializedVersion: 5
@@ -4783,6 +5238,24 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 0}
+--- !u!1107 &1107798187508991574
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Both Hand Sounds
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!1107 &1107799403845714532
 AnimatorStateMachine:
   serializedVersion: 5
@@ -4793,7 +5266,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102816155190481174}
-    m_Position: {x: 324, y: 96, z: 0}
+    m_Position: {x: 336, y: 108, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102805186739557768}
+    m_Position: {x: 288, y: 0, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 1101754490505033540}
@@ -4804,7 +5280,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102816155190481174}
+  m_DefaultState: {fileID: 1102805186739557768}
 --- !u!1107 &1107903375776716578
 AnimatorStateMachine:
   serializedVersion: 5
