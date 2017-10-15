@@ -8,6 +8,7 @@ public class SoundBehavior : StateMachineBehaviour {
     public bool playsInMiddle;
     public bool looping;
     public bool muteOnDeath;
+    public bool notForceStop;
     public float delay;
     RandomAudioSource target;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -44,7 +45,7 @@ public class SoundBehavior : StateMachineBehaviour {
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         RandomAudioSource target = GameObject.Find(sourceName).GetComponent<RandomAudioSource>();
         
-        if (target && !looping) target.Stop();
+        if (target && !looping && !notForceStop) target.Stop();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

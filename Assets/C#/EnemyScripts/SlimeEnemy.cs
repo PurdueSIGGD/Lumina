@@ -36,10 +36,15 @@ public class SlimeEnemy : BaseEnemy {
         if (health >= 0)
         {
             myAnim.SetTrigger("StartAttack");
-            rb.AddForce(transform.forward * thrust * 1.5f + Vector3.up * 2 *  thrust);
+            bool airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            rb.AddForce(transform.forward * thrust * 1.5f + (!airborne ? Vector3.up * 2 * thrust : Vector3.zero));
+
+            myAnim.SetBool("Attacking", airborne);
             yield return new WaitForSeconds(.9f);
             // Jump back
-            rb.AddForce(transform.forward * -1 * thrust + Vector3.up * 2 * thrust / 2);
+            airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            rb.AddForce(transform.forward * -1 * thrust + (!airborne?Vector3.up * 2 * thrust:Vector3.zero) / 2);
+            myAnim.SetBool("Attacking", airborne);
             // If still attacking, attack again
             if (isAttacking) StartCoroutine(Attack());
             else StopCoroutine(Attack());

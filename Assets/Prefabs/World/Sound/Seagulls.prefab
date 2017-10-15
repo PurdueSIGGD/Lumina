@@ -51,7 +51,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.109
   m_Pitch: 1
   Loop: 0
@@ -141,4 +141,5 @@ MonoBehaviour:
   looping: 1
   oneOnly: 0
   playOnAwake: 1
+  noScripting: 1
   delay: 0

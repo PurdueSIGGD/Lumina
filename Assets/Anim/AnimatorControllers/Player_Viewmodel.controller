@@ -482,7 +482,7 @@ AnimatorController:
       - {fileID: 114972358350198370}
     m_BlendingMode: 0
     m_SyncedLayerIndex: 7
-    m_DefaultWeight: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -501,6 +501,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114149152164889814
 MonoBehaviour:
@@ -517,6 +518,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 1
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114159780707122556
 MonoBehaviour:
@@ -533,6 +535,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114187899753499454
 MonoBehaviour:
@@ -549,6 +552,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114190397396688766
 MonoBehaviour:
@@ -565,6 +569,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114202289509860662
 MonoBehaviour:
@@ -581,6 +586,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114343934513544204
 MonoBehaviour:
@@ -597,6 +603,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114514899572191672
 MonoBehaviour:
@@ -625,6 +632,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114570416400175272
 MonoBehaviour:
@@ -641,6 +649,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114570458295447512
 MonoBehaviour:
@@ -657,6 +666,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114590550277256806
 MonoBehaviour:
@@ -673,6 +683,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114595638957489980
 MonoBehaviour:
@@ -689,6 +700,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114607225649149100
 MonoBehaviour:
@@ -705,6 +717,7 @@ MonoBehaviour:
   playsInMiddle: 1
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114655891016371364
 MonoBehaviour:
@@ -721,6 +734,7 @@ MonoBehaviour:
   playsInMiddle: 1
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114972358350198370
 MonoBehaviour:
@@ -737,6 +751,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 1
+  notForceStop: 1
   delay: 0
 --- !u!1101 &1101000614474063464
 AnimatorStateTransition:

@@ -16,6 +16,7 @@ abstract public class BaseEnemy : Hittable {
 	public float movementSpeed;		//Enemy movement speed
 
     private int deathLayer = 14;
+    private bool hasDeath;
 
 
 
@@ -26,7 +27,7 @@ abstract public class BaseEnemy : Hittable {
 	 * Instantiate that drop
 	 */
     void GenericDeath(){
-
+        hasDeath = true;
         OnDeath();
 
         healthBar.gameObject.SetActive(false);
@@ -117,7 +118,9 @@ abstract public class BaseEnemy : Hittable {
 	public void Update () {
 		if (health > 0) Movement ();
         else {
-
+            if (!hasDeath) {
+                GenericDeath();
+            }
         }
 	}
 

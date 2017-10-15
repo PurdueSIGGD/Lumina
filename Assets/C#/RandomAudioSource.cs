@@ -9,6 +9,7 @@ public class RandomAudioSource : MonoBehaviour {
     public bool looping;
     public bool oneOnly; // One only if a looping, single constant sound
     public bool playOnAwake;
+    public bool noScripting;
     public float delay;
 	// Use this for initialization
 	void Start () {
@@ -24,6 +25,7 @@ public class RandomAudioSource : MonoBehaviour {
                 StartCoroutine(RandomClip());
             }
         }
+       
 	}
 	
 	/**
@@ -32,6 +34,9 @@ public class RandomAudioSource : MonoBehaviour {
     IEnumerator RandomClip() {
         if (clips.Length > 0) {
             do {
+                if (noScripting && source.clip) {
+                    delay = source.clip.length;
+                }
                 yield return new WaitForSeconds(delay);
                 int index = Random.Range(0, clips.Length - 1);
                 source.clip = clips[index];
@@ -43,10 +48,14 @@ public class RandomAudioSource : MonoBehaviour {
     }
    
     public void PlayOnce() {
-        Stop();
+        
         int index = Random.Range(0, clips.Length - 1);
-        source.clip = clips[index];
-        source.Play();
+        if (clips.Length > 0) {
+            source.clip = clips[index];
+            source.Play();
+
+        }
+      
         //if (looping) {
         //StartCoroutine(RandomClip());
         //} else {

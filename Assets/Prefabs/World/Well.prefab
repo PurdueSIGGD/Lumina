@@ -984,7 +984,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.694
+  m_Volume: 0.334
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1111,6 +1111,7 @@ MonoBehaviour:
   looping: 0
   oneOnly: 0
   playOnAwake: 0
+  noScripting: 0
   delay: 0
 --- !u!137 &137588530888009686
 SkinnedMeshRenderer:
