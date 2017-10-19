@@ -16,6 +16,7 @@ abstract public class BaseEnemy : Hittable {
 	public float movementSpeed;		//Enemy movement speed
 
     private int deathLayer = 14;
+    private bool hasDeath;
 
 
 
@@ -26,7 +27,7 @@ abstract public class BaseEnemy : Hittable {
 	 * Instantiate that drop
 	 */
     void GenericDeath(){
-
+        hasDeath = true;
         OnDeath();
 
         healthBar.gameObject.SetActive(false);
@@ -39,7 +40,7 @@ abstract public class BaseEnemy : Hittable {
         MoveToLayer(transform, deathLayer);
         // Prevent from moving
         //TODO ragdoll
-        this.GetComponent<Rigidbody>().freezeRotation = true;
+        if (!this.GetComponent<BatEnemy>()) this.GetComponent<Rigidbody>().freezeRotation = true;
 
         ArrayList drops = new ArrayList();
         for (int i = 0; i < probabilityDrops.Length; i++) {
@@ -69,8 +70,12 @@ abstract public class BaseEnemy : Hittable {
             foreach (Collider col in attached.GetComponentsInChildren<Collider>())
                 col.enabled = true;
             ItemStats it;
-            if (it = attached.GetComponent<ItemStats>()) {
-                it.condition = Random.Range((0.3f * (it.maxCondition - it.minCondition)) + it.minCondition, it.maxCondition);
+            if ((it = attached.GetComponent<ItemStats>())) {
+                if (it.condition == 100) {
+                    it.condition = Random.Range((0.3f * (it.maxCondition - it.minCondition)) + it.minCondition, it.maxCondition);
+                } else {
+                    it.condition =  Random.Range(it.minCondition, it.condition);
+                }
             }
         }
 	}
@@ -113,7 +118,9 @@ abstract public class BaseEnemy : Hittable {
 	public void Update () {
 		if (health > 0) Movement ();
         else {
-
+            if (!hasDeath) {
+                GenericDeath();
+            }
         }
 	}
 

@@ -13,11 +13,15 @@ public class SlimeEnemy : BaseEnemy {
 	private Rigidbody rb;					//The slimes rigidbody which allows us to propel it
 	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
     float forceMultiplier = 1;
-
+    float lastHit;
+    public RandomAudioSource splat;
+    public RandomAudioSource death;
+    public float hitCooldown = 1;
+    public Animator myAnim;
 
     //Variable initialization 
     void Start(){
-
+        lastHit = 0;
 		startPos = transform.position;
 		rb = GetComponent<Rigidbody> ();
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -29,10 +33,21 @@ public class SlimeEnemy : BaseEnemy {
 	 */
 	public override IEnumerator Attack(){
         isAttacking = true;
-
         yield return new WaitForSeconds(timeBetweenAttacks); //Wait a single second before attack
-        if (health >= 0) {
-            rb.AddForce(transform.forward * thrust * forceMultiplier + Vector3.up * thrust / 2 * forceMultiplier);
+        if (health >= 0)
+        {
+            myAnim.SetTrigger("StartAttack");
+            bool airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            splat.PlayOnce();
+            rb.AddForce(transform.forward * thrust * 2.5f + (!airborne ? Vector3.up * 2 * thrust : Vector3.zero));
+
+            myAnim.SetBool("Attacking", airborne);
+            yield return new WaitForSeconds(.9f);
+            // Jump back
+            airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            splat.PlayOnce();
+            rb.AddForce(transform.forward * -1.5f * thrust + (!airborne?Vector3.up * 2 * thrust:Vector3.zero) / 2);
+            myAnim.SetBool("Attacking", airborne);
             // If still attacking, attack again
             if (isAttacking) StartCoroutine(Attack());
             else StopCoroutine(Attack());
@@ -53,14 +68,14 @@ public class SlimeEnemy : BaseEnemy {
 
                 if (!(Vector3.Distance(target.position, transform.position) < attackRange))
                 {
-                    forceMultiplier = 0;
+                    forceMultiplier = .1f;
                 } else
                 {
                     forceMultiplier = 1;
                 }
 
                 // They will start moving slower if they want to attack you! Good way of knowing when they spotted you
-                transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
+                transform.position = transform.position + (transform.forward * Time.deltaTime * forceMultiplier * movementSpeed);
                 if (/* You want to stop attacking, say you are mid air or low health*/false) {
                     isAttacking = false;
                 }
@@ -75,7 +90,10 @@ public class SlimeEnemy : BaseEnemy {
         }
 
         else if (target == null) {
-			changeDirectionCount += Time.deltaTime;
+
+            StopAllCoroutines();
+            myAnim.SetBool("Attacking", false);
+            changeDirectionCount += Time.deltaTime;
 			transform.position = transform.position + (transform.forward * Time.deltaTime * movementSpeed);
 			if (changeDirectionCount > 4f) {
 				transform.rotation = Quaternion.Euler(0, Random.Range (-360, 360), 0);
@@ -94,8 +112,10 @@ public class SlimeEnemy : BaseEnemy {
         {
             target = col.transform;
             isAttacking = true;
+            myAnim.SetTrigger("StartAttacking");
+            myAnim.SetBool("Attacking", true);
             StartCoroutine(Attack());
-            Debug.Log("PLAYER FOUND");
+            //Debug.Log("PLAYER FOUND");
         }
     }
 
@@ -103,18 +123,28 @@ public class SlimeEnemy : BaseEnemy {
     {
         if (!col.isTrigger && col.transform == target)
         {
+
+            StopAllCoroutines();
+            myAnim.SetBool("Attacking", false);
             target = null;
             isAttacking = false;
         }
     }
     public void OnCollisionEnter(Collision col) {
         Hittable h;
-        if (col.transform == target && health > 0 && (h = target.GetComponent<Hittable>())) {
+        if (Time.time - lastHit > hitCooldown && col.transform == target && health > 0 && (h = target.GetComponent<Hittable>())) {
+            lastHit = Time.time;
             h.Hit(damage);
         }
     }
     public override void OnDeath() {
         // IDK do whatever
+        death.PlayOnce();
+        StopAllCoroutines();
+        rb.constraints = RigidbodyConstraints.None;
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        myAnim.SetBool("Attacking", false);
+        myAnim.SetBool("Death", true);
     }
     public override void OnDamage(float damage, DamageType type) {
 

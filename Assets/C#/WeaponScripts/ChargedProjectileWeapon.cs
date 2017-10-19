@@ -8,13 +8,14 @@ public class ChargedProjectileWeapon : ProjectileWeapon {
     public bool isAttacking;
     public bool hasShot;
     static float maxChargeTime = 1; //The max amount of seconds we charge for
+    public AudioClip[] chargeSound;
     // Use this for initialization
     void Start() {
         isAttacking = false;
         hasShot = false;
     }
     public override string getBlurb() {
-        return "Damage: " + baseDamage + ", Speed: " + launchSpeed;
+        return "Damage: " + (baseDamage * (getCondition() / 100)) + ", Speed: " + launchSpeed;
     }
     public override void Attack(bool mouseDown) {
         //print("attac");

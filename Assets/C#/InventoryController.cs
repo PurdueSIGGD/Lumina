@@ -44,6 +44,7 @@ public class InventoryController : MonoBehaviour {
 
     private Text helpInteractText;  //text display to help interact
     public InventoryPanel inventoryPanel;
+    public AudioSource pickupSound;
 
     private void Awake()
     {
@@ -254,7 +255,8 @@ public class InventoryController : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 			if(other.gameObject.GetComponentInParent<Pickup>()!= null){
-			    pick = other.gameObject.GetComponentInParent<Pickup> ();
+            pick = other.gameObject.GetComponentInParent<Pickup>();
+            bool consumed = false;
 			    //Debug.Log ("Player picked up " + pick.itemType);
                 bool deletes = false;
 			    switch(pick.itemType){
@@ -270,7 +272,10 @@ public class InventoryController : MonoBehaviour {
                         break;
                     case Pickup.pickUpType.Magic:
                     float leftOver1 = statsController.UpdateMagic(pick.amount);
-                    if ((pick.amount - leftOver1) != 0) NotificationStackController.PostNotification("+{0} Magic", magicPotionSprite, pick.amount - leftOver1);
+                    if ((pick.amount - leftOver1) != 0) {
+                        NotificationStackController.PostNotification("+{0} Magic", magicPotionSprite, pick.amount - leftOver1);
+                        consumed = true;
+                    }
                     if (leftOver1 > 0) {
                         pick.amount = leftOver1;
                     } else {
@@ -279,7 +284,10 @@ public class InventoryController : MonoBehaviour {
                     break;
                     case Pickup.pickUpType.Health:
                     float leftOver2 = statsController.UpdateHealth(pick.amount);
-                    if ((pick.amount - leftOver2) != 0) NotificationStackController.PostNotification("+{0} Health", healthPotionSprite, pick.amount - leftOver2);
+                    if ((pick.amount - leftOver2) != 0) {
+                        NotificationStackController.PostNotification("+{0} Health", healthPotionSprite, pick.amount - leftOver2);
+                        consumed = true;
+                    }
                     if (leftOver2 > 0) {
                         pick.amount = leftOver2;
                     } else {
@@ -288,7 +296,10 @@ public class InventoryController : MonoBehaviour {
                     break;
                     case Pickup.pickUpType.Arrow:
                     int leftOver3 = statsController.UpdateArrows((int)pick.amount);
-                    if (((int)pick.amount - leftOver3) != 0) NotificationStackController.PostNotification("+{0} Arrows", arrowPickupSprite, (pick.amount - leftOver3));
+                    if (((int)pick.amount - leftOver3) != 0) {
+                        NotificationStackController.PostNotification("+{0} Arrows", arrowPickupSprite, (pick.amount - leftOver3));
+                        consumed = true;
+                    }
                     if (leftOver3 > 0) {
                         pick.amount = leftOver3;
                     } else {
@@ -296,7 +307,14 @@ public class InventoryController : MonoBehaviour {
                     }
                     break;
 			}
-			if (deletes) Destroy (pick.gameObject);
+            if (deletes || consumed) {
+                pick = other.gameObject.GetComponentInParent<Pickup>();
+                pickupSound.clip = pick.pickupSound;
+                pickupSound.Play();
+            }
+			if (deletes) {
+                Destroy (pick.gameObject);
+            }
 		}
     }
 

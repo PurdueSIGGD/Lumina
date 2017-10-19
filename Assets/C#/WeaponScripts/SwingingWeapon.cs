@@ -10,8 +10,9 @@ public class SwingingWeapon : Weapon {
 
     bool isAttacking;
 	bool hasRaycasted;
-
+    public AudioClip[] swingSounds;
     public GameObject hitParticles; // Prefab reference for particles to spawn
+    public GameObject enemyHitParticles; // Different for actually hitting real enemeis
 
 	// Use this for initialization
 	void Start () {
@@ -59,7 +60,9 @@ public class SwingingWeapon : Weapon {
 
     private void processHits(RaycastHit[] hits) {
         bool damageCondition = false;
+        bool isEnemy = false;
         Vector3 firstHit = Vector3.zero;
+        ArrayList alreadyHit = new ArrayList();
         foreach (RaycastHit hit in hits) {
             if (hit.distance <= range &&
                 !hit.collider.isTrigger &&
@@ -91,18 +94,22 @@ public class SwingingWeapon : Weapon {
                 }
                 // Hit with hittable
                 Hittable hittable = modifiableHit.collider.GetComponentInParent<Hittable>();
-                if (hittable != null) {
+                if (hittable != null && !alreadyHit.Contains(hittable)) {
                     //print("hit " + hit);
+                    alreadyHit.Add(hittable);
                     firstHit = modifiableHit.point;
                     damageCondition = true;
                     hittable.Hit(baseDamage * (getCondition() / 100), getLookObj().transform.forward, damageType);
+                    if (hittable.gameObject.GetComponent<BaseEnemy>()) {
+                        isEnemy = true;
+                    }
                 }
             }
         }
         if (firstHit != Vector3.zero) {
             // Spawn particles
             Debug.DrawLine(getLookObj().position, firstHit, Color.green, 10);
-            GameObject particles = GameObject.Instantiate(hitParticles, firstHit + (getLookObj().transform.position - firstHit) * 0.3f, Quaternion.Euler(1 * (getLookObj().transform.position - firstHit)));
+            GameObject particles = GameObject.Instantiate(isEnemy?enemyHitParticles:hitParticles, firstHit + (getLookObj().transform.position - firstHit) * 0.3f, Quaternion.Euler(1 * (getLookObj().transform.position - firstHit)));
             particles.transform.LookAt(getLookObj());
         }
         if (damageCondition) {

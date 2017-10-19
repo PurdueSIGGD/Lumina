@@ -127,30 +127,16 @@ public class MovementController : MonoBehaviour {
      * Returns true if able to move, false if no movement
 	 */
 	private bool ApplyHorizontalMovement(float x, float z, bool sprintPressed){
-        if (!canMove) return false;
+        //if (!canMove) return false;
 
 		ApplySprint (sprintPressed);
 
 		float sprintModifier = isSprinting ? 1.5f : 1f;
         float airborneModifier = IsGrounded() ? 1 : .75f;
 
-        bool couldMove = false;
-
-        if (!(Math.Abs(playerPhysics.velocity.x) >= MAX_X_SPEED*sprintModifier)) {
-            Vector3 desiredPosition = transform.position + (transform.right * x * Time.deltaTime * sprintModifier * airborneModifier * 10);
-            if (canMoveTo(desiredPosition)) {
-                if (Mathf.Abs(z) > 0) couldMove = true;
-                transform.position = desiredPosition;
-            }
-        }
-		if (!(Math.Abs (playerPhysics.velocity.z) >= MAX_Z_SPEED*sprintModifier)) {
-            Vector3 desiredPosition = (transform.position + transform.forward * z * Time.deltaTime * sprintModifier * airborneModifier * 10);
-            if (canMoveTo(desiredPosition)) {
-                if (Mathf.Abs(z) > 0) couldMove = true;
-                transform.position = desiredPosition;
-            }
-        }
-        return couldMove;
+        playerPhysics.MovePosition(transform.position + (transform.TransformDirection(new Vector3(x, 0, z)) * Time.deltaTime * sprintModifier * airborneModifier * 10));
+        
+        return true;
     }
 
 	/**
@@ -244,6 +230,7 @@ public class MovementController : MonoBehaviour {
         // change skybox settings to be all black
         playerCam.clearFlags = CameraClearFlags.Color;
         playerCam.backgroundColor = new Color(0.08f, 0.08f, 0.08f);
+        this.SendMessage("DungeonFeet"); // For footsteps
 
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
@@ -262,6 +249,7 @@ public class MovementController : MonoBehaviour {
         playerCam.clearFlags = CameraClearFlags.Skybox;
         disableMovement = false;
 
+        this.SendMessage("WorldFeet"); // For footsteps
         foreach (WeaponController w in GetComponents<WeaponController>()) {
             w.clearSwitchCooldown();
         }

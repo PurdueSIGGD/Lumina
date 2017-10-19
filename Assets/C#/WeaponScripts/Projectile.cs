@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour {
     public bool pushesOnHit;
     public bool doubleCheckStick;
     public Transform creator; //Do not hit creator
+    public AudioSource hitNoise;
+    private ArrayList hits;
 
     // README: Please set creator when creating this object, or else it will not damage anything
 
@@ -19,6 +21,7 @@ public class Projectile : MonoBehaviour {
 
     void Start() {
         myRigid = this.GetComponent<Rigidbody>();
+        hits = new ArrayList();
     }
 	
 	// Update is called once per frame
@@ -64,6 +67,7 @@ public class Projectile : MonoBehaviour {
             col.transform == creator
             ) return;
         //print(col.collider.transform);
+        
         // Push on it, as if it was a real collision
         if (pushesOnHit && col.rigidbody) {
             col.rigidbody.AddForce(myRigid.velocity);
@@ -90,7 +94,12 @@ public class Projectile : MonoBehaviour {
         }
         // Hit for damage
         Hittable h;
-        if (h = col.transform.GetComponent<Hittable>()) {
+        if ((h = col.transform.GetComponent<Hittable>()) && !hits.Contains(h)) {
+            hits.Add(h);
+            if (hitNoise) {
+                hitNoise.volume = col.relativeVelocity.sqrMagnitude / 8000;
+                hitNoise.Play();
+            }
             float immediateDamage = 0;
             float magVelocity = Vector3.Magnitude(col.relativeVelocity);
             

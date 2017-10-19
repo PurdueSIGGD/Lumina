@@ -32,4 +32,5 @@ public abstract class Weapon : ItemStats {
     public void setControllerSide(string s) { controllerSide = s; }
     public void setPlayerAnim(Animator a) { playerAnim = a; }
     public Animator getPlayerAnim() { return playerAnim; }
+    public AudioClip[] drawSounds;
 }

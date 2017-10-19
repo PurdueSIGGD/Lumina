@@ -712,17 +712,23 @@ MonoBehaviour:
   timeToAttack: 1
   timeToCooldown: 1
   range: 0
-  baseDamage: 15
+  baseDamage: 40
   animationType: 1
   bothHands: 1
   storedAmmo: 10
   myAnim: {fileID: 95062350520632246}
+  drawSounds:
+  - {fileID: 8300000, guid: f9d6540cf4754bc41a9b1e9024dbf3a0, type: 3}
   projectilePrefab: {fileID: 114235464419508022, guid: 072bf2cbfa4d5324594fd3dc59dc4c5e,
     type: 2}
   shootPoint: {fileID: 4765771991575608}
   launchSpeed: 57.96
+  shootSound:
+  - {fileID: 8300000, guid: 95009a2037379204090239fa35897085, type: 3}
   isAttacking: 0
   hasShot: 0
+  chargeSound:
+  - {fileID: 8300000, guid: 7528a0394adc95e4d930c3ae52b7d83a, type: 3}
 --- !u!137 &137696813415556342
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

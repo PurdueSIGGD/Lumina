@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: a5b1a581bf95adb44969de7189a4a430
-timeCreated: 1488066868
+timeCreated: 1507943443
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sprite: {instanceID: 0}
+  - playerStats: {instanceID: 0}
+  - myAnim: {instanceID: 0}
+  - hitParticles: {fileID: 1292280828393438, guid: abc58bc98a793cb4d9db90fbeb6a6e9c,
+      type: 2}
+  - enemyHitParticles: {fileID: 1292280828393438, guid: 39453144b3e245640a72493a8bc8ef82,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
