@@ -14,10 +14,11 @@ public class SlimeEnemy : BaseEnemy {
 	private float changeDirectionCount = 0;	//The time counter for the slime to change direction while the player isn't around
     float forceMultiplier = 1;
     float lastHit;
+    public RandomAudioSource splat;
+    public RandomAudioSource death;
     public float hitCooldown = 1;
     public Animator myAnim;
 
-    public RandomAudioSource death;
     //Variable initialization 
     void Start(){
         lastHit = 0;
@@ -37,12 +38,14 @@ public class SlimeEnemy : BaseEnemy {
         {
             myAnim.SetTrigger("StartAttack");
             bool airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            splat.PlayOnce();
             rb.AddForce(transform.forward * thrust * 2.5f + (!airborne ? Vector3.up * 2 * thrust : Vector3.zero));
 
             myAnim.SetBool("Attacking", airborne);
             yield return new WaitForSeconds(.9f);
             // Jump back
             airborne = Mathf.Abs(rb.velocity.y) > 0.1f;
+            splat.PlayOnce();
             rb.AddForce(transform.forward * -1.5f * thrust + (!airborne?Vector3.up * 2 * thrust:Vector3.zero) / 2);
             myAnim.SetBool("Attacking", airborne);
             // If still attacking, attack again
@@ -136,6 +139,7 @@ public class SlimeEnemy : BaseEnemy {
     }
     public override void OnDeath() {
         // IDK do whatever
+        death.PlayOnce();
         StopAllCoroutines();
         rb.constraints = RigidbodyConstraints.None;
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);

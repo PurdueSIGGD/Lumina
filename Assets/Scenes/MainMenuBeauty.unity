@@ -133,16 +133,16 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 9495393}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalRotation: {x: -0.00053218496, y: 0.0000023706236, z: 0.008711533, w: 0.9999619}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00000011842815}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1313551664}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.061000004, y: 0, z: 0.998}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 187, y: -204}
+  m_AnchoredPosition: {x: 127.95, y: -204}
   m_SizeDelta: {x: 1024, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9495395
@@ -164,7 +164,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9081ba18f560bd74498083d0e7689cb2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79a2de2e89b71654c9865701170edd77, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1170336612}
   m_HandleRect: {fileID: 1170336611}
   m_Direction: 0
-  m_Value: 0.50000006
+  m_Value: 0.4999999
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -7579,15 +7579,6 @@ Prefab:
       propertyPath: m_Name
       value: Bat (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 82609349759544654, guid: 8c13084d39bcb6e44975a5b4c025fc3b,
-        type: 2}
-      propertyPath: m_Volume
-      value: 0.268
-      objectReference: {fileID: 0}
-    - target: {fileID: 1341249851658236, guid: 8c13084d39bcb6e44975a5b4c025fc3b, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c13084d39bcb6e44975a5b4c025fc3b, type: 2}
   m_IsPrefabParent: 0
@@ -8205,7 +8196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1100049350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8221,9 +8212,9 @@ RectTransform:
   m_Father: {fileID: 1958205345}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 211, y: -535.75287}
   m_SizeDelta: {x: 384, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1100049351
@@ -8340,7 +8331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1155188797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8356,9 +8347,9 @@ RectTransform:
   m_Father: {fileID: 1958205345}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 211, y: -628.9035}
   m_SizeDelta: {x: 384, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1155188798
@@ -8506,7 +8497,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1341249851658236, guid: 8c13084d39bcb6e44975a5b4c025fc3b, type: 2}
+    - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -8992,7 +8983,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1797014797}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8113344
+  m_Size: 0.81404984
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9231,7 +9222,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 157105cecc487394a9444836dedbcd33, type: 3}
     m_FontSize: 42
     m_FontStyle: 0
     m_BestFit: 0
@@ -9243,10 +9234,32 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Welcome!\r\n\r\nLumina is the new SIGGD game determined for 2017. It is
-    planned to be a first person fantasy dungeon crawling game, fine tuned to challenge
-    the player as much as possible with adaptive AI and multiple gameplay challenges.\r\n\r\nFor
-    more information, see us on Github: PurdueSIGGD"
+  m_Text: 'LUMINA
+
+
+    The SIGGD 2017 Game, developed over Spring and Fall 2017
+
+
+    Contributors:
+
+
+    Andrew Lonsway
+
+    Vinson Luo
+
+    Chau Nguyen
+
+    Isaac Carpenter
+
+    Everett Gwyn
+
+    Andrew Graber
+
+    Andrew Arpasi
+
+    Chris Kok
+
+    Matin Hormati'
 --- !u!222 &1355986674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9719,7 +9732,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Game \nInformation"
+  m_Text: Credits
 --- !u!222 &1449452564
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9877,7 +9890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 165.45972}
+  m_AnchoredPosition: {x: 0, y: 0.054471407}
   m_SizeDelta: {x: 0, y: 877}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &1530198381
@@ -10947,8 +10960,8 @@ RectTransform:
   m_Father: {fileID: 559772869}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.09753571}
-  m_AnchorMax: {x: 1, y: 0.81133443}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.81404984}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11001,7 +11014,7 @@ GameObject:
   - component: {fileID: 1806956336}
   - component: {fileID: 1806956335}
   m_Layer: 5
-  m_Name: GameInforButton
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
