@@ -22,7 +22,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public Hittable.DamageType attackType = Hittable.DamageType.Neutral;
     public bool isAllowedToAttack;
 
-    [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public float stateTimeElapsed = 2f;
     [HideInInspector] public Animator animator;
     [HideInInspector] public SaveTransform startTransform; //position where skeleton first appear
 

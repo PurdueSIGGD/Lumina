@@ -57,7 +57,7 @@ public class DungeonGenerator : MonoBehaviour {
     public DungeonLevel[] dungeons;
 
     private readonly float distanceBetween = 100f;
-    private readonly float spawnRadius = 20f;
+    private readonly float spawnRadius = 16f;
 
     private readonly Vector2 junkCountRangeFirst = new Vector2(25, 40);
     private readonly Vector2 junkCountRange = new Vector2(10, 20);
@@ -128,7 +128,7 @@ public class DungeonGenerator : MonoBehaviour {
          */
 
     void Start () {
-
+        Random.Range(0.0f, 1.0f); // Use random so we don't get the same each time
         Random.State oldState = Random.state;
         if (seed == 0) {
             seed = PlayerPrefs.GetInt("DungeonSeed");
@@ -347,6 +347,8 @@ public class DungeonGenerator : MonoBehaviour {
             lastDungeon = newDungeon;
 
         }
+
+        Random.state = oldState;
 
     }
 

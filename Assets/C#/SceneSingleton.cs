@@ -18,7 +18,7 @@ public class SceneSingleton : MonoBehaviour {
 
     public GameObject itemToSpawn;
     public String itemName = "Singleton"; // What to call this object
-    public bool setParent = true; // Keep track of the child throughout scenes, otherwise spawn once and forget
+    public bool setParent = true, endOnSpawn; // Keep track of the child throughout scenes, otherwise spawn once and forget
     public Guid guid; // Globally unique identifier
     public String guidString;
     private int sceneIndex; // When this item was spawned (to bring it back later);
@@ -89,7 +89,7 @@ public class SceneSingleton : MonoBehaviour {
     }
     void OnDestroy() {
         // IF still the child and not found, we're gonna be fine
-        if (spawnedObject && spawnedObject.transform.parent == transform) {
+        if (spawnedObject && spawnedObject.transform.parent == transform && !endOnSpawn) {
             PlayerPrefs.SetInt(guid.ToString(), 0);
         }
     }

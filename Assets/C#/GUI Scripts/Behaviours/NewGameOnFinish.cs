@@ -13,6 +13,7 @@ public class NewGameOnFinish : StateMachineBehaviour {
 
         //load scene 1
         SceneManager.LoadScene("Island1");
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

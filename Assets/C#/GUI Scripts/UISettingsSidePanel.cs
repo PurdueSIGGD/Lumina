@@ -43,13 +43,13 @@ public class UISettingsSidePanel : UIPanel {
 
     public override void Open()
     {
-        /*
+        
         //open
         gameObject.SetActive(true);
         anim.SetTrigger("Open");
 
         //set current side
-        controller.currentSidePanel = this;*/
+        controller.currentSidePanel = this;
     }
 
 

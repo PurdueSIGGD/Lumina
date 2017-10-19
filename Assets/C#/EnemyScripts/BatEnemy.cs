@@ -23,6 +23,9 @@ public class BatEnemy : BaseEnemy
     public bool exploding;
     public GameObject explodeParticles;
     public GameObject dynamite;
+    public Animator myAnim;
+    public Collider aliveColldier;
+    public Collider deathCollider;
 
     //Variable initialization 
     void Start()
@@ -93,6 +96,7 @@ public class BatEnemy : BaseEnemy
                         float thrust = Random.Range(3 * flightThrust / 4, flightThrust);
                         flap.PlayOnce();
                         rb.AddForce(rb.mass * Vector3.up * thrust);
+                        myAnim.SetTrigger("Flap");
                         //Debug.Log(thrust);
                     }
                 }
@@ -218,7 +222,13 @@ public class BatEnemy : BaseEnemy
     public override void OnDeath() {
         print("should die here");
         rb.useGravity = true;
+        //rb.freezeRotation = false;
+        rb.constraints = RigidbodyConstraints.None;
+        
         StopCoroutine(MovementPattern());
+        myAnim.SetTrigger("Death");
+        aliveColldier.enabled = false;
+        deathCollider.enabled = true;
         // IDK do whatever
     }
     public override void OnDamage(float damage, DamageType type) {

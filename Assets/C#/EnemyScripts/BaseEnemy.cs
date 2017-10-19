@@ -40,7 +40,7 @@ abstract public class BaseEnemy : Hittable {
         MoveToLayer(transform, deathLayer);
         // Prevent from moving
         //TODO ragdoll
-        this.GetComponent<Rigidbody>().freezeRotation = true;
+        if (!this.GetComponent<BatEnemy>()) this.GetComponent<Rigidbody>().freezeRotation = true;
 
         ArrayList drops = new ArrayList();
         for (int i = 0; i < probabilityDrops.Length; i++) {

@@ -11904,7 +11904,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1093692038157098}
-  m_LocalRotation: {x: 0.64137787, y: -0.64137626, z: 0.29771492, w: 0.29771957}
+  m_LocalRotation: {x: 0.6413778, y: -0.6413762, z: 0.2977149, w: 0.29771954}
   m_LocalPosition: {x: 0.0003800049, y: 0.00054619217, z: 0.0006736655}
   m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
   m_Children:
@@ -19652,6 +19652,7 @@ MonoBehaviour:
   looping: 0
   oneOnly: 0
   playOnAwake: 0
+  noScripting: 0
   delay: 0
 --- !u!114 &114720907296965544
 MonoBehaviour:
@@ -19694,6 +19695,7 @@ MonoBehaviour:
   looping: 0
   oneOnly: 0
   playOnAwake: 0
+  noScripting: 0
   delay: 0
 --- !u!114 &114904345396697558
 MonoBehaviour:
@@ -19752,7 +19754,7 @@ MonoBehaviour:
   target: {fileID: 0}
   lookSphereRadius: 15
   distanceMeleeAttack: 4
-  timeBetweenAttacks: 2
+  timeBetweenAttacks: 1.5
   attackDamage: 13
   attackType: 0
   isAllowedToAttack: 0
@@ -19785,6 +19787,7 @@ MonoBehaviour:
   looping: 0
   oneOnly: 0
   playOnAwake: 0
+  noScripting: 0
   delay: 0
 --- !u!135 &135527014319093248
 SphereCollider:
