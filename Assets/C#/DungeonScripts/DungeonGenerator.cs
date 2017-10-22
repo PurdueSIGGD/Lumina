@@ -57,7 +57,8 @@ public class DungeonGenerator : MonoBehaviour {
     public DungeonLevel[] dungeons;
 
     private readonly float distanceBetween = 100f;
-    private readonly float spawnRadius = 16f;
+    private readonly float junkSpawnRadius = 18f;
+    private readonly float enemySpawnRadius = 10f;
 
     private readonly Vector2 junkCountRangeFirst = new Vector2(25, 40);
     private readonly Vector2 junkCountRange = new Vector2(10, 20);
@@ -180,10 +181,13 @@ public class DungeonGenerator : MonoBehaviour {
                 GameObject wall = GameObject.Instantiate(walls[Random.Range(0, walls.Length - 1)], dungeonPosition + wallPositions[i], Quaternion.Euler(wallRotations[i]));
                 wall.transform.parent = newDungeon.transform;
             }
-
+            Debug.DrawLine(dungeonPosition, dungeonPosition + (Vector3.forward * enemySpawnRadius), Color.green, 20);
+            Debug.DrawLine(dungeonPosition, dungeonPosition + (Vector3.back * enemySpawnRadius), Color.green, 20);
+            Debug.DrawLine(dungeonPosition, dungeonPosition + (Vector3.right * enemySpawnRadius), Color.green, 20);
+            Debug.DrawLine(dungeonPosition, dungeonPosition + (Vector3.left * enemySpawnRadius), Color.green, 20);
             // Toss in some random junk each stage, more if the first one
             for (int junkCount = 0; junkCount < (currentDepth == 0 ? Random.Range(junkCountRangeFirst.x, junkCountRangeFirst.y) : Random.Range(junkCountRange.x, junkCountRange.y)); junkCount++) {
-                Vector2 v2Position = Random.insideUnitCircle * spawnRadius * 1f;
+                Vector2 v2Position = Random.insideUnitCircle * junkSpawnRadius * 1f;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
                 int randomIndex = Random.Range(0, junkLottery.Count - 1);
                 bool keepDesiredRotation = Random.Range(0.0f, 1.0f) < 0.1f;
@@ -218,7 +222,7 @@ public class DungeonGenerator : MonoBehaviour {
                     Random.state = currentState;
                     continue;
                 }
-                Vector2 v2Position = Random.insideUnitCircle * spawnRadius;
+                Vector2 v2Position = Random.insideUnitCircle * enemySpawnRadius;
                 Vector3 v3Position = new Vector3(v2Position.x, 1, v2Position.y) + dungeonPosition; //Put them slightly above so they don't fall through
               
                 GameObject newEnemy = GameObject.Instantiate(difficultyArrays.get(difficulty)[(int)enemyLottery[enemyType]].prefab, v3Position, Quaternion.identity);

@@ -17,6 +17,7 @@ public class SkeletonEnemy : PatrolGroundEnemy
     public Transform target;
     public float lookSphereRadius = 15f; //use for draw Gizmo, and detect target
     public float distanceMeleeAttack = 2f;
+    public float distanceStartBack = 3f;
     public float timeBetweenAttacks = 2f;
     public float attackDamage = 10;
     public Hittable.DamageType attackType = Hittable.DamageType.Neutral;

@@ -32,7 +32,7 @@ public class SkeletonAttackAction : EnemyAction
             return;
 
         //narrow down distance to target
-        if (!skeleton.isCloseEnoughToTarget(skeleton.target.position, skeleton.distanceMeleeAttack))
+        if (!skeleton.isCloseEnoughToTarget(skeleton.target.position, skeleton.distanceStartBack))
         {
             bool succeed = skeleton.StartRunningAnimation();
             if (succeed)
@@ -45,10 +45,12 @@ public class SkeletonAttackAction : EnemyAction
             //if target get outside zone, skeleton is allowed to attack
             //skeleton.isAllowedToAttack = true;
         }
-
+        if (skeleton.CheckIfCountDownElapsed(skeleton.timeBetweenAttacks)) {
+            skeleton.isAllowedToAttack = true;
+        }
         //if close enough, 
-        else
-        {
+        if (skeleton.isCloseEnoughToTarget(skeleton.target.position, skeleton.distanceStartBack)  )
+            {
             //attack him/her
             if (skeleton.isAllowedToAttack)
             {
@@ -70,10 +72,7 @@ public class SkeletonAttackAction : EnemyAction
                 skeleton.StopRunningAnimation();
                                   
             //give it some time before attack
-            if (skeleton.CheckIfCountDownElapsed(skeleton.timeBetweenAttacks))
-            {
-                skeleton.isAllowedToAttack = true;
-            }
+           
             
             
         }

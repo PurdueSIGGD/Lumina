@@ -427,6 +427,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33317296901809374
 MeshFilter:
@@ -445,7 +446,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30.38101, y: 2.3401031, z: 13.426808}
+  m_Size: {x: 38.6, y: 2.81, z: 13.426808}
   m_Center: {x: -14.693092, y: -0.6700491, z: -12.064112}
 --- !u!65 &65447290601552158
 BoxCollider:
