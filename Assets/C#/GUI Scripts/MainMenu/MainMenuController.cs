@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour {
 
 
+	public RectTransform[] scrollRects;
+
     public GameObject currentSidePanel; //side panel beside MainMenuPanel
 
     private void Start()
@@ -59,6 +61,9 @@ public class MainMenuController : MonoBehaviour {
         OpenPanel(panel);
         currentSidePanel = panel;
 
+		foreach (RectTransform r in scrollRects) {
+			r.anchoredPosition = new Vector3(0, 0);
+		}
     }
 
 

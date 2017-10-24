@@ -218,11 +218,7 @@ public class GameSaveManager : MonoBehaviour {
                     weaponController.EquipWeaponInstantly(newWeapon, i);
                 }
 
-                if (weaponType == 0) {
-                    inventoryController.inventoryPanel.weaponPanel.Add(newWeapon);
-                } else if (weaponType == 1) {
-                    inventoryController.inventoryPanel.magicPanel.Add(newWeapon);
-                }
+               
             }
             
         }

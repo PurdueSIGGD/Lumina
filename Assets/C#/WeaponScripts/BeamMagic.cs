@@ -16,7 +16,7 @@ public class BeamMagic : Magic {
     public float magicDraw = 1; //Magic per second this attack takes
 
     public override string getBlurb() {
-        return "Damage: " + baseDamage + "/s, Magic Draw: " + magicDraw + "/s";
+		return "Damage: " + System.Math.Round((baseDamage * condition/maxCondition), 2) + "/s, Cost: " + magicDraw + "/s";
     }
 
 	public void Start() {
@@ -95,7 +95,7 @@ public class BeamMagic : Magic {
                             Hittable hittable = hit.collider.GetComponentInParent<Hittable>();
                             if (hittable != null && hittable.gameObject.tag != "Item" && hittable.gameObject.tag != "Player") { //Sometimes may hit our item that we are holding
                                 //print(hit.collider);
-                                hittable.Hit(baseDamage, getLookObj().transform.forward, damageType);
+								hittable.Hit(baseDamage * condition/maxCondition, getLookObj().transform.forward, damageType);
                             }
                         }
                     }

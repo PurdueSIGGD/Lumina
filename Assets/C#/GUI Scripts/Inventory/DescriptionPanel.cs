@@ -40,8 +40,8 @@ public class DescriptionPanel : MonoBehaviour {
         string stats = "";
 
         //general stats from ItemStats
-        stats += "Tier: " + i.itemStats.tier.ToString() + "\n";      
-        stats += "Condition: " + System.Math.Round(i.itemStats.condition, 2) + "/" + i.itemStats.maxCondition.ToString() + "\n";
+		stats += "Tier: " + i.itemStats.tier.ToString() + "\n";      
+		stats += (i.itemStats is BeamMagic ? "Potency: ":"Condition: ") + System.Math.Round(i.itemStats.condition, 2) + "/" + i.itemStats.maxCondition.ToString() + "\n";
 
         //specific stats from Item
         if (i.itemStats is Weapon)

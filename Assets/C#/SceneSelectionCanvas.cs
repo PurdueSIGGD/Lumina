@@ -56,13 +56,13 @@ public class SceneSelectionCanvas : MonoBehaviour {
     }
 
     void Option1() {
-        myBoatDoor.selectScene(0);
+		if (myBoatDoor) myBoatDoor.selectScene(0);
     }
     void Option2() {
-        myBoatDoor.selectScene(1);
+		if (myBoatDoor) myBoatDoor.selectScene(1);
     }
     void Option3() {
-        myBoatDoor.selectScene(2);
+		if (myBoatDoor) myBoatDoor.selectScene(2);
     }
 
     void DungeonsLeftError(int dungeonsLeft) {

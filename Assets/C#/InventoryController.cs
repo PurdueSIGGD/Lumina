@@ -181,15 +181,10 @@ public class InventoryController : MonoBehaviour {
             //print("Picked up magic");
             leftWeaponController.EquipWeapon((Weapon)item);
 		
-            //add to inventory
-            inventoryPanel.magicPanel.Add(item);
         } else  if (item is Weapon) {
             //print("Picked up weapon");
             rightWeaponController.EquipWeapon((Weapon)item);
 
-
-            //add to weapon
-            inventoryPanel.weaponPanel.Add(item);
         }
 
 	}
