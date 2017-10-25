@@ -18633,6 +18633,7 @@ MonoBehaviour:
   looping: 0
   oneOnly: 0
   playOnAwake: 0
+  noScripting: 0
   delay: 0
 --- !u!114 &114266934536396328
 MonoBehaviour:
@@ -18650,6 +18651,7 @@ MonoBehaviour:
   looping: 1
   oneOnly: 1
   playOnAwake: 1
+  noScripting: 0
   delay: 0
 --- !u!114 &114275899387149464
 MonoBehaviour:
@@ -18727,7 +18729,7 @@ MonoBehaviour:
   timeBetweenTele: 4
   timeBeforeAppear: 0.5
   distanceRunAfterAttack: 20
-  distanceMeleeAttack: 8
+  distanceMeleeAttack: 6
   distanceMeleeZone: 15
   distanceFlyMin: 20
   attackDamage: 10

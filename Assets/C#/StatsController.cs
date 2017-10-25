@@ -255,7 +255,7 @@ public class StatsController : Hittable
 
         int returnVal = 0;
         arrowCount += amount;
-        if (arrowCount > magicMax) {
+        if (arrowCount > arrowMax) {
             returnVal = arrowCount - arrowMax;
             arrowCount = arrowMax;
         } else if (arrowCount < 0) {
