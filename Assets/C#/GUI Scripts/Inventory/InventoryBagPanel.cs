@@ -71,20 +71,24 @@ public class InventoryBagPanel : MonoBehaviour {
             return;
         }
         //if already contain, increase the number     
-        if (itemDict.ContainsKey(item)) {
+		if (itemDict.ContainsKey (item)) {
           
-            //increment
-            itemDict[item] += 1;
+			//increment
+			itemDict [item] += 1;
 
-            //update the UI as well
-            UIBagItem i = itemUIList.Find(x => x.itemStats.compareTo(item));
-            i.displayNameText.text = i.itemStats.displayName + " (" + itemDict[item] + ")";
+			//update the UI as well
+			UIBagItem i = itemUIList.Find (x => x.itemStats.compareTo (item));
+			i.displayNameText.text = i.itemStats.displayName /*+ " (" + itemDict [item] + ")"*/;
 
-            return;
-        }
+            
+		} else {
+			//if not exist, add new
+			itemDict.Add(item, 1);
 
-        //if not exist, add new
-        itemDict.Add(item, 1);
+		}
+			
+
+		//print("add" + itemDict[item]);
         AddNewUIBagItem(item);
     }
 
@@ -124,7 +128,7 @@ public class InventoryBagPanel : MonoBehaviour {
             return;
         }
 
-       
+       /*
         //if there are 2 of same weapons
         if (amount == 2)
         {
@@ -134,20 +138,24 @@ public class InventoryBagPanel : MonoBehaviour {
             //update the UI
             UIBagItem i = itemUIList.Find(x => x.itemStats.compareTo(item));
             i.displayNameText.text = i.itemStats.displayName;
-        }
+        }*/
 
         //if there is 1 or unique weapon
-        if (amount == 1)
-        {
-            //udate dict               
-            itemDict.Remove(item);
+        //if (amount == 1)
+        //{
+		//print("drop" + itemDict[item]);
+			itemDict[item]--;
+            //udate dict           
+			if (itemDict [item] == 0) {
+				itemDict.Remove(item);
+			}
 
             //update ui element 
             UIBagItem uiItem = itemUIList.Find(x => x.itemStats == item);
             itemUIList.Remove(uiItem);
             Destroy(uiItem.gameObject);
             UpdateBagContent();
-        }
+        //}
 
         
 
@@ -164,3 +172,4 @@ public class InventoryBagPanel : MonoBehaviour {
     
 
 }
+

@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryCanvas : UICanvas {
 
     public InventoryPanel inventoryPanel;
     public AvatarPanel avatarPanel;
     public UINormalPanel descriptionPanel;
+
+	public RectTransform[] rects;
 
     public UIController uiController { get; set; }
 
@@ -42,6 +45,10 @@ public class InventoryCanvas : UICanvas {
         
         //open stuff
         listPanels.ForEach(x => x.Open());
+
+		foreach (RectTransform r in rects) {
+			r.anchoredPosition = new Vector3(r.anchoredPosition.x, 0);
+		}
     }
 
     public void Close()

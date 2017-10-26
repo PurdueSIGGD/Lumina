@@ -132,6 +132,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114386883283960956
 MonoBehaviour:
@@ -148,6 +149,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114508133561660818
 MonoBehaviour:
@@ -164,6 +166,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114675376631449048
 MonoBehaviour:
@@ -180,6 +183,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 1
 --- !u!114 &114730620353887946
 MonoBehaviour:
@@ -196,6 +200,7 @@ MonoBehaviour:
   playsInMiddle: 0
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!114 &114971908382328436
 MonoBehaviour:
@@ -212,6 +217,7 @@ MonoBehaviour:
   playsInMiddle: 1
   looping: 0
   muteOnDeath: 0
+  notForceStop: 0
   delay: 0
 --- !u!1101 &1101016230711648130
 AnimatorStateTransition:
@@ -234,7 +240,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.6756352
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101018957154241734
@@ -303,7 +309,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.8125
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101099912500170552
@@ -327,7 +333,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.75
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101175487935051038
@@ -531,7 +537,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.5161291
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101575822386126580
@@ -600,7 +606,7 @@ AnimatorStateTransition:
   m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101641523414031528
@@ -696,7 +702,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.625
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &1101791313361643336
@@ -1173,7 +1179,7 @@ AnimatorStateMachine:
     m_Position: {x: 492, y: 36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102552191190303244}
-    m_Position: {x: 960, y: -72, z: 0}
+    m_Position: {x: 960, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102001248462855888}
     m_Position: {x: 696, y: -72, z: 0}

@@ -390,7 +390,10 @@ public class WeaponController : MonoBehaviour {
 
         pendingNewWeapon = newWeapon;
 
-        
+
+
+		//add to weapon
+		guiBag.Add(newWeapon);
 
         //print("Trying to equip");
         if (weaponCount >= weapons.Length) {
@@ -423,7 +426,9 @@ public class WeaponController : MonoBehaviour {
     /**
      * Equipping a weapon without the fancy aniamtions and such, assumed to be not the currently shown weapon
      */
-    public void EquipWeaponInstantly(Weapon weaponToEquip, int index) {
+	public void EquipWeaponInstantly(Weapon weaponToEquip, int index) {
+		//add to weapon
+		guiBag.Add(weaponToEquip);
         weaponCount++;
         weapons[index] = weaponToEquip;
         weaponToEquip.transform.localScale = Vector3.zero;
