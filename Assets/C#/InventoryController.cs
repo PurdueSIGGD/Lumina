@@ -137,6 +137,9 @@ public class InventoryController : MonoBehaviour {
 			}
 			//Debug.Log ("Interacting");
 			for (int i = 0; i < hitObjs.Length; i++) {
+                if (Vector3.Distance(hitObjs[i].transform.position, transform.position) >= GRAB_DISTANCE) {
+                    continue;
+                }
                 if (hitObjs[i].collider.GetComponentInParent<Usable>()) {
                     Usable itemToUse = hitObjs[i].collider.GetComponentInParent<Usable>();
                     itemToUse.Use();
@@ -319,7 +322,7 @@ public class InventoryController : MonoBehaviour {
         upgradekits -= 1;
 
         //The upgrades of your armor are more effective depending on the condition of your armor
-        if (i is Armor) {
+        /*if (i is Armor) {
 			((Armor)i).flatDamageBlock += (2.5f * i.getCondition());
 			((Armor)i).percentDamageBlock += (1.25f * i.getCondition());
 			if(((Armor)i).type == Armor.ArmorPiece.helmet){
@@ -327,7 +330,7 @@ public class InventoryController : MonoBehaviour {
 
 			}
 			return;
-        }
+        }*/
 
 
     }

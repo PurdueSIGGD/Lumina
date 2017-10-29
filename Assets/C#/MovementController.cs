@@ -91,11 +91,10 @@ public class MovementController : MonoBehaviour {
 				isJumping = false;
 			}
 		}
-
-
+        
         bool walking = (lr != 0 || fb != 0) && IsGrounded() && couldMove;
-        viewmodelAnimator.SetBool("Walking", walking);
-        viewmodelAnimator.SetBool("Running", this.isSprinting && walking);
+        viewmodelAnimator.SetBool("Walking", walking && !disableMovement);
+        viewmodelAnimator.SetBool("Running", this.isSprinting && walking && !disableMovement);
     }
 
 	/**
@@ -219,7 +218,10 @@ public class MovementController : MonoBehaviour {
         StopMoving();
     }
     void StopMoving() {
+        isSprinting = false;
         disableMovement = true;
+        viewmodelAnimator.SetBool("Walking", false);
+        viewmodelAnimator.SetBool("Running", false);
     }
     
     void EnterDungeon() {
